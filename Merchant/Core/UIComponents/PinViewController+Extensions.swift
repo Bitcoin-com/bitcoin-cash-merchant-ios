@@ -47,9 +47,12 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
         pinCollectionView.delegate = self
     }
     
+    @objc func didPushValid() {
+        pinDelegate?.onPushValid(amount: amountStr)
+    }
+    
     @objc func didPushPin(sender: UIButton) {
         guard let pin = sender.currentTitle else {
-            pinDelegate?.onPushValid(amount: amountStr)
             return
         }
         
@@ -94,11 +97,11 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
         if item == "valid" {
             cell.pinButton.setImage(UIImage(named: "checkmark_icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
             cell.pinButton.tintColor = BDCColor.green.uiColor
+            cell.pinButton.addTarget(self, action: #selector(didPushValid), for: .touchUpInside)
         } else {
             cell.pinButton.setTitle(items[indexPath.item], for: .normal)
+            cell.pinButton.addTarget(self, action: #selector(didPushPin), for: .touchUpInside)
         }
-        
-        cell.pinButton.addTarget(self, action: #selector(didPushPin), for: .touchUpInside)
         
         return cell
     }
