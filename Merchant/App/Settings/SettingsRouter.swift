@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsRouter: BDCRouter {
     
-    func transitBack() {
+    func transitBackTo() {
         viewController?.dismiss(animated: true)
     }
 }

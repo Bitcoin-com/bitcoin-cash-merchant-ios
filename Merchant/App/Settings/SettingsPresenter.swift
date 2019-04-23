@@ -24,7 +24,7 @@ class SettingsPresenter {
     }
     
     func didPushClose() {
-        router?.transitBack()
+        router?.transitBackTo()
     }
     
     func didEditCompanyName(_ newCompanyName: String) {

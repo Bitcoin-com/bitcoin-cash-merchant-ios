@@ -9,4 +9,9 @@
 import UIKit
 
 class PaymentRouter: BDCRouter {
+    func transitToPaymentDetail(_ pr: PaymentRequest) {
+        let paymentRequestViewController = PaymentRequestBuilder().provide(pr)
+        let navViewController = UINavigationController(rootViewController: paymentRequestViewController)
+        viewController?.present(navViewController, animated: true, completion: nil)
+    }
 }
