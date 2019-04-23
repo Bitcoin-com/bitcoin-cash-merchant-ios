@@ -2,7 +2,7 @@
 
 # Merchant App iOS
 
-[![Build Status](https://app.bitrise.io/app/9ec5d07dd5572592/status.svg?token=Ivup6ZfejBL9XsDGv-VqVg)](https://app.bitrise.io/app/9ec5d07dd5572592)
+[![Build Status](https://app.bitrise.io/app/a0fb7440bceeb1a5/status.svg?token=mVRGlTDDoDonqqyPfmSrNw&branch=master)](https://app.bitrise.io/app/a0fb7440bceeb1a5)
 [![codecov](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios/branch/master/graph/badge.svg?token=nGdwMKynQL)](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios)
 ![Version](https://img.shields.io/badge/version-v0.0.1-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-ios-black.svg) 
