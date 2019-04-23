@@ -10,7 +10,8 @@ import RealmSwift
 
 class StoreTransaction: Object {
     @objc dynamic var toAddress: String = ""
-    @objc dynamic var amountInSatoshis: Int = 0
+    @objc dynamic var txid: String = ""
+    @objc dynamic var amountInSatoshis: Int64 = 0
     @objc dynamic var amountInFiat: String = ""
-    @objc dynamic var date: Date = Date.init()
+    @objc dynamic var date: Date = Date()
 }

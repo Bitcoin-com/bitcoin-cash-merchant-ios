@@ -10,8 +10,8 @@ import RealmSwift
 
 class StoreRate: Object {
     @objc dynamic var currency: StoreCurrency?
-    @objc dynamic var rateInSatoshis: Int = 0
-    @objc dynamic var updatedAt: Date = Date.init()
+    @objc dynamic var rateInSatoshis: Double = 0.0
+    @objc dynamic var updatedAt: Date = Date()
 }
 
 

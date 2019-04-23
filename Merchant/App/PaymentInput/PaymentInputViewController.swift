@@ -1,5 +1,5 @@
 //
-//  PaymentViewController.swift
+//  PaymentInputViewController.swift
 //  Merchant
 //
 //  Created by Jean-Baptiste Dominguez on 2019/04/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaymentViewController: PinViewController {
+class PaymentInputViewController: PinViewController {
     
     var amountLabel: BDCLabel = {
         let label = BDCLabel.build(.title)
@@ -21,7 +21,7 @@ class PaymentViewController: PinViewController {
         return view
     }()
     
-    var presenter: PaymentPresenter?
+    var presenter: PaymentInputPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class PaymentViewController: PinViewController {
     
 }
 
-extension PaymentViewController: PinViewControllerDelegate {
+extension PaymentInputViewController: PinViewControllerDelegate {
     func onPushValid(amount: String) {
         presenter?.didPushValid(amount)
     }

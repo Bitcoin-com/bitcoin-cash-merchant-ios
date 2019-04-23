@@ -18,6 +18,9 @@ class PaymentRequestViewController: BDCViewController {
         title = "Payment request"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
+        
+        //
+        //
     }
     
     @objc func didPushClose() {

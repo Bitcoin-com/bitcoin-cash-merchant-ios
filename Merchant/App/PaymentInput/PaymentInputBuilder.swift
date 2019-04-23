@@ -1,5 +1,5 @@
 //
-//  PaymentBuilder.swift
+//  PaymentInputBuilder.swift
 //  Merchant
 //
 //  Created by Jean-Baptiste Dominguez on 2018/10/18.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class PaymentBuilder: BDCBuilder {
+class PaymentInputBuilder: BDCBuilder {
     
     func provide() -> UIViewController {
-        let viewController = PaymentViewController()
+        let viewController = PaymentInputViewController()
         
-        let router = PaymentRouter(viewController)
+        let router = PaymentInputRouter(viewController)
         
-        let presenter = PaymentPresenter()
+        let presenter = PaymentInputPresenter()
         
         presenter.viewDelegate = viewController
         presenter.router = router

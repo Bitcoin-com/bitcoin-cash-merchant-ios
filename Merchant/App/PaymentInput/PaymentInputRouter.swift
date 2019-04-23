@@ -1,5 +1,5 @@
 //
-//  PaymentRouter.swift
+//  PaymentInputRouter.swift
 //  Merchant
 //
 //  Created by Jean-Baptiste Dominguez on 2018/10/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaymentRouter: BDCRouter {
+class PaymentInputRouter: BDCRouter {
     func transitToPaymentDetail(_ pr: PaymentRequest) {
         let paymentRequestViewController = PaymentRequestBuilder().provide(pr)
         let navViewController = UINavigationController(rootViewController: paymentRequestViewController)

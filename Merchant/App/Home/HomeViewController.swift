@@ -15,7 +15,7 @@ class HomeViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let paymentController = PaymentBuilder().provide()
+        let paymentController = PaymentInputBuilder().provide()
         paymentController.tabBarItem = UITabBarItem(title: "Payment", image: UIImage(named: "payment_icon"), tag: 0)
         
         let txsController = TransactionsBuilder().provide()

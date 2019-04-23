@@ -10,6 +10,6 @@ import Foundation
 
 struct PaymentRequest {
     var toAddress: String
-    var amountInSatoshis: Int
+    var amountInSatoshis: Int64
     var amountInCurrency: Double
 }

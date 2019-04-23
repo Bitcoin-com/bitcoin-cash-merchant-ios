@@ -1,5 +1,5 @@
 //
-//  PaymentPresenter.swift
+//  PaymentInputPresenter.swift
 //  Merchant
 //
 //  Created by Jean-Baptiste Dominguez on 2018/11/14.
@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class PaymentPresenter {
+class PaymentInputPresenter {
     
-    var router: PaymentRouter?
-    weak var viewDelegate: PaymentViewController?
+    var router: PaymentInputRouter?
+    weak var viewDelegate: PaymentInputViewController?
     
     func viewDidLoad() {
     }
@@ -31,6 +31,9 @@ class PaymentPresenter {
             // TODO: Handle the error here with a message
             return
         }
+        
+        // TODO: Calcul du montant en satoshis
+        //
         
         let pr = PaymentRequest(toAddress: address, amountInSatoshis: 1000, amountInCurrency: 10.10)
         router?.transitToPaymentDetail(pr)
