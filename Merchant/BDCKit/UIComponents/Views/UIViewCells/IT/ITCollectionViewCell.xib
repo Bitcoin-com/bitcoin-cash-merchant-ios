@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="ITCollectionViewCell" id="iN0-l3-epB" customClass="ITCollectionViewCell" customModule="BitcoinComWallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="72" height="96"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmF-5F-jBC" customClass="BDCLabel" customModule="BitcoinComWallet" customModuleProvider="target">
+                    <rect key="frame" x="8" y="72" width="56" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="Ufj-VO-1hS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCe-3s-rRI">
+                    <rect key="frame" x="8" y="8" width="56" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="56" id="Z2M-3q-6qo"/>
+                        <constraint firstAttribute="height" constant="56" id="cqZ-Ky-C59"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wmF-5F-jBC" secondAttribute="bottom" constant="8" id="DQ8-v1-HNw"/>
+                <constraint firstItem="wmF-5F-jBC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="Hsr-M9-RMO"/>
+                <constraint firstItem="rCe-3s-rRI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="Jm0-Ek-a9p"/>
+                <constraint firstAttribute="trailing" secondItem="wmF-5F-jBC" secondAttribute="trailing" constant="8" id="NpT-NR-CO7"/>
+                <constraint firstItem="rCe-3s-rRI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="O2a-p8-vmC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rCe-3s-rRI" secondAttribute="trailing" constant="8" id="gwK-se-WQN"/>
+                <constraint firstItem="wmF-5F-jBC" firstAttribute="top" secondItem="rCe-3s-rRI" secondAttribute="bottom" constant="8" id="uCF-5H-qny"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="iconImageView" destination="rCe-3s-rRI" id="Qjy-JN-9ir"/>
+                <outlet property="titleLabel" destination="wmF-5F-jBC" id="DrZ-nS-9cP"/>
+            </connections>
+            <point key="canvasLocation" x="-105.59999999999999" y="-90.854572713643179"/>
+        </view>
+    </objects>
+</document>

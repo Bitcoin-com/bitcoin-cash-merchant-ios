@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings View Controller-->
+        <scene sceneID="bqC-oL-gyU">
+            <objects>
+                <tableViewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yf8-oa-SRX" customClass="SettingsViewController" customModule="Merchant" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ar4-oE-fJ6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Account" id="f0p-0D-Yum">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="72" id="OXL-Kh-WwB">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OXL-Kh-WwB" id="1Ri-S6-bWn">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OVM-Bc-MU8">
+                                                    <rect key="frame" x="8" y="8" width="359" height="55.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTo-Ne-D1f" customClass="BDCLabel" customModule="Merchant" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter company name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yvQ-xM-vie" customClass="BDCTextField" customModule="Merchant" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="28.5" width="359" height="27"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="OVM-Bc-MU8" firstAttribute="top" secondItem="1Ri-S6-bWn" secondAttribute="top" constant="8" id="7Y9-Bt-7Tl"/>
+                                                <constraint firstAttribute="bottom" secondItem="OVM-Bc-MU8" secondAttribute="bottom" constant="8" id="8qP-AQ-lyn"/>
+                                                <constraint firstAttribute="trailing" secondItem="OVM-Bc-MU8" secondAttribute="trailing" constant="8" id="iVd-9R-J5o"/>
+                                                <constraint firstItem="OVM-Bc-MU8" firstAttribute="leading" secondItem="1Ri-S6-bWn" secondAttribute="leading" constant="8" id="sFV-0A-lXG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="72" id="aKa-DK-XsO">
+                                        <rect key="frame" x="0.0" y="127.5" width="375" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aKa-DK-XsO" id="l5p-JV-SQG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pAA-4o-ZSF">
+                                                    <rect key="frame" x="8" y="8" width="359" height="55.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dr4-1S-76u" customClass="BDCLabel" customModule="Merchant" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter destination address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gF5-Ge-yXF" customClass="BDCTextField" customModule="Merchant" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="28.5" width="359" height="27"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="pAA-4o-ZSF" secondAttribute="bottom" constant="8" id="Xu3-8I-G8i"/>
+                                                <constraint firstItem="pAA-4o-ZSF" firstAttribute="top" secondItem="l5p-JV-SQG" secondAttribute="top" constant="8" id="YzP-Ke-4FR"/>
+                                                <constraint firstAttribute="trailing" secondItem="pAA-4o-ZSF" secondAttribute="trailing" constant="8" id="qf8-Pu-bZx"/>
+                                                <constraint firstItem="pAA-4o-ZSF" firstAttribute="leading" secondItem="l5p-JV-SQG" secondAttribute="leading" constant="8" id="xAX-Zg-Hpc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="72" id="aD8-U7-o0j">
+                                        <rect key="frame" x="0.0" y="199.5" width="375" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aD8-U7-o0j" id="1FR-SP-EGE">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KR3-mj-43p">
+                                                    <rect key="frame" x="8" y="8" width="359" height="55.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Local currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtj-vV-ecB" customClass="BDCLabel" customModule="Merchant" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="27"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91H-RT-xyJ" customClass="BDCLabel" customModule="Merchant" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="35" width="359" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="KR3-mj-43p" secondAttribute="trailing" constant="8" id="DCh-XM-fQw"/>
+                                                <constraint firstItem="KR3-mj-43p" firstAttribute="leading" secondItem="1FR-SP-EGE" secondAttribute="leading" constant="8" id="IZm-3v-2PE"/>
+                                                <constraint firstItem="KR3-mj-43p" firstAttribute="top" secondItem="1FR-SP-EGE" secondAttribute="top" constant="8" id="kPS-wG-rWl"/>
+                                                <constraint firstAttribute="bottom" secondItem="KR3-mj-43p" secondAttribute="bottom" constant="8" id="lh3-rR-9e1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Yf8-oa-SRX" id="McQ-7F-O40"/>
+                            <outlet property="delegate" destination="Yf8-oa-SRX" id="VRU-pV-JVt"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="companyNameLabel" destination="zTo-Ne-D1f" id="Ea9-JV-EKP"/>
+                        <outlet property="companyNameTextField" destination="yvQ-xM-vie" id="7ld-p1-3Pt"/>
+                        <outlet property="destinationAddressLabel" destination="dr4-1S-76u" id="uxI-di-spk"/>
+                        <outlet property="destinationAddressTextField" destination="gF5-Ge-yXF" id="van-pH-YZ4"/>
+                        <outlet property="localCurrencyLabel" destination="Rtj-vV-ecB" id="8mK-cZ-CAt"/>
+                        <outlet property="localCurrencyValueLabel" destination="91H-RT-xyJ" id="HER-K4-nR8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HkT-gl-4g5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="26.399999999999999" y="-577.06146926536735"/>
+        </scene>
+    </scenes>
+</document>
