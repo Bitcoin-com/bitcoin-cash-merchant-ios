@@ -1,6 +1,6 @@
 ![Logo](github_logo.png)
 
-# Merchant App iOS
+# Merchant App iOS ![Logo](github_logo_app.png)
 
 [![Build Status](https://app.bitrise.io/app/a0fb7440bceeb1a5/status.svg?token=mVRGlTDDoDonqqyPfmSrNw&branch=master)](https://app.bitrise.io/app/a0fb7440bceeb1a5)
 [![codecov](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios/branch/master/graph/badge.svg?token=nGdwMKynQL)](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios)
