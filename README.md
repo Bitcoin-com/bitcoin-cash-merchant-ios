@@ -1,6 +1,6 @@
-![Logo](github_logo.png) ![Logo](github_logo_app.png)
+![Logo](github_logo_app.png)
 
-# Merchant App iOS
+# Merchant App iOS :snake: (Built with VIPER)
 
 [![Build Status](https://app.bitrise.io/app/a0fb7440bceeb1a5/status.svg?token=mVRGlTDDoDonqqyPfmSrNw&branch=master)](https://app.bitrise.io/app/a0fb7440bceeb1a5)
 [![codecov](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios/branch/master/graph/badge.svg?token=nGdwMKynQL)](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios)
@@ -9,3 +9,17 @@
 ![Compatibility](https://img.shields.io/badge/iOS-+10.0-orange.svg) 
 ![Compatibility](https://img.shields.io/badge/Swift-4.0-orange.svg) 
 ![License](https://img.shields.io/badge/License-MIT-lightgrey.svg) 
+
+## Demo
+
+Coming soon.
+
+## Authors & Maintainers
+- Jean-Baptiste Dominguez [[Github](https://github.com/jbdtky), [Twitter](https://twitter.com/jbdtky)]
+
+## References
+- [BitcoinKit](https://github.com/Bitcoin-com/BitcoinKit)
+
+## License
+
+Merchant App is available under the MIT license. See the LICENSE file for more info.
