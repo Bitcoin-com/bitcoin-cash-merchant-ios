@@ -28,12 +28,17 @@ class MerchantUITests: XCTestCase {
 
     func testFlow() {
         let app = XCUIApplication()
-        app.navigationBars["My company name"].buttons["settings icon"].tap()
+        app.navigationBars.firstMatch.buttons["settings icon"].tap()
         
         let tablesQuery = app.tables
         tablesQuery.cells.containing(.staticText, identifier:"Company name").children(matching: .textField).element.tap()
-        app.tables.containing(.other, identifier:"ACCOUNT").element.tap()
         tablesQuery.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element.tap()
+        
+        let addressTextField = tablesQuery.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element
+       
+        addressTextField.tap()
+        addressTextField.typeText("1FW9BDQ62aWrcqzScvmvKbRmzUAkANqaJ3")
+        
         app.navigationBars["Settings"].buttons["close icon"].tap()
         app.tabBars.buttons["History"].tap()
         

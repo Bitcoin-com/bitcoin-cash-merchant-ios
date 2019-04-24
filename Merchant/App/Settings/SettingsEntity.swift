@@ -20,7 +20,7 @@ extension SettingsEntry {
         case .companyName:
             return "Company name"
         case .address:
-            return "Address"
+            return "Destination address"
         case .selectedCurrency:
             return "Local currency"
         }
