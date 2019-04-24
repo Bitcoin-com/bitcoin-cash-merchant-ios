@@ -63,7 +63,6 @@
 		3B1BA9B9226E04E6002EED15 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9B5226E04E6002EED15 /* SettingsPresenter.swift */; };
 		3B1BA9BC226E06B1002EED15 /* I_TS_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9BB226E06B1002EED15 /* I_TS_TableViewCell.swift */; };
 		3B1BA9BE226E06BD002EED15 /* I_TS_ViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9BD226E06BD002EED15 /* I_TS_ViewCell.swift */; };
-		3B1BA9C6226E114E002EED15 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA9C5226E114E002EED15 /* Settings.storyboard */; };
 		3B1BA9CA226E2014002EED15 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9C9226E2014002EED15 /* UserManager.swift */; };
 		3B1BA9CE226EA545002EED15 /* StoreCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9CD226EA545002EED15 /* StoreCurrency.swift */; };
 		3B1BA9D1226EA608002EED15 /* rates.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA9CF226EA608002EED15 /* rates.json */; };
@@ -81,6 +80,7 @@
 		3B1BA9ED226EF6AF002EED15 /* PaymentRequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9EC226EF6AF002EED15 /* PaymentRequestRouter.swift */; };
 		3B1BA9EF226EF6DD002EED15 /* PaymentRequestPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9EE226EF6DD002EED15 /* PaymentRequestPresenter.swift */; };
 		3B1BA9F1226EF6FE002EED15 /* PaymentRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F0226EF6FE002EED15 /* PaymentRequestViewController.swift */; };
+		3B1BA9F52270B5E5002EED15 /* SettingsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */; };
 		B473B38741D46B5A9144EEA0 /* libPods-MerchantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -163,7 +163,6 @@
 		3B1BA9B5226E04E6002EED15 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		3B1BA9BB226E06B1002EED15 /* I_TS_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I_TS_TableViewCell.swift; sourceTree = "<group>"; };
 		3B1BA9BD226E06BD002EED15 /* I_TS_ViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I_TS_ViewCell.swift; sourceTree = "<group>"; };
-		3B1BA9C5226E114E002EED15 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		3B1BA9C9226E2014002EED15 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		3B1BA9CD226EA545002EED15 /* StoreCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreCurrency.swift; sourceTree = "<group>"; };
 		3B1BA9CF226EA608002EED15 /* rates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rates.json; sourceTree = "<group>"; };
@@ -181,6 +180,7 @@
 		3B1BA9EC226EF6AF002EED15 /* PaymentRequestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestRouter.swift; sourceTree = "<group>"; };
 		3B1BA9EE226EF6DD002EED15 /* PaymentRequestPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestPresenter.swift; sourceTree = "<group>"; };
 		3B1BA9F0226EF6FE002EED15 /* PaymentRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestViewController.swift; sourceTree = "<group>"; };
+		3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEntity.swift; sourceTree = "<group>"; };
 		4003DFD9D9642EACD01CFD90 /* Pods-All-Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Merchant.release.xcconfig"; path = "Target Support Files/Pods-All-Merchant/Pods-All-Merchant.release.xcconfig"; sourceTree = "<group>"; };
 		88A57F2AEF2F3475CB6D522F /* Pods-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantUITests/Pods-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9666CC57B1123D7CAE96F46F /* Pods_All_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -502,7 +502,7 @@
 				3B1BA9B5226E04E6002EED15 /* SettingsPresenter.swift */,
 				3B1BA9B2226E04E6002EED15 /* SettingsRouter.swift */,
 				3B1BA9B3226E04E6002EED15 /* SettingsViewController.swift */,
-				3B1BA9C5226E114E002EED15 /* Settings.storyboard */,
+				3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -680,7 +680,6 @@
 				3B1BA986226DF1AC002EED15 /* ITCollectionViewCell.xib in Resources */,
 				3B1BA902226DEE32002EED15 /* LaunchScreen.storyboard in Resources */,
 				3B1BA8FF226DEE32002EED15 /* Assets.xcassets in Resources */,
-				3B1BA9C6226E114E002EED15 /* Settings.storyboard in Resources */,
 				3B1BA967226DF1AC002EED15 /* success_animation.json in Resources */,
 				3B1BA9D2226EA608002EED15 /* symbols.json in Resources */,
 				3B1BA976226DF1AC002EED15 /* Assets.xcassets in Resources */,
@@ -832,6 +831,7 @@
 				3B1BA971226DF1AC002EED15 /* TransactionsBuilder.swift in Sources */,
 				3B1BA9B9226E04E6002EED15 /* SettingsPresenter.swift in Sources */,
 				3B1BA97D226DF1AC002EED15 /* BDCViewController.swift in Sources */,
+				3B1BA9F52270B5E5002EED15 /* SettingsEntity.swift in Sources */,
 				3B1BA984226DF1AC002EED15 /* TS_B_CollectionViewCell.swift in Sources */,
 				3B1BA9EB226EF68A002EED15 /* PaymentRequestBuilder.swift in Sources */,
 				3B1BA97C226DF1AC002EED15 /* BDCColor.swift in Sources */,

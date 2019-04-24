@@ -13,6 +13,11 @@ class EditUserInteractor {
     
     fileprivate let storageProvider = InternalStorageProvider()
     
+    func editSelectedCurrency(_ newCurrency: StoreCurrency) {
+        storageProvider.setString(newCurrency.ticker, key: "selectedCurrencyTicker")
+        UserManager.shared.selectedCurrency = newCurrency
+    }
+    
     func editCompanyName(_ newCompanyName: String) {
         storageProvider.setString(newCompanyName, key: "companyName")
         UserManager.shared.companyName = newCompanyName

@@ -11,7 +11,7 @@ import UIKit
 class SettingsBuilder: BDCBuilder {
     
     func provide() -> UIViewController {
-        let viewController = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        let viewController = SettingsViewController()
         
         let editUserInteractor = EditUserInteractor()
         let router = SettingsRouter(viewController)

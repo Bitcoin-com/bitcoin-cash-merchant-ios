@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SettingsPresenter {
     
@@ -15,16 +16,35 @@ class SettingsPresenter {
     weak var viewDelegate: SettingsViewController?
     var router: SettingsRouter?
     
+    init() {
+        
+    }
+    
     func viewDidLoad() {
         let companyName = UserManager.shared.companyName
-        viewDelegate?.onGetCompanyName(companyName ?? "")
+        viewDelegate?.onGetCompanyName(companyName)
         
         let destination = UserManager.shared.destination
-        viewDelegate?.onGetDestination(destination ?? "")
+        viewDelegate?.onGetDestination(destination)
+        
+        let currency = UserManager.shared.selectedCurrency
+        viewDelegate?.onGetCurrency(currency.name)
+        
+        let realm = try! Realm()
+        let currencies: [StoreCurrency] = realm
+            .objects(StoreCurrency.self)
+            .flatMap({ $0 })
+        let selectedIndex = currencies.firstIndex(where: { $0.ticker == currency.ticker }) ?? 0
+        viewDelegate?.onGetCurrencies(currencies, selectedIndex: selectedIndex)
     }
     
     func didPushClose() {
         router?.transitBackTo()
+    }
+    
+    func didEditSelectedCurrency(_ newCurrency: StoreCurrency) {
+        editUserInteractor?.editSelectedCurrency(newCurrency)
+        viewDelegate?.onGetCurrency(newCurrency.name)
     }
     
     func didEditCompanyName(_ newCompanyName: String) {
@@ -39,7 +59,7 @@ class SettingsPresenter {
         
         if !editUserInteractor.editDestination(newDestination) {
             let destination = UserManager.shared.destination
-            viewDelegate?.onGetDestination(destination ?? "")
+            viewDelegate?.onGetDestination(destination)
         }
     }
 }

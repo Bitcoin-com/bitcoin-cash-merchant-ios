@@ -26,9 +26,38 @@ class MerchantUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testFlow() {
+        let app = XCUIApplication()
+        app.navigationBars["My company name"].buttons["settings icon"].tap()
+        
+        let tablesQuery = app.tables
+        tablesQuery.cells.containing(.staticText, identifier:"Company name").children(matching: .textField).element.tap()
+        app.tables.containing(.other, identifier:"ACCOUNT").element.tap()
+        tablesQuery.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element.tap()
+        app.navigationBars["Settings"].buttons["close icon"].tap()
+        app.tabBars.buttons["History"].tap()
+        
+        let transactionCell = app.tables.cells.containing(.staticText, identifier:"Today at 7:00").staticTexts["$ 100,00"]
+        
+        transactionCell.tap()
+        app.sheets.buttons["View transaction on explorer"].tap()
+        
+        transactionCell.tap()
+        app.sheets.buttons["View address on explorer"].tap()
+        
+        transactionCell.tap()
+        app.sheets.buttons["Copy transaction"].tap()
+        
+        app.tabBars.buttons["Payment"].tap()
+        
+        let collectionViewsQuery = app.collectionViews
+        collectionViewsQuery.buttons["1"].tap()
+        collectionViewsQuery.buttons["5"].tap()
+        collectionViewsQuery.buttons["8"].tap()
+        app.staticTexts["$ 158,00"].tap()
+        collectionViewsQuery.buttons["checkmark icon"].tap()
+        app.navigationBars["Payment request"].buttons["close icon"].tap()
+        
     }
 
 }

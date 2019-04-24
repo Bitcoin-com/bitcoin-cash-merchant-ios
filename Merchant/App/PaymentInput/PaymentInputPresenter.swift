@@ -8,11 +8,18 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class PaymentInputPresenter {
     
     var router: PaymentInputRouter?
     weak var viewDelegate: PaymentInputViewController?
+    
+    var selectedCurrency: StoreCurrency
+    
+    init() {
+        selectedCurrency = UserManager.shared.selectedCurrency
+    }
     
     func viewDidLoad() {
     }
@@ -26,8 +33,8 @@ class PaymentInputPresenter {
     func didPushValid(_ amount: String) {
         // TODO: Calculate amount of Satoshis
         // Create payment request
-        guard let destination = UserManager.shared.destination
-            , let address = try? destination.toCashAddress() else {
+        let destination = UserManager.shared.destination
+        guard let address = try? destination.toCashAddress() else {
             // TODO: Handle the error here with a message
             return
         }

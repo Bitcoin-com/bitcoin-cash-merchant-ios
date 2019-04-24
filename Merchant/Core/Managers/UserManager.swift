@@ -14,21 +14,19 @@ class UserManager {
     // Singleton
     static let shared = UserManager()
     
-    var selectedCurrency: StoreCurrency?
-    var destination: String?
-    var companyName: String?
+    var selectedCurrency: StoreCurrency
+    var destination: String
+    var companyName: String
     
     init() {
         
         let storageProvider = InternalStorageProvider()
-        let ticker = storageProvider.getString("selectedCurrencyTicker")
+        let ticker = storageProvider.getString("selectedCurrencyTicker") ?? "USD"
         
-        if let _ = ticker {
-            let realm = try! Realm()
-            selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker)
-        }
+        let realm = try! Realm()
+        selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker) ?? RateManager.shared.defaultCurrency
         
-        destination = storageProvider.getString("destination")
-        companyName = storageProvider.getString("companyName")
+        destination = storageProvider.getString("destination") ?? ""
+        companyName = storageProvider.getString("companyName") ?? "Your company name"
     }
 }

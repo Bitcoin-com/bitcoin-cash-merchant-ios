@@ -9,9 +9,15 @@
 import RealmSwift
 
 class StoreRate: Object {
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    @objc dynamic var id: String = ""
     @objc dynamic var currency: StoreCurrency?
-    @objc dynamic var rateInSatoshis: Double = 0.0
-    @objc dynamic var updatedAt: Date = Date()
+    @objc dynamic var rate: Double = 0.0
+    @objc dynamic var updatedAt: Int = 0
 }
 
 
