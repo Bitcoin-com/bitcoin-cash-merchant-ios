@@ -25,7 +25,7 @@ extension String {
         return Double(self.replacingOccurrences(of: ",", with: ".")) ?? 0
     }
     
-    func toFormat(_ ticker: String, strict: Bool = true) -> String {
+    func toFormat(_ ticker: String, symbol: String, strict: Bool = true) -> String {
         var str = self
         var bothSide: [String.SubSequence]
         if str.contains(",") {
@@ -55,18 +55,21 @@ extension String {
         
         let leftSideStr = String(fiatFormat)
         
-        switch ticker {
-        case "USD":
+        switch symbol {
+        case "$":
 //            if leftSideStr == "0" && rightSideStr == "00" {
 //                str = "< $ 0,01"
 //            } else {
-                str = "$ \(leftSideStr)"
+                str = "\(symbol) \(leftSideStr)"
                 if rightSideStr.count > 0 {
                     str = "\(str),\(rightSideStr)"
                 }
 //            }
             break
-        case "EUR":
+        case "¥":
+            str = "\(leftSideStr) \(symbol)"
+            break
+        default:
 //            if leftSideStr == "0" && rightSideStr == "00" {
 //                str = "< 0,01 €"
 //            } else {
@@ -74,11 +77,8 @@ extension String {
                 if rightSideStr.count > 0 {
                     str = "\(str),\(rightSideStr)"
                 }
-                str = "\(str) €"
+                str = "\(str) \(symbol)"
 //            }
-            break
-        default:
-            str = "\(leftSideStr) \(ticker)"
             break
         }
         

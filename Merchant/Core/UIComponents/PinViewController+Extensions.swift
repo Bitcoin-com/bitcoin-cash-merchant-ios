@@ -8,12 +8,13 @@
 import UIKit
 
 protocol PinViewControllerDelegate {
-    func onPushPin(amount: String)
-    func onPushValid(amount: String)
+    func onPushPin(_ pin: String)
+    func onPushValid()
 }
 
 class PinViewController: BDCViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var hasComma = true
     let items = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ",", "0", "del", "valid"]
     let inset: CGFloat = 1
     let minimumLineSpacing: CGFloat = 0
@@ -22,14 +23,13 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     let cellsPerColumn = 4
     let cellId = "pinCell"
     
-    var amount: Int = 0
-    var amountStr: String = "0"
     var pinDelegate: PinViewControllerDelegate?
     var pinCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
+    var commaButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     }
     
     @objc func didPushValid() {
-        pinDelegate?.onPushValid(amount: amountStr)
+        pinDelegate?.onPushValid()
     }
     
     @objc func didPushPin(sender: UIButton) {
@@ -56,28 +56,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
             return
         }
         
-        switch pin {
-        case ",":
-            if amountStr.contains(pin) {
-                return
-            }
-            amountStr.append(pin)
-            pinDelegate?.onPushPin(amount: amountStr)
-        case "del":
-            if amountStr.count > 1 {
-                amountStr.removeLast()
-            } else {
-                amountStr = "0"
-            }
-            pinDelegate?.onPushPin(amount: amountStr)
-        default:
-            if amountStr.count < 1 || amountStr == "0" {
-                amountStr = pin
-            } else {
-                amountStr.append(pin)
-            }
-            pinDelegate?.onPushPin(amount: amountStr)
-        }
+        pinDelegate?.onPushPin(pin)
     }
     
     // Datasource
@@ -92,14 +71,20 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PinCell
         
-        let item = items[indexPath.item]
+        var item = items[indexPath.item]
         
-        if item == "valid" {
+         if item == "valid" {
             cell.pinButton.setImage(UIImage(named: "checkmark_icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
             cell.pinButton.tintColor = BDCColor.green.uiColor
             cell.pinButton.addTarget(self, action: #selector(didPushValid), for: .touchUpInside)
         } else {
-            cell.pinButton.setTitle(items[indexPath.item], for: .normal)
+            if item == "," {
+                if !hasComma {
+                    item = ""
+                }
+                commaButton = cell.pinButton
+            }
+            cell.pinButton.setTitle(item, for: .normal)
             cell.pinButton.addTarget(self, action: #selector(didPushPin), for: .touchUpInside)
         }
         

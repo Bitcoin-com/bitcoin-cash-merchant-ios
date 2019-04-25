@@ -17,8 +17,9 @@ class MerchantUITests: XCTestCase {
         continueAfterFailure = false
 
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
+        let app = XCUIApplication()
+        app.launchArguments = ["MerchantUITests"]
+        app.launch()
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
@@ -32,11 +33,18 @@ class MerchantUITests: XCTestCase {
         
         let tablesQuery = app.tables
         tablesQuery.cells.containing(.staticText, identifier:"Company name").children(matching: .textField).element.tap()
+        
         tablesQuery.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element.tap()
         
         let addressTextField = tablesQuery.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element
        
         addressTextField.tap()
+        
+        // Clean
+        let deleteString = (0..<40).map { _ in XCUIKeyboardKey.delete.rawValue }.joined()
+        addressTextField.typeText(deleteString)
+        
+        // Type the address
         addressTextField.typeText("1FW9BDQ62aWrcqzScvmvKbRmzUAkANqaJ3")
         
         app.navigationBars["Settings"].buttons["close icon"].tap()
@@ -59,7 +67,6 @@ class MerchantUITests: XCTestCase {
         collectionViewsQuery.buttons["1"].tap()
         collectionViewsQuery.buttons["5"].tap()
         collectionViewsQuery.buttons["8"].tap()
-        app.staticTexts["$ 158,00"].tap()
         collectionViewsQuery.buttons["checkmark icon"].tap()
         app.navigationBars["Payment request"].buttons["close icon"].tap()
         

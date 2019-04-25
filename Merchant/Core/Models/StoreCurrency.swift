@@ -18,3 +18,14 @@ class StoreCurrency: Object {
     @objc dynamic var symbol: String = ""
     @objc dynamic var ticker: String = ""
 }
+
+extension StoreCurrency {
+    func hasComma() -> Bool {
+        switch symbol {
+        case "¥":
+            return false
+        default:
+            return true
+        }
+    }
+}

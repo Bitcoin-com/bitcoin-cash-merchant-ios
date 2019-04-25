@@ -16,18 +16,28 @@ class PaymentInputPresenter {
     weak var viewDelegate: PaymentInputViewController?
     
     var selectedCurrency: StoreCurrency
+    var currentRawAmount: String = "0"
     
     init() {
         selectedCurrency = UserManager.shared.selectedCurrency
     }
     
     func viewDidLoad() {
+        setupCurrency()
     }
     
-    func setAmount(_ amount: String) {
-        // TODO: Manage the rate here
-        let amountStr = amount.toFormat("USD", strict: true)
-        viewDelegate?.onGetAmount(amountStr)
+    func viewWillAppear() {
+        let newCurrency = UserManager.shared.selectedCurrency
+        
+        if newCurrency != selectedCurrency {
+            selectedCurrency = newCurrency
+            setupCurrency()
+        }
+    }
+    
+    func didSetAmount(_ rawAmount: String) {
+        currentRawAmount = rawAmount
+        setupAmount()
     }
     
     func didPushValid(_ amount: String) {
@@ -44,5 +54,19 @@ class PaymentInputPresenter {
         
         let pr = PaymentRequest(toAddress: address, amountInSatoshis: 1000, amountInCurrency: 10.10)
         router?.transitToPaymentDetail(pr)
+    }
+}
+
+extension PaymentInputPresenter {
+    
+    fileprivate func setupCurrency() {
+        viewDelegate?.onSetComma(selectedCurrency.hasComma())
+        setupAmount()
+    }
+    
+    fileprivate func setupAmount() {
+        // TODO: Manage the rate here
+        let amount = currentRawAmount.toFormat(selectedCurrency.ticker, symbol: selectedCurrency.symbol, strict: true)
+        viewDelegate?.onSetAmount(amount)
     }
 }

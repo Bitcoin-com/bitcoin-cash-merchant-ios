@@ -23,6 +23,9 @@ class PaymentInputViewController: PinViewController {
     
     var presenter: PaymentInputPresenter?
     
+    var amount: Int = 0
+    var amountStr: String = "0"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,24 +41,56 @@ class PaymentInputViewController: PinViewController {
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: .alignAllTop, metrics: nil, views: ["v0": amountView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: .alignAllTop, metrics: nil, views: ["v0": pinCollectionView]))
         
-        self.pinDelegate = self
+        pinDelegate = self
         
-        onPushPin(amount: "0")
+        presenter?.viewDidLoad()
     }
     
-    func onGetAmount(_ amount: String) {
+    override func viewWillAppear(_ animated: Bool) {
+        presenter?.viewWillAppear()
+    }
+    
+    func onSetAmount(_ amount: String) {
         amountLabel.text = amount
     }
     
+    func onSetComma(_ hasComma: Bool) {
+        self.hasComma = hasComma
+        commaButton?.setTitle(hasComma ? "," : "", for: .normal)
+    }
+ 
 }
 
 extension PaymentInputViewController: PinViewControllerDelegate {
-    func onPushValid(amount: String) {
-        presenter?.didPushValid(amount)
+    
+    func onPushValid() {
+        presenter?.didPushValid(amountStr)
     }
     
     
-    func onPushPin(amount: String) {
-        presenter?.setAmount(amount)
+    func onPushPin(_ pin: String) {
+        switch pin {
+        case ",":
+            if amountStr.contains(pin) {
+                return
+            }
+            amountStr.append(pin)
+            presenter?.didSetAmount(amountStr)
+        case "del":
+            if amountStr.count > 1 {
+                amountStr.removeLast()
+            } else {
+                amountStr = "0"
+            }
+            presenter?.didSetAmount(amountStr)
+        case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+            if amountStr.count < 1 || amountStr == "0" {
+                amountStr = pin
+            } else {
+                amountStr.append(pin)
+            }
+            presenter?.didSetAmount(amountStr)
+        default: break
+        }
     }
 }
