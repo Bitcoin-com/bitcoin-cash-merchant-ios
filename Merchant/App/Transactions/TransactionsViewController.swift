@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Lottie
 
 class TransactionsViewController: BDCViewController {
     
@@ -17,6 +18,12 @@ class TransactionsViewController: BDCViewController {
     var items = [TransactionOutput]()
     
     var tableView: UITableView?
+    let successAnimation: LOTAnimationView = {
+        let animationView = LOTAnimationView(name: "success_animation")
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        animationView.isHidden = true
+        return animationView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +35,12 @@ class TransactionsViewController: BDCViewController {
         view.addSubview(tableView)
         tableView.fillSuperView()
         
+        view.addSubview(successAnimation)
+        successAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        successAnimation.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        successAnimation.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        successAnimation.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
         self.tableView = tableView
     }
     
@@ -38,6 +51,13 @@ class TransactionsViewController: BDCViewController {
     func onGetTransactions(_ outputs: [TransactionOutput]) {
         items = outputs
         tableView?.reloadData()
+    }
+    
+    func onSuccessCopy() {
+        successAnimation.isHidden = false
+        successAnimation.play { _ in
+            self.successAnimation.isHidden = true
+        }
     }
     
 }
@@ -57,12 +77,17 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         // 1
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let viewAddressAction = UIAlertAction(title: "View address on explorer", style: .default)
-        let viewTransactionAction = UIAlertAction(title: "View transaction on explorer", style: .default, handler: { _ in
-            self.presenter?.didPushViewTransaction(forOutput: self.items[indexPath.item])
+        let viewAddressAction = UIAlertAction(title: "View address on explorer", style: .default, handler: { _ in
+            self.presenter?.didPushViewAddress(forIndex: indexPath.item)
         })
         
-        let copyTransactionAction = UIAlertAction(title: "Copy transaction", style: .default)
+        let viewTransactionAction = UIAlertAction(title: "View transaction on explorer", style: .default, handler: { _ in
+            self.presenter?.didPushViewTransaction(forIndex: indexPath.item)
+        })
+        
+        let copyTransactionAction = UIAlertAction(title: "Copy transaction", style: .default, handler: { _ in
+            self.presenter?.didPushCopyTransaction(forIndex: indexPath.item)
+        })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         

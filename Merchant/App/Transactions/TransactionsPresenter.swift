@@ -20,9 +20,9 @@ class TransactionsPresenter {
     var transactionsInteractor: TransactionsInteractor?
     weak var viewDelegate: TransactionsViewController?
     
+    fileprivate var transactions = [StoreTransaction]()
+    
     func viewDidLoad() {
-        // Actual code to fetch the transactions
-        setupTransactions()
     }
     
     func viewWillAppear() {
@@ -34,30 +34,54 @@ class TransactionsPresenter {
             return
         }
         
-        let outputs = transactions.compactMap { tx -> TransactionOutput in
+        if transactions.count != self.transactions.count {
+            // Actual code to fetch the transactions
+            let outputs = transactions.compactMap { tx -> TransactionOutput in
+                
+                // Date
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .medium
+                dateFormatter.timeStyle = .medium
+                
+                // US English Locale (en_US)
+                dateFormatter.locale = Locale(identifier: "en_US")
+                let dateStr = dateFormatter.string(from: tx.date) // Jan 2, 2001
+                
+                let amountInBCH = tx.amountInSatoshis.toBCH().description.toFormat("BCH", symbol: "BCH")
+                
+                return TransactionOutput(txid: tx.txid, date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
+            }
             
-            // Date
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .medium
-            
-            // US English Locale (en_US)
-            dateFormatter.locale = Locale(identifier: "en_US")
-            let dateStr = dateFormatter.string(from: tx.date) // Jan 2, 2001
-            
-            let amountInBCH = tx.amountInSatoshis.toBCH().description.toFormat("BCH", symbol: "BCH")
-            
-            return TransactionOutput(txid: tx.txid, date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
+            viewDelegate?.onGetTransactions(outputs)
         }
         
-        viewDelegate?.onGetTransactions(outputs)
+        self.transactions = transactions
     }
     
-    func didPushViewTransaction(forOutput transactionOutput: TransactionOutput) {
-        guard let url = URL(string: "https://explorer.bitcoin.com/bch/tx/\(transactionOutput.txid)") else {
-                return
+    func didPushViewTransaction(forIndex index: Int) {
+        let transaction = transactions[index]
+        
+        guard let url = URL(string: "https://explorer.bitcoin.com/bch/tx/\(transaction.txid)") else {
+            return
         }
         UIApplication.shared.open(url)
+    }
+    
+    func didPushViewAddress(forIndex index: Int) {
+        let transaction = transactions[index]
+        
+        guard let url = URL(string: "https://explorer.bitcoin.com/bch/address/\(transaction.toAddress)") else {
+            return
+        }
+        UIApplication.shared.open(url)
+    }
+    
+    func didPushCopyTransaction(forIndex index: Int) {
+        let transaction = transactions[index]
+        
+        UIPasteboard.general.string = transaction.txid
+        
+        viewDelegate?.onSuccessCopy()
     }
     
 }
