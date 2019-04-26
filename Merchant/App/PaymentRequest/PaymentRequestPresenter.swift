@@ -7,23 +7,40 @@
 //
 
 import Foundation
+import RxSwift
 
 class PaymentRequestPresenter {
     
+    var waitTransactionInteractor: WaitTransactionInteractor?
     var router: PaymentRequestRouter?
     
     weak var viewDelegate: PaymentRequestViewController?
     
-    var paymentRequest: PaymentRequest
+    fileprivate let bag = DisposeBag()
+    fileprivate var pr: PaymentRequest
     
-    init(_ paymentRequest: PaymentRequest) {
-        self.paymentRequest = paymentRequest
-        print(paymentRequest.amountInCurrency)
-        print(paymentRequest.amountInSatoshis)
-        print(paymentRequest.toAddress)
+    init(_ pr: PaymentRequest) {
+        self.pr = pr
+        print(pr.amountInFiat)
+        print(pr.amountInSatoshis)
+        print(pr.toAddress)
     }
     
     func viewDidLoad() {
+        let data = "\(pr.toAddress)?amount=\(pr.amountInSatoshis.toBCH())"
+        viewDelegate?.onSetQRCode(withData: data)
+        viewDelegate?.onSetAmount(pr.amountInFiat)
+        
+        waitTransactionInteractor?
+            .waitTransaction(withPr: pr)
+            .subscribe(onSuccess: { isSuccess in
+                print("success")
+                self.viewDelegate?.onSuccess()
+            }, onError: { error in
+                print("error")
+                // Handle error
+            })
+            .disposed(by: bag)
     }
     
     func didPushClose() {

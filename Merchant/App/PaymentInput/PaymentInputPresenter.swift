@@ -51,7 +51,7 @@ class PaymentInputPresenter {
             return
         }
         
-        guard let amountInCurrency = Double(rawAmount) else {
+        guard let amountInFiat = Double(rawAmount) else {
             // TODO: Handle the error here with a message
             print("amount in currency")
             return
@@ -65,9 +65,10 @@ class PaymentInputPresenter {
         
         // TODO: Calcul du montant en satoshis
         //
-        let amountInSatoshis = rate.rate > 0  ? (amountInCurrency / rate.rate).toSatoshis() : 0
+        let amountInSatoshis = rate.rate > 0  ? (amountInFiat / rate.rate).toSatoshis() : 0
+        let amountInFiatStr = rawAmount.toFormat(selectedCurrency.ticker, symbol: selectedCurrency.symbol, strict: true)
         
-        let pr = PaymentRequest(toAddress: address, amountInSatoshis: Int64(amountInSatoshis), amountInCurrency: amountInCurrency)
+        let pr = PaymentRequest(toAddress: address, amountInSatoshis: Int64(amountInSatoshis), amountInFiat: amountInFiatStr, selectedCurrency: selectedCurrency)
         router?.transitToPaymentDetail(pr)
     }
 }

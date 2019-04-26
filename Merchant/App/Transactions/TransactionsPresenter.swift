@@ -6,10 +6,12 @@
 //  Copyright © 2018 Bitcoin.com. All rights reserved.
 //
 
+import UIKit
+
 struct TransactionOutput {
     var date: String
-    var amountFiat: String
-    var amountSatoshis: String
+    var amountInFiat: String
+    var amountInBCH: String
 }
 
 class TransactionsPresenter {
@@ -19,21 +21,34 @@ class TransactionsPresenter {
     
     func viewDidLoad() {
         // Actual code to fetch the transactions
-//        guard let transactions = transactionsInteractor?.getTransactions() else {
-//            return
-//        }
-//
-//        let outputs = transactions.flatMap { tx -> TransactionOutput in
-//            return TransactionOutput(amountFiat: Double(tx.amount), amountSatoshis: tx.amount)
-//        }
-
-        // Get random data to work on the UI
-        var outputs = [TransactionOutput]()
-        
-        Array(0...20).forEach { i in
-            outputs.append(TransactionOutput(date: "Today at \(i):00", amountFiat: "$ 100,00", amountSatoshis: "0.00012 BCH"))
+        setupTransactions()
+    }
+    
+    func viewWillAppear() {
+        setupTransactions()
+    }
+    
+    func setupTransactions() {
+        guard let transactions = transactionsInteractor?.getTransactions() else {
+            return
         }
-
+        
+        let outputs = transactions.compactMap { tx -> TransactionOutput in
+            
+            // Date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .medium
+            
+            // US English Locale (en_US)
+            dateFormatter.locale = Locale(identifier: "en_US")
+            let dateStr = dateFormatter.string(from: tx.date) // Jan 2, 2001
+            
+            let amountInBCH = tx.amountInSatoshis.toBCH().description.toFormat("BCH", symbol: "BCH")
+            
+            return TransactionOutput(date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
+        }
+        
         viewDelegate?.onGetTransactions(outputs)
     }
     

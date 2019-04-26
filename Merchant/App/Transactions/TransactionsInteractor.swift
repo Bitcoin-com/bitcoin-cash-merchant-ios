@@ -13,8 +13,13 @@ class TransactionsInteractor {
     
     func getTransactions() -> [StoreTransaction] {
         let realm = try! Realm()
-        let results = realm.objects(StoreTransaction.self)
+        
+        let results = realm
+            .objects(StoreTransaction.self)
+            .sorted(byKeyPath: "date", ascending: false)
+        
         let transactions = Array(results)
+        
         return transactions
     }
 }

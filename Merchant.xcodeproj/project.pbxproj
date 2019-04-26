@@ -11,6 +11,8 @@
 		35BDC46C8FB46A584130A8C1 /* Pods_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F06E88E22A28BCD3A88967C8 /* Pods_MerchantTests.framework */; };
 		3B0624922272C20F00899A4B /* GetRateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624912272C20F00899A4B /* GetRateInteractor.swift */; };
 		3B0624952272C97600899A4B /* RateNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624942272C97600899A4B /* RateNetwork.swift */; };
+		3B0624972272D40700899A4B /* Int64+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624962272D40700899A4B /* Int64+Extensions.swift */; };
+		3B0624992272D69A00899A4B /* WaitTransactionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624982272D69A00899A4B /* WaitTransactionInteractor.swift */; };
 		3B1BA8F8226DEE30002EED15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */; };
 		3B1BA8FF226DEE32002EED15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA8FE226DEE32002EED15 /* Assets.xcassets */; };
 		3B1BA902226DEE32002EED15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA900226DEE32002EED15 /* LaunchScreen.storyboard */; };
@@ -107,6 +109,8 @@
 		39A09D4E1B96899B6B626933 /* Pods-All-Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Merchant.debug.xcconfig"; path = "Target Support Files/Pods-All-Merchant/Pods-All-Merchant.debug.xcconfig"; sourceTree = "<group>"; };
 		3B0624912272C20F00899A4B /* GetRateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRateInteractor.swift; sourceTree = "<group>"; };
 		3B0624942272C97600899A4B /* RateNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateNetwork.swift; sourceTree = "<group>"; };
+		3B0624962272D40700899A4B /* Int64+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Extensions.swift"; sourceTree = "<group>"; };
+		3B0624982272D69A00899A4B /* WaitTransactionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitTransactionInteractor.swift; sourceTree = "<group>"; };
 		3B1BA8F4226DEE30002EED15 /* Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merchant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B1BA8FE226DEE32002EED15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -356,8 +360,8 @@
 		3B1BA93A226DF1AC002EED15 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				3B1BA93B226DF1AC002EED15 /* TransactionsBuilder.swift */,
 				3B1BA93C226DF1AC002EED15 /* TransactionsInteractor.swift */,
+				3B1BA93B226DF1AC002EED15 /* TransactionsBuilder.swift */,
 				3B1BA93D226DF1AC002EED15 /* TransactionsViewController.swift */,
 				3B1BA93E226DF1AC002EED15 /* TransactionsPresenter.swift */,
 			);
@@ -492,6 +496,7 @@
 				3B1BA9E3226EE48F002EED15 /* String+Extensions.swift */,
 				3B1BA99C226DF2B7002EED15 /* UserDefaults+Extensions.swift */,
 				3B1BA9E5226EE6CD002EED15 /* Double+Extensions.swift */,
+				3B0624962272D40700899A4B /* Int64+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -551,6 +556,7 @@
 		3B1BA9E9226EF672002EED15 /* PaymentRequest */ = {
 			isa = PBXGroup;
 			children = (
+				3B0624982272D69A00899A4B /* WaitTransactionInteractor.swift */,
 				3B1BA9EA226EF68A002EED15 /* PaymentRequestBuilder.swift */,
 				3B1BA9EC226EF6AF002EED15 /* PaymentRequestRouter.swift */,
 				3B1BA9EE226EF6DD002EED15 /* PaymentRequestPresenter.swift */,
@@ -860,6 +866,7 @@
 				3B1BA972226DF1AC002EED15 /* TransactionsInteractor.swift in Sources */,
 				3B1BA98B226DF1AC002EED15 /* BDCTableViewCell.swift in Sources */,
 				3B1BA9AE226E028C002EED15 /* StoreRate.swift in Sources */,
+				3B0624992272D69A00899A4B /* WaitTransactionInteractor.swift in Sources */,
 				3B1BA987226DF1AC002EED15 /* BDCViewCell.swift in Sources */,
 				3B1BA9E1226ECBCB002EED15 /* PinViewController+Extensions.swift in Sources */,
 				3B1BA989226DF1AC002EED15 /* I_T_TS_TableViewCell.swift in Sources */,
@@ -876,6 +883,7 @@
 				3B1BA9B7226E04E6002EED15 /* SettingsViewController.swift in Sources */,
 				3B1BA99D226DF2B7002EED15 /* UserDefaults+Extensions.swift in Sources */,
 				3B1BA985226DF1AC002EED15 /* ITCollectionViewCell.swift in Sources */,
+				3B0624972272D40700899A4B /* Int64+Extensions.swift in Sources */,
 				3B1BA9CE226EA545002EED15 /* StoreCurrency.swift in Sources */,
 				3B1BA988226DF1AC002EED15 /* I_T_TS_CollectionViewCell.swift in Sources */,
 				3B1BA9D4226EAAC6002EED15 /* EditUserInteractor.swift in Sources */,
@@ -1094,7 +1102,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F79D5998235519D2ADF26848 /* Pods-MerchantTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
@@ -1116,7 +1123,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B4423D46E73793DE7376E21B /* Pods-MerchantTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
@@ -1138,7 +1144,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 88A57F2AEF2F3475CB6D522F /* Pods-MerchantUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = MerchantUITests/Info.plist;
@@ -1159,7 +1164,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D5805DB52B3B173588EDD0D5 /* Pods-MerchantUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = MerchantUITests/Info.plist;

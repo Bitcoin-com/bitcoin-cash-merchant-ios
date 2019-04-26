@@ -31,6 +31,10 @@ class TransactionsViewController: BDCViewController {
         self.tableView = tableView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        presenter?.viewWillAppear()
+    }
+    
     func onGetTransactions(_ outputs: [TransactionOutput]) {
         items = outputs
         tableView?.reloadData()
@@ -73,9 +77,9 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         
         cell.viewCell?.iconImageView.image = UIImage(named: "checkmark_icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         cell.viewCell?.iconImageView.tintColor = BDCColor.green.uiColor
-        cell.viewCell?.title1Label.text = item.amountFiat.description
-        cell.viewCell?.title2Label.text = item.date
-        cell.viewCell?.subtitleLabel.text = item.amountSatoshis.description
+        cell.viewCell?.title1Label.text = item.amountInFiat
+        cell.viewCell?.title2Label.text = item.amountInBCH
+        cell.viewCell?.subtitleLabel.text = item.date
         
         return cell
     }

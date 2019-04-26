@@ -41,11 +41,11 @@ class MerchantUITests: XCTestCase {
         addressTextField.tap()
         
         // Clean
-        let deleteString = (0..<40).map { _ in XCUIKeyboardKey.delete.rawValue }.joined()
+        let deleteString = (0..<60).map { _ in XCUIKeyboardKey.delete.rawValue }.joined()
         addressTextField.typeText(deleteString)
         
         // Type the address
-        addressTextField.typeText("1FW9BDQ62aWrcqzScvmvKbRmzUAkANqaJ3")
+        addressTextField.typeText("bitcoincash:pzmgrnkszxvw0r5n0hh66jhcj6p0zpc6xv9xal297t")
         
         app.navigationBars["Settings"].buttons["close icon"].tap()
         app.tabBars.buttons["History"].tap()

@@ -13,10 +13,12 @@ class PaymentRequestBuilder {
     func provide(_ pr: PaymentRequest) -> UIViewController {
         let viewController = PaymentRequestViewController()
         
+        let waitTransactionInteractor = WaitTransactionInteractor()
         let router = PaymentRequestRouter(viewController)
         
         let presenter = PaymentRequestPresenter(pr)
         
+        presenter.waitTransactionInteractor = waitTransactionInteractor
         presenter.viewDelegate = viewController
         presenter.router = router
         
