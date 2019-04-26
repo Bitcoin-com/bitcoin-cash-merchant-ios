@@ -13,10 +13,12 @@ class PaymentInputBuilder: BDCBuilder {
     func provide() -> UIViewController {
         let viewController = PaymentInputViewController()
         
+        let getRateInteractor = GetRateInteractor()
         let router = PaymentInputRouter(viewController)
         
         let presenter = PaymentInputPresenter()
         
+        presenter.getRateInteractor = getRateInteractor
         presenter.viewDelegate = viewController
         presenter.router = router
         

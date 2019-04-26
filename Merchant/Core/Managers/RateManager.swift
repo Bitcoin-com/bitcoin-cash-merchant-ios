@@ -19,22 +19,15 @@ class RateManager {
     var defaultRate = StoreRate()
     var defaultCurrency = StoreCurrency()
     
-//    var output: Observable<StoreRate> {
-//        return rate.asObservable()
-//    }
-//
-//    fileprivate let bag = DisposeBag()
-//    fileprivate let realm = try! Realm()
-//    fileprivate let rate: BehaviorRelay<StoreRate>
-//
-//    fileprivate lazy var timer: DispatchSourceTimer = {
-//        let t = DispatchSource.makeTimerSource()
-//        t.schedule(deadline: .now(), repeating: 10)
-//        t.setEventHandler(handler: { [weak self] in
-//            self?.fetchRate()
-//        })
-//        return t
-//    }()
+    fileprivate let bag = DisposeBag()
+    fileprivate lazy var timer: DispatchSourceTimer = {
+        let t = DispatchSource.makeTimerSource()
+        t.schedule(deadline: .now(), repeating: 30)
+        t.setEventHandler(handler: { [weak self] in
+            self?.fetchRate()
+        })
+        return t
+    }()
     
     struct RateResponse: Codable {
         var code: String
@@ -77,18 +70,15 @@ class RateManager {
             }
             
             let storeRates = rates.compactMap { rate -> StoreRate? in
-                guard rate.code == "BCH"
-                    , rate.code == "BCH_BTC"
-                    , rate.code == "BCC" else {
+                guard rate.code != "BCH"
+                    , rate.code != "BCH_BTC"
+                    , rate.code != "BCC" else {
                     return nil
                 }
                 
-                let currency = currencies[rate.code]
-                
                 let newRate = StoreRate()
-                newRate.id = "\(rate.code)-0"
+                newRate.id = rate.code
                 newRate.rate = rate.rate*bchRate.rate
-                newRate.currency = currency
                 newRate.updatedAt = 0
                 
                 if rate.code == "USD" {
@@ -110,43 +100,56 @@ class RateManager {
             print("Error loading symbols & default rates", error)
         }
         
-        
-//        let results = realm.objects(StoreRate.self)
-//            .sorted(byKeyPath: "updatedAt")
-//        if let rate = results.first {
-//            self.rate = BehaviorRelay(value: rate)
-//        } else {
-//            self.rate = BehaviorRelay(value: StoreRate())
-//        }
-//        timer.resume()
+        timer.resume()
     }
     
     func fetchRate() {
-//        let provider = MoyaProvider<RateNetwork>()
-//        provider.rx
-//            .request(.get("BCH"))
-//            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-//            .retry(3)
-//            .filterSuccessfulStatusCodes()
-//            .map(ResponseRate.self)
-//            .observeOn(MainScheduler.asyncInstance)
-//            .subscribe(onSuccess: { response in
-//                let updateAt = Int(Date().timeIntervalSince1970)
-//
-//                let rate = StoreRate()
-//                rate.eur = response.eur
-//                rate.usd = response.usd
-//                rate.updatedAt = updateAt
-//                do {
-//                    try self.realm.write {
-//                        self.realm.add(rate)
-//                    }
-//                } catch {
-//                    print(error)
-//                }
-//
-//                self.rate.accept(rate)
-//            })
-//            .disposed(by: bag)
+        let provider = MoyaProvider<RateNetwork>()
+        provider.rx
+            .request(.get())
+            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .retry(3)
+            .filterSuccessfulStatusCodes()
+            .map([RateResponse].self)
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe(onSuccess: { response in
+                self.storeData(withRates: response)
+            })
+            .disposed(by: bag)
+    }
+    
+    func storeData(withRates rates: [RateResponse]) {
+        do {
+            guard let bchRate = rates.filter({ $0.code == "BCH" }).first else {
+                return
+            }
+            
+            let storeRates = rates.compactMap { rate -> StoreRate? in
+                guard rate.code != "BCH"
+                    , rate.code != "BCH_BTC"
+                    , rate.code != "BCC" else {
+                        return nil
+                }
+                
+                let newRate = StoreRate()
+                newRate.id = rate.code
+                newRate.rate = rate.rate*bchRate.rate
+                newRate.updatedAt = 0
+                
+                if rate.code == "USD" {
+                    self.defaultRate = newRate
+                }
+                
+                return newRate
+            }
+            
+            let realm = try Realm()
+            try realm.write {
+                realm.add(storeRates, update: true)
+            }
+            
+        } catch {
+            print("Error loading symbols & default rates", error)
+        }
     }
 }

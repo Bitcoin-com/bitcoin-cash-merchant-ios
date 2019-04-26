@@ -15,7 +15,6 @@ class StoreRate: Object {
     }
     
     @objc dynamic var id: String = ""
-    @objc dynamic var currency: StoreCurrency?
     @objc dynamic var rate: Double = 0.0
     @objc dynamic var updatedAt: Int = 0
 }

@@ -18,6 +18,9 @@ class PaymentRequestPresenter {
     
     init(_ paymentRequest: PaymentRequest) {
         self.paymentRequest = paymentRequest
+        print(paymentRequest.amountInCurrency)
+        print(paymentRequest.amountInSatoshis)
+        print(paymentRequest.toAddress)
     }
     
     func viewDidLoad() {

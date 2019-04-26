@@ -12,6 +12,7 @@ import RealmSwift
 
 class PaymentInputPresenter {
     
+    var getRateInteractor: GetRateInteractor?
     var router: PaymentInputRouter?
     weak var viewDelegate: PaymentInputViewController?
     
@@ -40,19 +41,33 @@ class PaymentInputPresenter {
         setupAmount()
     }
     
-    func didPushValid(_ amount: String) {
+    func didPushValid(_ rawAmount: String) {
         // TODO: Calculate amount of Satoshis
         // Create payment request
         let destination = UserManager.shared.destination
         guard let address = try? destination.toCashAddress() else {
             // TODO: Handle the error here with a message
+            print("cash address")
+            return
+        }
+        
+        guard let amountInCurrency = Double(rawAmount) else {
+            // TODO: Handle the error here with a message
+            print("amount in currency")
+            return
+        }
+        
+        guard let rate = getRateInteractor?.getRate(withCurrency: selectedCurrency) else {
+            // TODO: Handle the error here with a message
+            print("get rate")
             return
         }
         
         // TODO: Calcul du montant en satoshis
         //
+        let amountInSatoshis = rate.rate > 0  ? (amountInCurrency / rate.rate).toSatoshis() : 0
         
-        let pr = PaymentRequest(toAddress: address, amountInSatoshis: 1000, amountInCurrency: 10.10)
+        let pr = PaymentRequest(toAddress: address, amountInSatoshis: Int64(amountInSatoshis), amountInCurrency: amountInCurrency)
         router?.transitToPaymentDetail(pr)
     }
 }
