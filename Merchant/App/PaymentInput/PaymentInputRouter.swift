@@ -13,6 +13,9 @@ class PaymentInputRouter: BDCRouter {
     func transitToPaymentDetail(_ pr: PaymentRequest) {
         let paymentRequestViewController = PaymentRequestBuilder().provide(pr)
         let navViewController = UINavigationController(rootViewController: paymentRequestViewController)
+        navViewController.modalPresentationStyle = .custom
+        navViewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
+        navViewController.modalPresentationCapturesStatusBarAppearance = true
         viewController?.present(navViewController, animated: true, completion: nil)
     }
     

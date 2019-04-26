@@ -14,6 +14,7 @@
 		3B0624972272D40700899A4B /* Int64+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624962272D40700899A4B /* Int64+Extensions.swift */; };
 		3B0624992272D69A00899A4B /* WaitTransactionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624982272D69A00899A4B /* WaitTransactionInteractor.swift */; };
 		3B06249B2272FA0400899A4B /* GetCurrenciesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B06249A2272FA0400899A4B /* GetCurrenciesInteractor.swift */; };
+		3B06249D22734D2600899A4B /* CircleAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B06249C22734D2600899A4B /* CircleAnimationController.swift */; };
 		3B1BA8F8226DEE30002EED15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */; };
 		3B1BA8FF226DEE32002EED15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA8FE226DEE32002EED15 /* Assets.xcassets */; };
 		3B1BA902226DEE32002EED15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA900226DEE32002EED15 /* LaunchScreen.storyboard */; };
@@ -113,6 +114,7 @@
 		3B0624962272D40700899A4B /* Int64+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Extensions.swift"; sourceTree = "<group>"; };
 		3B0624982272D69A00899A4B /* WaitTransactionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitTransactionInteractor.swift; sourceTree = "<group>"; };
 		3B06249A2272FA0400899A4B /* GetCurrenciesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrenciesInteractor.swift; sourceTree = "<group>"; };
+		3B06249C22734D2600899A4B /* CircleAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationController.swift; sourceTree = "<group>"; };
 		3B1BA8F4226DEE30002EED15 /* Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merchant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B1BA8FE226DEE32002EED15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -507,10 +509,11 @@
 			isa = PBXGroup;
 			children = (
 				3B0624912272C20F00899A4B /* GetRateInteractor.swift */,
-				3B1BA9A3226DFD70002EED15 /* PaymentInputRouter.swift */,
 				3B1BA9A4226DFD70002EED15 /* PaymentInputBuilder.swift */,
+				3B1BA9A3226DFD70002EED15 /* PaymentInputRouter.swift */,
 				3B1BA9A6226DFD70002EED15 /* PaymentInputPresenter.swift */,
 				3B1BA9A5226DFD70002EED15 /* PaymentInputViewController.swift */,
+				3B06249C22734D2600899A4B /* CircleAnimationController.swift */,
 			);
 			path = PaymentInput;
 			sourceTree = "<group>";
@@ -868,6 +871,7 @@
 				3B1BA979226DF1AC002EED15 /* BDCLabelType.swift in Sources */,
 				3B1BA972226DF1AC002EED15 /* TransactionsInteractor.swift in Sources */,
 				3B1BA98B226DF1AC002EED15 /* BDCTableViewCell.swift in Sources */,
+				3B06249D22734D2600899A4B /* CircleAnimationController.swift in Sources */,
 				3B1BA9AE226E028C002EED15 /* StoreRate.swift in Sources */,
 				3B0624992272D69A00899A4B /* WaitTransactionInteractor.swift in Sources */,
 				3B1BA987226DF1AC002EED15 /* BDCViewCell.swift in Sources */,

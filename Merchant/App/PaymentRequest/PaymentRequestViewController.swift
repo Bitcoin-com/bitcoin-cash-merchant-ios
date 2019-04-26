@@ -64,6 +64,7 @@ class PaymentRequestViewController: BDCViewController {
         let priceView = UIStackView(arrangedSubviews: [fiatAmountLabel, bchAmountLabel])
         priceView.axis = .vertical
         priceView.distribution = .fill
+        priceView.spacing = 8
         priceView.translatesAutoresizingMaskIntoConstraints = false
         
         let stackView = UIStackView(arrangedSubviews: [waitingLabel, qrImageView, priceView])
