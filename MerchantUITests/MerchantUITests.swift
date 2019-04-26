@@ -50,16 +50,16 @@ class MerchantUITests: XCTestCase {
         app.navigationBars["Settings"].buttons["close icon"].tap()
         app.tabBars.buttons["History"].tap()
         
-        let transactionCell = app.tables.cells.containing(.staticText, identifier:"Today at 7:00").staticTexts["$ 100,00"]
-        
-        transactionCell.tap()
-        app.sheets.buttons["View transaction on explorer"].tap()
-        
-        transactionCell.tap()
-        app.sheets.buttons["View address on explorer"].tap()
-        
-        transactionCell.tap()
-        app.sheets.buttons["Copy transaction"].tap()
+//        let transactionCell = app.tables.cells.containing(.staticText, identifier:"Today at 7:00").staticTexts["$ 100,00"]
+//        
+//        transactionCell.tap()
+//        app.sheets.buttons["View transaction on explorer"].tap()
+//        
+//        transactionCell.tap()
+//        app.sheets.buttons["View address on explorer"].tap()
+//        
+//        transactionCell.tap()
+//        app.sheets.buttons["Copy transaction"].tap()
         
         app.tabBars.buttons["Payment"].tap()
         

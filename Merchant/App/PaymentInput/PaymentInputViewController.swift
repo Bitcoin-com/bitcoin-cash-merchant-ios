@@ -33,13 +33,13 @@ class PaymentInputViewController: PinViewController {
         amountLabel.centerXAnchor.constraint(equalTo: amountView.centerXAnchor).isActive =  true
         amountLabel.centerYAnchor.constraint(equalTo: amountView.centerYAnchor).isActive =  true
 
-        view.addSubview(amountView)
+        let stackView = UIStackView(arrangedSubviews: [amountView, pinCollectionView])
+        stackView.axis = .vertical
+        stackView.alignment = .fill
         
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0][c0]", options: .alignAllLeft, metrics: nil, views: ["v0": amountView, "c0": pinCollectionView]))
-        pinCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive =  true
+        view.addSubview(stackView)
         
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: .alignAllTop, metrics: nil, views: ["v0": amountView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: .alignAllTop, metrics: nil, views: ["v0": pinCollectionView]))
+        stackView.fillSuperView()
         
         pinDelegate = self
         

@@ -18,8 +18,8 @@ extension UIView {
             return
         }
         
-        topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
+        topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.bottomAnchor).isActive = true
         leftAnchor.constraint(equalTo: superView.leftAnchor).isActive = true
         rightAnchor.constraint(equalTo: superView.rightAnchor).isActive = true
     }
