@@ -13,10 +13,12 @@ class SettingsBuilder: BDCBuilder {
     func provide() -> UIViewController {
         let viewController = SettingsViewController()
         
+        let getCurrenciesInteractor = GetCurrenciesInteractor()
         let editUserInteractor = EditUserInteractor()
         let router = SettingsRouter(viewController)
         
         let presenter = SettingsPresenter()
+        presenter.getCurrenciesInteractor = getCurrenciesInteractor
         presenter.editUserInteractor = editUserInteractor
         presenter.viewDelegate = viewController
         presenter.router = router

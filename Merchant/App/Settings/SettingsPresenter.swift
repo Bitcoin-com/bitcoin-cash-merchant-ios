@@ -11,6 +11,7 @@ import RealmSwift
 
 class SettingsPresenter {
     
+    var getCurrenciesInteractor: GetCurrenciesInteractor?
     var editUserInteractor: EditUserInteractor?
     
     weak var viewDelegate: SettingsViewController?
@@ -30,10 +31,10 @@ class SettingsPresenter {
         let currency = UserManager.shared.selectedCurrency
         viewDelegate?.onGetCurrency(currency.name)
         
-        let realm = try! Realm()
-        let currencies: [StoreCurrency] = realm
-            .objects(StoreCurrency.self)
-            .flatMap({ $0 })
+        guard let currencies = getCurrenciesInteractor?.getCurrencies() else {
+            return
+        }
+        
         let selectedIndex = currencies.firstIndex(where: { $0.ticker == currency.ticker }) ?? 0
         viewDelegate?.onGetCurrencies(currencies, selectedIndex: selectedIndex)
     }

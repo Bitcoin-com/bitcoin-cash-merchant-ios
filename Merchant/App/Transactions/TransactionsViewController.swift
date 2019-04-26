@@ -58,7 +58,10 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let viewAddressAction = UIAlertAction(title: "View address on explorer", style: .default)
-        let viewTransactionAction = UIAlertAction(title: "View transaction on explorer", style: .default)
+        let viewTransactionAction = UIAlertAction(title: "View transaction on explorer", style: .default, handler: { _ in
+            self.presenter?.didPushViewTransaction(forOutput: self.items[indexPath.item])
+        })
+        
         let copyTransactionAction = UIAlertAction(title: "Copy transaction", style: .default)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

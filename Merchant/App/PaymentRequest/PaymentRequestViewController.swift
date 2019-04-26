@@ -18,8 +18,23 @@ class PaymentRequestViewController: BDCViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    let fiatAmountLabel: BDCLabel = {
+    let waitingLabel: BDCLabel = {
         let label = BDCLabel.build(.title)
+        label.text = "Waiting for payment"
+        label.textColor = .red
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let fiatAmountLabel: BDCLabel = {
+        let label = BDCLabel.build(.header)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let bchAmountLabel: BDCLabel = {
+        let label = BDCLabel.build(.subtitle)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -37,40 +52,48 @@ class PaymentRequestViewController: BDCViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
         
-        let qrView = UIView()
-        qrView.addSubview(qrImageView)
+//        let qrView = UIView(frame: .zero)
+//        qrView.translatesAutoresizingMaskIntoConstraints = false
+//        qrView.backgroundColor = .blue
+//        qrView.addSubview(qrImageView)
         
         // QR Code Image View
-        qrImageView.centerXAnchor.constraint(equalTo: qrView.centerXAnchor).isActive = true
-        qrImageView.centerYAnchor.constraint(equalTo: qrView.centerYAnchor).isActive = true
         qrImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         qrImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-        let priceView = UIView()
-        priceView.addSubview(fiatAmountLabel)
+        let priceView = UIStackView(arrangedSubviews: [fiatAmountLabel, bchAmountLabel])
+        priceView.axis = .vertical
+        priceView.distribution = .fill
+        priceView.translatesAutoresizingMaskIntoConstraints = false
         
-        fiatAmountLabel.centerXAnchor.constraint(equalTo: priceView.centerXAnchor).isActive = true
-        fiatAmountLabel.centerYAnchor.constraint(equalTo: priceView.centerYAnchor).isActive = true
-        
-        let stackView = UIStackView(arrangedSubviews: [qrView, priceView])
+        let stackView = UIStackView(arrangedSubviews: [waitingLabel, qrImageView, priceView])
         stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 32
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(stackView)
-        stackView.fillSuperView()
+        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        view.addSubview(successAnimation)
-        successAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        successAnimation.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        qrImageView.addSubview(successAnimation)
+        successAnimation.centerXAnchor.constraint(equalTo: qrImageView.centerXAnchor).isActive = true
+        successAnimation.centerYAnchor.constraint(equalTo: qrImageView.centerYAnchor).isActive = true
         successAnimation.widthAnchor.constraint(equalToConstant: 200).isActive = true
         successAnimation.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        presenter?.viewDidDisappear()
     }
     
     func onSetQRCode(withData data: String) {
         qrImageView.image = generateQRCode(withData: data)
     }
     
-    func onSetAmount(_ fiatAmount: String) {
+    func onSetAmount(_ fiatAmount: String, bchAmount: String) {
         fiatAmountLabel.text = fiatAmount
+        bchAmountLabel.text = bchAmount
     }
     
     @objc func didPushClose() {

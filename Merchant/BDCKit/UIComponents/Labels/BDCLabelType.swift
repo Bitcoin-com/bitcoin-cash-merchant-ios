@@ -9,6 +9,7 @@
 import UIKit
 
 enum BDCLabelType {
+    case header
     case title
     case subtitle
     case subtitle2
@@ -18,6 +19,8 @@ enum BDCLabelType {
 extension BDCLabelType {
     var font: UIFont {
         switch self {
+        case .header:
+            return UIFont(name: "SFProDisplay-Bold", size: 32) ?? UIFont.boldSystemFont(ofSize: 32)
         case .title:
             return UIFont(name: "SFProDisplay-Bold", size: 16) ?? UIFont.boldSystemFont(ofSize: 16)
         case .subtitle:
@@ -31,7 +34,7 @@ extension BDCLabelType {
     
     var color: UIColor {
         switch self {
-        case .title, .subtitle3:
+        case .header, .title, .subtitle3:
             return BDCColor.black.uiColor
         case .subtitle, .subtitle2:
             return BDCColor.warmGrey.uiColor

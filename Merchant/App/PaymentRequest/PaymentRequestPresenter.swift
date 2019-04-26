@@ -18,6 +18,7 @@ class PaymentRequestPresenter {
     
     fileprivate let bag = DisposeBag()
     fileprivate var pr: PaymentRequest
+    fileprivate var txDisp: Disposable?
     
     init(_ pr: PaymentRequest) {
         self.pr = pr
@@ -29,9 +30,9 @@ class PaymentRequestPresenter {
     func viewDidLoad() {
         let data = "\(pr.toAddress)?amount=\(pr.amountInSatoshis.toBCH())"
         viewDelegate?.onSetQRCode(withData: data)
-        viewDelegate?.onSetAmount(pr.amountInFiat)
+        viewDelegate?.onSetAmount(pr.amountInFiat, bchAmount: pr.amountInSatoshis.toBCH().description.toFormat("BCH", symbol: "BCH"))
         
-        waitTransactionInteractor?
+        txDisp = waitTransactionInteractor?
             .waitTransaction(withPr: pr)
             .subscribe(onSuccess: { isSuccess in
                 print("success")
@@ -40,7 +41,11 @@ class PaymentRequestPresenter {
                 print("error")
                 // Handle error
             })
-            .disposed(by: bag)
+        txDisp?.disposed(by: bag)
+    }
+    
+    func viewDidDisappear() {
+        txDisp?.dispose()
     }
     
     func didPushClose() {

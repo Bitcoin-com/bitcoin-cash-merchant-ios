@@ -40,13 +40,12 @@ class WaitTransactionInteractor {
             
             ws.event.open = {
                 print("opened")
-//                if let data = message.data(using: .utf8) {
-//                    print(message)
-//                    ws.send(data: data)
-//                }
-                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress)\"}"
-                print(message)
-                ws.send(message)
+                
+                if shouldListen {
+                    let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress)\"}"
+                    print(message)
+                    ws.send(message)
+                }
             }
             
             ws.event.close = { code, reason, clean in
@@ -67,7 +66,6 @@ class WaitTransactionInteractor {
                 
                 guard let transaction = try? JSONDecoder().decode(WebSocketTransactionResponse.self, from: data!) else {
                     single(.error(TransactionError.decode))
-                        print("fail decoder")
                     return
                 }
                 
@@ -80,6 +78,17 @@ class WaitTransactionInteractor {
                     return
                 }
                 
+                let realm = try! Realm()
+                let numberOfResult = realm
+                    .objects(StoreTransaction.self)
+                    .filter("txid = %@", transaction.txid)
+                    .count
+                
+                guard numberOfResult == 0 else {
+                    // Parasite, we wait
+                    return
+                }
+                
                 let storeTransaction = StoreTransaction()
                 storeTransaction.amountInFiat = pr.amountInFiat
                 storeTransaction.amountInSatoshis = pr.amountInSatoshis
@@ -87,13 +96,14 @@ class WaitTransactionInteractor {
                 storeTransaction.txid = transaction.txid
                 storeTransaction.date = Date()
                 
-                let realm = try! Realm()
                 try! realm.write {
                     realm.add(storeTransaction)
                 }
                 
                 shouldListen = false
                 ws.close()
+                
+                print("success")
                 
                 single(.success(true))
                 

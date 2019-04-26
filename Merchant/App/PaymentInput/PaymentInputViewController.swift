@@ -11,7 +11,7 @@ import UIKit
 class PaymentInputViewController: PinViewController {
     
     var amountLabel: BDCLabel = {
-        let label = BDCLabel.build(.title)
+        let label = BDCLabel.build(.header)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

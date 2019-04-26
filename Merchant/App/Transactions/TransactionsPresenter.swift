@@ -9,6 +9,7 @@
 import UIKit
 
 struct TransactionOutput {
+    var txid: String
     var date: String
     var amountInFiat: String
     var amountInBCH: String
@@ -46,10 +47,17 @@ class TransactionsPresenter {
             
             let amountInBCH = tx.amountInSatoshis.toBCH().description.toFormat("BCH", symbol: "BCH")
             
-            return TransactionOutput(date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
+            return TransactionOutput(txid: tx.txid, date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
         }
         
         viewDelegate?.onGetTransactions(outputs)
+    }
+    
+    func didPushViewTransaction(forOutput transactionOutput: TransactionOutput) {
+        guard let url = URL(string: "https://explorer.bitcoin.com/bch/tx/\(transactionOutput.txid)") else {
+                return
+        }
+        UIApplication.shared.open(url)
     }
     
 }
