@@ -41,21 +41,21 @@ class PaymentInputPresenter {
         setupAmount()
     }
     
+    func didPushSettings() {
+        router?.transitToSettings()
+    }
+    
     func didPushValid(_ rawAmount: String) {
         // TODO: Calculate amount of Satoshis
         // Create payment request
         let destination = UserManager.shared.destination
         guard let address = try? destination.toCashAddress() else {
             // TODO: Handle the error here with a message
-            print("cash address")
+            viewDelegate?.onAddressError()
             return
         }
         
-        guard let amountInFiat = Double(rawAmount) else {
-            // TODO: Handle the error here with a message
-            print("amount in currency")
-            return
-        }
+        let amountInFiat = rawAmount.toDouble()
         
         guard let rate = getRateInteractor?.getRate(withCurrency: selectedCurrency) else {
             // TODO: Handle the error here with a message

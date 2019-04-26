@@ -58,6 +58,18 @@ class PaymentInputViewController: PinViewController {
         self.hasComma = hasComma
         commaButton?.setTitle(hasComma ? "," : "", for: .normal)
     }
+    
+    func onAddressError() {
+        let alert = UIAlertController(title: "Receiving Address not available", message: "You don't have any address setup.", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            self.presenter?.didPushSettings()
+        }
+        
+        alert.addAction(settingsAction)
+        
+        present(alert, animated: true)
+    }
  
 }
 
