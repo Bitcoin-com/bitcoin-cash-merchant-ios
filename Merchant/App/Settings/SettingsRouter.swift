@@ -13,4 +13,10 @@ class SettingsRouter: BDCRouter {
     func transitBackTo() {
         viewController?.dismiss(animated: true)
     }
+    
+    func transitScan(_ scannerDelegate: ScannerDelegate) {
+        let scannerViewController = ScannerBuilder().provide(scannerDelegate)
+        let navViewController = UINavigationController(rootViewController: scannerViewController)
+        viewController?.present(navViewController, animated: true, completion: nil)
+    }
 }

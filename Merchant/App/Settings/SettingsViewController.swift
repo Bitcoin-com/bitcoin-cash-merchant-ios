@@ -23,7 +23,11 @@ class SettingsViewController: BDCViewController {
     var destinationAddressTextField = BDCTextField.build(.type1)
     var selectedCurrencyLabel = BDCLabel.build(.subtitle)
     var currenciesPickerView = UIPickerView(frame: .zero)
-    var currenciesStackView = UIStackView(arrangedSubviews: [])
+    var currenciesView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     var presenter: SettingsPresenter?
     var currencyItems = [StoreCurrency]()
@@ -50,10 +54,26 @@ class SettingsViewController: BDCViewController {
         closeButton.tintColor = BDCColor.green.uiColor
         closeButton.addTarget(self, action: #selector(didPushCloseSelectCurrency), for: .touchUpInside)
         
-        currenciesStackView.addArrangedSubview(currenciesPickerView)
-        currenciesStackView.addArrangedSubview(closeButton)
+        let currenciesStackView = UIStackView(arrangedSubviews: [currenciesPickerView, closeButton])
         currenciesStackView.translatesAutoresizingMaskIntoConstraints = false
         currenciesStackView.axis = .vertical
+        currenciesStackView.distribution = .fill
+        currenciesStackView.alignment = .fill
+        
+        let blurView = UIVisualEffectView(effect: nil)
+        blurView.effect = UIBlurEffect(style: .light)
+        blurView.alpha = 1
+        
+        currenciesView.addSubview(blurView)
+        blurView.fillSuperView()
+        
+        currenciesView.addSubview(currenciesStackView)
+        currenciesStackView.topAnchor.constraint(equalTo: currenciesView.topAnchor, constant: 32).isActive = true
+        currenciesStackView.bottomAnchor.constraint(equalTo: currenciesView.bottomAnchor, constant: -32).isActive = true
+        currenciesStackView.leadingAnchor.constraint(equalTo: currenciesView.leadingAnchor, constant: 0).isActive = true
+        currenciesStackView.trailingAnchor.constraint(equalTo: currenciesView.trailingAnchor, constant: 0).isActive = true
+        
+        hideKeyboardWhenTappedAround()
         
         presenter?.viewDidLoad()
     }
@@ -89,13 +109,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         cell.selectionStyle = .none
+        cell.subviews.forEach({ $0.removeFromSuperview() })
         
         let item = SettingsEntry.allCases[indexPath.item]
         
         let titleLabel = BDCLabel.build(.title)
         titleLabel.text = item.title
         
-        let stackView = UIStackView(arrangedSubviews: [titleLabel])
+        let headerStackView = UIStackView(arrangedSubviews: [titleLabel])
+        headerStackView.axis = .horizontal
+        headerStackView.distribution = .fill
+        headerStackView.alignment = .fill
+        headerStackView.spacing = 8
+        
+        let stackView = UIStackView(arrangedSubviews: [headerStackView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -107,10 +134,19 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             destinationAddressTextField.placeholder = item.placeholder
             destinationAddressTextField.delegate = self
             stackView.addArrangedSubview(destinationAddressTextField)
+            
+            let iconButton = BDCButton.build(.type1)
+            iconButton.setTitle("Scan", for: .normal)
+            iconButton.translatesAutoresizingMaskIntoConstraints = false
+            iconButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+            iconButton.addTarget(self, action: #selector(didPushScan), for: .touchUpInside)
+            
+            headerStackView.addArrangedSubview(iconButton)
          case .companyName:
             companyNameTextField.placeholder = item.placeholder
             companyNameTextField.delegate = self
             stackView.addArrangedSubview(companyNameTextField)
+            
         case .selectedCurrency:
             cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didPushSelectCurrency)))
             stackView.addArrangedSubview(selectedCurrencyLabel)
@@ -121,21 +157,27 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         stackView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 16).isActive = true
         stackView.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 16).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: 16).isActive = true
-//        stackView.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -16).isActive = true
         
         return cell
     }
     
-    @objc func didPushCloseSelectCurrency() {
-        currenciesStackView.removeFromSuperview()
+    @objc func didPushSelectCurrency() {
+        currenciesView.alpha = 0
+        view.addSubview(currenciesView)
+        currenciesView.fillSuperView()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.currenciesView.alpha = 1
+        }
     }
     
-    @objc func didPushSelectCurrency() {
-        view.addSubview(currenciesStackView)
-        currenciesStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        currenciesStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        currenciesStackView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+    @objc func didPushScan() {
+        presenter?.didPushScan()
+    }
+    
+    @objc func didPushCloseSelectCurrency() {
+        currenciesView.removeFromSuperview()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

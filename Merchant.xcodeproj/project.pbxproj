@@ -16,6 +16,10 @@
 		3B06249B2272FA0400899A4B /* GetCurrenciesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B06249A2272FA0400899A4B /* GetCurrenciesInteractor.swift */; };
 		3B06249D22734D2600899A4B /* CircleAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B06249C22734D2600899A4B /* CircleAnimationController.swift */; };
 		3B06249F2274050200899A4B /* CircleInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B06249E2274050200899A4B /* CircleInteractionController.swift */; };
+		3B0624A622743C7800899A4B /* ScannerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624A122743C7800899A4B /* ScannerPresenter.swift */; };
+		3B0624A822743C7800899A4B /* ScannerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624A322743C7800899A4B /* ScannerRouter.swift */; };
+		3B0624A922743C7800899A4B /* ScannerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624A422743C7800899A4B /* ScannerBuilder.swift */; };
+		3B0624AA22743C7800899A4B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0624A522743C7800899A4B /* ScannerViewController.swift */; };
 		3B1BA8F8226DEE30002EED15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */; };
 		3B1BA8FF226DEE32002EED15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA8FE226DEE32002EED15 /* Assets.xcassets */; };
 		3B1BA902226DEE32002EED15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA900226DEE32002EED15 /* LaunchScreen.storyboard */; };
@@ -117,6 +121,10 @@
 		3B06249A2272FA0400899A4B /* GetCurrenciesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrenciesInteractor.swift; sourceTree = "<group>"; };
 		3B06249C22734D2600899A4B /* CircleAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationController.swift; sourceTree = "<group>"; };
 		3B06249E2274050200899A4B /* CircleInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleInteractionController.swift; sourceTree = "<group>"; };
+		3B0624A122743C7800899A4B /* ScannerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerPresenter.swift; sourceTree = "<group>"; };
+		3B0624A322743C7800899A4B /* ScannerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerRouter.swift; sourceTree = "<group>"; };
+		3B0624A422743C7800899A4B /* ScannerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerBuilder.swift; sourceTree = "<group>"; };
+		3B0624A522743C7800899A4B /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3B1BA8F4226DEE30002EED15 /* Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merchant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B1BA8FE226DEE32002EED15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -241,6 +249,17 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		3B0624A022743C7800899A4B /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				3B0624A122743C7800899A4B /* ScannerPresenter.swift */,
+				3B0624A322743C7800899A4B /* ScannerRouter.swift */,
+				3B0624A422743C7800899A4B /* ScannerBuilder.swift */,
+				3B0624A522743C7800899A4B /* ScannerViewController.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
 		3B1BA8EB226DEE30002EED15 = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +362,7 @@
 		3B1BA92D226DF1AC002EED15 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				3B0624A022743C7800899A4B /* Scanner */,
 				3B1BA9E9226EF672002EED15 /* PaymentRequest */,
 				3B1BA9A2226DFD70002EED15 /* PaymentInput */,
 				3B1BA9B1226E0490002EED15 /* Settings */,
@@ -857,6 +877,7 @@
 				3B1BA9E8226EF568002EED15 /* PaymentRequest.swift in Sources */,
 				3B1BA98D226DF1AC002EED15 /* BDCModule.swift in Sources */,
 				3B1BA9B8226E04E6002EED15 /* SettingsBuilder.swift in Sources */,
+				3B0624AA22743C7800899A4B /* ScannerViewController.swift in Sources */,
 				3B1BA971226DF1AC002EED15 /* TransactionsBuilder.swift in Sources */,
 				3B1BA9B9226E04E6002EED15 /* SettingsPresenter.swift in Sources */,
 				3B1BA97D226DF1AC002EED15 /* BDCViewController.swift in Sources */,
@@ -868,6 +889,7 @@
 				3B1BA9E2226ECBCB002EED15 /* PinCell.swift in Sources */,
 				3B1BA981226DF1AC002EED15 /* BDCView.swift in Sources */,
 				3B1BA9BC226E06B1002EED15 /* I_TS_TableViewCell.swift in Sources */,
+				3B0624A922743C7800899A4B /* ScannerBuilder.swift in Sources */,
 				3B1BA9AA226DFD70002EED15 /* PaymentInputPresenter.swift in Sources */,
 				3B1BA994226DF1EF002EED15 /* HomeBuilder.swift in Sources */,
 				3B1BA9BE226E06BD002EED15 /* I_TS_ViewCell.swift in Sources */,
@@ -891,11 +913,13 @@
 				3B1BA97F226DF1AC002EED15 /* UIViewController+Extensions.swift in Sources */,
 				3B1BA9F1226EF6FE002EED15 /* PaymentRequestViewController.swift in Sources */,
 				3B1BA982226DF1AC002EED15 /* TS_B_TableViewCell.swift in Sources */,
+				3B0624A622743C7800899A4B /* ScannerPresenter.swift in Sources */,
 				3B1BA9B7226E04E6002EED15 /* SettingsViewController.swift in Sources */,
 				3B1BA99D226DF2B7002EED15 /* UserDefaults+Extensions.swift in Sources */,
 				3B1BA985226DF1AC002EED15 /* ITCollectionViewCell.swift in Sources */,
 				3B0624972272D40700899A4B /* Int64+Extensions.swift in Sources */,
 				3B1BA9CE226EA545002EED15 /* StoreCurrency.swift in Sources */,
+				3B0624A822743C7800899A4B /* ScannerRouter.swift in Sources */,
 				3B06249F2274050200899A4B /* CircleInteractionController.swift in Sources */,
 				3B1BA988226DF1AC002EED15 /* I_T_TS_CollectionViewCell.swift in Sources */,
 				3B1BA9D4226EAAC6002EED15 /* EditUserInteractor.swift in Sources */,

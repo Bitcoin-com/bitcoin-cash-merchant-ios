@@ -39,6 +39,10 @@ class SettingsPresenter {
         viewDelegate?.onGetCurrencies(currencies, selectedIndex: selectedIndex)
     }
     
+    func didPushScan() {
+        router?.transitScan(self)
+    }
+    
     func didPushClose() {
         router?.transitBackTo()
     }
@@ -62,5 +66,17 @@ class SettingsPresenter {
             let destination = UserManager.shared.destination
             viewDelegate?.onGetDestination(destination)
         }
+    }
+}
+
+extension SettingsPresenter: ScannerDelegate {
+    func onScanResult(value: String?) {
+        guard let value = value else {
+            return
+        }
+        
+        viewDelegate?.onGetDestination(value)
+        
+        didEditDestination(value)
     }
 }

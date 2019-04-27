@@ -32,7 +32,6 @@ class CircleInteractionController: UIPercentDrivenInteractiveTransition {
         
         var progress = ((translation.y - 100) / 200)
         progress = CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
-        print(progress)
         
         switch gestureRecognizer.state {
         case .began:
