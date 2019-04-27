@@ -15,7 +15,7 @@ class PaymentInputRouter: BDCRouter {
         let navViewController = UINavigationController(rootViewController: paymentRequestViewController)
         navViewController.modalPresentationStyle = .custom
         navViewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
-        navViewController.modalPresentationCapturesStatusBarAppearance = true
+        navViewController.modalPresentationCapturesStatusBarAppearance = false
         viewController?.present(navViewController, animated: true, completion: nil)
     }
     

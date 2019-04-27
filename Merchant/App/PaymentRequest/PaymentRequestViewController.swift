@@ -12,6 +12,7 @@ import Lottie
 class PaymentRequestViewController: BDCViewController {
     
     var presenter: PaymentRequestPresenter?
+    var interactionController: CircleInteractionController?
     
     let qrImageView: UIImageView = {
         let imageView = UIImageView()
@@ -52,14 +53,15 @@ class PaymentRequestViewController: BDCViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
         
-//        let qrView = UIView(frame: .zero)
-//        qrView.translatesAutoresizingMaskIntoConstraints = false
-//        qrView.backgroundColor = .blue
-//        qrView.addSubview(qrImageView)
+        let qrView = UIView(frame: .zero)
+        qrView.translatesAutoresizingMaskIntoConstraints = false
+        qrView.addSubview(qrImageView)
         
         // QR Code Image View
         qrImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         qrImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        qrImageView.centerXAnchor.constraint(equalTo: qrView.centerXAnchor).isActive = true
+        qrImageView.centerYAnchor.constraint(equalTo: qrView.centerYAnchor).isActive = true
         
         let priceView = UIStackView(arrangedSubviews: [fiatAmountLabel, bchAmountLabel])
         priceView.axis = .vertical
@@ -67,11 +69,13 @@ class PaymentRequestViewController: BDCViewController {
         priceView.spacing = 8
         priceView.translatesAutoresizingMaskIntoConstraints = false
         
-        let stackView = UIStackView(arrangedSubviews: [waitingLabel, qrImageView, priceView])
+        let stackView = UIStackView(arrangedSubviews: [waitingLabel, qrView, priceView])
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.spacing = 32
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        qrView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         view.addSubview(stackView)
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -82,7 +86,9 @@ class PaymentRequestViewController: BDCViewController {
         successAnimation.centerYAnchor.constraint(equalTo: qrImageView.centerYAnchor).isActive = true
         successAnimation.widthAnchor.constraint(equalToConstant: 200).isActive = true
         successAnimation.heightAnchor.constraint(equalToConstant: 200).isActive = true
-    }
+        
+        interactionController = CircleInteractionController(viewController: self)
+}
     
     override func viewDidDisappear(_ animated: Bool) {
         presenter?.viewDidDisappear()

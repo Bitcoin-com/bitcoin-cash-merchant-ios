@@ -22,9 +22,6 @@ class PaymentRequestPresenter {
     
     init(_ pr: PaymentRequest) {
         self.pr = pr
-        print(pr.amountInFiat)
-        print(pr.amountInSatoshis)
-        print(pr.toAddress)
     }
     
     func viewDidLoad() {
@@ -35,10 +32,8 @@ class PaymentRequestPresenter {
         txDisp = waitTransactionInteractor?
             .waitTransaction(withPr: pr)
             .subscribe(onSuccess: { isSuccess in
-                print("success")
                 self.viewDelegate?.onSuccess()
             }, onError: { error in
-                print("error")
                 // Handle error
             })
         txDisp?.disposed(by: bag)

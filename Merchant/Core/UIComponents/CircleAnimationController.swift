@@ -34,14 +34,13 @@ class CirclePresentAnimationController: NSObject, UIViewControllerAnimatedTransi
         maskView.clipsToBounds = true
         maskView.addSubview(snapshot)
         
-        print(fromVC.view.safeAreaInsets.top)
-        
         maskView.frame.origin.y += fromVC.view.safeAreaInsets.top + originFrame.height
         maskView.frame.origin.x = 16
         maskView.frame.size.width = snapshot.frame.size.width - 32
+        maskView.frame.size.height += 16
         maskView.layer.cornerRadius = 32
         
-        snapshot.frame.origin.y = -(snapshot.frame.height/2 + 106)
+        snapshot.frame.origin.y = -(snapshot.frame.height/2 + 100)
         snapshot.frame.origin.x = -16
         
         let blurView = UIVisualEffectView(effect: nil)
@@ -53,20 +52,23 @@ class CirclePresentAnimationController: NSObject, UIViewControllerAnimatedTransi
         let containerView = transitionContext.containerView
         containerView.addSubview(blurView)
         containerView.addSubview(maskView)
-        containerView.addSubview(toVC.view)
+        containerView.insertSubview(toVC.view, at: 0)
         blurView.fillSuperView()
         
-        UIView.animate(withDuration: 0.5, animations: {
+        let duration = transitionDuration(using: transitionContext)
+        
+        UIView.animate(withDuration: duration, animations: {
             maskView.frame = finalFrame
             snapshot.frame = finalFrame
             maskView.layer.cornerRadius = 0
         }) { _ in
             blurView.removeFromSuperview()
+            maskView.removeFromSuperview()
             toVC.view.isHidden = false
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             blurView.alpha = 1
         })
         
@@ -77,9 +79,11 @@ class CirclePresentAnimationController: NSObject, UIViewControllerAnimatedTransi
 class CircleDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     private let originFrame: CGRect
+    let interactionController: CircleInteractionController?
     
-    init(originFrame: CGRect) {
+    init(originFrame: CGRect, interactionController: CircleInteractionController?) {
         self.originFrame = originFrame
+        self.interactionController = interactionController
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -89,8 +93,8 @@ class CircleDismissAnimationController: NSObject, UIViewControllerAnimatedTransi
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromVC = transitionContext.viewController(forKey: .from)
             , let toVC = transitionContext.viewController(forKey: .to)
-            , let snapshot = fromVC.view.snapshotView(afterScreenUpdates: false)
-            , let snapshotTo = toVC.view.snapshotView(afterScreenUpdates: false)
+            , let snapshot = fromVC.view.snapshotView(afterScreenUpdates: true)
+            , let snapshotTo = toVC.view.snapshotView(afterScreenUpdates: true)
             else {
                 return
         }
@@ -101,7 +105,6 @@ class CircleDismissAnimationController: NSObject, UIViewControllerAnimatedTransi
         maskView.clipsToBounds = true
         maskView.layer.cornerRadius = 0
         maskView.addSubview(snapshot)
-        maskView.layer.cornerRadius = 32
         
         snapshot.frame = finalFrame
         
@@ -109,29 +112,30 @@ class CircleDismissAnimationController: NSObject, UIViewControllerAnimatedTransi
         blurView.effect = UIBlurEffect(style: .dark)
         blurView.alpha = 1
         
-        fromVC.view.isHidden = true
-        
         let containerView = transitionContext.containerView
         containerView.addSubview(snapshotTo)
         containerView.addSubview(blurView)
         containerView.addSubview(maskView)
         blurView.fillSuperView()
         
-        UIView.animate(withDuration: 0.5, animations: {
+        let duration = transitionDuration(using: transitionContext)
+        
+        UIView.animate(withDuration: duration, animations: {
             maskView.frame = self.originFrame
-            maskView.frame.origin.y = self.originFrame.origin.y + fromVC.view.safeAreaInsets.top + self.originFrame.height
+            maskView.frame.origin.y = -6 + self.originFrame.origin.y + fromVC.view.safeAreaInsets.top + self.originFrame.height
             maskView.frame.origin.x = 16
             maskView.frame.size.width = snapshot.frame.size.width - 32
+            maskView.frame.size.height += 16
             maskView.layer.cornerRadius = 32
             
-            snapshot.frame.origin.y = -(snapshot.frame.height/2 + 108)
+            snapshot.frame.origin.y = -(snapshot.frame.height/2 + 100)
             snapshot.frame.origin.x = -16
             
             blurView.alpha = 0
         }) { _ in
             snapshotTo.removeFromSuperview()
             blurView.removeFromSuperview()
-            fromVC.view.isHidden = false
+            maskView.removeFromSuperview()
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
         

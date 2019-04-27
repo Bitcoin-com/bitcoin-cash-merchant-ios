@@ -109,12 +109,24 @@ extension PaymentInputViewController: PinViewControllerDelegate {
 
 extension PaymentInputViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print(amountLabel.frame)
         return CirclePresentAnimationController(originFrame: amountLabel.frame)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print(amountLabel.frame)
-        return CircleDismissAnimationController(originFrame: amountLabel.frame)
+        guard let navVC = dismissed as? UINavigationController
+            , let toVC = navVC.viewControllers.first as? PaymentRequestViewController else {
+            return nil
+        }
+        return CircleDismissAnimationController(originFrame: amountLabel.frame, interactionController: toVC.interactionController)
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let animator = animator as? CircleDismissAnimationController,
+            let interactionController = animator.interactionController,
+            interactionController.interactionInProgress
+            else {
+                return nil
+        }
+        return interactionController
     }
 }
