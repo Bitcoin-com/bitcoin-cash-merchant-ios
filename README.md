@@ -12,7 +12,7 @@
 
 ## Demo
 
-Coming soon.
+![Alt Text](./demo-app.gif)
 
 ## Authors & Maintainers
 - Jean-Baptiste Dominguez [[Github](https://github.com/jbdtky), [Twitter](https://twitter.com/jbdtky)]
