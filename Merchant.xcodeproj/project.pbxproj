@@ -92,6 +92,7 @@
 		3B1BA9EF226EF6DD002EED15 /* PaymentRequestPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9EE226EF6DD002EED15 /* PaymentRequestPresenter.swift */; };
 		3B1BA9F1226EF6FE002EED15 /* PaymentRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F0226EF6FE002EED15 /* PaymentRequestViewController.swift */; };
 		3B1BA9F52270B5E5002EED15 /* SettingsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */; };
+		3B57ABCD2275E7220078D983 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B57ABCF2275E7220078D983 /* Localizable.strings */; };
 		B473B38741D46B5A9144EEA0 /* libPods-MerchantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -203,6 +204,13 @@
 		3B1BA9EE226EF6DD002EED15 /* PaymentRequestPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestPresenter.swift; sourceTree = "<group>"; };
 		3B1BA9F0226EF6FE002EED15 /* PaymentRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestViewController.swift; sourceTree = "<group>"; };
 		3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEntity.swift; sourceTree = "<group>"; };
+		3B57ABC72275DFB40078D983 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		3B57ABC92275DFCE0078D983 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		3B57ABCA2275E3A10078D983 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		3B57ABCE2275E7220078D983 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3B57ABD62275EC610078D983 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3B57ABD72275ECDB0078D983 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3B57ABD82275ECDE0078D983 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4003DFD9D9642EACD01CFD90 /* Pods-All-Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Merchant.release.xcconfig"; path = "Target Support Files/Pods-All-Merchant/Pods-All-Merchant.release.xcconfig"; sourceTree = "<group>"; };
 		88A57F2AEF2F3475CB6D522F /* Pods-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantUITests/Pods-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9666CC57B1123D7CAE96F46F /* Pods_All_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -292,6 +300,7 @@
 				3B1BA925226DF1AC002EED15 /* Core */,
 				3B1BA92C226DF1AC002EED15 /* success_animation.json */,
 				3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */,
+				3B57ABCF2275E7220078D983 /* Localizable.strings */,
 				3B1BA8FE226DEE32002EED15 /* Assets.xcassets */,
 				3B1BA900226DEE32002EED15 /* LaunchScreen.storyboard */,
 				3B1BA903226DEE32002EED15 /* Info.plist */,
@@ -708,6 +717,9 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				es,
+				fr,
 			);
 			mainGroup = 3B1BA8EB226DEE30002EED15;
 			productRefGroup = 3B1BA8F5226DEE30002EED15 /* Products */;
@@ -731,6 +743,7 @@
 				3B1BA8FF226DEE32002EED15 /* Assets.xcassets in Resources */,
 				3B1BA967226DF1AC002EED15 /* success_animation.json in Resources */,
 				3B1BA9D2226EA608002EED15 /* symbols.json in Resources */,
+				3B57ABCD2275E7220078D983 /* Localizable.strings in Resources */,
 				3B1BA976226DF1AC002EED15 /* Assets.xcassets in Resources */,
 				3B1BA9D1226EA608002EED15 /* rates.json in Resources */,
 			);
@@ -973,8 +986,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				3B1BA901226DEE32002EED15 /* Base */,
+				3B57ABC72275DFB40078D983 /* ja */,
+				3B57ABC92275DFCE0078D983 /* es */,
+				3B57ABCA2275E3A10078D983 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3B57ABCF2275E7220078D983 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B57ABCE2275E7220078D983 /* en */,
+				3B57ABD62275EC610078D983 /* es */,
+				3B57ABD72275ECDB0078D983 /* ja */,
+				3B57ABD82275ECDE0078D983 /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -984,6 +1011,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1045,6 +1073,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

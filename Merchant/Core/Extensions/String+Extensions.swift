@@ -9,6 +9,11 @@
 import BitcoinKit
 
 extension String {
+    
+    var localized : String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
     func toCashAddress() throws -> String {
         return try AddressFactory.create(self).cashaddr
     }

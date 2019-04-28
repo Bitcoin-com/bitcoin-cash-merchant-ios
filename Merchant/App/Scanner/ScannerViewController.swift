@@ -23,7 +23,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Scanner"
+        title = Constants.Strings.scanner
 
         let closeItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
         navigationItem.leftBarButtonItem = closeItem
@@ -43,15 +43,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                         return
                     }
                     
-                    let alert = UIAlertController(title: "Camera Permission Error", message: "The camera is necessary", preferredStyle: .alert)
+                    let alert = UIAlertController(title: Constants.Strings.cameraPermissionError, message: Constants.Strings.theCameraIsNecessary, preferredStyle: .alert)
                     
-                    alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+                    alert.addAction(UIAlertAction(title: Constants.Strings.openSettings, style: .default, handler: { _ in
                         UIApplication.shared.open(settingsUrl, options: [:], completionHandler: { success in
                             self?.checkPermission()
                         })
                     }))
                     
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    alert.addAction(UIAlertAction(title: Constants.Strings.cancel, style: .cancel, handler: { _ in
                         self?.presenter?.didPushClose()
                     }))
                     
@@ -128,8 +128,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     fileprivate func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        let ac = UIAlertController(title: Constants.Strings.scanningNotSupported, message: Constants.Strings.scanningNotSupportedDetails, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: Constants.Strings.ok, style: .default))
         present(ac, animated: true)
         captureSession = nil
     }

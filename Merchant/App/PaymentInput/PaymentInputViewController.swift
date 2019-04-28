@@ -60,9 +60,9 @@ class PaymentInputViewController: PinViewController {
     }
     
     func onAddressError() {
-        let alert = UIAlertController(title: "Receiving Address not available", message: "You don't have any address setup.", preferredStyle: .alert)
+        let alert = UIAlertController(title: Constants.Strings.receivingAddressNotAvailable, message: Constants.Strings.receivingAddressNotAvailableDetails, preferredStyle: .alert)
         
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+        let settingsAction = UIAlertAction(title: Constants.Strings.settings, style: .default) { _ in
             self.presenter?.didPushSettings()
         }
         

@@ -35,7 +35,7 @@ class SettingsViewController: BDCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Settings"
+        title = Constants.Strings.settings
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
@@ -136,7 +136,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             stackView.addArrangedSubview(destinationAddressTextField)
             
             let iconButton = BDCButton.build(.type1)
-            iconButton.setTitle("Scan", for: .normal)
+            iconButton.setTitle(Constants.Strings.scan, for: .normal)
             iconButton.translatesAutoresizingMaskIntoConstraints = false
             iconButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
             iconButton.addTarget(self, action: #selector(didPushScan), for: .touchUpInside)

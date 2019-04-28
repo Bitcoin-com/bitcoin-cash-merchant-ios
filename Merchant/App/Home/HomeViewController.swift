@@ -16,10 +16,10 @@ class HomeViewController: UITabBarController {
         super.viewDidLoad()
         
         let paymentController = PaymentInputBuilder().provide()
-        paymentController.tabBarItem = UITabBarItem(title: "Payment", image: UIImage(named: "payment_icon"), tag: 0)
+        paymentController.tabBarItem = UITabBarItem(title: Constants.Strings.payment, image: UIImage(named: "payment_icon"), tag: 0)
         
         let txsController = TransactionsBuilder().provide()
-        txsController.tabBarItem = UITabBarItem(title: "History", image: UIImage(named: "transactions_icon"), tag: 0)
+        txsController.tabBarItem = UITabBarItem(title: Constants.Strings.history, image: UIImage(named: "transactions_icon"), tag: 0)
         
         viewControllers = [paymentController, txsController]
         

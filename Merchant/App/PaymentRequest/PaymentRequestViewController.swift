@@ -21,7 +21,7 @@ class PaymentRequestViewController: BDCViewController {
     }()
     let waitingLabel: BDCLabel = {
         let label = BDCLabel.build(.title)
-        label.text = "Waiting for payment"
+        label.text = Constants.Strings.waitingForPayment
         label.textColor = .red
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ class PaymentRequestViewController: BDCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Payment request"
+        title = Constants.Strings.paymentRequest
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
         

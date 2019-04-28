@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Jean-Baptiste Dominguez on 2019/04/28.
+  Copyright © 2019 Bitcoin.com. All rights reserved.
+*/
+
+// Shared
+"settings" = "Settings";
+
+// Home module
+"payment" = "Payment";
+"history" = "History";
+
+// Settings module
+"company_name" = "Company name";
+"enter_company_name" = "Enter a company name";
+"my_company_name" = "My company name";
+"destination_address" = "Destination address";
+"enter_destination_address" = "Enter a destination address";
+"scan" = "Scan";
+"local_currency" = "Local currency";
+
+// Scanner module
+"scanner" = "Scanner";
+"open_settings" = "Open Settings";
+"the_camera_is_necessary" = "The camera is necessary";
+"camera_permission_error" = "Camera Permission Error";
+"cancel" = "Cancel";
+"scanning_not_supported" = "Scanning not supported";
+"scanning_not_supported_details" = "Your device does not support scanning a code from an item. Please use a device with a camera.";
+"ok" = "Ok";
+
+// Payment request module
+"payment_request" = "Payment request";
+"waiting_for_payment" = "Waiting for payment";
+
+// Payment input module
+"receiving_address_not_available" = "Receiving Address not available";
+"receiving_address_not_available_details" = "You do not have any address setup.";

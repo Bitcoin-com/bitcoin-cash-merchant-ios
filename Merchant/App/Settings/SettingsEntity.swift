@@ -18,20 +18,20 @@ extension SettingsEntry {
     var title: String {
         switch self {
         case .companyName:
-            return "Company name"
+            return Constants.Strings.companyName
         case .address:
-            return "Destination address"
+            return Constants.Strings.destinationAddress
         case .selectedCurrency:
-            return "Local currency"
+            return Constants.Strings.localCurrency
         }
     }
     
     var placeholder: String {
         switch self {
         case .companyName:
-            return "Enter a company name"
+            return Constants.Strings.enterCompanyName
         case .address:
-            return "Enter a destination address"
+            return Constants.Strings.enterDestinationAddress
         default:
             return ""
         }
