@@ -1,33 +1,38 @@
-def shared_pods
-  pod 'EFQRCode',       '~> 4.3.0'
+source 'https://github.com/Bitcoin-com/CocoaPods.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '10.0'
+
+def testing
+  # Pods for testing
+  pod 'RxBlocking'
+  pod 'RxTest'
+  pod 'Quick'
+  pod 'Nimble'
 end
 
-target 'AirWallet' do
-  platform :ios, '10.0'
+abstract_target 'All' do
+    use_frameworks!
 
-  use_frameworks!
+    # Pods for all targets
+    pod 'RxSwift',          '~> 4.0'
+    pod 'RxCocoa',          '~> 4.0'
+    pod 'Moya/RxSwift',     '~> 11.0'
+    pod 'BitcoinKit',       '~> 1.1.1'
+    pod 'lottie-ios',       '~> 2.5.2'
+    pod 'RealmSwift'
+    pod 'SwiftWebSocket',     :git => 'https://github.com/tidwall/SwiftWebSocket.git', :branch => 'swift/4.0'
 
-  shared_pods
-
-  # Pods for AirWallet
-  pod 'Fabric'
-  pod 'Crashlytics'
-  pod 'BitcoinKit',      '~> 1.0.2'
-  pod 'RxSwift',        '~> 4.0'
-  pod 'RxCocoa',        '~> 4.0'
-  pod 'Moya/RxSwift',   '~> 11.0'
-  pod 'lottie-ios'
-  pod 'RealmSwift'
-  pod 'FSPagerView'
-  pod 'IGIdenticon'
+    target 'Merchant' do
+        
+        target 'MerchantTests' do
+            inherit! :search_paths
+            testing
+        end
+    end
 end
 
-target 'AirWallet Watch Extension' do
-  platform :watchos, '4.0'
-  
-  use_frameworks!
-
-  shared_pods
+target 'MerchantUITests' do
+    inherit! :search_paths
+    testing
 end
-
-
