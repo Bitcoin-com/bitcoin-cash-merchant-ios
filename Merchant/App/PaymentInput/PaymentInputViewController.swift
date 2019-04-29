@@ -50,6 +50,11 @@ class PaymentInputViewController: PinViewController {
         presenter?.viewWillAppear()
     }
     
+    func onCleanAmount() {
+        amount = 0
+        amountStr = "0"
+    }
+    
     func onSetAmount(_ amount: String) {
         amountLabel.text = amount
     }

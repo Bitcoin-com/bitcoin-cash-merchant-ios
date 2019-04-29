@@ -10,7 +10,7 @@ import UIKit
 
 class PaymentRequestBuilder {
     
-    func provide(_ pr: PaymentRequest) -> UIViewController {
+    func provide(_ pr: PaymentRequest, requestDelegate: PaymentRequestPresenterDelegate) -> UIViewController {
         let viewController = PaymentRequestViewController()
         
         let waitTransactionInteractor = WaitTransactionInteractor()
@@ -20,6 +20,7 @@ class PaymentRequestBuilder {
         
         presenter.waitTransactionInteractor = waitTransactionInteractor
         presenter.viewDelegate = viewController
+        presenter.requestDelegate = requestDelegate
         presenter.router = router
         
         viewController.presenter = presenter

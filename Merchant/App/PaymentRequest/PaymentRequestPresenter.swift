@@ -9,9 +9,14 @@
 import Foundation
 import RxSwift
 
+protocol PaymentRequestPresenterDelegate {
+    func paymentReceived()
+}
+
 class PaymentRequestPresenter {
     
     var waitTransactionInteractor: WaitTransactionInteractor?
+    var requestDelegate: PaymentRequestPresenterDelegate?
     var router: PaymentRequestRouter?
     
     weak var viewDelegate: PaymentRequestViewController?
@@ -33,6 +38,7 @@ class PaymentRequestPresenter {
             .waitTransaction(withPr: pr)
             .subscribe(onSuccess: { isSuccess in
                 self.viewDelegate?.onSuccess()
+                self.requestDelegate?.paymentReceived()
             }, onError: { error in
                 // Handle error
             })

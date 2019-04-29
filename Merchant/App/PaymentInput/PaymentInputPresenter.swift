@@ -35,7 +35,17 @@ class PaymentInputPresenter {
             setupCurrency()
         }
     }
+}
+
+extension PaymentInputPresenter: PaymentRequestPresenterDelegate {
     
+    func paymentReceived() {
+        viewDelegate?.onCleanAmount()
+        didSetAmount("0")
+    }
+}
+
+extension PaymentInputPresenter {
     func didSetAmount(_ rawAmount: String) {
         currentRawAmount = rawAmount
         setupAmount()
@@ -56,7 +66,6 @@ class PaymentInputPresenter {
         let amountInFiat = rawAmount.toDouble()
         
         guard amountInFiat > 0 else {
-            // TODO: Handle the error here with a message
             return
         }
         
@@ -70,7 +79,7 @@ class PaymentInputPresenter {
         let amountInFiatStr = rawAmount.toFormat(selectedCurrency.ticker, symbol: selectedCurrency.symbol, strict: true)
         
         let pr = PaymentRequest(toAddress: address, amountInSatoshis: Int64(amountInSatoshis), amountInFiat: amountInFiatStr, selectedCurrency: selectedCurrency)
-        router?.transitToPaymentDetail(pr)
+        router?.transitToPaymentDetail(pr, requestDelegate: self)
     }
 }
 

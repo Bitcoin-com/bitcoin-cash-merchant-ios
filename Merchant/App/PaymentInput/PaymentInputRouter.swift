@@ -10,8 +10,8 @@ import UIKit
 
 class PaymentInputRouter: BDCRouter {
     
-    func transitToPaymentDetail(_ pr: PaymentRequest) {
-        let paymentRequestViewController = PaymentRequestBuilder().provide(pr)
+    func transitToPaymentDetail(_ pr: PaymentRequest, requestDelegate: PaymentRequestPresenterDelegate) {
+        let paymentRequestViewController = PaymentRequestBuilder().provide(pr, requestDelegate: requestDelegate)
         let navViewController = UINavigationController(rootViewController: paymentRequestViewController)
         navViewController.modalPresentationStyle = .custom
         navViewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
