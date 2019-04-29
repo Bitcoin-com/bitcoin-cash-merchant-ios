@@ -29,7 +29,7 @@
 "camera_permission_error" = "Erreur de permission sur la camera";
 "cancel" = "Annuler";
 "scanning_not_supported" = "Le scan n'est pas supporté";
-"scanning_not_supported_details" = "Votre appareil ne supporte pas le scan de code d'un item. SVP, utilisez un appareil avec une camera.";
+"scanning_not_supported_details" = "Your device does not support qr code scanning. Please use a device with a camera.";
 "ok" = "Oui";
 
 // Payment request module
