@@ -21,7 +21,8 @@ abstract_target 'All' do
     pod 'BitcoinKit',       '~> 1.1.1'
     pod 'lottie-ios',       '~> 2.5.2'
     pod 'RealmSwift'
-    pod 'SwiftWebSocket',     :git => 'https://github.com/tidwall/SwiftWebSocket.git', :branch => 'swift/4.0'
+    pod 'RxRealm'
+    pod 'SwiftWebSocket',   :git => 'https://github.com/tidwall/SwiftWebSocket.git', :branch => 'swift/4.0'
 
     target 'Merchant' do
         

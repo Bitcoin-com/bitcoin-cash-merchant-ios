@@ -13,10 +13,10 @@ class TransactionsBuilder: BDCBuilder {
     func provide() -> UIViewController {
         let viewController = TransactionsViewController()
         
-        let transactionsInteractor = TransactionsInteractor()
+        let getTransactionsInteractor = GetTransactionsInteractor()
         let presenter = TransactionsPresenter()
         
-        presenter.transactionsInteractor = transactionsInteractor
+        presenter.getTransactionsInteractor = getTransactionsInteractor
         presenter.viewDelegate = viewController
         
         viewController.presenter = presenter

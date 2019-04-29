@@ -44,10 +44,6 @@ class TransactionsViewController: BDCViewController {
         self.tableView = tableView
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        presenter?.viewWillAppear()
-    }
-    
     func onGetTransactions(_ outputs: [TransactionOutput]) {
         items = outputs
         tableView?.reloadData()

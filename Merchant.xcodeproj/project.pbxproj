@@ -27,7 +27,7 @@
 		3B1BA918226DEE32002EED15 /* MerchantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA917226DEE32002EED15 /* MerchantUITests.swift */; };
 		3B1BA967226DF1AC002EED15 /* success_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA92C226DF1AC002EED15 /* success_animation.json */; };
 		3B1BA971226DF1AC002EED15 /* TransactionsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA93B226DF1AC002EED15 /* TransactionsBuilder.swift */; };
-		3B1BA972226DF1AC002EED15 /* TransactionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA93C226DF1AC002EED15 /* TransactionsInteractor.swift */; };
+		3B1BA972226DF1AC002EED15 /* GetTransactionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA93C226DF1AC002EED15 /* GetTransactionsInteractor.swift */; };
 		3B1BA973226DF1AC002EED15 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA93D226DF1AC002EED15 /* TransactionsViewController.swift */; };
 		3B1BA974226DF1AC002EED15 /* TransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA93E226DF1AC002EED15 /* TransactionsPresenter.swift */; };
 		3B1BA976226DF1AC002EED15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BA941226DF1AC002EED15 /* Assets.xcassets */; };
@@ -139,7 +139,7 @@
 		3B1BA919226DEE32002EED15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B1BA92C226DF1AC002EED15 /* success_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success_animation.json; sourceTree = "<group>"; };
 		3B1BA93B226DF1AC002EED15 /* TransactionsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsBuilder.swift; sourceTree = "<group>"; };
-		3B1BA93C226DF1AC002EED15 /* TransactionsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsInteractor.swift; sourceTree = "<group>"; };
+		3B1BA93C226DF1AC002EED15 /* GetTransactionsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTransactionsInteractor.swift; sourceTree = "<group>"; };
 		3B1BA93D226DF1AC002EED15 /* TransactionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		3B1BA93E226DF1AC002EED15 /* TransactionsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsPresenter.swift; sourceTree = "<group>"; };
 		3B1BA941226DF1AC002EED15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -395,7 +395,7 @@
 		3B1BA93A226DF1AC002EED15 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				3B1BA93C226DF1AC002EED15 /* TransactionsInteractor.swift */,
+				3B1BA93C226DF1AC002EED15 /* GetTransactionsInteractor.swift */,
 				3B1BA93B226DF1AC002EED15 /* TransactionsBuilder.swift */,
 				3B1BA93D226DF1AC002EED15 /* TransactionsViewController.swift */,
 				3B1BA93E226DF1AC002EED15 /* TransactionsPresenter.swift */,
@@ -907,7 +907,7 @@
 				3B1BA994226DF1EF002EED15 /* HomeBuilder.swift in Sources */,
 				3B1BA9BE226E06BD002EED15 /* I_TS_ViewCell.swift in Sources */,
 				3B1BA979226DF1AC002EED15 /* BDCLabelType.swift in Sources */,
-				3B1BA972226DF1AC002EED15 /* TransactionsInteractor.swift in Sources */,
+				3B1BA972226DF1AC002EED15 /* GetTransactionsInteractor.swift in Sources */,
 				3B1BA98B226DF1AC002EED15 /* BDCTableViewCell.swift in Sources */,
 				3B06249D22734D2600899A4B /* CircleAnimationController.swift in Sources */,
 				3B1BA9AE226E028C002EED15 /* StoreRate.swift in Sources */,

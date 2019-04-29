@@ -1,5 +1,5 @@
 //
-//  TransactionsInteractor.swift
+//  GetTransactionsInteractor.swift
 //  Merchant
 //
 //  Created by Jean-Baptiste Dominguez on 2018/11/06.
@@ -8,18 +8,20 @@
 
 import Foundation
 import RealmSwift
+import RxRealm
+import RxSwift
 
-class TransactionsInteractor {
+class GetTransactionsInteractor {
     
-    func getTransactions() -> [StoreTransaction] {
+    func getTransactions() -> Observable<[StoreTransaction]> {
         let realm = try! Realm()
         
-        let results = realm
+        let transactions = realm
             .objects(StoreTransaction.self)
             .sorted(byKeyPath: "date", ascending: false)
         
-        let transactions = Array(results)
-        
-        return transactions
+        return Observable
+            .collection(from: transactions, synchronousStart: true)
+            .map({ $0.toArray() })
     }
 }

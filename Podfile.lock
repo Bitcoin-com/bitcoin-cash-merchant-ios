@@ -20,6 +20,9 @@ PODS:
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxRealm (0.7.6):
+    - RealmSwift (~> 3.0)
+    - RxSwift (~> 4.0)
   - RxSwift (4.5.0)
   - RxTest (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
@@ -34,6 +37,7 @@ DEPENDENCIES:
   - RealmSwift
   - RxBlocking
   - RxCocoa (~> 4.0)
+  - RxRealm
   - RxSwift (~> 4.0)
   - RxTest
   - SwiftWebSocket (from `https://github.com/tidwall/SwiftWebSocket.git`, branch `swift/4.0`)
@@ -52,6 +56,7 @@ SPEC REPOS:
     - Result
     - RxBlocking
     - RxCocoa
+    - RxRealm
     - RxSwift
     - RxTest
 
@@ -77,10 +82,11 @@ SPEC CHECKSUMS:
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxBlocking: 79413e4d916f44bb3e113c5b2cc059e36fe58910
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxRealm: 5379eddd74f8d617ca7681d1f8d144af25b432b0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
   SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
 
-PODFILE CHECKSUM: 5df8b632e87b1c021aa5e55bd92e61cadb07626f
+PODFILE CHECKSUM: e32f2a44b980194aa96ccf19813ace7701ae45c7
 
 COCOAPODS: 1.7.0.beta.2

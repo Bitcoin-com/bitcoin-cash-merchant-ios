@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 struct TransactionOutput {
     var txid: String
@@ -17,23 +18,23 @@ struct TransactionOutput {
 
 class TransactionsPresenter {
     
-    var transactionsInteractor: TransactionsInteractor?
+    var getTransactionsInteractor: GetTransactionsInteractor?
     weak var viewDelegate: TransactionsViewController?
     
+    fileprivate var bag = DisposeBag()
     fileprivate var transactions = [StoreTransaction]()
     
     func viewDidLoad() {
-    }
-    
-    func viewWillAppear() {
-        setupTransactions()
-    }
-    
-    func setupTransactions() {
-        guard let transactions = transactionsInteractor?.getTransactions() else {
-            return
-        }
         
+        getTransactionsInteractor?
+            .getTransactions()
+            .subscribe(onNext: { txs in
+                self.setupTransactions(txs)
+            })
+            .disposed(by: bag)
+    }
+    
+    func setupTransactions(_ transactions: [StoreTransaction]) {
         if transactions.count != self.transactions.count {
             // Actual code to fetch the transactions
             let outputs = transactions.compactMap { tx -> TransactionOutput in
