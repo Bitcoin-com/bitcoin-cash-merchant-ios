@@ -93,6 +93,7 @@
 		3B1BA9F1226EF6FE002EED15 /* PaymentRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F0226EF6FE002EED15 /* PaymentRequestViewController.swift */; };
 		3B1BA9F52270B5E5002EED15 /* SettingsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */; };
 		3B57ABCD2275E7220078D983 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B57ABCF2275E7220078D983 /* Localizable.strings */; };
+		3B57ABDB2276E7E60078D983 /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B57ABDA2276E7E60078D983 /* SocketService.swift */; };
 		B473B38741D46B5A9144EEA0 /* libPods-MerchantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +212,7 @@
 		3B57ABD62275EC610078D983 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B57ABD72275ECDB0078D983 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B57ABD82275ECDE0078D983 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3B57ABDA2276E7E60078D983 /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		4003DFD9D9642EACD01CFD90 /* Pods-All-Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Merchant.release.xcconfig"; path = "Target Support Files/Pods-All-Merchant/Pods-All-Merchant.release.xcconfig"; sourceTree = "<group>"; };
 		88A57F2AEF2F3475CB6D522F /* Pods-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantUITests/Pods-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9666CC57B1123D7CAE96F46F /* Pods_All_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,6 +331,7 @@
 		3B1BA925226DF1AC002EED15 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				3B57ABD92276E7D40078D983 /* Services */,
 				3B0624932272C95800899A4B /* Network */,
 				3B1BA9DE226ECBCB002EED15 /* UIComponents */,
 				3B1BA99B226DF2B7002EED15 /* Extensions */,
@@ -601,6 +604,14 @@
 				3B1BA9F0226EF6FE002EED15 /* PaymentRequestViewController.swift */,
 			);
 			path = PaymentRequest;
+			sourceTree = "<group>";
+		};
+		3B57ABD92276E7D40078D983 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3B57ABDA2276E7E60078D983 /* SocketService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		D0F89782984C4AF28F05A3BA /* Frameworks */ = {
@@ -893,6 +904,7 @@
 				3B0624AA22743C7800899A4B /* ScannerViewController.swift in Sources */,
 				3B1BA971226DF1AC002EED15 /* TransactionsBuilder.swift in Sources */,
 				3B1BA9B9226E04E6002EED15 /* SettingsPresenter.swift in Sources */,
+				3B57ABDB2276E7E60078D983 /* SocketService.swift in Sources */,
 				3B1BA97D226DF1AC002EED15 /* BDCViewController.swift in Sources */,
 				3B1BA9F52270B5E5002EED15 /* SettingsEntity.swift in Sources */,
 				3B1BA984226DF1AC002EED15 /* TS_B_CollectionViewCell.swift in Sources */,
