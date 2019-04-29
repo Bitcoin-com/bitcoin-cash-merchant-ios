@@ -46,16 +46,19 @@ class PaymentInputPresenter {
     }
     
     func didPushValid(_ rawAmount: String) {
-        // TODO: Calculate amount of Satoshis
         // Create payment request
         let destination = UserManager.shared.destination
         guard let address = try? destination.toCashAddress() else {
-            // TODO: Handle the error here with a message
             viewDelegate?.onAddressError()
             return
         }
         
         let amountInFiat = rawAmount.toDouble()
+        
+        guard amountInFiat > 0 else {
+            // TODO: Handle the error here with a message
+            return
+        }
         
         guard let rate = getRateInteractor?.getRate(withCurrency: selectedCurrency) else {
             // TODO: Handle the error here with a message
@@ -63,8 +66,6 @@ class PaymentInputPresenter {
             return
         }
         
-        // TODO: Calcul du montant en satoshis
-        //
         let amountInSatoshis = rate.rate > 0  ? (amountInFiat / rate.rate).toSatoshis() : 0
         let amountInFiatStr = rawAmount.toFormat(selectedCurrency.ticker, symbol: selectedCurrency.symbol, strict: true)
         
@@ -81,7 +82,6 @@ extension PaymentInputPresenter {
     }
     
     fileprivate func setupAmount() {
-        // TODO: Manage the rate here
         let amount = currentRawAmount.toFormat(selectedCurrency.ticker, symbol: selectedCurrency.symbol, strict: true)
         viewDelegate?.onSetAmount(amount)
     }
