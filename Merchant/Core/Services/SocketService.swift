@@ -33,7 +33,7 @@ class SocketService {
     fileprivate let ws = WebSocket("ws://47.254.143.172:80/v1/address")
     fileprivate var shouldListen = false
     
-    var observedAddress: PublishSubject<WebSocketTransactionResponse>?
+    var addressObs: PublishSubject<WebSocketTransactionResponse>?
     
     init() {
         self.ws.event.close = { code, reason, clean in
@@ -54,7 +54,7 @@ class SocketService {
             
             print("received transaction", transaction)
             
-            self.observedAddress?.onNext(transaction)
+            self.addressObs?.onNext(transaction)
             
             // Received from the websocket : {"txid":"04dc5f2c5c012ef20de56fde1582139c477f7656de33b1342ed003009eabdf41","fees":0,"confirmations":0,"amount":16983,"outputs":[{"address":"3JL2QfYGqb6jbXNUKVY2RES3exxpRZAi1a","value":16983}]}
         }
@@ -67,15 +67,15 @@ class SocketService {
 extension SocketService {
     
     func observeAddress(withAddress address: String) -> Observable<WebSocketTransactionResponse> {
-        guard let observedAddress = self.observedAddress else {
-            let observedAddress = PublishSubject<WebSocketTransactionResponse>()
-            self.observedAddress = observedAddress
+        guard let addressObs = self.addressObs else {
+            let addressObs = PublishSubject<WebSocketTransactionResponse>()
+            self.addressObs = addressObs
             self.subscribe(withAddress: address)
-            return observedAddress.asObservable()
+            return addressObs.asObservable()
         }
         
         self.subscribe(withAddress: address)
-        return observedAddress.asObservable()
+        return addressObs.asObservable()
     }
     
     func subscribe(withAddress address: String) {
