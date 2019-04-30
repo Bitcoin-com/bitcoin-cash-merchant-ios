@@ -71,7 +71,7 @@ extension PaymentInputPresenter {
         
         guard let rate = getRateInteractor?.getRate(withCurrency: selectedCurrency) else {
             // TODO: Handle the error here with a message
-            print("get rate")
+            print("error get rate")
             return
         }
         

@@ -32,13 +32,14 @@ class SocketService {
 
     fileprivate let ws = WebSocket("ws://47.254.143.172:80/v1/address")
     fileprivate var shouldListen = false
+    fileprivate var address: String?
     
     var addressObs: PublishSubject<WebSocketTransactionResponse>?
     
     init() {
         self.ws.event.close = { code, reason, clean in
-            sleep(1)
-            self.ws.open()
+            sleep(2)
+            self.open()
         }
         
         self.ws.event.error = { error in
@@ -82,14 +83,22 @@ class SocketService {
             // Received from the websocket : {"txid":"04dc5f2c5c012ef20de56fde1582139c477f7656de33b1342ed003009eabdf41","fees":0,"confirmations":0,"amount":16983,"outputs":[{"address":"3JL2QfYGqb6jbXNUKVY2RES3exxpRZAi1a","value":16983}]}
         }
         
-        self.shouldListen = true
-        self.ws.open()
+        open()
     }
 }
 
 extension SocketService {
     
+    func open() {
+        self.ws.open()
+        if let address = self.address {
+            subscribe(withAddress: address)
+        }
+    }
+    
     func observeAddress(withAddress address: String) -> Observable<WebSocketTransactionResponse> {
+        self.address = address
+        
         guard let addressObs = self.addressObs else {
             let addressObs = PublishSubject<WebSocketTransactionResponse>()
             self.addressObs = addressObs
