@@ -10,15 +10,23 @@ import UIKit
 
 class BDCTableView: UITableView {
     
+    override init(frame: CGRect, style: UITableView.Style) {
+        super.init(frame: frame, style: style)
+        
+        setup()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.masksToBounds = false
-        layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.cornerRadius = 7
-        layer.shadowRadius = 20
-        layer.shadowOpacity = 0.05
+        setup()
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup() {
         // Default raw height
         rowHeight = 64
     }

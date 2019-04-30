@@ -471,8 +471,8 @@
 			children = (
 				3B1BA951226DF1AC002EED15 /* BDCTableView.swift */,
 				3B1BA952226DF1AC002EED15 /* BDCView.swift */,
-				3B1BA953226DF1AC002EED15 /* UIViewCells */,
 				3B1BA961226DF1AC002EED15 /* BDCCollectionView.swift */,
+				3B1BA953226DF1AC002EED15 /* UIViewCells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,11 +481,11 @@
 			isa = PBXGroup;
 			children = (
 				3B1BA95B226DF1AC002EED15 /* BDCViewCell.swift */,
+				3B1BA960226DF1AC002EED15 /* BDCTableViewCell.swift */,
 				3B1BA9BA226E068F002EED15 /* I_TS */,
 				3B1BA954226DF1AC002EED15 /* TS_B */,
 				3B1BA958226DF1AC002EED15 /* IT */,
 				3B1BA95C226DF1AC002EED15 /* I_T_TS */,
-				3B1BA960226DF1AC002EED15 /* BDCTableViewCell.swift */,
 			);
 			path = UIViewCells;
 			sourceTree = "<group>";

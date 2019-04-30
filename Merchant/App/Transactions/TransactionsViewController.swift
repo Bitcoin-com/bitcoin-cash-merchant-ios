@@ -17,7 +17,7 @@ class TransactionsViewController: BDCViewController {
     var presenter: TransactionsPresenter?
     var items = [TransactionOutput]()
     
-    var tableView: UITableView?
+    var tableView: BDCTableView?
     let successAnimation: LOTAnimationView = {
         let animationView = LOTAnimationView(name: "success_animation")
         animationView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +28,7 @@ class TransactionsViewController: BDCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tableView = UITableView()
+        let tableView = BDCTableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(I_T_TS_TableViewCell.self, forCellReuseIdentifier: cellId)

@@ -37,6 +37,7 @@ class SocketService {
     
     init() {
         self.ws.event.close = { code, reason, clean in
+            sleep(1)
             self.ws.open()
         }
         

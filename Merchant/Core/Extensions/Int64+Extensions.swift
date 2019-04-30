@@ -22,17 +22,18 @@ extension Int64 {
         var satoshisStr: [Character] = self.description.reversed()
         
         // Make sure our str has minimum 8 characters
-        while (satoshisStr.count < 10) {
+        while (satoshisStr.count < 9) {
             satoshisStr.append("0")
         }
-        
-        print(satoshisStr)
-        
+                
         // Then add space when it is needed
         var satoshisStrWithSpace = [Character]()
-        for (i, _) in satoshisStr.enumerated() {
-            if i>0 && i%3 == 0 {
-                if i == 9 {
+        satoshisStrWithSpace.insert(satoshisStr.removeFirst(), at: 0)
+        satoshisStrWithSpace.insert(satoshisStr.removeFirst(), at: 0)
+        
+        for i in 0...satoshisStr.count-1 {
+            if i%3 == 0 {
+                if i == 6 {
                     satoshisStrWithSpace.insert(",", at: 0)
                 } else {
                     satoshisStrWithSpace.insert(" ", at: 0)
