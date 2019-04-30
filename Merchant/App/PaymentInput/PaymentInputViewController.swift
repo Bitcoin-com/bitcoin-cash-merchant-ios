@@ -86,6 +86,10 @@ extension PaymentInputViewController: PinViewControllerDelegate {
     
     
     func onPushPin(_ pin: String) {
+        if amountStr.count > 12 {
+            return
+        }
+        
         switch pin {
         case ",":
             if amountStr.contains(pin) {

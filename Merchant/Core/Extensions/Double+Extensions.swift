@@ -9,8 +9,8 @@
 import Foundation
 
 extension Double {
-    func toSatoshis() -> Int {
-        return Int(self*100000000)
+    func toSatoshis() -> Int64 {
+        return Int64(self*100000000)
     }
     
     func toString() -> String {

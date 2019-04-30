@@ -7,35 +7,35 @@
 */
 
 // Shared
-"settings" = "Settings";
+"settings" = "Ajustes";
 
 // Home module
-"payment" = "Payment";
-"history" = "History";
+"payment" = "Pago";
+"history" = "Historial";
 
 // Settings module
-"company_name" = "Company name";
-"enter_company_name" = "Enter a company name";
-"my_company_name" = "My company name";
-"destination_address" = "Destination address";
-"enter_destination_address" = "Enter a destination address";
-"scan" = "Scan";
-"local_currency" = "Local currency";
+"company_name" = "Nombre de la empresa";
+"enter_company_name" = "Introduce el nombre de la empresa";
+"my_company_name" = "Nombre de mi empresa";
+"destination_address" = "Dirección de destino";
+"enter_destination_address" = "Introduce una dirección de destino";
+"scan" = "Escanear";
+"local_currency" = "Moneda local";
 
 // Scanner module
-"scanner" = "Scanner";
-"open_settings" = "Open Settings";
-"the_camera_is_necessary" = "The camera is necessary";
-"camera_permission_error" = "Camera Permission Error";
-"cancel" = "Cancel";
-"scanning_not_supported" = "Scanning not supported";
-"scanning_not_supported_details" = "Your device does not support qr code scanning. Please use a device with a camera.";
+"scanner" = "Escáner";
+"open_settings" = "Abrir ajustes";
+"the_camera_is_necessary" = "Se necesita la cámara";
+"camera_permission_error" = "Error en permisos de cámara";
+"cancel" = "Cancelar";
+"scanning_not_supported" = "Escáner no soportado";
+"scanning_not_supported_details" = "Tu dispositivo no puede escanear códigos QR. Por favor utiliza un dispositivo con cámara.";
 "ok" = "Ok";
 
 // Payment request module
-"payment_request" = "Payment request";
-"waiting_for_payment" = "Waiting for payment";
+"payment_request" = "Petición de pago";
+"waiting_for_payment" = "Esperando a el pago";
 
 // Payment input module
-"receiving_address_not_available" = "Receiving Address not available";
-"receiving_address_not_available_details" = "You do not have any address setup.";
+"receiving_address_not_available" = "Dirección de destino no disponible.";
+"receiving_address_not_available_details" = "No has configurado ninguna dirección.";

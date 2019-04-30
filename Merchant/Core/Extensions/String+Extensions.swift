@@ -22,7 +22,7 @@ extension String {
         return try AddressFactory.create(self).base58
     }
     
-    func toSatoshis() -> Int {
+    func toSatoshis() -> Int64 {
         return Double(self)?.toSatoshis() ?? 0
     }
     
@@ -38,7 +38,7 @@ extension String {
         } else {
             bothSide = str.split(separator: ".")
         }
-        let leftSide = String(bothSide[0])
+        let leftSide = bothSide[0].description
         
         // Have right side with 2 numbers
         var rightSideStr = bothSide.count > 1 ? bothSide[1].description : ""

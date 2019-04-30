@@ -48,7 +48,7 @@ class TransactionsPresenter {
                 dateFormatter.locale = Locale(identifier: "en_US")
                 let dateStr = dateFormatter.string(from: tx.date) // Jan 2, 2001
                 
-                let amountInBCH = tx.amountInSatoshis.toBCH().description.toFormat("BCH", symbol: "BCH")
+                let amountInBCH = tx.amountInSatoshis.toBCHFormat()
                 
                 return TransactionOutput(txid: tx.txid, date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
             }

@@ -32,7 +32,7 @@ class PaymentRequestPresenter {
     func viewDidLoad() {
         let data = "\(pr.toAddress)?amount=\(pr.amountInSatoshis.toBCH())"
         viewDelegate?.onSetQRCode(withData: data)
-        viewDelegate?.onSetAmount(pr.amountInFiat, bchAmount: pr.amountInSatoshis.toBCH().description.toFormat("BCH", symbol: "BCH"))
+        viewDelegate?.onSetAmount(pr.amountInFiat, bchAmount: pr.amountInSatoshis.toBCHFormat())
         
         txDisp = waitTransactionInteractor?
             .waitTransaction(withPr: pr)

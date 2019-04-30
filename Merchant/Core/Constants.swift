@@ -24,7 +24,7 @@ struct Constants {
         static let myCompanyName = "my_company_name".localized
         static let destinationAddress = "destination_address".localized
         static let enterDestinationAddress = "enter_destination_address".localized
-        static let scan = "Scan".localized
+        static let scan = "scan".localized
         static let localCurrency = "local_currency".localized
         
         // Scanner module
