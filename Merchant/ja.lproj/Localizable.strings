@@ -10,32 +10,32 @@
 "settings" = "設定";
 
 // Home module
-"payment" = "ペイメント";
+"payment" = "支払い";
 "history" = "取引履歴";
 
 // Settings module
-"company_name" = "Company name";
-"enter_company_name" = "Enter a company name";
-"my_company_name" = "My company name";
-"destination_address" = "Destination address";
-"enter_destination_address" = "Enter a destination address";
+"company_name" = "社名";
+"enter_company_name" = "社名を入力してください";
+"my_company_name" = "新規社名";
+"destination_address" = "支払先アドレス";
+"enter_destination_address" = "支払先アドレスを入力してください";
 "scan" = "スキャン";
-"local_currency" = "Local currency";
+"local_currency" = "現地通貨";
 
 // Scanner module
-"scanner" = "Scanner";
+"scanner" = "スキャナー";
 "open_settings" = "設定を開く";
-"the_camera_is_necessary" = "The camera is necessary";
-"camera_permission_error" = "Camera Permission Error";
-"cancel" = "Cancel";
-"scanning_not_supported" = "Scanning not supported";
-"scanning_not_supported_details" = "Your device does not support qr code scanning. Please use a device with a camera.";
-"ok" = "Ok";
+"the_camera_is_necessary" = "カメラへのアクセスが必要です";
+"camera_permission_error" = "カメラへのアクセス許可エラー";
+"cancel" = "キャンセル";
+"scanning_not_supported" = "スキャンがサポートされていません";
+"scanning_not_supported_details" = "ご使用のデバイスはQRコードのスキャンに対応していません。カメラ付きのデバイスでご利用ください。";
+"ok" = "OK";
 
 // Payment request module
 "payment_request" = "支払いを要求する";
-"waiting_for_payment" = "Waiting for payment";
+"waiting_for_payment" = "支払いを待機しています";
 
 // Payment input module
-"receiving_address_not_available" = "Receiving Address not available";
-"receiving_address_not_available_details" = "You do not have any address setup.";
+"receiving_address_not_available" = "利用可能な支払先アドレスがありません";
+"receiving_address_not_available_details" = "アドレスが一切セットアップされていません。";
