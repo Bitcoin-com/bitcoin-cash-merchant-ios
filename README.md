@@ -10,6 +10,24 @@
 ![Compatibility](https://img.shields.io/badge/Swift-4.0-orange.svg) 
 ![License](https://img.shields.io/badge/License-MIT-lightgrey.svg) 
 
+## Installation
+
+### CocoaPods
+
+#### Commands
+
+```bash
+$ brew install autoconf automake // Required with BitcoinKit
+$ brew install libtool // Required with BitcoinKit
+$ pod install
+```
+
+#### Pod install issue
+
+```bash 
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer/
+```
+
 ## Authors & Maintainers
 - Jean-Baptiste Dominguez [[Github](https://github.com/jbdtky), [Twitter](https://twitter.com/jbdtky)]
 
