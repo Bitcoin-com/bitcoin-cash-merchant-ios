@@ -34,7 +34,10 @@ class CirclePresentAnimationController: NSObject, UIViewControllerAnimatedTransi
         maskView.clipsToBounds = true
         maskView.addSubview(snapshot)
         
-        maskView.frame.origin.y += fromVC.view.safeAreaInsets.top + originFrame.height
+        maskView.frame.origin.y += originFrame.height
+        if #available(iOS 11.0, *) {
+            maskView.frame.origin.y += fromVC.view.safeAreaInsets.top
+        }
         maskView.frame.origin.x = 16
         maskView.frame.size.width = snapshot.frame.size.width - 32
         maskView.frame.size.height += 16
@@ -122,7 +125,10 @@ class CircleDismissAnimationController: NSObject, UIViewControllerAnimatedTransi
         
         UIView.animate(withDuration: duration, animations: {
             maskView.frame = self.originFrame
-            maskView.frame.origin.y = -6 + self.originFrame.origin.y + fromVC.view.safeAreaInsets.top + self.originFrame.height
+            maskView.frame.origin.y = -6 + self.originFrame.origin.y + self.originFrame.height
+            if #available(iOS 11.0, *) {
+                 maskView.frame.origin.y += fromVC.view.safeAreaInsets.top
+            }
             maskView.frame.origin.x = 16
             maskView.frame.size.width = snapshot.frame.size.width - 32
             maskView.frame.size.height += 16
