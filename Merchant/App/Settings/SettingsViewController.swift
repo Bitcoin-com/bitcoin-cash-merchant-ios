@@ -142,10 +142,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             iconButton.addTarget(self, action: #selector(didPushScan), for: .touchUpInside)
             
             headerStackView.addArrangedSubview(iconButton)
-         case .companyName:
+ 
+        case .companyName:
             companyNameTextField.placeholder = item.placeholder
             companyNameTextField.delegate = self
             stackView.addArrangedSubview(companyNameTextField)
+            
+        case .changePin:
+            let iconButton = BDCButton.build(.type1)
+            iconButton.setTitle("Change", for: .normal)
+            iconButton.translatesAutoresizingMaskIntoConstraints = false
+            iconButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+            iconButton.addTarget(self, action: #selector(didPushChangePin), for: .touchUpInside)
+            
+            headerStackView.addArrangedSubview(iconButton)
             
         case .selectedCurrency:
             cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didPushSelectCurrency)))
@@ -174,6 +184,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func didPushScan() {
         presenter?.didPushScan()
+    }
+    
+    @objc func didPushChangePin() {
+        presenter?.didPushChangePin()
     }
     
     @objc func didPushCloseSelectCurrency() {

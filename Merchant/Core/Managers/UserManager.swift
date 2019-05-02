@@ -17,7 +17,8 @@ class UserManager {
     var selectedCurrency: StoreCurrency
     var destination: String
     var companyName: String
-    
+    var pin: String
+
     init() {
         
         let storageProvider = InternalStorageProvider()
@@ -28,5 +29,6 @@ class UserManager {
         
         destination = storageProvider.getString("destination") ?? ""
         companyName = storageProvider.getString("companyName") ?? "Your company name"
+        pin = storageProvider.getString("pin") ?? ""
     }
 }

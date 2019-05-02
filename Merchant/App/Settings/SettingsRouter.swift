@@ -19,4 +19,10 @@ class SettingsRouter: BDCRouter {
         let navViewController = UINavigationController(rootViewController: scannerViewController)
         viewController?.present(navViewController, animated: true, completion: nil)
     }
+
+    func transitPinChange(_ pinCheckDelegate : PinCheckDelegate) {
+        let vc = PinBuilder().provide(pinCheckDelegate)
+        let nvc = UINavigationController(rootViewController: vc)
+        viewController?.present(nvc, animated: true, completion: nil)
+    }
 }
