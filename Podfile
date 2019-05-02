@@ -15,7 +15,7 @@ abstract_target 'All' do
     use_frameworks!
 
     # Pods for all targets
-    pod 'BDCKit', :git => 'https://github.com/bitcoin-com/bdc-kit-ios', :branch => 'master'
+    pod 'BDCKit',           :git => 'https://github.com/bitcoin-com/bdc-kit-ios', :branch => 'master'
     pod 'RxSwift',          '~> 4.0'
     pod 'RxCocoa',          '~> 4.0'
     pod 'Moya/RxSwift',     '~> 11.0'
