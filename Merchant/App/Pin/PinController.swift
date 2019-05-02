@@ -23,6 +23,7 @@ class PinController: PinViewController {
 
     var pinMessageLabel: BDCLabel = {
         let label = BDCLabel.build(.header)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Enter pin code"
         return label
@@ -45,12 +46,16 @@ class PinController: PinViewController {
         super.viewDidLoad()
         
         updatePinCodeCircles()
+        
+        let pinStackView = UIStackView(arrangedSubviews: [pinCodeLabel, pinMessageLabel])
+        pinStackView.axis = .vertical
+        pinStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        pinView.addSubview(pinCodeLabel)
-        pinCodeLabel.centerXAnchor.constraint(equalTo: pinView.centerXAnchor).isActive =  true
-        pinCodeLabel.centerYAnchor.constraint(equalTo: pinView.centerYAnchor).isActive =  true
+        pinView.addSubview(pinStackView)
+        pinStackView.centerXAnchor.constraint(equalTo: pinView.centerXAnchor).isActive =  true
+        pinStackView.centerYAnchor.constraint(equalTo: pinView.centerYAnchor).isActive =  true
 
-        let stackView = UIStackView(arrangedSubviews: [pinView, pinMessageLabel, pinCollectionView])
+        let stackView = UIStackView(arrangedSubviews: [pinView, pinCollectionView])
         stackView.axis = .vertical
         stackView.alignment = .fill
         view.addSubview(stackView)
