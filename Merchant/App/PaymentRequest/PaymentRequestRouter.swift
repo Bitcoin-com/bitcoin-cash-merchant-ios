@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BDCKit
 
 class PaymentRequestRouter: BDCRouter {
     

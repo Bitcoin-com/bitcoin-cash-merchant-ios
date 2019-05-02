@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import BDCKit
 
 class PaymentRequestViewController: BDCViewController {
     

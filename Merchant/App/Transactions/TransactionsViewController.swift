@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import Lottie
+import BDCKit
 
 class TransactionsViewController: BDCViewController {
     

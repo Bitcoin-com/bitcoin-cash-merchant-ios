@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - BDCKit (0.1.0)
   - BitcoinKit (1.1.1)
   - lottie-ios (2.5.3)
   - Moya/Core (11.0.2):
@@ -9,12 +10,12 @@ PODS:
     - Moya/Core
     - RxSwift (~> 4.0)
   - Nimble (8.0.1)
-  - Quick (2.0.0)
-  - Realm (3.14.1):
-    - Realm/Headers (= 3.14.1)
-  - Realm/Headers (3.14.1)
-  - RealmSwift (3.14.1):
-    - Realm (= 3.14.1)
+  - Quick (2.1.0)
+  - Realm (3.14.2):
+    - Realm/Headers (= 3.14.2)
+  - Realm/Headers (3.14.2)
+  - RealmSwift (3.14.2):
+    - Realm (= 3.14.2)
   - Result (3.2.4)
   - RxBlocking (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
@@ -29,6 +30,7 @@ PODS:
   - SwiftWebSocket (2.7.0)
 
 DEPENDENCIES:
+  - BDCKit (from `https://github.com/bitcoin-portal/bdc-kit-ios`, branch `master`)
   - BitcoinKit (~> 1.1.1)
   - lottie-ios (~> 2.5.2)
   - Moya/RxSwift (~> 11.0)
@@ -61,24 +63,31 @@ SPEC REPOS:
     - RxTest
 
 EXTERNAL SOURCES:
+  BDCKit:
+    :branch: master
+    :git: https://github.com/bitcoin-portal/bdc-kit-ios
   SwiftWebSocket:
     :branch: swift/4.0
     :git: https://github.com/tidwall/SwiftWebSocket.git
 
 CHECKOUT OPTIONS:
+  BDCKit:
+    :commit: a06c8c42dcea62a591856801c444d77aed5e4845
+    :git: https://github.com/bitcoin-portal/bdc-kit-ios
   SwiftWebSocket:
     :commit: 1f3049d4958ffb4e7586e58e158fba80dec86ff7
     :git: https://github.com/tidwall/SwiftWebSocket.git
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  BDCKit: a1caeba8ea7b1922356623f944161281ecb38875
   BitcoinKit: aad4c997e2500f7a89e1a82bd5aff6d9d6fab90d
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
-  Quick: ce1276c7c27ba2da3cb2fd0cde053c3648b3b22d
-  Realm: e12c9c2387d05c5bba3a9c394838f5870e85763b
-  RealmSwift: a82eab9b04c3e1616082c7e17aa300740847769c
+  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+  Realm: 179c6706e3a49dbfe112e572fd3c03d3169bea35
+  RealmSwift: 1797f272fb51c555b764fada32e82159a2c65247
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxBlocking: 79413e4d916f44bb3e113c5b2cc059e36fe58910
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
@@ -87,6 +96,6 @@ SPEC CHECKSUMS:
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
   SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
 
-PODFILE CHECKSUM: e32f2a44b980194aa96ccf19813ace7701ae45c7
+PODFILE CHECKSUM: f9b003189ab2fdc1123fc17bc0d752754825ffbc
 
 COCOAPODS: 1.7.0.beta.2
