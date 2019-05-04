@@ -11,11 +11,12 @@ import UIKit
 
 class PinController: PinViewController {
     static let CODE_DIGIT_COUNT: Int = 4
-    static let CIRCLE_EMPTY: String = "\u{25EF}";
-    static let CIRCLE_FILLED: String = "\u{2B24}";
+    static let CIRCLE_EMPTY: String = "\u{26AA}";
+    static let CIRCLE_FILLED: String = "\u{26AB}";
     
     var pinCodeLabel: BDCLabel = {
         let label = BDCLabel.build(.header)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = label.font.withSize(56)
         return label
@@ -25,7 +26,6 @@ class PinController: PinViewController {
         let label = BDCLabel.build(.header)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Enter pin code"
         return label
     }()
 
@@ -35,12 +35,27 @@ class PinController: PinViewController {
         return view
     }()
     var presenter: PinPresenter?
-    
+    let pinMode: PinMode
     var pin: String = ""
     // Next value is only used when the user has never
-    var pinBeingChanged: Bool = false
     var pinChangeFirstCode: String = ""
     var pinChangeCodeBeingConfirmed: Bool = false
+
+    init(_ pinMode: PinMode) {
+        self.pinMode = pinMode
+        super.init(nibName:nil, bundle:nil);
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func resetAndTryAgain() {
+        pin = "";
+        pinChangeFirstCode = ""
+        pinChangeCodeBeingConfirmed = false;
+        updatePinCodeCircles()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +121,7 @@ extension PinController: PinViewControllerDelegate {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
             pin.append(key)
             if pin.count == PinController.CODE_DIGIT_COUNT {
-                pinCompleted();
+                pinCompletelyEntered();
             }
         default:
             break
@@ -120,13 +135,40 @@ extension PinController: PinViewControllerDelegate {
             s = (i == 1 ? "" : " " + s)
                 + (pin.count >= i ? PinController.CIRCLE_FILLED : PinController.CIRCLE_EMPTY)
         }
-        pinCodeLabel.text = s;
+        pinCodeLabel.text = s
+        updateMessage()
+    }
+    
+    func updateMessage() {
+        switch pinMode {
+        case PinMode.Set:
+            pinMessageLabel.text = pinChangeCodeBeingConfirmed ? "Confirm new pin code" : "Create pin code"
+        case PinMode.Change:
+            pinMessageLabel.text = pinChangeCodeBeingConfirmed ? "Confirm new pin code" : "Enter new pin code"
+        case PinMode.Verify:
+            pinMessageLabel.text = "Enter pin code"
+        }
     }
 
-    func pinCompleted() {
-        if pinBeingChanged {
+    fileprivate func showAlertAndGoBack(_ title: String, _ message: String, _ action: String) {
+        let alertAction = UIAlertAction(title: action, style: .default) { _ in
+            self.presenter?.router?.transitBack()
+        }
+        showAlert(title, message, alertAction)
+    }
+    
+    fileprivate func showAlert(_ title: String, _ message: String, _ alertAction: UIAlertAction) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(alertAction)
+        present(alert, animated: true)
+    }
+    
+    func pinCompletelyEntered() {
+        switch pinMode {
+        case PinMode.Set, PinMode.Change:
             // pin creation or modification
             if !pinChangeCodeBeingConfirmed {
+                // User entered 1st pin code
                 // switch to confirmation mode
                 pinChangeCodeBeingConfirmed = true;
                 // record full pin for later comparison
@@ -134,32 +176,34 @@ extension PinController: PinViewControllerDelegate {
                 // reset value to allow confirmation
                 pin = "";
             } else {
-                // verify that confirmation pin matches the first entry
+                // User entered 2nd pin code
+                // verify that confirmation pin matches the first code
                 if (pin == pinChangeFirstCode) {
                     // persist the new pin
+                    let storageProvider = InternalStorageProvider()
+                    storageProvider.setString(pin, key: "pin")
                     UserManager.shared.pin = pin;
+                    showAlertAndGoBack("Success", pinMode == PinMode.Set ? "Pin code created" : "PIN code changed", Constants.Strings.ok)
+                    presenter?.pinCheckDelegate?.onPinChecked()
                 } else {
-                    // 1st and 2nd pin code mismatch: cancel change
-                    let alert = UIAlertController(title: "Mismatching PIN", message: "Cancelling PIN code change", preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: Constants.Strings.cancel, style: .default) { _ in
-                        self.presenter?.router?.transitBack()
+                    // 1st & 2nd pin code mismatch: cancel change
+                    if pinMode == PinMode.Set {
+                        showAlert("Mismatching PIN", "The PIN code has not been created",
+                                  UIAlertAction(title: "Try again", style: .default) { _ in
+                                    self.resetAndTryAgain()
+                            })
+                    } else if pinMode == PinMode.Change {
+                        showAlertAndGoBack("Mismatching PIN", "The PIN code has not been changed", Constants.Strings.cancel)
                     }
-                    alert.addAction(cancelAction)
-                    present(alert, animated: true)
                 }
             }
-        } else {
+        case PinMode.Verify:
             // pin verification
             let checked : Bool = UserManager.shared.pin == pin;
             if (checked) {
                 presenter?.pinCheckDelegate?.onPinChecked()
             } else {
-                let alert = UIAlertController(title: "Incorrect PIN", message: "Operation denied", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: Constants.Strings.cancel, style: .default) { _ in
-                    self.presenter?.router?.transitBack()
-                }
-                alert.addAction(cancelAction)
-                present(alert, animated: true)
+                showAlertAndGoBack("Incorrect PIN", "Operation denied", Constants.Strings.cancel)
             }
         }
     }

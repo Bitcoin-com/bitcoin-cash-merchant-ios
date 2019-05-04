@@ -9,13 +9,20 @@
 import Foundation
 import UIKit
 
+enum PinMode {
+    case Set
+    case Change
+    case Verify
+}
+
 class PinBuilder {
     
-    func provide(_ pinCheckDelegate: PinCheckDelegate) -> UIViewController {
-        let viewController = PinController()
+    func provide(_ pinMode : PinMode, _ pinCheckDelegate: PinCheckDelegate) -> UIViewController {
+        let viewController = PinController(pinMode)
         let router = PinRouter(viewController)
         let presenter = PinPresenter()
         
+        presenter.pinCheckDelegate = pinCheckDelegate
         presenter.viewDelegate = viewController
         presenter.router = router
         

@@ -10,10 +10,13 @@ import UIKit
 import RealmSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, PinCheckDelegate {
+    func onPinChecked() {
+        window!.rootViewController = UINavigationController(rootViewController: HomeBuilder().provide())
+    }
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupRealm()
         setupUITestingIfItIsRequired()
@@ -24,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let frame = UIScreen.main.bounds
         window = UIWindow(frame: frame)
         
-        let rootViewController = HomeBuilder().provide()
+        let pinCreationRequired : Bool = UserManager.shared.pin.count != PinController.CODE_DIGIT_COUNT
+        let rootViewController = pinCreationRequired ? PinBuilder().provide(PinMode.Set, self) : HomeBuilder().provide()
         let navigationController = UINavigationController(rootViewController: rootViewController)
         
         let navStyles = UINavigationBar.appearance()
