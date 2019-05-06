@@ -21,6 +21,7 @@ class SettingsViewController: BDCViewController {
     }()
     var companyNameTextField = BDCTextField.build(.type1)
     var destinationAddressTextField = BDCTextField.build(.type1)
+    var pinCodeTextField = BDCTextField.build(.type1)
     var selectedCurrencyLabel = BDCLabel.build(.subtitle)
     var currenciesPickerView = UIPickerView(frame: .zero)
     var currenciesView: UIView = {
@@ -148,7 +149,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             companyNameTextField.delegate = self
             stackView.addArrangedSubview(companyNameTextField)
             
-        case .changePin:
+        case .pinCode:
+            pinCodeTextField.placeholder = item.placeholder
+            pinCodeTextField.delegate = self
+            stackView.addArrangedSubview(pinCodeTextField)
+            
             let iconButton = BDCButton.build(.type1)
             iconButton.setTitle("Change", for: .normal)
             iconButton.translatesAutoresizingMaskIntoConstraints = false
