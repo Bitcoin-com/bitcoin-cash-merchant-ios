@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PinDelegate {
         let frame = UIScreen.main.bounds
         window = UIWindow(frame: frame)
         
-        let pinCreationRequired : Bool = UserManager.shared.pin.count > 0
+        let pinCreationRequired : Bool = UserManager.shared.pin.count == 0
         if pinCreationRequired {
             let rootViewController = PinBuilder().provide(.set, pinDelegate: self, target: "home")
             window!.rootViewController = rootViewController

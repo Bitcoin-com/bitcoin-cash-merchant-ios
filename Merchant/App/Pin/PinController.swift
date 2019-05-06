@@ -20,6 +20,7 @@ class PinController: PinViewController {
 
     var pinView: UIView = {
         let view = UIView(frame: .zero)
+        view.backgroundColor = BDCColor.white.uiColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -64,6 +65,7 @@ class PinController: PinViewController {
         view.addSubview(stackView)
 
         stackView.fillSuperView()
+        stackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         
         view.backgroundColor = BDCColor.whiteTwo.uiColor
 
@@ -81,7 +83,7 @@ class PinController: PinViewController {
             if number <= i {
                 pinCodeImageView.image = nil
             } else {
-                pinCodeImageView.image = UIImage(named: "AppIcon")
+                pinCodeImageView.image = UIImage(named: "bch_icon")
             }
         }
     }
