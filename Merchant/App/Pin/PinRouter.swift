@@ -11,6 +11,6 @@ import UIKit
 
 class PinRouter: BDCRouter {
     func transitBack() {
-        viewController?.dismiss(animated: true)
+        viewController?.dismiss(animated: false)
     }
 }

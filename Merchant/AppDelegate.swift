@@ -10,10 +10,21 @@ import UIKit
 import RealmSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, PinCheckDelegate {
-    func onPinChecked() {
-        window!.rootViewController = UINavigationController(rootViewController: HomeBuilder().provide())
+class AppDelegate: UIResponder, UIApplicationDelegate, PinDelegate {
+    func onSuccess(_ target: String?) {
+        let rootViewController = HomeBuilder().provide()
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        window!.rootViewController = navigationController
     }
+    
+    func onFailure() {
+        print("failure")
+    }
+    
+//    func onPinChecked() {
+//        window!.rootViewController = UINavigationController(rootViewController: HomeBuilder().provide())
+//    }
+    
     
     var window: UIWindow?
     
@@ -27,16 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PinCheckDelegate {
         let frame = UIScreen.main.bounds
         window = UIWindow(frame: frame)
         
-        let pinCreationRequired : Bool = UserManager.shared.pin.count != PinController.CODE_DIGIT_COUNT
-        let rootViewController = pinCreationRequired ? PinBuilder().provide(PinMode.Set, self) : HomeBuilder().provide()
-        let navigationController = UINavigationController(rootViewController: rootViewController)
+        let pinCreationRequired : Bool = UserManager.shared.pin.count > 0
+        if pinCreationRequired {
+            let rootViewController = PinBuilder().provide(.set, pinDelegate: self, target: "home")
+            window!.rootViewController = rootViewController
+        } else {
+            let rootViewController = HomeBuilder().provide()
+            let navigationController = UINavigationController(rootViewController: rootViewController)
+            window!.rootViewController = navigationController
+        }
         
         let navStyles = UINavigationBar.appearance()
         navStyles.barTintColor = BDCColor.white.uiColor
         navStyles.tintColor = BDCColor.green.uiColor
         navStyles.titleTextAttributes = [NSAttributedString.Key.foregroundColor:BDCColor.green.uiColor]
         
-        window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         
         return true

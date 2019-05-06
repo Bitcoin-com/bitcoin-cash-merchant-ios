@@ -27,6 +27,8 @@ class PaymentInputViewController: PinViewController {
     var amountStr: String = "0"
     
     override func viewDidLoad() {
+        self.hasValid = true
+        
         super.viewDidLoad()
         
         amountView.addSubview(amountLabel)

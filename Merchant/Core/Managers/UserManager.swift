@@ -17,10 +17,11 @@ class UserManager {
     var selectedCurrency: StoreCurrency
     var destination: String
     var companyName: String
-    var pin: String
+    
+    fileprivate var _pin: String
+    var pin: String { get { return _pin } }
 
     init() {
-        
         let storageProvider = InternalStorageProvider()
         let ticker = storageProvider.getString("selectedCurrencyTicker") ?? "USD"
         
@@ -29,6 +30,15 @@ class UserManager {
         
         destination = storageProvider.getString("destination") ?? ""
         companyName = storageProvider.getString("companyName") ?? "Your company name"
-        pin = storageProvider.getString("pin") ?? ""
+        _pin = storageProvider.getString("pin") ?? ""
+    }
+}
+
+extension UserManager {
+
+    func setPin(_ pin: String) {
+        let storageProvider = InternalStorageProvider()
+        storageProvider.setString(pin, key: "pin")
+        self._pin = pin
     }
 }

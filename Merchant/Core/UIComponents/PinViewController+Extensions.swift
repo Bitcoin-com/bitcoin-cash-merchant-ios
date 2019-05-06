@@ -15,6 +15,7 @@ protocol PinViewControllerDelegate {
 class PinViewController: BDCViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var hasComma = true
+    var hasValid = false
     let items = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ",", "0", "del", "valid"]
     let inset: CGFloat = 1
     let minimumLineSpacing: CGFloat = 0
@@ -35,13 +36,13 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         
         pinCollectionView.register(PinCell.self, forCellWithReuseIdentifier: cellId)
-        pinCollectionView.backgroundColor = BDCColor.white.uiColor
+        pinCollectionView.backgroundColor = .clear
         
         pinCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(pinCollectionView)
         
-        pinCollectionView.heightAnchor.constraint(equalToConstant: 50*4 + 80 + 5 * inset).isActive = true
+        pinCollectionView.heightAnchor.constraint(equalToConstant: 50*4 + (hasValid ? 80 : 0) + 5 * inset).isActive = true
         
         pinCollectionView.dataSource = self
         pinCollectionView.delegate = self
@@ -65,7 +66,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return hasValid ? items.count : items.count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,7 +110,7 @@ extension PinViewController: UICollectionViewDelegateFlowLayout {
         
         let marginsAndInsets = inset * 2 + minimumInteritemSpacing * CGFloat(cellsPerRow)
         
-        if indexPath.item < items.count - 1 {
+        if indexPath.item < items.count - 1 || !hasValid {
             let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
             
             return CGSize(width: itemWidth, height: 50)

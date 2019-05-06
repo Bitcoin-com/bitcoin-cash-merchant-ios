@@ -44,7 +44,7 @@ class SettingsPresenter {
     }
 
     func didPushChangePin() {
-        router?.transitPinChange(self)
+        router?.transitPinChange()
     }
     
     func didPushClose() {
@@ -82,11 +82,5 @@ extension SettingsPresenter: ScannerDelegate {
         viewDelegate?.onGetDestination(value)
         
         didEditDestination(value)
-    }
-}
-
-extension SettingsPresenter: PinCheckDelegate {
-    func onPinChecked() {
-        NSLog("PinCheck called")
     }
 }
