@@ -19,7 +19,6 @@ Features:
 - Employee friendly: settings accessible only through a PIN code
 - Amount displayed in local currency: 150+ currencies supported
 - Customer fee is lower than 1 cent per payment independent of the amount
-- Open source: https://github.com/Bitcoin-com/bitcoin-cash-merchant-ios
 
 Start accepting Bitcoin Cash today and promoting more economic freedom in the world.
 
