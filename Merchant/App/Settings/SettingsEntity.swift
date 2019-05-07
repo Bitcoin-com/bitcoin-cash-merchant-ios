@@ -12,6 +12,7 @@ enum SettingsEntry: CaseIterable {
     case companyName
     case address
     case selectedCurrency
+    case pinCode
 }
 
 extension SettingsEntry {
@@ -23,6 +24,8 @@ extension SettingsEntry {
             return Constants.Strings.destinationAddress
         case .selectedCurrency:
             return Constants.Strings.localCurrency
+        case .pinCode:
+            return Constants.Strings.pinCode
         }
     }
     
@@ -32,6 +35,8 @@ extension SettingsEntry {
             return Constants.Strings.enterCompanyName
         case .address:
             return Constants.Strings.enterDestinationAddress
+        case .pinCode:
+            return "####"
         default:
             return ""
         }

@@ -42,6 +42,11 @@ class SettingsPresenter {
     func didPushScan() {
         router?.transitScan(self)
     }
+
+    func didPushChangePin() {
+        let pinMode: PinMode = UserManager.shared.hasPin() ? .change : .set
+        router?.transitToPin(pinMode)
+    }
     
     func didPushClose() {
         router?.transitBackTo()

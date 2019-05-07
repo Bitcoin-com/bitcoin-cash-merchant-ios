@@ -52,7 +52,7 @@ extension PaymentInputPresenter {
     }
     
     func didPushSettings() {
-        router?.transitToSettings()
+        self.router?.transitToSettings()
     }
     
     func didPushValid(_ rawAmount: String) {

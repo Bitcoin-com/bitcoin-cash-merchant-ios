@@ -47,25 +47,6 @@ class SocketService {
             print("error \(error)")
             
             // TODO: Show a red bar if the connection is lost.
-//            DispatchQueue.main.async {
-//
-//                guard let titleView = UIApplication.shared.delegate?.window??.rootViewController?.inputViewController?.navigationController?.navigationItem.titleView else {
-//                    return
-//                }
-//
-//                print("found titleView")
-//
-//                let barView = UIView()
-//                barView.backgroundColor = .red
-//
-//                titleView.addSubview(barView)
-//
-//                barView.topAnchor.constraint(equalTo: titleView.topAnchor).isActive = true
-//                barView.leadingAnchor.constraint(equalTo: titleView.leadingAnchor).isActive = true
-//                barView.trailingAnchor.constraint(equalTo: titleView.trailingAnchor).isActive = true
-//                barView.heightAnchor.constraint(equalToConstant: 10).isActive = true
-//
-//            }
         }
         
         self.ws.event.message = { message in

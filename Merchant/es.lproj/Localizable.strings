@@ -31,6 +31,8 @@
 "scanning_not_supported" = "Escáner no soportado";
 "scanning_not_supported_details" = "Tu dispositivo no puede escanear códigos QR. Por favor utiliza un dispositivo con cámara.";
 "ok" = "Ok";
+"change" = "Cambiar";
+"pin_code" = "Código PIN";
 
 // Payment request module
 "payment_request" = "Petición de pago";
@@ -39,3 +41,19 @@
 // Payment input module
 "receiving_address_not_available" = "Dirección de destino no disponible.";
 "receiving_address_not_available_details" = "No has configurado ninguna dirección.";
+
+// Pin modue
+"mismatch_pin" = "El PIN no coincide";
+"cancelling_pin" = "Cancelando cambio de PIN";
+"pin_has_not_been_changed" = "El PIN no ha sido cambiado";
+"pin_is_required" = "Se necesita un código PIN para tu seguridad";
+"try_again" = "Intenta de nuevo";
+"pin_has_been_changed" = "Se ha cambiado el código PIN";
+"success" = "Éxito";
+"incorrect_pin" = "PIN erróneo";
+"operation_denied" = "Operación denegada";
+"create_code_pin" = "Crear código PIN";
+"enter_current_code_pin" = "Introduce el PIN actual";
+"enter_pin_code" = "Introduce el código PIN";
+"confirm_new_pin_code" = "Confirma el nuevo código PIN";
+"enter_new_pin_code" = "Introduce el nuevo código PIN";

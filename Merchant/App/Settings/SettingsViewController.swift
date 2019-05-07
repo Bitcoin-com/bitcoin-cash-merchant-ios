@@ -22,6 +22,7 @@ class SettingsViewController: BDCViewController {
     }()
     var companyNameTextField = BDCTextField.build(.type1)
     var destinationAddressTextField = BDCTextField.build(.type1)
+    var pinCodeLabel = BDCLabel.build(.subtitle)
     var selectedCurrencyLabel = BDCLabel.build(.subtitle)
     var currenciesPickerView = UIPickerView(frame: .zero)
     var currenciesView: UIView = {
@@ -77,6 +78,10 @@ class SettingsViewController: BDCViewController {
         hideKeyboardWhenTappedAround()
         
         presenter?.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     @objc func didPushClose() {
@@ -143,10 +148,23 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             iconButton.addTarget(self, action: #selector(didPushScan), for: .touchUpInside)
             
             headerStackView.addArrangedSubview(iconButton)
-         case .companyName:
+ 
+        case .companyName:
             companyNameTextField.placeholder = item.placeholder
             companyNameTextField.delegate = self
             stackView.addArrangedSubview(companyNameTextField)
+            
+        case .pinCode:
+            pinCodeLabel.text = item.placeholder
+            stackView.addArrangedSubview(pinCodeLabel)
+            
+            let iconButton = BDCButton.build(.type1)
+            iconButton.setTitle(Constants.Strings.change, for: .normal)
+            iconButton.translatesAutoresizingMaskIntoConstraints = false
+            iconButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+            iconButton.addTarget(self, action: #selector(didPushChangePin), for: .touchUpInside)
+            
+            headerStackView.addArrangedSubview(iconButton)
             
         case .selectedCurrency:
             cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didPushSelectCurrency)))
@@ -175,6 +193,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func didPushScan() {
         presenter?.didPushScan()
+    }
+    
+    @objc func didPushChangePin() {
+        presenter?.didPushChangePin()
     }
     
     @objc func didPushCloseSelectCurrency() {

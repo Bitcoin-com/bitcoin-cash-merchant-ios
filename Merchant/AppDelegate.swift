@@ -12,9 +12,9 @@ import BDCKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupRealm()
         setupUITestingIfItIsRequired()
@@ -27,14 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let rootViewController = HomeBuilder().provide()
         let navigationController = UINavigationController(rootViewController: rootViewController)
+        window!.rootViewController = navigationController
         
         let navStyles = UINavigationBar.appearance()
         navStyles.barTintColor = BDCColor.white.uiColor
         navStyles.tintColor = BDCColor.green.uiColor
         navStyles.titleTextAttributes = [NSAttributedString.Key.foregroundColor:BDCColor.green.uiColor]
         
-        window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
+        
+        SecureAccessService.setup()
         
         return true
     }
@@ -94,6 +96,10 @@ extension AppDelegate {
             try! realm.write {
                 realm.deleteAll()
             }
+            
+            UserManager.shared.setPin("")
+            UserManager.shared.setDestination("")
+            UserManager.shared.setCompanyName("Your company name")
         }
     }
 }

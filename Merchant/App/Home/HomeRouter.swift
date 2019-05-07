@@ -12,8 +12,10 @@ import BDCKit
 class HomeRouter: BDCRouter {
     
     func transitToSettings() {
-        let settingsViewController = SettingsBuilder().provide()
-        let navViewController = UINavigationController(rootViewController: settingsViewController)
-        viewController?.present(navViewController, animated: true, completion: nil)
+        SecureAccessService.transitTo({ [weak self] in
+            let settingsViewController = SettingsBuilder().provide()
+            let navViewController = UINavigationController(rootViewController: settingsViewController)
+            self?.viewController?.present(navViewController, animated: true, completion: nil)
+        })
     }
 }
