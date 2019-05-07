@@ -6,8 +6,8 @@
 //  Copyright © 2019 Bitcoin.com. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import BDCKit
 
 class PinController: PinViewController {
 

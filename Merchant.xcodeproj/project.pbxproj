@@ -65,11 +65,11 @@
 		3B1BA9F52270B5E5002EED15 /* SettingsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */; };
 		3B57ABCD2275E7220078D983 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B57ABCF2275E7220078D983 /* Localizable.strings */; };
 		3B57ABDB2276E7E60078D983 /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B57ABDA2276E7E60078D983 /* SocketService.swift */; };
-		3B86E20122816A0B004BBB0D /* SecureAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E20022816A0B004BBB0D /* SecureAccessService.swift */; };
-		4E9FBF89227AF6D000700253 /* PinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF85227AF6CF00700253 /* PinRouter.swift */; };
-		4E9FBF8A227AF6D000700253 /* PinPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF86227AF6CF00700253 /* PinPresenter.swift */; };
-		4E9FBF8B227AF6D000700253 /* PinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF87227AF6D000700253 /* PinController.swift */; };
-		4E9FBF8C227AF6D000700253 /* PinBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF88227AF6D000700253 /* PinBuilder.swift */; };
+		3B86E2022281B937004BBB0D /* PinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF85227AF6CF00700253 /* PinRouter.swift */; };
+		3B86E2032281B93A004BBB0D /* PinPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF86227AF6CF00700253 /* PinPresenter.swift */; };
+		3B86E2042281B93E004BBB0D /* PinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF87227AF6D000700253 /* PinController.swift */; };
+		3B86E2052281B941004BBB0D /* PinBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF88227AF6D000700253 /* PinBuilder.swift */; };
+		3B86E2062281BB9F004BBB0D /* SecureAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E20022816A0B004BBB0D /* SecureAccessService.swift */; };
 		B473B38741D46B5A9144EEA0 /* libPods-MerchantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -162,10 +162,10 @@
 		3B57ABDA2276E7E60078D983 /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		3B86E20022816A0B004BBB0D /* SecureAccessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureAccessService.swift; sourceTree = "<group>"; };
 		4003DFD9D9642EACD01CFD90 /* Pods-All-Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Merchant.release.xcconfig"; path = "Target Support Files/Pods-All-Merchant/Pods-All-Merchant.release.xcconfig"; sourceTree = "<group>"; };
-		4E9FBF85227AF6CF00700253 /* PinRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinRouter.swift; path = Pin/PinRouter.swift; sourceTree = "<group>"; };
-		4E9FBF86227AF6CF00700253 /* PinPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinPresenter.swift; path = Pin/PinPresenter.swift; sourceTree = "<group>"; };
-		4E9FBF87227AF6D000700253 /* PinController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinController.swift; path = Pin/PinController.swift; sourceTree = "<group>"; };
-		4E9FBF88227AF6D000700253 /* PinBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinBuilder.swift; path = Pin/PinBuilder.swift; sourceTree = "<group>"; };
+		4E9FBF85227AF6CF00700253 /* PinRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRouter.swift; sourceTree = "<group>"; };
+		4E9FBF86227AF6CF00700253 /* PinPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPresenter.swift; sourceTree = "<group>"; };
+		4E9FBF87227AF6D000700253 /* PinController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinController.swift; sourceTree = "<group>"; };
+		4E9FBF88227AF6D000700253 /* PinBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinBuilder.swift; sourceTree = "<group>"; };
 		88A57F2AEF2F3475CB6D522F /* Pods-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantUITests/Pods-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9666CC57B1123D7CAE96F46F /* Pods_All_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4423D46E73793DE7376E21B /* Pods-MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.release.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -435,7 +435,7 @@
 				4E9FBF86227AF6CF00700253 /* PinPresenter.swift */,
 				4E9FBF85227AF6CF00700253 /* PinRouter.swift */,
 			);
-			name = Pin;
+			path = Pin;
 			sourceTree = "<group>";
 		};
 		D0F89782984C4AF28F05A3BA /* Frameworks */ = {
@@ -730,7 +730,9 @@
 				3B1BA972226DF1AC002EED15 /* GetTransactionsInteractor.swift in Sources */,
 				3B06249D22734D2600899A4B /* CircleAnimationController.swift in Sources */,
 				3B1BA9AE226E028C002EED15 /* StoreRate.swift in Sources */,
+				3B86E2062281BB9F004BBB0D /* SecureAccessService.swift in Sources */,
 				3B0624992272D69A00899A4B /* WaitTransactionInteractor.swift in Sources */,
+				3B86E2052281B941004BBB0D /* PinBuilder.swift in Sources */,
 				3B1BA9E1226ECBCB002EED15 /* PinViewController+Extensions.swift in Sources */,
 				3B06249B2272FA0400899A4B /* GetCurrenciesInteractor.swift in Sources */,
 				3B1BA9A9226DFD70002EED15 /* PaymentInputViewController.swift in Sources */,
@@ -738,13 +740,16 @@
 				3B1BA974226DF1AC002EED15 /* TransactionsPresenter.swift in Sources */,
 				3B1BA996226DF1EF002EED15 /* HomeRouter.swift in Sources */,
 				3B1BA9EF226EF6DD002EED15 /* PaymentRequestPresenter.swift in Sources */,
+				3B86E2022281B937004BBB0D /* PinRouter.swift in Sources */,
 				3B1BA9F1226EF6FE002EED15 /* PaymentRequestViewController.swift in Sources */,
 				3B0624A622743C7800899A4B /* ScannerPresenter.swift in Sources */,
 				3B1BA9B7226E04E6002EED15 /* SettingsViewController.swift in Sources */,
+				3B86E2042281B93E004BBB0D /* PinController.swift in Sources */,
 				3B1BA99D226DF2B7002EED15 /* UserDefaults+Extensions.swift in Sources */,
 				3B0624972272D40700899A4B /* Int64+Extensions.swift in Sources */,
 				3B1BA9CE226EA545002EED15 /* StoreCurrency.swift in Sources */,
 				3B0624A822743C7800899A4B /* ScannerRouter.swift in Sources */,
+				3B86E2032281B93A004BBB0D /* PinPresenter.swift in Sources */,
 				3B06249F2274050200899A4B /* CircleInteractionController.swift in Sources */,
 				3B1BA9D4226EAAC6002EED15 /* EditUserInteractor.swift in Sources */,
 				3B0624952272C97600899A4B /* RateNetwork.swift in Sources */,

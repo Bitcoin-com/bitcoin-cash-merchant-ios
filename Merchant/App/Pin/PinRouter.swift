@@ -6,7 +6,7 @@
 //  Copyright © 2019 Bitcoin.com. All rights reserved.
 //
 
-import Foundation
+import BDCKit
 import UIKit
 
 class PinRouter: BDCRouter {

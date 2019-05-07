@@ -6,7 +6,6 @@
 //  Copyright © 2019 Bitcoin.com. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 enum PinMode {
