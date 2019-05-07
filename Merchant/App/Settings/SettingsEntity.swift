@@ -25,7 +25,7 @@ extension SettingsEntry {
         case .selectedCurrency:
             return Constants.Strings.localCurrency
         case .pinCode:
-            return "Pin code"
+            return Constants.Strings.pinCode
         }
     }
     

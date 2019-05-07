@@ -25,7 +25,7 @@ class PinPresenter {
     var pinMode: PinMode
     
     init(_ pinMode: PinMode, target: String?) {
-        currentPin = UserManager.shared.pin;
+        currentPin = UserManager.shared.pin
         self.pinMode = pinMode
         self.target = target
     }
@@ -33,11 +33,11 @@ class PinPresenter {
     func viewDidLoad() {
         switch pinMode {
         case .verify:
-            viewDelegate?.setupPin("Enter pin code")
+            viewDelegate?.setupPin(Constants.Strings.enterPinCode)
         case .change:
-            viewDelegate?.setupPin("Enter current pin code")
+            viewDelegate?.setupPin(Constants.Strings.enterCurrentPinCode)
         case .set:
-            viewDelegate?.setupPin("Create pin code")
+            viewDelegate?.setupPin(Constants.Strings.createPinCode)
         }
     }
 }
@@ -55,34 +55,52 @@ extension PinPresenter {
                     if pin == currentPin {
                         pinDelegate?.onSuccess(target)
                     } else {
-                        pinDelegate?.onFailure()
+                        viewDelegate?.showAlert(Constants.Strings.incorrectPin, message: Constants.Strings.operationDenied, action: Constants.Strings.cancel, actionHandler: { [weak self] in
+                            self?.pinDelegate?.onFailure()
+                        })
                     }
                 case .set:
                     if let newPin = self.newPin {
                         if pin == newPin {
                             UserManager.shared.setPin(newPin)
-                            router?.transitBack()
-                            pinDelegate?.onSuccess(target)
+                            
+                            viewDelegate?.showAlert(Constants.Strings.success, message: Constants.Strings.pinHasBeenChanged, action: Constants.Strings.ok, actionHandler: { [weak self] in
+                                self?.router?.transitBack()
+                                self?.pinDelegate?.onSuccess(self?.target)
+                            })
                         } else {
-                            // Show error retape
-                            viewDelegate?.setupPin("Wrong pin code, retry")
+                            if currentPin.count > 0 {
+                                // Show error
+                                viewDelegate?.showAlert(Constants.Strings.mismatchPin, message: Constants.Strings.pinHasNotBeenChanged, action: Constants.Strings.cancel, actionHandler: { [weak self] in
+                                    self?.router?.transitBack()
+                                    self?.pinDelegate?.onFailure()
+                                })
+                            } else {
+                                // Show error retape
+                                viewDelegate?.showAlert(Constants.Strings.mismatchPin, message: Constants.Strings.pinIsRequired, action: Constants.Strings.tryAgain, actionHandler: { [weak self] in
+                                    self?.newPin = nil
+                                    self?.viewDelegate?.setupPin(Constants.Strings.createPinCode)
+                                })
+                            }
                         }
                     } else {
                         self.newPin = pin
                         
                         // Setup UI for second time
                         // ..
-                        viewDelegate?.setupPin("Confirm new pin code")
+                        viewDelegate?.setupPin(Constants.Strings.confirmNewPinCode)
                     }
                 case .change:
                     if pin == currentPin {
                         pinMode = .set
                         
                         // Setup UI
-                        viewDelegate?.setupPin("Enter new pin code")
+                        viewDelegate?.setupPin(Constants.Strings.enterNewPinCode)
                     } else {
-                        // Show error retape
-                        viewDelegate?.setupPin("Wrong pin code, retry")
+                        viewDelegate?.showAlert(Constants.Strings.mismatchPin, message: Constants.Strings.cancellingPin, action: Constants.Strings.ok, actionHandler: { [weak self] in
+                            self?.router?.transitBack()
+                            self?.pinDelegate?.onFailure()
+                        })
                     }
                 }
             }

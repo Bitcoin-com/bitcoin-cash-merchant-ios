@@ -16,13 +16,11 @@ class SettingsRouter: BDCRouter {
     
     func transitScan(_ scannerDelegate: ScannerDelegate) {
         let scannerViewController = ScannerBuilder().provide(scannerDelegate)
-        let navViewController = UINavigationController(rootViewController: scannerViewController)
-        viewController?.present(navViewController, animated: true, completion: nil)
+        viewController?.navigationController?.pushViewController(scannerViewController, animated: true)
     }
-
-    func transitPinChange() {
-        let vc = PinBuilder().provide(.change)
-        let nvc = UINavigationController(rootViewController: vc)
-        viewController?.present(nvc, animated: true, completion: nil)
+    
+    func transitToPin(_ pinMode: PinMode) {
+        let pinViewController = PinBuilder().provide(pinMode)
+        viewController?.navigationController?.pushViewController(pinViewController, animated: true)
     }
 }

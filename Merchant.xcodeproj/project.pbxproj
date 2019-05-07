@@ -94,6 +94,7 @@
 		3B1BA9F52270B5E5002EED15 /* SettingsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BA9F42270B5E5002EED15 /* SettingsEntity.swift */; };
 		3B57ABCD2275E7220078D983 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B57ABCF2275E7220078D983 /* Localizable.strings */; };
 		3B57ABDB2276E7E60078D983 /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B57ABDA2276E7E60078D983 /* SocketService.swift */; };
+		3B86E20122816A0B004BBB0D /* SecureAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E20022816A0B004BBB0D /* SecureAccessService.swift */; };
 		4E9FBF89227AF6D000700253 /* PinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF85227AF6CF00700253 /* PinRouter.swift */; };
 		4E9FBF8A227AF6D000700253 /* PinPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF86227AF6CF00700253 /* PinPresenter.swift */; };
 		4E9FBF8B227AF6D000700253 /* PinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF87227AF6D000700253 /* PinController.swift */; };
@@ -217,6 +218,7 @@
 		3B57ABD72275ECDB0078D983 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B57ABD82275ECDE0078D983 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B57ABDA2276E7E60078D983 /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		3B86E20022816A0B004BBB0D /* SecureAccessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureAccessService.swift; sourceTree = "<group>"; };
 		4003DFD9D9642EACD01CFD90 /* Pods-All-Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Merchant.release.xcconfig"; path = "Target Support Files/Pods-All-Merchant/Pods-All-Merchant.release.xcconfig"; sourceTree = "<group>"; };
 		4E9FBF85227AF6CF00700253 /* PinRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinRouter.swift; path = Pin/PinRouter.swift; sourceTree = "<group>"; };
 		4E9FBF86227AF6CF00700253 /* PinPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinPresenter.swift; path = Pin/PinPresenter.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				3B57ABDA2276E7E60078D983 /* SocketService.swift */,
+				3B86E20022816A0B004BBB0D /* SecureAccessService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -934,6 +937,7 @@
 				3B1BA97C226DF1AC002EED15 /* BDCColor.swift in Sources */,
 				3B1BA99A226DF278002EED15 /* InternalStorageProvider.swift in Sources */,
 				3B1BA9E2226ECBCB002EED15 /* PinCell.swift in Sources */,
+				3B86E20122816A0B004BBB0D /* SecureAccessService.swift in Sources */,
 				3B1BA981226DF1AC002EED15 /* BDCView.swift in Sources */,
 				3B1BA9BC226E06B1002EED15 /* I_TS_TableViewCell.swift in Sources */,
 				3B0624A922743C7800899A4B /* ScannerBuilder.swift in Sources */,

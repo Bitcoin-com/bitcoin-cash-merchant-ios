@@ -44,7 +44,8 @@ class SettingsPresenter {
     }
 
     func didPushChangePin() {
-        router?.transitPinChange()
+        let pinMode: PinMode = UserManager.shared.hasPin() ? .change : .set
+        router?.transitToPin(pinMode)
     }
     
     func didPushClose() {

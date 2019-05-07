@@ -27,49 +27,96 @@ class MerchantUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testFlow() {
+    func testBasicFlow() {
+        
         let app = XCUIApplication()
-        app.navigationBars.firstMatch.buttons["settings icon"].tap()
         
-        let tablesQuery = app.tables
-        tablesQuery.cells.containing(.staticText, identifier:"Company name").children(matching: .textField).element.tap()
+        let closeButton = app.navigationBars.buttons["close icon"]
+        let settingsButton = app.navigationBars.buttons["settings icon"]
+        let checkmarkButton = app.collectionViews.buttons["checkmark icon"]
         
-        tablesQuery.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element.tap()
+        let button1 = app.collectionViews.buttons["1"]
+        let button2 = app.collectionViews.buttons["2"]
         
-        let addressTextField = tablesQuery.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element
-       
-        addressTextField.tap()
+        // Set PIN
+        button1.tap()
+        button1.tap()
+        button2.tap()
+        button2.tap()
+        
+        // Confirm PIN
+        button1.tap()
+        button1.tap()
+        button2.tap()
+        button2.tap()
+        
+        let okButton = app.alerts.firstMatch.buttons["Ok"]
+        okButton.tap()
+        
+        button1.tap()
+        button1.tap()
+        
+        checkmarkButton.tap()
+        
+        app.alerts.firstMatch.buttons["Settings"].tap()
+        
+        button1.tap()
+        button1.tap()
+        button2.tap()
+        button2.tap()
         
         // Clean
         let deleteString = (0..<60).map { _ in XCUIKeyboardKey.delete.rawValue }.joined()
-        addressTextField.typeText(deleteString)
         
-        // Type the address
-        addressTextField.typeText("bitcoincash:pzmgrnkszxvw0r5n0hh66jhcj6p0zpc6xv9xal297t")
+        let companyTextField = app.tables.cells.containing(.staticText, identifier:"Company name").children(matching: .textField).element
         
-        app.navigationBars["Settings"].buttons["close icon"].tap()
-        app.tabBars.buttons["History"].tap()
+        companyTextField.tap()
+        companyTextField.typeText(deleteString)
+        companyTextField.typeText("My company")
         
-//        let transactionCell = app.tables.cells.containing(.staticText, identifier:"Today at 7:00").staticTexts["$ 100,00"]
-//        
-//        transactionCell.tap()
-//        app.sheets.buttons["View transaction on explorer"].tap()
-//        
-//        transactionCell.tap()
-//        app.sheets.buttons["View address on explorer"].tap()
-//        
-//        transactionCell.tap()
-//        app.sheets.buttons["Copy transaction"].tap()
+        let addressTextField = app.tables.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element
         
-        app.tabBars.buttons["Payment"].tap()
-        
-        let collectionViewsQuery = app.collectionViews
-        collectionViewsQuery.buttons["1"].tap()
-        collectionViewsQuery.buttons["5"].tap()
-        collectionViewsQuery.buttons["8"].tap()
-        collectionViewsQuery.buttons["checkmark icon"].tap()
-        app.navigationBars["Payment request"].buttons["close icon"].tap()
-        
-    }
+        addressTextField.tap()
+        addressTextField.typeText("bitcoincash:pqazqrn4l2pve9luh6s3xn2z94pvwtnpavn6ecz0fj")
 
+        app.tables.buttons["Change"].tap()
+        
+        button1.tap()
+        button1.tap()
+        button2.tap()
+        button2.tap()
+        
+        button1.tap()
+        button1.tap()
+        button1.tap()
+        button1.tap()
+        
+        button1.tap()
+        button1.tap()
+        button1.tap()
+        button1.tap()
+        
+        okButton.tap()
+        
+        closeButton.tap()
+        
+        app.navigationBars["My company"].tap()
+        app.staticTexts["$ 11,00"].tap()
+        
+        settingsButton.tap()
+        
+        button1.tap()
+        button1.tap()
+        button1.tap()
+        button1.tap()
+        
+        closeButton.tap()
+        
+        checkmarkButton.tap()
+        
+        app.staticTexts["Waiting for payment"].tap()
+        app.staticTexts["$ 11,00"].firstMatch.tap()
+        
+        closeButton.tap()
+    }
 }

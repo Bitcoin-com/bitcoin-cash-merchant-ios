@@ -11,6 +11,10 @@ import UIKit
 
 class PinRouter: BDCRouter {
     func transitBack() {
-        viewController?.dismiss(animated: false)
+        if let navController = viewController?.parent as? UINavigationController {
+            navController.popViewController(animated: true)
+        } else {
+            viewController?.dismiss(animated: false)
+        }
     }
 }

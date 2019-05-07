@@ -11,16 +11,12 @@ import BitcoinKit
 
 class EditUserInteractor {
     
-    fileprivate let storageProvider = InternalStorageProvider()
-    
     func editSelectedCurrency(_ newCurrency: StoreCurrency) {
-        storageProvider.setString(newCurrency.ticker, key: "selectedCurrencyTicker")
-        UserManager.shared.selectedCurrency = newCurrency
+        UserManager.shared.setSelectedCurrency(newCurrency)
     }
     
     func editCompanyName(_ newCompanyName: String) {
-        storageProvider.setString(newCompanyName, key: "companyName")
-        UserManager.shared.companyName = newCompanyName
+        UserManager.shared.setCompanyName(newCompanyName)
     }
     
     func editDestination(_ newDestination: String) -> Bool {
@@ -29,8 +25,7 @@ class EditUserInteractor {
             return false
         }
         
-        storageProvider.setString(newDestination, key: "destination")
-        UserManager.shared.destination = newDestination
+        UserManager.shared.setDestination(newDestination)
         
         return true
     }

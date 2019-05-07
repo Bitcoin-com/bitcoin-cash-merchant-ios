@@ -31,6 +31,8 @@
 "scanning_not_supported" = "Scanning not supported";
 "scanning_not_supported_details" = "Your device does not support qr code scanning. Please use a device with a camera.";
 "ok" = "Ok";
+"change" = "Change";
+"pin_code" = "PIN code";
 
 // Payment request module
 "payment_request" = "Payment request";
@@ -39,3 +41,19 @@
 // Payment input module
 "receiving_address_not_available" = "Receiving Address not available";
 "receiving_address_not_available_details" = "You do not have any address setup.";
+
+// Pin modue
+"mismatch_pin" = "Mismatching PIN code";
+"cancelling_pin" = "Cancelling PIN code change";
+"pin_has_not_been_changed" = "The PIN code has not been changed";
+"pin_is_required" = "The PIN code is required for your safety";
+"try_again" = "Try again";
+"pin_has_been_changed" = "The PIN code has been changed";
+"success" = "Success";
+"incorrect_pin" = "Incorrect PIN code";
+"operation_denied" = "Operation denied";
+"create_code_pin" = "Create PIN code";
+"enter_current_code_pin" = "Enter current PIN code";
+"enter_pin_code" = "Enter PIN code";
+"confirm_new_pin_code" = "Confirm new PIN code";
+"enter_new_pin_code" = "Enter new PIN code";

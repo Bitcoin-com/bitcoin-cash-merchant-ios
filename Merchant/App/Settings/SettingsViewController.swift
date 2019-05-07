@@ -21,7 +21,7 @@ class SettingsViewController: BDCViewController {
     }()
     var companyNameTextField = BDCTextField.build(.type1)
     var destinationAddressTextField = BDCTextField.build(.type1)
-    var pinCodeTextField = BDCTextField.build(.type1)
+    var pinCodeLabel = BDCLabel.build(.subtitle)
     var selectedCurrencyLabel = BDCLabel.build(.subtitle)
     var currenciesPickerView = UIPickerView(frame: .zero)
     var currenciesView: UIView = {
@@ -77,6 +77,10 @@ class SettingsViewController: BDCViewController {
         hideKeyboardWhenTappedAround()
         
         presenter?.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     @objc func didPushClose() {
@@ -150,12 +154,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             stackView.addArrangedSubview(companyNameTextField)
             
         case .pinCode:
-            pinCodeTextField.placeholder = item.placeholder
-            pinCodeTextField.delegate = self
-            stackView.addArrangedSubview(pinCodeTextField)
+            pinCodeLabel.text = item.placeholder
+            stackView.addArrangedSubview(pinCodeLabel)
             
             let iconButton = BDCButton.build(.type1)
-            iconButton.setTitle("Change", for: .normal)
+            iconButton.setTitle(Constants.Strings.change, for: .normal)
             iconButton.translatesAutoresizingMaskIntoConstraints = false
             iconButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
             iconButton.addTarget(self, action: #selector(didPushChangePin), for: .touchUpInside)

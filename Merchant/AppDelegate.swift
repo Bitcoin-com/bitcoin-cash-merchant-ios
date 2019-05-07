@@ -10,21 +10,7 @@ import UIKit
 import RealmSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, PinDelegate {
-    func onSuccess(_ target: String?) {
-        let rootViewController = HomeBuilder().provide()
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        window!.rootViewController = navigationController
-    }
-    
-    func onFailure() {
-        print("failure")
-    }
-    
-//    func onPinChecked() {
-//        window!.rootViewController = UINavigationController(rootViewController: HomeBuilder().provide())
-//    }
-    
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
@@ -38,15 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PinDelegate {
         let frame = UIScreen.main.bounds
         window = UIWindow(frame: frame)
         
-        let pinCreationRequired : Bool = UserManager.shared.pin.count == 0
-        if pinCreationRequired {
-            let rootViewController = PinBuilder().provide(.set, pinDelegate: self, target: "home")
-            window!.rootViewController = rootViewController
-        } else {
-            let rootViewController = HomeBuilder().provide()
-            let navigationController = UINavigationController(rootViewController: rootViewController)
-            window!.rootViewController = navigationController
-        }
+        let rootViewController = HomeBuilder().provide()
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        window!.rootViewController = navigationController
         
         let navStyles = UINavigationBar.appearance()
         navStyles.barTintColor = BDCColor.white.uiColor
@@ -54,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PinDelegate {
         navStyles.titleTextAttributes = [NSAttributedString.Key.foregroundColor:BDCColor.green.uiColor]
         
         window!.makeKeyAndVisible()
+        
+        SecureAccessService.setup()
         
         return true
     }
@@ -113,6 +95,10 @@ extension AppDelegate {
             try! realm.write {
                 realm.deleteAll()
             }
+            
+            UserManager.shared.setPin("")
+            UserManager.shared.setDestination("")
+            UserManager.shared.setCompanyName("Your company name")
         }
     }
 }

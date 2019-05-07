@@ -15,6 +15,7 @@ class PinController: PinViewController {
         let label = BDCLabel.build(.header)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
 
@@ -55,8 +56,8 @@ class PinController: PinViewController {
         pinCodeStack.centerYAnchor.constraint(equalTo: pinView.centerYAnchor).isActive =  true
         
         pinView.addSubview(pinMessageLabel)
-        pinMessageLabel.leadingAnchor.constraint(equalTo: pinView.leadingAnchor).isActive =  true
-        pinMessageLabel.trailingAnchor.constraint(equalTo: pinView.trailingAnchor).isActive = true
+        pinMessageLabel.leadingAnchor.constraint(equalTo: pinView.leadingAnchor, constant: 8).isActive =  true
+        pinMessageLabel.trailingAnchor.constraint(equalTo: pinView.trailingAnchor, constant: -8).isActive = true
         pinMessageLabel.bottomAnchor.constraint(equalTo: pinCodeStack.topAnchor, constant: -32).isActive =  true
 
         let stackView = UIStackView(arrangedSubviews: [pinView, pinCollectionView])
@@ -68,12 +69,15 @@ class PinController: PinViewController {
         stackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         
         view.backgroundColor = BDCColor.whiteTwo.uiColor
+        hasComma = false
 
         pinDelegate = self
 }
     
-    func setupPin(_ message: String) {
-        pinMessageLabel.text = message
+    func setupPin(_ message: String? = nil) {
+        if let message = message {
+            pinMessageLabel.text = message
+        }
         pinStr = ""
         showPins(pinStr.count)
     }
@@ -86,6 +90,17 @@ class PinController: PinViewController {
                 pinCodeImageView.image = UIImage(named: "bch_icon")
             }
         }
+    }
+    
+    func showAlert(_ title: String, message: String, action: String, actionHandler: (() -> ())? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: action, style: .default) { _ in
+            if let handler = actionHandler {
+                handler()
+            }
+        }
+        alert.addAction(alertAction)
+        present(alert, animated: true)
     }
 }
 

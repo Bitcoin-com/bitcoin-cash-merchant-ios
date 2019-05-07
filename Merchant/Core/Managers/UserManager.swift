@@ -14,9 +14,14 @@ class UserManager {
     // Singleton
     static let shared = UserManager()
     
-    var selectedCurrency: StoreCurrency
-    var destination: String
-    var companyName: String
+    fileprivate var _selectedCurrency: StoreCurrency
+    var selectedCurrency: StoreCurrency { get { return _selectedCurrency } }
+    
+    fileprivate var _destination: String
+    var destination: String { get { return _destination } }
+    
+    fileprivate var _companyName: String
+    var companyName: String { get { return _companyName } }
     
     fileprivate var _pin: String
     var pin: String { get { return _pin } }
@@ -26,19 +31,41 @@ class UserManager {
         let ticker = storageProvider.getString("selectedCurrencyTicker") ?? "USD"
         
         let realm = try! Realm()
-        selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker) ?? RateManager.shared.defaultCurrency
+        _selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker) ?? RateManager.shared.defaultCurrency
         
-        destination = storageProvider.getString("destination") ?? ""
-        companyName = storageProvider.getString("companyName") ?? "Your company name"
+        _destination = storageProvider.getString("destination") ?? ""
+        _companyName = storageProvider.getString("companyName") ?? "Your company name"
         _pin = storageProvider.getString("pin") ?? ""
     }
 }
 
 extension UserManager {
-
+    
+    func setSelectedCurrency(_ selectedCurrency: StoreCurrency) {
+        let storageProvider = InternalStorageProvider()
+        storageProvider.setString(selectedCurrency.ticker, key: "selectedCurrencyTicker")
+        self._selectedCurrency = selectedCurrency
+    }
+    
+    func setDestination(_ destination: String) {
+        let storageProvider = InternalStorageProvider()
+        storageProvider.setString(destination, key: "destination")
+        self._destination = destination
+    }
+    
+    func setCompanyName(_ companyName: String) {
+        let storageProvider = InternalStorageProvider()
+        storageProvider.setString(companyName, key: "companyName")
+        self._companyName = companyName
+    }
+    
     func setPin(_ pin: String) {
         let storageProvider = InternalStorageProvider()
         storageProvider.setString(pin, key: "pin")
         self._pin = pin
+    }
+    
+    func hasPin() -> Bool {
+        return pin.count > 0
     }
 }
