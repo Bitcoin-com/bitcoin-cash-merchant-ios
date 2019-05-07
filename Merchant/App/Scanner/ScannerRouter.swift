@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import BDCKit
 
 class ScannerRouter: BDCRouter {
     

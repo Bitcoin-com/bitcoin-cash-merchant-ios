@@ -6,6 +6,7 @@
 //  Copyright © 2018 Bitcoin.com. All rights reserved.
 //
 import UIKit
+import BDCKit
 
 protocol PinViewControllerDelegate {
     func onPushPin(_ pin: String)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BDCKit
 
 class PaymentInputViewController: PinViewController {
     
