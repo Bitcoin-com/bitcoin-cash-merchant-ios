@@ -22,6 +22,21 @@ class PaymentInputViewController: PinViewController {
         return view
     }()
     
+    var alertStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    var blurView: UIVisualEffectView = {
+        let blurView = UIVisualEffectView(effect: nil)
+        blurView.effect = UIBlurEffect(style: .extraLight)
+        blurView.alpha = 0.8
+        return blurView
+    }()
+    
     var presenter: PaymentInputPresenter?
     
     var amount: Int = 0
@@ -46,11 +61,48 @@ class PaymentInputViewController: PinViewController {
         
         pinDelegate = self
         
+        let titleLabel = BDCLabel.build(.title)
+        titleLabel.text = Constants.Strings.receivingAddressNotAvailable
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        
+        let messageLabel = BDCLabel.build(.subtitle)
+        messageLabel.text = Constants.Strings.receivingAddressNotAvailableDetails
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        
+        let settingsButton = BDCButton.build(.type3)
+        settingsButton.setTitle(Constants.Strings.settings, for: .normal)
+        settingsButton.addTarget(self, action: #selector(didPushSettings), for: .touchUpInside)
+        
+        alertStackView.addArrangedSubview(titleLabel)
+        alertStackView.addArrangedSubview(messageLabel)
+        alertStackView.addArrangedSubview(settingsButton)
+        
+        view.addSubview(alertStackView)
+        alertStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        alertStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
         presenter?.viewDidLoad()
+    }
+    
+    func showAlertSettings() {
+        view.addSubview(blurView)
+        view.addSubview(alertStackView)
+        blurView.fillSuperView()        
+    }
+    
+    func hideAlertSettings() {
+        blurView.removeFromSuperview()
+        alertStackView.removeFromSuperview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         presenter?.viewWillAppear()
+    }
+    
+    @objc func didPushSettings() {
+        presenter?.didPushSettings()
     }
     
     func onCleanAmount() {
@@ -65,18 +117,6 @@ class PaymentInputViewController: PinViewController {
     func onSetComma(_ hasComma: Bool) {
         self.hasComma = hasComma
         commaButton?.setTitle(hasComma ? "," : "", for: .normal)
-    }
-    
-    func onAddressError() {
-        let alert = UIAlertController(title: Constants.Strings.receivingAddressNotAvailable, message: Constants.Strings.receivingAddressNotAvailableDetails, preferredStyle: .alert)
-        
-        let settingsAction = UIAlertAction(title: Constants.Strings.settings, style: .default) { _ in
-            self.presenter?.didPushSettings()
-        }
-        
-        alert.addAction(settingsAction)
-        
-        present(alert, animated: true)
     }
  
 }

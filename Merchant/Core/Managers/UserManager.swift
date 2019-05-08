@@ -55,8 +55,13 @@ extension UserManager {
     
     func setCompanyName(_ companyName: String) {
         let storageProvider = InternalStorageProvider()
-        storageProvider.setString(companyName, key: "companyName")
-        self._companyName = companyName
+        if companyName.count == 0 {
+            storageProvider.remove("companyName")
+            self._companyName = nil
+        } else {
+            storageProvider.setString(companyName, key: "companyName")
+            self._companyName = companyName
+        }
     }
     
     func setPin(_ pin: String) {

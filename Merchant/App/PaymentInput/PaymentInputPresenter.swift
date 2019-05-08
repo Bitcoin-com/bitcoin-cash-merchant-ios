@@ -34,6 +34,12 @@ class PaymentInputPresenter {
             selectedCurrency = newCurrency
             setupCurrency()
         }
+        
+        if UserManager.shared.destination != nil {
+            viewDelegate?.hideAlertSettings()
+        } else {
+            viewDelegate?.showAlertSettings()
+        }
     }
 }
 
@@ -59,7 +65,6 @@ extension PaymentInputPresenter {
         // Create payment request
         guard let destination = UserManager.shared.destination
             , let address = try? destination.toCashAddress() else {
-            viewDelegate?.onAddressError()
             return
         }
         

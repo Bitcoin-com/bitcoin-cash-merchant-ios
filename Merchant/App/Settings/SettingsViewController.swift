@@ -138,6 +138,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch item {
         case .address:
             destinationAddressTextField.placeholder = item.placeholder
+            destinationAddressTextField.returnKeyType = .done
             destinationAddressTextField.delegate = self
             stackView.addArrangedSubview(destinationAddressTextField)
             
@@ -151,6 +152,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
  
         case .companyName:
             companyNameTextField.placeholder = item.placeholder
+            companyNameTextField.returnKeyType = .done
             companyNameTextField.delegate = self
             stackView.addArrangedSubview(companyNameTextField)
             
@@ -215,6 +217,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SettingsViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
 
