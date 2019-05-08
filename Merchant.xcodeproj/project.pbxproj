@@ -70,6 +70,8 @@
 		3B86E2042281B93E004BBB0D /* PinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF87227AF6D000700253 /* PinController.swift */; };
 		3B86E2052281B941004BBB0D /* PinBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FBF88227AF6D000700253 /* PinBuilder.swift */; };
 		3B86E2062281BB9F004BBB0D /* SecureAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E20022816A0B004BBB0D /* SecureAccessService.swift */; };
+		3B86E20C2281D9D1004BBB0D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 3B86E20B2281D9D0004BBB0D /* Podfile */; };
+		3B91DECB228316E200E41D31 /* qr_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B91DECA228316E200E41D31 /* qr_animation.json */; };
 		B473B38741D46B5A9144EEA0 /* libPods-MerchantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +163,8 @@
 		3B57ABD82275ECDE0078D983 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B57ABDA2276E7E60078D983 /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		3B86E20022816A0B004BBB0D /* SecureAccessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureAccessService.swift; sourceTree = "<group>"; };
+		3B86E20B2281D9D0004BBB0D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		3B91DECA228316E200E41D31 /* qr_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = qr_animation.json; sourceTree = "<group>"; };
 		4003DFD9D9642EACD01CFD90 /* Pods-All-Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Merchant.release.xcconfig"; path = "Target Support Files/Pods-All-Merchant/Pods-All-Merchant.release.xcconfig"; sourceTree = "<group>"; };
 		4E9FBF85227AF6CF00700253 /* PinRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRouter.swift; sourceTree = "<group>"; };
 		4E9FBF86227AF6CF00700253 /* PinPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPresenter.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 		3B1BA8EB226DEE30002EED15 = {
 			isa = PBXGroup;
 			children = (
+				3B86E20B2281D9D0004BBB0D /* Podfile */,
 				3B1BA8F6226DEE30002EED15 /* Merchant */,
 				3B1BA90B226DEE32002EED15 /* MerchantTests */,
 				3B1BA916226DEE32002EED15 /* MerchantUITests */,
@@ -252,6 +257,7 @@
 				3B1BA92D226DF1AC002EED15 /* App */,
 				3B1BA925226DF1AC002EED15 /* Core */,
 				3B1BA92C226DF1AC002EED15 /* success_animation.json */,
+				3B91DECA228316E200E41D31 /* qr_animation.json */,
 				3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */,
 				3B57ABCF2275E7220078D983 /* Localizable.strings */,
 				3B1BA8FE226DEE32002EED15 /* Assets.xcassets */,
@@ -576,8 +582,10 @@
 				3B1BA902226DEE32002EED15 /* LaunchScreen.storyboard in Resources */,
 				3B1BA8FF226DEE32002EED15 /* Assets.xcassets in Resources */,
 				3B1BA967226DF1AC002EED15 /* success_animation.json in Resources */,
+				3B91DECB228316E200E41D31 /* qr_animation.json in Resources */,
 				3B1BA9D2226EA608002EED15 /* symbols.json in Resources */,
 				3B57ABCD2275E7220078D983 /* Localizable.strings in Resources */,
+				3B86E20C2281D9D1004BBB0D /* Podfile in Resources */,
 				3B1BA9D1226EA608002EED15 /* rates.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

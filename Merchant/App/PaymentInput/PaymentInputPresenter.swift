@@ -57,8 +57,8 @@ extension PaymentInputPresenter {
     
     func didPushValid(_ rawAmount: String) {
         // Create payment request
-        let destination = UserManager.shared.destination
-        guard let address = try? destination.toCashAddress() else {
+        guard let destination = UserManager.shared.destination
+            , let address = try? destination.toCashAddress() else {
             viewDelegate?.onAddressError()
             return
         }

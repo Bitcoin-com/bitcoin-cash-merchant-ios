@@ -111,6 +111,9 @@ class PaymentRequestViewController: BDCViewController {
     func onSuccess() {
         successAnimation.isHidden = false
         successAnimation.play()
+        UIView.animate(withDuration: 0.2) {
+            self.waitingLabel.alpha = 0
+        }
     }
 }
 

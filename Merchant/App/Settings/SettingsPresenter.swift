@@ -22,10 +22,10 @@ class SettingsPresenter {
     }
     
     func viewDidLoad() {
-        let companyName = UserManager.shared.companyName
+        let companyName = UserManager.shared.companyName ?? ""
         viewDelegate?.onGetCompanyName(companyName)
         
-        let destination = UserManager.shared.destination
+        let destination = UserManager.shared.destination ?? ""
         viewDelegate?.onGetDestination(destination)
         
         let currency = UserManager.shared.selectedCurrency
@@ -68,7 +68,7 @@ class SettingsPresenter {
         }
         
         if !editUserInteractor.editDestination(newDestination) {
-            let destination = UserManager.shared.destination
+            let destination: String = UserManager.shared.destination ?? ""
             viewDelegate?.onGetDestination(destination)
         }
     }

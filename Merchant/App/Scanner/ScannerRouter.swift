@@ -13,6 +13,10 @@ import BDCKit
 class ScannerRouter: BDCRouter {
     
     func transitBack() {
-        viewController?.dismiss(animated: true)
+        if let navController = viewController?.parent as? UINavigationController {
+            navController.popViewController(animated: true)
+        } else {
+            viewController?.dismiss(animated: false)
+        }
     }
 }

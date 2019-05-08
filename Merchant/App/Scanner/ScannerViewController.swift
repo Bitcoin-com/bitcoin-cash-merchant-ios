@@ -24,9 +24,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         super.viewDidLoad()
         
         title = Constants.Strings.scanner
-
-        let closeItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
-        navigationItem.leftBarButtonItem = closeItem
         
         view.backgroundColor = UIColor.white
         
@@ -37,26 +34,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         //Camera
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] success in
             if !success {
-                DispatchQueue.main.async {
-                    // Handle the case without permission
-                    guard let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) else {
-                        return
-                    }
-                    
-                    let alert = UIAlertController(title: Constants.Strings.cameraPermissionError, message: Constants.Strings.theCameraIsNecessary, preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: Constants.Strings.openSettings, style: .default, handler: { _ in
-                        UIApplication.shared.open(settingsUrl, options: [:], completionHandler: { success in
-                            self?.checkPermission()
-                        })
-                    }))
-                    
-                    alert.addAction(UIAlertAction(title: Constants.Strings.cancel, style: .cancel, handler: { _ in
-                        self?.presenter?.didPushClose()
-                    }))
-                    
-                    self?.present(alert, animated: true)
+                // Handle the case without permission
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) else {
+                    return
                 }
+                
+                let alert = UIAlertController(title: Constants.Strings.cameraPermissionError, message: Constants.Strings.theCameraIsNecessary, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: Constants.Strings.openSettings, style: .default, handler: { _ in
+                    UIApplication.shared.open(settingsUrl, options: [:], completionHandler: { success in
+                        self?.checkPermission()
+                    })
+                }))
+                
+                alert.addAction(UIAlertAction(title: Constants.Strings.cancel, style: .cancel, handler: { _ in
+                    self?.presenter?.didPushClose()
+                }))
+                
+                self?.present(alert, animated: true)
             } else {
                 self?.hasPermission = true
                 self?.setupCamera()
@@ -69,58 +64,64 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             return
         }
         
-        captureSession = AVCaptureSession()
-        
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            failed()
-            return
-        }
-        
-        let videoInput: AVCaptureDeviceInput
-        
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            return
-        }
-        
-        if (captureSession.canAddInput(videoInput)) {
-            captureSession.addInput(videoInput)
-        } else {
-            failed()
-            return
-        }
-        
-        let metadataOutput = AVCaptureMetadataOutput()
-        
-        if (captureSession.canAddOutput(metadataOutput)) {
-            captureSession.addOutput(metadataOutput)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
             
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            failed()
-            return
+            self.captureSession = AVCaptureSession()
+            
+            guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+                self.failed()
+                return
+            }
+            
+            let videoInput: AVCaptureDeviceInput
+            
+            do {
+                videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+            } catch {
+                return
+            }
+            
+            if (self.captureSession.canAddInput(videoInput)) {
+                self.captureSession.addInput(videoInput)
+            } else {
+                self.failed()
+                return
+            }
+            
+            let metadataOutput = AVCaptureMetadataOutput()
+            
+            if (self.captureSession.canAddOutput(metadataOutput)) {
+                self.captureSession.addOutput(metadataOutput)
+                
+                metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+                metadataOutput.metadataObjectTypes = [.qr]
+            } else {
+                self.failed()
+                return
+            }
+            
+            self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+            self.previewLayer.frame = self.view.layer.bounds
+            self.previewLayer.videoGravity = .resizeAspectFill
+            self.view.layer.addSublayer(self.previewLayer)
+            
+            self.captureSession.startRunning()
+            
+            self.animationView = LOTAnimationView(name: "qr_animation")
+            self.view.addSubview(self.animationView)
+            
+            self.animationView.translatesAutoresizingMaskIntoConstraints = false
+            self.animationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            self.animationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            self.animationView.heightAnchor.constraint(equalToConstant: self.view.frame.width / 2).isActive = true
+            self.animationView.widthAnchor.constraint(equalToConstant: self.view.frame.width / 2).isActive = true
+            
+            self.animationView.loopAnimation = true
+            self.animationView.play()
         }
-        
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
-        
-        captureSession.startRunning()
-        
-        animationView = LOTAnimationView(name: "qr_animation")
-        view.addSubview(animationView)
-        
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        animationView.heightAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
-        animationView.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
-        
-        animationView.loopAnimation = true
-        animationView.play()
     }
         
     @objc func didPushClose() {

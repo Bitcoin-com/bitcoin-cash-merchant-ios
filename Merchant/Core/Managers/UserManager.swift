@@ -17,14 +17,14 @@ class UserManager {
     fileprivate var _selectedCurrency: StoreCurrency
     var selectedCurrency: StoreCurrency { get { return _selectedCurrency } }
     
-    fileprivate var _destination: String
-    var destination: String { get { return _destination } }
+    fileprivate var _destination: String?
+    var destination: String? { get { return _destination } }
     
-    fileprivate var _companyName: String
-    var companyName: String { get { return _companyName } }
+    fileprivate var _companyName: String?
+    var companyName: String? { get { return _companyName } }
     
-    fileprivate var _pin: String
-    var pin: String { get { return _pin } }
+    fileprivate var _pin: String?
+    var pin: String? { get { return _pin } }
 
     init() {
         let storageProvider = InternalStorageProvider()
@@ -33,9 +33,9 @@ class UserManager {
         let realm = try! Realm()
         _selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker) ?? RateManager.shared.defaultCurrency
         
-        _destination = storageProvider.getString("destination") ?? ""
-        _companyName = storageProvider.getString("companyName") ?? "Your company name"
-        _pin = storageProvider.getString("pin") ?? ""
+        _destination = storageProvider.getString("destination")
+        _companyName = storageProvider.getString("companyName")
+        _pin = storageProvider.getString("pin")
     }
 }
 
@@ -66,6 +66,6 @@ extension UserManager {
     }
     
     func hasPin() -> Bool {
-        return pin.count > 0
+        return pin != nil
     }
 }

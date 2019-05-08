@@ -182,12 +182,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func didPushSelectCurrency() {
+        dismissKeyboard()
+        
         currenciesView.alpha = 0
         view.addSubview(currenciesView)
         currenciesView.fillSuperView()
         
         UIView.animate(withDuration: 0.2) {
             self.currenciesView.alpha = 1
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
     
@@ -201,6 +204,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func didPushCloseSelectCurrency() {
         currenciesView.removeFromSuperview()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -20,7 +20,7 @@ class PinPresenter {
     var pinDelegate: PinDelegate?
 
     var target: String?
-    var currentPin: String
+    var currentPin: String?
     var newPin: String?
     var pinMode: PinMode
     
@@ -69,7 +69,7 @@ extension PinPresenter {
                                 self?.pinDelegate?.onSuccess(self?.target)
                             })
                         } else {
-                            if currentPin.count > 0 {
+                            if let _ = currentPin {
                                 // Show error
                                 viewDelegate?.showAlert(Constants.Strings.mismatchPin, message: Constants.Strings.pinHasNotBeenChanged, action: Constants.Strings.cancel, actionHandler: { [weak self] in
                                     self?.router?.transitBack()

@@ -14,10 +14,7 @@ class HomePresenter {
     var router: HomeRouter?
     weak var viewDelegate: HomeViewController?
     
-    var companyName: String
-    
     init() {
-        companyName = UserManager.shared.companyName
     }
     
     func viewDidLoad() {
@@ -37,8 +34,7 @@ class HomePresenter {
 extension HomePresenter {
     
     func setupCompanyName() {
-        let newCompanyName = UserManager.shared.companyName
-        companyName = newCompanyName
+        let companyName: String = UserManager.shared.companyName ?? "My company name"
         viewDelegate?.onCompanyName(companyName)
     }
 }
