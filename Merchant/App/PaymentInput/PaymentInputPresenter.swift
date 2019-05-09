@@ -68,8 +68,8 @@ extension PaymentInputPresenter {
             return
         }
         
-        let amountInFiat = rawAmount.toDouble()
-        
+        let amountInFiat = amountToDouble(rawAmount)
+
         guard amountInFiat > 0 else {
             return
         }
@@ -94,9 +94,29 @@ extension PaymentInputPresenter {
         viewDelegate?.onSetComma(selectedCurrency.hasComma())
         setupAmount()
     }
+
+    func amountToDouble(_ input: String) -> Double {
+        let f = NumberFormatter()
+        f.numberStyle = .decimal
+        f.locale = Locale.current
+        let n = f.number(from: input.replacingOccurrences(of: ",", with: f.decimalSeparator))
+        let dv : Double = n?.doubleValue ?? 0
+        return dv
+    }
     
+    func doubleToCurrency(_ amount: Double) -> String{
+        let f = NumberFormatter()
+        f.locale = Locale.current
+        f.numberStyle = .currency
+        if (selectedCurrency.symbol.count > 0) {
+            f.currencySymbol = selectedCurrency.symbol
+        }
+        f.currencyCode = selectedCurrency.ticker;
+        return f.string(from: NSNumber(value: amount))!
+    }
+
     fileprivate func setupAmount() {
-        let amount = currentRawAmount.toFormat(selectedCurrency.ticker, symbol: selectedCurrency.symbol, strict: true)
-        viewDelegate?.onSetAmount(amount)
+        let d = amountToDouble(currentRawAmount)
+        viewDelegate?.onSetAmount(doubleToCurrency(d))
     }
 }
