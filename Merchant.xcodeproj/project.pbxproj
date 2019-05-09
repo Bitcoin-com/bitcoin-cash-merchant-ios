@@ -479,6 +479,7 @@
 				3B1BA8F1226DEE30002EED15 /* Frameworks */,
 				3B1BA8F2226DEE30002EED15 /* Resources */,
 				C869EEBB715DD619CC269C2A /* [CP] Embed Pods Frameworks */,
+				3BEF6FEF22842DF900C0B2B5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -607,6 +608,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3BEF6FEF22842DF900C0B2B5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" f1749788feca88f98b043c2e5c68418f37686dc9 3fc91229ae6cad2d8a6024406723290372a3d87420089e58c7e1e9ba0b9774cf\n";
+		};
 		54AB01B6A7E7A2C24C5FF72B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -953,6 +971,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

@@ -24,6 +24,8 @@ abstract_target 'All' do
     pod 'RealmSwift'
     pod 'RxRealm'
     pod 'SwiftWebSocket',   :git => 'https://github.com/tidwall/SwiftWebSocket.git', :branch => 'swift/4.0'
+    pod 'Fabric'
+    pod 'Crashlytics'
 
     target 'Merchant' do
         
