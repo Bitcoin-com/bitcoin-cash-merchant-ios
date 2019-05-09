@@ -68,7 +68,6 @@ class PinController: PinViewController {
         pinView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 8).isActive =  true
         pinView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -8).isActive = true
         pinView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive =  true
-        pinView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive =  true
 
         let stackView = UIStackView(arrangedSubviews: [headerView, pinCollectionView])
         stackView.axis = .vertical

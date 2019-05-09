@@ -121,6 +121,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let titleLabel = BDCLabel.build(.title)
         titleLabel.text = item.title
+        titleLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
         
         let headerStackView = UIStackView(arrangedSubviews: [titleLabel])
         headerStackView.axis = .horizontal
