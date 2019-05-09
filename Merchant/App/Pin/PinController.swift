@@ -33,6 +33,7 @@ class PinController: PinViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgesForExtendedLayout = []
         
         for _ in 0...3 {
             let pinCodeImageView = UIImageView(image: nil)
