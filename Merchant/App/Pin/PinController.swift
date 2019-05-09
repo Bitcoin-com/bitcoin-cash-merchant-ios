@@ -16,12 +16,14 @@ class PinController: PinViewController {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 24) ?? UIFont.boldSystemFont(ofSize: 24)
+
         return label
     }()
 
     var pinView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = BDCColor.white.uiColor
+        let view = UIView()
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -46,21 +48,29 @@ class PinController: PinViewController {
         }
         
         let pinCodeStack = UIStackView(arrangedSubviews: pinCodeImageViews)
-        pinCodeStack.translatesAutoresizingMaskIntoConstraints = false
         pinCodeStack.axis = .horizontal
         pinCodeStack.alignment = .center
         pinCodeStack.spacing = 16
+        pinCodeStack.translatesAutoresizingMaskIntoConstraints = false
         
         pinView.addSubview(pinCodeStack)
         pinCodeStack.centerXAnchor.constraint(equalTo: pinView.centerXAnchor).isActive =  true
-        pinCodeStack.centerYAnchor.constraint(equalTo: pinView.centerYAnchor).isActive =  true
+        pinCodeStack.bottomAnchor.constraint(equalTo: pinView.bottomAnchor).isActive =  true
         
         pinView.addSubview(pinMessageLabel)
-        pinMessageLabel.leadingAnchor.constraint(equalTo: pinView.leadingAnchor, constant: 8).isActive =  true
-        pinMessageLabel.trailingAnchor.constraint(equalTo: pinView.trailingAnchor, constant: -8).isActive = true
+        pinMessageLabel.leadingAnchor.constraint(equalTo: pinView.leadingAnchor).isActive =  true
+        pinMessageLabel.trailingAnchor.constraint(equalTo: pinView.trailingAnchor).isActive = true
+        pinMessageLabel.topAnchor.constraint(equalTo: pinView.topAnchor).isActive =  true
         pinMessageLabel.bottomAnchor.constraint(equalTo: pinCodeStack.topAnchor, constant: -32).isActive =  true
+        
+        let headerView = UIView()
+        headerView.addSubview(pinView)
+        pinView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 8).isActive =  true
+        pinView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -8).isActive = true
+        pinView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive =  true
+        pinView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive =  true
 
-        let stackView = UIStackView(arrangedSubviews: [pinView, pinCollectionView])
+        let stackView = UIStackView(arrangedSubviews: [headerView, pinCollectionView])
         stackView.axis = .vertical
         stackView.alignment = .fill
         view.addSubview(stackView)
