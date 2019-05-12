@@ -53,12 +53,7 @@ class MerchantUITests: XCTestCase {
         let okButton = app.alerts.firstMatch.buttons["Ok"]
         okButton.tap()
         
-        button1.tap()
-        button1.tap()
-        
-        checkmarkButton.tap()
-        
-        app.alerts.firstMatch.buttons["Settings"].tap()
+        app.firstMatch.buttons["Settings"].tap()
         
         button1.tap()
         button1.tap()
@@ -101,7 +96,12 @@ class MerchantUITests: XCTestCase {
         closeButton.tap()
         
         app.navigationBars["My company"].tap()
-        app.staticTexts["$ 11,00"].tap()
+        
+        
+        button1.tap()
+        button1.tap()
+        
+        app.staticTexts["$ 11.00"].tap()
         
         settingsButton.tap()
         
@@ -115,7 +115,7 @@ class MerchantUITests: XCTestCase {
         checkmarkButton.tap()
         
         app.staticTexts["Waiting for payment"].tap()
-        app.staticTexts["$ 11,00"].firstMatch.tap()
+        app.staticTexts["$ 11.00"].firstMatch.tap()
         
         closeButton.tap()
     }
