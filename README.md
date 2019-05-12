@@ -4,10 +4,10 @@
 
 [![Build Status](https://app.bitrise.io/app/a0fb7440bceeb1a5/status.svg?token=mVRGlTDDoDonqqyPfmSrNw&branch=master)](https://app.bitrise.io/app/a0fb7440bceeb1a5)
 [![codecov](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios/branch/master/graph/badge.svg?token=nGdwMKynQL)](https://codecov.io/gh/bitcoin-com/bitcoin-cash-merchant-ios)
-![Version](https://img.shields.io/badge/version-v0.1.1-blue.svg)
+![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-ios-black.svg) 
-![Compatibility](https://img.shields.io/badge/iOS-+10.0-orange.svg) 
-![Compatibility](https://img.shields.io/badge/Swift-4.0-orange.svg) 
+![Compatibility](https://img.shields.io/badge/iOS-+11.0-orange.svg) 
+![Compatibility](https://img.shields.io/badge/Swift-4.2-orange.svg) 
 ![License](https://img.shields.io/badge/License-MIT-lightgrey.svg) 
 
 This simple Point of Sale allows you to accept Bitcoin Cash (BCH) payments at any retail location. All it requires is an address linked to your wallet to start receiving Bitcoin Cash (BCH) payments.
