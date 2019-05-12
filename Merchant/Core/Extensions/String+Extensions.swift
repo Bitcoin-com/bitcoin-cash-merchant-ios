@@ -67,7 +67,7 @@ extension String {
 //            } else {
                 str = "\(symbol) \(leftSideStr)"
                 if rightSideStr.count > 0 {
-                    str = "\(str),\(rightSideStr)"
+                    str = "\(str).\(rightSideStr)"
                 }
 //            }
             break
@@ -80,7 +80,7 @@ extension String {
 //            } else {
                 str = "\(leftSideStr)"
                 if rightSideStr.count > 0 {
-                    str = "\(str),\(rightSideStr)"
+                    str = "\(str).\(rightSideStr)"
                 }
                 str = "\(str) \(symbol)"
 //            }

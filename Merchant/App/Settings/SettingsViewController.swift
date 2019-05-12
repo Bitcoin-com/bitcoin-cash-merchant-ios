@@ -85,6 +85,7 @@ class SettingsViewController: BDCViewController {
     }
     
     @objc func didPushClose() {
+        dismissKeyboard()
         presenter?.didPushClose()
     }
     
@@ -212,6 +213,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y < -130 {
+            dismissKeyboard()
             presenter?.didPushClose()
         }
     }

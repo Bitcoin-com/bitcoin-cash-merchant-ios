@@ -17,7 +17,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     
     var hasComma = true
     var hasValid = false
-    let items = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ",", "0", "del", "valid"]
+    let items = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "del", "valid"]
     let inset: CGFloat = 1
     let minimumLineSpacing: CGFloat = 0
     let minimumInteritemSpacing: CGFloat = 0
@@ -80,7 +80,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
             cell.pinButton.tintColor = BDCColor.green.uiColor
             cell.pinButton.addTarget(self, action: #selector(didPushValid), for: .touchUpInside)
         } else {
-            if item == "," {
+            if item == "." {
                 if !hasComma {
                     item = ""
                 }
