@@ -41,10 +41,20 @@ class PaymentInputViewController: PinViewController {
     
     var amount: Int = 0
     var amountStr: String = "0"
+   
+    private let notificationCenter: NotificationCenter = NotificationCenter.default
+    
+    @objc private func currencyDidChange(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.onCleanAmount()
+            self.presenter?.didSetAmount("0")
+        }
+    }
     
     override func viewDidLoad() {
         self.hasValid = true
-        
+        notificationCenter.addObserver(self, selector: #selector(currencyDidChange),
+                                       name: .currencyChanged, object: nil)
         super.viewDidLoad()
         
         amountView.addSubview(amountLabel)
@@ -91,7 +101,6 @@ class PaymentInputViewController: PinViewController {
         view.addSubview(alertStackView)
         alertStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         alertStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
     }
     
     func hideAlertSettings() {
@@ -150,7 +159,7 @@ extension PaymentInputViewController: PinViewControllerDelegate {
             }
             presenter?.didSetAmount(amountStr)
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-            let range = amountStr.range(of: ",")
+            let range = amountStr.range(of: ".")
             if let r = range {
                 let decimals = amountStr[r.upperBound..<amountStr.endIndex]
                 if decimals.count >= 2 {

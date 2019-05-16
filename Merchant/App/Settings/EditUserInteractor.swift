@@ -10,9 +10,15 @@ import Foundation
 import BitcoinKit
 
 class EditUserInteractor {
+    private let notificationCenter: NotificationCenter
+    
+    init(notificationCenter: NotificationCenter = .default) {
+        self.notificationCenter = notificationCenter
+    }
     
     func editSelectedCurrency(_ newCurrency: StoreCurrency) {
         UserManager.shared.setSelectedCurrency(newCurrency)
+        notificationCenter.post(name: .currencyChanged, object: newCurrency)
     }
     
     func editCompanyName(_ newCompanyName: String) {
@@ -28,5 +34,11 @@ class EditUserInteractor {
         UserManager.shared.setDestination(newDestination)
         
         return true
+    }
+}
+
+extension Notification.Name {
+    static var currencyChanged: Notification.Name {
+        return .init(rawValue: "EditUserInteractor.currencyChanged")
     }
 }
