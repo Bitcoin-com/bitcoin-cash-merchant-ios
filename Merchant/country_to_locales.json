@@ -1,0 +1,1525 @@
+{
+    "AED": [
+        {
+            "country": "AE",
+            "locales": "ar-AE,fa,en,hi,ur",
+            "population": 4975593
+        }
+    ],
+    "AFN": [
+        {
+            "country": "AF",
+            "locales": "fa-AF,ps,uz-AF,tk",
+            "population": 29121286
+        }
+    ],
+    "ALL": [
+        {
+            "country": "AL",
+            "locales": "sq,el",
+            "population": 2986952
+        }
+    ],
+    "AMD": [
+        {
+            "country": "AM",
+            "locales": "hy",
+            "population": 2968000
+        }
+    ],
+    "ANG": [
+        {
+            "country": "CW",
+            "locales": "nl,pap",
+            "population": 141766
+        },
+        {
+            "country": "SX",
+            "locales": "nl,en",
+            "population": 37429
+        }
+    ],
+    "AOA": [
+        {
+            "country": "AO",
+            "locales": "pt-AO",
+            "population": 13068161
+        }
+    ],
+    "ARS": [
+        {
+            "country": "AR",
+            "locales": "es-AR,en,it,de,fr,gn",
+            "population": 41343201
+        }
+    ],
+    "AUD": [
+        {
+            "country": "AU",
+            "locales": "en-AU",
+            "population": 21515754
+        },
+        {
+            "country": "KI",
+            "locales": "en-KI,gil",
+            "population": 92533
+        },
+        {
+            "country": "TV",
+            "locales": "tvl,en,sm,gil",
+            "population": 10472
+        },
+        {
+            "country": "NR",
+            "locales": "na,en-NR",
+            "population": 10065
+        },
+        {
+            "country": "NF",
+            "locales": "en-NF",
+            "population": 1828
+        },
+        {
+            "country": "CX",
+            "locales": "en,zh,ms-CC",
+            "population": 1500
+        },
+        {
+            "country": "CC",
+            "locales": "ms-CC,en",
+            "population": 628
+        }
+    ],
+    "AWG": [
+        {
+            "country": "AW",
+            "locales": "nl-AW,es,en",
+            "population": 71566
+        }
+    ],
+    "AZN": [
+        {
+            "country": "AZ",
+            "locales": "az,ru,hy",
+            "population": 8303512
+        }
+    ],
+    "BAM": [
+        {
+            "country": "BA",
+            "locales": "bs,hr-BA,sr-BA",
+            "population": 4590000
+        }
+    ],
+    "BBD": [
+        {
+            "country": "BB",
+            "locales": "en-BB",
+            "population": 285653
+        }
+    ],
+    "BDT": [
+        {
+            "country": "BD",
+            "locales": "bn-BD,en",
+            "population": 156118464
+        }
+    ],
+    "BGN": [
+        {
+            "country": "BG",
+            "locales": "bg,tr-BG,rom",
+            "population": 7148785
+        }
+    ],
+    "BHD": [
+        {
+            "country": "BH",
+            "locales": "ar-BH,en,fa,ur",
+            "population": 738004
+        }
+    ],
+    "BIF": [
+        {
+            "country": "BI",
+            "locales": "fr-BI,rn",
+            "population": 9863117
+        }
+    ],
+    "BMD": [
+        {
+            "country": "BM",
+            "locales": "en-BM,pt",
+            "population": 65365
+        }
+    ],
+    "BND": [
+        {
+            "country": "BN",
+            "locales": "ms-BN,en-BN",
+            "population": 395027
+        }
+    ],
+    "BOB": [
+        {
+            "country": "BO",
+            "locales": "es-BO,qu,ay",
+            "population": 9947418
+        }
+    ],
+    "BRL": [
+        {
+            "country": "BR",
+            "locales": "pt-BR,es,en,fr",
+            "population": 201103330
+        }
+    ],
+    "BSD": [
+        {
+            "country": "BS",
+            "locales": "en-BS",
+            "population": 301790
+        }
+    ],
+    "BWP": [
+        {
+            "country": "BW",
+            "locales": "en-BW,tn-BW",
+            "population": 2029307
+        }
+    ],
+    "BYN": [
+        {
+            "country": "BY",
+            "locales": "be,ru",
+            "population": 9685000
+        }
+    ],
+    "BZD": [
+        {
+            "country": "BZ",
+            "locales": "en-BZ,es",
+            "population": 314522
+        }
+    ],
+    "CAD": [
+        {
+            "country": "CA",
+            "locales": "en-CA,fr-CA,iu",
+            "population": 33679000
+        }
+    ],
+    "CDF": [
+        {
+            "country": "CD",
+            "locales": "fr-CD,ln,kg",
+            "population": 70916439
+        }
+    ],
+    "CHF": [
+        {
+            "country": "CH",
+            "locales": "de-CH,fr-CH,it-CH,rm",
+            "population": 8484100
+        },
+        {
+            "country": "LI",
+            "locales": "de-LI",
+            "population": 35000
+        }
+    ],
+    "CLP": [
+        {
+            "country": "CL",
+            "locales": "es-CL",
+            "population": 16746491
+        }
+    ],
+    "CNY": [
+        {
+            "country": "CN",
+            "locales": "zh-CN,yue,wuu,dta,ug,za",
+            "population": 1330044000
+        }
+    ],
+    "COP": [
+        {
+            "country": "CO",
+            "locales": "es-CO",
+            "population": 47790000
+        }
+    ],
+    "CRC": [
+        {
+            "country": "CR",
+            "locales": "es-CR,en",
+            "population": 4516220
+        }
+    ],
+    "CUP": [
+        {
+            "country": "CU",
+            "locales": "es-CU",
+            "population": 11423000
+        }
+    ],
+    "CVE": [
+        {
+            "country": "CV",
+            "locales": "pt-CV",
+            "population": 508659
+        }
+    ],
+    "CZK": [
+        {
+            "country": "CZ",
+            "locales": "cs,sk",
+            "population": 10476000
+        }
+    ],
+    "DJF": [
+        {
+            "country": "DJ",
+            "locales": "fr-DJ,ar,so-DJ,aa",
+            "population": 740528
+        }
+    ],
+    "DKK": [
+        {
+            "country": "DK",
+            "locales": "da-DK,en,fo,de-DK",
+            "population": 5484000
+        },
+        {
+            "country": "GL",
+            "locales": "kl,da-GL,en",
+            "population": 56375
+        },
+        {
+            "country": "FO",
+            "locales": "fo,da-FO",
+            "population": 48228
+        }
+    ],
+    "DOP": [
+        {
+            "country": "DO",
+            "locales": "es-DO",
+            "population": 9823821
+        }
+    ],
+    "DZD": [
+        {
+            "country": "DZ",
+            "locales": "ar-DZ",
+            "population": 34586184
+        }
+    ],
+    "EGP": [
+        {
+            "country": "EG",
+            "locales": "ar-EG,en,fr",
+            "population": 80471869
+        }
+    ],
+    "ERN": [
+        {
+            "country": "ER",
+            "locales": "aa-ER,ar,tig,kun,ti-ER",
+            "population": 5792984
+        }
+    ],
+    "ETB": [
+        {
+            "country": "ET",
+            "locales": "am,en-ET,om-ET,ti-ET,so-ET,sid",
+            "population": 88013491
+        }
+    ],
+    "EUR": [
+        {
+            "country": "DE",
+            "locales": "de",
+            "population": 81802257
+        },
+        {
+            "country": "FR",
+            "locales": "fr-FR,frp,br,co,ca,eu,oc",
+            "population": 64768389
+        },
+        {
+            "country": "IT",
+            "locales": "it-IT,de-IT,fr-IT,sc,ca,co,sl",
+            "population": 60340328
+        },
+        {
+            "country": "ES",
+            "locales": "es-ES,ca,gl,eu,oc",
+            "population": 46505963
+        },
+        {
+            "country": "NL",
+            "locales": "nl-NL,fy-NL",
+            "population": 16645000
+        },
+        {
+            "country": "GR",
+            "locales": "el-GR,en,fr",
+            "population": 11000000
+        },
+        {
+            "country": "PT",
+            "locales": "pt-PT,mwl",
+            "population": 10676000
+        },
+        {
+            "country": "BE",
+            "locales": "nl-BE,fr-BE,de-BE",
+            "population": 10403000
+        },
+        {
+            "country": "AT",
+            "locales": "de-AT,hr,hu,sl",
+            "population": 8205000
+        },
+        {
+            "country": "SK",
+            "locales": "sk,hu",
+            "population": 5455000
+        },
+        {
+            "country": "FI",
+            "locales": "fi-FI,sv-FI,smn",
+            "population": 5244000
+        },
+        {
+            "country": "IE",
+            "locales": "en-IE,ga-IE",
+            "population": 4622917
+        },
+        {
+            "country": "LT",
+            "locales": "lt,ru,pl",
+            "population": 2944459
+        },
+        {
+            "country": "LV",
+            "locales": "lv,ru,lt",
+            "population": 2217969
+        },
+        {
+            "country": "SI",
+            "locales": "sl,sh",
+            "population": 2007000
+        },
+        {
+            "country": "EE",
+            "locales": "et,ru",
+            "population": 1291170
+        },
+        {
+            "country": "CY",
+            "locales": "el-CY,tr-CY,en",
+            "population": 1102677
+        },
+        {
+            "country": "RE",
+            "locales": "fr-RE",
+            "population": 776948
+        },
+        {
+            "country": "ME",
+            "locales": "sr,hu,bs,sq,hr,rom",
+            "population": 666730
+        },
+        {
+            "country": "LU",
+            "locales": "lb,de-LU,fr-LU",
+            "population": 497538
+        },
+        {
+            "country": "GP",
+            "locales": "fr-GP",
+            "population": 443000
+        },
+        {
+            "country": "MQ",
+            "locales": "fr-MQ",
+            "population": 432900
+        },
+        {
+            "country": "MT",
+            "locales": "mt,en-MT",
+            "population": 403000
+        },
+        {
+            "country": "GF",
+            "locales": "fr-GF",
+            "population": 195506
+        },
+        {
+            "country": "YT",
+            "locales": "fr-YT",
+            "population": 159042
+        },
+        {
+            "country": "AD",
+            "locales": "ca",
+            "population": 84000
+        },
+        {
+            "country": "MF",
+            "locales": "fr",
+            "population": 35925
+        },
+        {
+            "country": "MC",
+            "locales": "fr-MC,en,it",
+            "population": 32965
+        },
+        {
+            "country": "SM",
+            "locales": "it-SM",
+            "population": 31477
+        },
+        {
+            "country": "AX",
+            "locales": "sv-AX",
+            "population": 26711
+        },
+        {
+            "country": "BL",
+            "locales": "fr",
+            "population": 8450
+        },
+        {
+            "country": "PM",
+            "locales": "fr-PM",
+            "population": 7012
+        },
+        {
+            "country": "VA",
+            "locales": "la,it,fr",
+            "population": 921
+        },
+        {
+            "country": "TF",
+            "locales": "fr",
+            "population": 140
+        }
+    ],
+    "FJD": [
+        {
+            "country": "FJ",
+            "locales": "en-FJ,fj",
+            "population": 875983
+        }
+    ],
+    "GBP": [
+        {
+            "country": "GB",
+            "locales": "en-GB,cy-GB,gd",
+            "population": 62348447
+        },
+        {
+            "country": "JE",
+            "locales": "en,pt",
+            "population": 90812
+        },
+        {
+            "country": "IM",
+            "locales": "en,gv",
+            "population": 75049
+        },
+        {
+            "country": "GG",
+            "locales": "en,fr",
+            "population": 65228
+        }
+    ],
+    "GEL": [
+        {
+            "country": "GE",
+            "locales": "ka,ru,hy,az",
+            "population": 4630000
+        }
+    ],
+    "GHS": [
+        {
+            "country": "GH",
+            "locales": "en-GH,ak,ee,tw",
+            "population": 24339838
+        }
+    ],
+    "GIP": [
+        {
+            "country": "GI",
+            "locales": "en-GI,es,it,pt",
+            "population": 27884
+        }
+    ],
+    "GMD": [
+        {
+            "country": "GM",
+            "locales": "en-GM,mnk,wof,wo,ff",
+            "population": 1593256
+        }
+    ],
+    "GNF": [
+        {
+            "country": "GN",
+            "locales": "fr-GN",
+            "population": 10324025
+        }
+    ],
+    "GTQ": [
+        {
+            "country": "GT",
+            "locales": "es-GT",
+            "population": 13550440
+        }
+    ],
+    "GYD": [
+        {
+            "country": "GY",
+            "locales": "en-GY",
+            "population": 748486
+        }
+    ],
+    "HKD": [
+        {
+            "country": "HK",
+            "locales": "zh-HK,yue,zh,en",
+            "population": 6898686
+        }
+    ],
+    "HNL": [
+        {
+            "country": "HN",
+            "locales": "es-HN",
+            "population": 7989415
+        }
+    ],
+    "HRK": [
+        {
+            "country": "HR",
+            "locales": "hr-HR,sr",
+            "population": 4284889
+        }
+    ],
+    "HTG": [
+        {
+            "country": "HT",
+            "locales": "ht,fr-HT",
+            "population": 9648924
+        }
+    ],
+    "HUF": [
+        {
+            "country": "HU",
+            "locales": "hu-HU",
+            "population": 9982000
+        }
+    ],
+    "IDR": [
+        {
+            "country": "ID",
+            "locales": "id,en,nl,jv",
+            "population": 242968342
+        }
+    ],
+    "ILS": [
+        {
+            "country": "IL",
+            "locales": "he,ar-IL,en-IL,",
+            "population": 7353985
+        }
+    ],
+    "INR": [
+        {
+            "country": "IN",
+            "locales": "en-IN,hi,bn,te,mr,ta,ur,gu,kn,ml,or,pa,as,bh,sat,ks,ne,sd,kok,doi,mni,sit,sa,fr,lus,inc",
+            "population": 1173108018
+        },
+        {
+            "country": "BT",
+            "locales": "dz",
+            "population": 699847
+        }
+    ],
+    "IQD": [
+        {
+            "country": "IQ",
+            "locales": "ar-IQ,ku,hy",
+            "population": 29671605
+        }
+    ],
+    "IRR": [
+        {
+            "country": "IR",
+            "locales": "fa-IR,ku",
+            "population": 76923300
+        }
+    ],
+    "ISK": [
+        {
+            "country": "IS",
+            "locales": "is,en,de,da,sv,no",
+            "population": 308910
+        }
+    ],
+    "JMD": [
+        {
+            "country": "JM",
+            "locales": "en-JM",
+            "population": 2847232
+        }
+    ],
+    "JOD": [
+        {
+            "country": "JO",
+            "locales": "ar-JO,en",
+            "population": 6407085
+        }
+    ],
+    "JPY": [
+        {
+            "country": "JP",
+            "locales": "ja",
+            "population": 127288000
+        }
+    ],
+    "KES": [
+        {
+            "country": "KE",
+            "locales": "en-KE,sw-KE",
+            "population": 40046566
+        }
+    ],
+    "KGS": [
+        {
+            "country": "KG",
+            "locales": "ky,uz,ru",
+            "population": 5776500
+        }
+    ],
+    "KHR": [
+        {
+            "country": "KH",
+            "locales": "km,fr,en",
+            "population": 14453680
+        }
+    ],
+    "KMF": [
+        {
+            "country": "KM",
+            "locales": "ar,fr-KM",
+            "population": 773407
+        }
+    ],
+    "KPW": [
+        {
+            "country": "KP",
+            "locales": "ko-KP",
+            "population": 22912177
+        }
+    ],
+    "KRW": [
+        {
+            "country": "KR",
+            "locales": "ko-KR,en",
+            "population": 48422644
+        }
+    ],
+    "KWD": [
+        {
+            "country": "KW",
+            "locales": "ar-KW,en",
+            "population": 2789132
+        }
+    ],
+    "KYD": [
+        {
+            "country": "KY",
+            "locales": "en-KY",
+            "population": 44270
+        }
+    ],
+    "KZT": [
+        {
+            "country": "KZ",
+            "locales": "kk,ru",
+            "population": 15340000
+        }
+    ],
+    "LAK": [
+        {
+            "country": "LA",
+            "locales": "lo,fr,en",
+            "population": 6368162
+        }
+    ],
+    "LBP": [
+        {
+            "country": "LB",
+            "locales": "ar-LB,fr-LB,en,hy",
+            "population": 4125247
+        }
+    ],
+    "LKR": [
+        {
+            "country": "LK",
+            "locales": "si,ta,en",
+            "population": 21513990
+        }
+    ],
+    "LRD": [
+        {
+            "country": "LR",
+            "locales": "en-LR",
+            "population": 3685076
+        }
+    ],
+    "LSL": [
+        {
+            "country": "LS",
+            "locales": "en-LS,st,zu,xh",
+            "population": 1919552
+        }
+    ],
+    "LYD": [
+        {
+            "country": "LY",
+            "locales": "ar-LY,it,en",
+            "population": 6461454
+        }
+    ],
+    "MAD": [
+        {
+            "country": "MA",
+            "locales": "ar-MA,ber,fr",
+            "population": 33848242
+        },
+        {
+            "country": "EH",
+            "locales": "ar,mey",
+            "population": 273008
+        }
+    ],
+    "MDL": [
+        {
+            "country": "MD",
+            "locales": "ro,ru,gag,tr",
+            "population": 4324000
+        }
+    ],
+    "MGA": [
+        {
+            "country": "MG",
+            "locales": "fr-MG,mg",
+            "population": 21281844
+        }
+    ],
+    "MKD": [
+        {
+            "country": "MK",
+            "locales": "mk,sq,tr,rmm,sr",
+            "population": 2062294
+        }
+    ],
+    "MMK": [
+        {
+            "country": "MM",
+            "locales": "my",
+            "population": 53414374
+        }
+    ],
+    "MNT": [
+        {
+            "country": "MN",
+            "locales": "mn,ru",
+            "population": 3086918
+        }
+    ],
+    "MOP": [
+        {
+            "country": "MO",
+            "locales": "zh,zh-MO,pt",
+            "population": 449198
+        }
+    ],
+    "MRO": [
+        {
+            "country": "MR",
+            "locales": "ar-MR,fuc,snk,fr,mey,wo",
+            "population": 3205060
+        }
+    ],
+    "MUR": [
+        {
+            "country": "MU",
+            "locales": "en-MU,bho,fr",
+            "population": 1294104
+        }
+    ],
+    "MVR": [
+        {
+            "country": "MV",
+            "locales": "dv,en",
+            "population": 395650
+        }
+    ],
+    "MWK": [
+        {
+            "country": "MW",
+            "locales": "ny,yao,tum,swk",
+            "population": 15447500
+        }
+    ],
+    "MXN": [
+        {
+            "country": "MX",
+            "locales": "es-MX",
+            "population": 112468855
+        }
+    ],
+    "MYR": [
+        {
+            "country": "MY",
+            "locales": "ms-MY,en,zh,ta,te,ml,pa,th",
+            "population": 28274729
+        }
+    ],
+    "MZN": [
+        {
+            "country": "MZ",
+            "locales": "pt-MZ,vmw",
+            "population": 22061451
+        }
+    ],
+    "NAD": [
+        {
+            "country": "NA",
+            "locales": "en-NA,af,de,hz,naq",
+            "population": 2128471
+        }
+    ],
+    "NGN": [
+        {
+            "country": "NG",
+            "locales": "en-NG,ha,yo,ig,ff",
+            "population": 154000000
+        }
+    ],
+    "NIO": [
+        {
+            "country": "NI",
+            "locales": "es-NI,en",
+            "population": 5995928
+        }
+    ],
+    "NOK": [
+        {
+            "country": "NO",
+            "locales": "no,nb,nn,se,fi",
+            "population": 5009150
+        },
+        {
+            "country": "SJ",
+            "locales": "no,ru",
+            "population": 2550
+        }
+    ],
+    "NPR": [
+        {
+            "country": "NP",
+            "locales": "ne,en",
+            "population": 28951852
+        }
+    ],
+    "NZD": [
+        {
+            "country": "NZ",
+            "locales": "en-NZ,mi",
+            "population": 4252277
+        },
+        {
+            "country": "CK",
+            "locales": "en-CK,mi",
+            "population": 21388
+        },
+        {
+            "country": "NU",
+            "locales": "niu,en-NU",
+            "population": 2166
+        },
+        {
+            "country": "TK",
+            "locales": "tkl,en-TK",
+            "population": 1466
+        },
+        {
+            "country": "PN",
+            "locales": "en-PN",
+            "population": 46
+        }
+    ],
+    "OMR": [
+        {
+            "country": "OM",
+            "locales": "ar-OM,en,bal,ur",
+            "population": 2967717
+        }
+    ],
+    "PAB": [
+        {
+            "country": "PA",
+            "locales": "es-PA,en",
+            "population": 3410676
+        }
+    ],
+    "PEN": [
+        {
+            "country": "PE",
+            "locales": "es-PE,qu,ay",
+            "population": 29907003
+        }
+    ],
+    "PGK": [
+        {
+            "country": "PG",
+            "locales": "en-PG,ho,meu,tpi",
+            "population": 6064515
+        }
+    ],
+    "PHP": [
+        {
+            "country": "PH",
+            "locales": "tl,en-PH,fil",
+            "population": 99900177
+        }
+    ],
+    "PKR": [
+        {
+            "country": "PK",
+            "locales": "ur-PK,en-PK,pa,sd,ps,brh",
+            "population": 184404791
+        }
+    ],
+    "PLN": [
+        {
+            "country": "PL",
+            "locales": "pl",
+            "population": 38500000
+        }
+    ],
+    "PYG": [
+        {
+            "country": "PY",
+            "locales": "es-PY,gn",
+            "population": 6375830
+        }
+    ],
+    "QAR": [
+        {
+            "country": "QA",
+            "locales": "ar-QA,es",
+            "population": 840926
+        }
+    ],
+    "RON": [
+        {
+            "country": "RO",
+            "locales": "ro,hu,rom",
+            "population": 21959278
+        }
+    ],
+    "RSD": [
+        {
+            "country": "RS",
+            "locales": "sr,hu,bs,rom",
+            "population": 7344847
+        }
+    ],
+    "RUB": [
+        {
+            "country": "RU",
+            "locales": "ru,tt,xal,cau,ady,kv,ce,tyv,cv,udm,tut,mns,bua,myv,mdf,chm,ba,inh,tut,kbd,krc,av,sah,nog",
+            "population": 140702000
+        }
+    ],
+    "RWF": [
+        {
+            "country": "RW",
+            "locales": "rw,en-RW,fr-RW,sw",
+            "population": 11055976
+        }
+    ],
+    "SAR": [
+        {
+            "country": "SA",
+            "locales": "ar-SA",
+            "population": 25731776
+        }
+    ],
+    "SBD": [
+        {
+            "country": "SB",
+            "locales": "en-SB,tpi",
+            "population": 559198
+        }
+    ],
+    "SCR": [
+        {
+            "country": "SC",
+            "locales": "en-SC,fr-SC",
+            "population": 88340
+        }
+    ],
+    "SDG": [
+        {
+            "country": "SD",
+            "locales": "ar-SD,en,fia",
+            "population": 35000000
+        }
+    ],
+    "SEK": [
+        {
+            "country": "SE",
+            "locales": "sv-SE,se,sma,fi-SE",
+            "population": 9828655
+        }
+    ],
+    "SGD": [
+        {
+            "country": "SG",
+            "locales": "cmn,en-SG,ms-SG,ta-SG,zh-SG",
+            "population": 4701069
+        }
+    ],
+    "SHP": [
+        {
+            "country": "SH",
+            "locales": "en-SH",
+            "population": 7460
+        }
+    ],
+    "SLL": [
+        {
+            "country": "SL",
+            "locales": "en-SL,men,tem",
+            "population": 5245695
+        }
+    ],
+    "SOS": [
+        {
+            "country": "SO",
+            "locales": "so-SO,ar-SO,it,en-SO",
+            "population": 10112453
+        }
+    ],
+    "SRD": [
+        {
+            "country": "SR",
+            "locales": "nl-SR,en,srn,hns,jv",
+            "population": 492829
+        }
+    ],
+    "SSP": [
+        {
+            "country": "SS",
+            "locales": "en",
+            "population": 8260490
+        }
+    ],
+    "STD": [
+        {
+            "country": "ST",
+            "locales": "pt-ST",
+            "population": 197700
+        }
+    ],
+    "SVC": [
+        {
+            "country": "SV",
+            "locales": "es-SV",
+            "population": 6052064
+        }
+    ],
+    "SYP": [
+        {
+            "country": "SY",
+            "locales": "ar-SY,ku,hy,arc,fr,en",
+            "population": 22198110
+        }
+    ],
+    "SZL": [
+        {
+            "country": "SZ",
+            "locales": "en-SZ,ss-SZ",
+            "population": 1354051
+        }
+    ],
+    "THB": [
+        {
+            "country": "TH",
+            "locales": "th,en",
+            "population": 67089500
+        }
+    ],
+    "TJS": [
+        {
+            "country": "TJ",
+            "locales": "tg,ru",
+            "population": 7487489
+        }
+    ],
+    "TMT": [
+        {
+            "country": "TM",
+            "locales": "tk,ru,uz",
+            "population": 4940916
+        }
+    ],
+    "TND": [
+        {
+            "country": "TN",
+            "locales": "ar-TN,fr",
+            "population": 10589025
+        }
+    ],
+    "TOP": [
+        {
+            "country": "TO",
+            "locales": "to,en-TO",
+            "population": 122580
+        }
+    ],
+    "TRY": [
+        {
+            "country": "TR",
+            "locales": "tr-TR,ku,diq,az,av",
+            "population": 77804122
+        }
+    ],
+    "TTD": [
+        {
+            "country": "TT",
+            "locales": "en-TT,hns,fr,es,zh",
+            "population": 1328019
+        }
+    ],
+    "TWD": [
+        {
+            "country": "TW",
+            "locales": "zh-TW,zh,nan,hak",
+            "population": 22894384
+        }
+    ],
+    "TZS": [
+        {
+            "country": "TZ",
+            "locales": "sw-TZ,en,ar",
+            "population": 41892895
+        }
+    ],
+    "UAH": [
+        {
+            "country": "UA",
+            "locales": "uk,ru-UA,rom,pl,hu",
+            "population": 45415596
+        }
+    ],
+    "UGX": [
+        {
+            "country": "UG",
+            "locales": "en-UG,lg,sw,ar",
+            "population": 33398682
+        }
+    ],
+    "USD": [
+        {
+            "country": "US",
+            "locales": "en-US,es-US,haw,fr",
+            "population": 310232863
+        },
+        {
+            "country": "EC",
+            "locales": "es-EC",
+            "population": 14790608
+        },
+        {
+            "country": "PR",
+            "locales": "en-PR,es-PR",
+            "population": 3916632
+        },
+        {
+            "country": "TL",
+            "locales": "tet,pt-TL,id,en",
+            "population": 1154625
+        },
+        {
+            "country": "GU",
+            "locales": "en-GU,ch-GU",
+            "population": 159358
+        },
+        {
+            "country": "VI",
+            "locales": "en-VI",
+            "population": 108708
+        },
+        {
+            "country": "FM",
+            "locales": "en-FM,chk,pon,yap,kos,uli,woe,nkr,kpg",
+            "population": 107708
+        },
+        {
+            "country": "MH",
+            "locales": "mh,en-MH",
+            "population": 65859
+        },
+        {
+            "country": "AS",
+            "locales": "en-AS,sm,to",
+            "population": 57881
+        },
+        {
+            "country": "MP",
+            "locales": "fil,tl,zh,ch-MP,en-MP",
+            "population": 53883
+        },
+        {
+            "country": "VG",
+            "locales": "en-VG",
+            "population": 21730
+        },
+        {
+            "country": "TC",
+            "locales": "en-TC",
+            "population": 20556
+        },
+        {
+            "country": "PW",
+            "locales": "pau,sov,en-PW,tox,ja,fil,zh",
+            "population": 19907
+        },
+        {
+            "country": "BQ",
+            "locales": "nl,pap,en",
+            "population": 18012
+        },
+        {
+            "country": "IO",
+            "locales": "en-IO",
+            "population": 4000
+        },
+        {
+            "country": "UM",
+            "locales": "en-UM",
+            "population": 0
+        }
+    ],
+    "UYU": [
+        {
+            "country": "UY",
+            "locales": "es-UY",
+            "population": 3477000
+        }
+    ],
+    "UZS": [
+        {
+            "country": "UZ",
+            "locales": "uz,ru,tg",
+            "population": 27865738
+        }
+    ],
+    "VEF": [
+        {
+            "country": "VE",
+            "locales": "es-VE",
+            "population": 27223228
+        }
+    ],
+    "VND": [
+        {
+            "country": "VN",
+            "locales": "vi,en,fr,zh,km",
+            "population": 89571130
+        }
+    ],
+    "VUV": [
+        {
+            "country": "VU",
+            "locales": "bi,en-VU,fr-VU",
+            "population": 221552
+        }
+    ],
+    "WST": [
+        {
+            "country": "WS",
+            "locales": "sm,en-WS",
+            "population": 192001
+        }
+    ],
+    "XAF": [
+        {
+            "country": "CM",
+            "locales": "en-CM,fr-CM",
+            "population": 19294149
+        },
+        {
+            "country": "TD",
+            "locales": "fr-TD,ar-TD,sre",
+            "population": 10543464
+        },
+        {
+            "country": "CF",
+            "locales": "fr-CF,sg,ln,kg",
+            "population": 4844927
+        },
+        {
+            "country": "CG",
+            "locales": "fr-CG,kg,ln-CG",
+            "population": 3039126
+        },
+        {
+            "country": "GA",
+            "locales": "fr-GA",
+            "population": 1545255
+        },
+        {
+            "country": "GQ",
+            "locales": "es-GQ,fr",
+            "population": 1014999
+        }
+    ],
+    "XCD": [
+        {
+            "country": "LC",
+            "locales": "en-LC",
+            "population": 160922
+        },
+        {
+            "country": "GD",
+            "locales": "en-GD",
+            "population": 107818
+        },
+        {
+            "country": "VC",
+            "locales": "en-VC,fr",
+            "population": 104217
+        },
+        {
+            "country": "AG",
+            "locales": "en-AG",
+            "population": 86754
+        },
+        {
+            "country": "DM",
+            "locales": "en-DM",
+            "population": 72813
+        },
+        {
+            "country": "KN",
+            "locales": "en-KN",
+            "population": 51134
+        },
+        {
+            "country": "AI",
+            "locales": "en-AI",
+            "population": 13254
+        },
+        {
+            "country": "MS",
+            "locales": "en-MS",
+            "population": 9341
+        }
+    ],
+    "XOF": [
+        {
+            "country": "CI",
+            "locales": "fr-CI",
+            "population": 21058798
+        },
+        {
+            "country": "BF",
+            "locales": "fr-BF",
+            "population": 16241811
+        },
+        {
+            "country": "NE",
+            "locales": "fr-NE,ha,kr,dje",
+            "population": 15878271
+        },
+        {
+            "country": "ML",
+            "locales": "fr-ML,bm",
+            "population": 13796354
+        },
+        {
+            "country": "SN",
+            "locales": "fr-SN,wo,fuc,mnk",
+            "population": 12323252
+        },
+        {
+            "country": "BJ",
+            "locales": "fr-BJ",
+            "population": 9056010
+        },
+        {
+            "country": "TG",
+            "locales": "fr-TG,ee,hna,kbp,dag,ha",
+            "population": 6587239
+        },
+        {
+            "country": "GW",
+            "locales": "pt-GW,pov",
+            "population": 1565126
+        }
+    ],
+    "XPF": [
+        {
+            "country": "PF",
+            "locales": "fr-PF,ty",
+            "population": 270485
+        },
+        {
+            "country": "NC",
+            "locales": "fr-NC",
+            "population": 216494
+        },
+        {
+            "country": "WF",
+            "locales": "wls,fud,fr-WF",
+            "population": 16025
+        }
+    ],
+    "YER": [
+        {
+            "country": "YE",
+            "locales": "ar-YE",
+            "population": 23495361
+        }
+    ],
+    "ZAR": [
+        {
+            "country": "ZA",
+            "locales": "zu,xh,af,nso,en-ZA,tn,st,ts,ss,ve,nr",
+            "population": 49000000
+        }
+    ],
+    "ZMW": [
+        {
+            "country": "ZM",
+            "locales": "en-ZM,bem,loz,lun,lue,ny,toi",
+            "population": 13460305
+        }
+    ],
+    "ZWL": [
+        {
+            "country": "ZW",
+            "locales": "en-ZW,sn,nr,nd",
+            "population": 13061000
+        }
+    ]
+}

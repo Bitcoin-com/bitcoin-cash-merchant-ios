@@ -148,6 +148,13 @@ extension PaymentInputViewController: PinViewControllerDelegate {
             }
             presenter?.didSetAmount(amountStr)
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+            let range = amountStr.range(of: ",")
+            if let r = range {
+                let decimals = amountStr[r.upperBound..<amountStr.endIndex]
+                if decimals.count >= 2 {
+                    return // already has 2 decimals
+                }
+            }
             if amountStr.count < 1 || amountStr == "0" {
                 amountStr = pin
             } else {
