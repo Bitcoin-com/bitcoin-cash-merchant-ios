@@ -68,8 +68,7 @@ extension PaymentInputPresenter {
             return
         }
         
-        let amountInFiat = amountToDouble(rawAmount)
-
+        let amountInFiat = rawAmount.toDouble()
         guard amountInFiat > 0 else {
             return
         }
@@ -81,9 +80,7 @@ extension PaymentInputPresenter {
         }
         
         let amountInSatoshis = rate.rate > 0  ? (amountInFiat / rate.rate).toSatoshis() : 0
-        let amountInFiatStr = rawAmount.toFormat(selectedCurrency.ticker, symbol: selectedCurrency.symbol, strict: true)
-        
-        let pr = PaymentRequest(toAddress: address, amountInSatoshis: Int64(amountInSatoshis), amountInFiat: amountInFiatStr, selectedCurrency: selectedCurrency)
+        let pr = PaymentRequest(toAddress: address, amountInSatoshis: Int64(amountInSatoshis), amountInFiat: amountInFiat.toCurrency(), selectedCurrency: selectedCurrency)
         router?.transitToPaymentDetail(pr, requestDelegate: self)
     }
 }
@@ -95,28 +92,7 @@ extension PaymentInputPresenter {
         setupAmount()
     }
 
-    func amountToDouble(_ input: String) -> Double {
-        let f = NumberFormatter()
-        f.numberStyle = .decimal
-        f.locale = Locale.current
-        let n = f.number(from: input.replacingOccurrences(of: ",", with: f.decimalSeparator))
-        let dv : Double = n?.doubleValue ?? 0
-        return dv
-    }
-    
-    func doubleToCurrency(_ amount: Double) -> String{
-        let f = NumberFormatter()
-        f.locale = Locale.current
-        f.numberStyle = .currency
-        if (selectedCurrency.symbol.count > 0) {
-            f.currencySymbol = selectedCurrency.symbol
-        }
-        f.currencyCode = selectedCurrency.ticker;
-        return f.string(from: NSNumber(value: amount))!
-    }
-
     fileprivate func setupAmount() {
-        let d = amountToDouble(currentRawAmount)
-        viewDelegate?.onSetAmount(doubleToCurrency(d))
+        viewDelegate?.onSetAmount(currentRawAmount.toDouble().toCurrency())
     }
 }

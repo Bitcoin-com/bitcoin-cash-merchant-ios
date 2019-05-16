@@ -18,6 +18,7 @@ class RateManager {
     
     var defaultRate = StoreRate()
     var defaultCurrency = StoreCurrency()
+    var currencyToCountryLocales : [String:[CountryLocales]]? = nil
     
     fileprivate let bag = DisposeBag()
     fileprivate lazy var timer: DispatchSourceTimer = {
@@ -34,14 +35,55 @@ class RateManager {
         var name: String
         var rate: Double
     }
+
+    struct CountryLocales: Codable {
+        var country: String
+        var locales: String
+    }
     
+    fileprivate func createCurrencies(_ rates: [RateManager.RateResponse], _ symbols: [String : String]) -> [String:StoreCurrency] {
+        var currencies = [String:StoreCurrency]()
+        rates.forEach { rate in
+            let newCurrency = StoreCurrency()
+            newCurrency.name = rate.name
+            newCurrency.symbol = symbols[rate.code] ?? rate.code
+            newCurrency.ticker = rate.code
+            if !rate.name.lowercased().contains("coin") {
+                currencies[rate.code] = newCurrency
+            }
+            if rate.code == "USD" {
+                self.defaultCurrency = newCurrency
+            }
+        }
+        return currencies
+    }
+    
+    fileprivate func createRates(_ rates: [RateManager.RateResponse], _ bchRate: RateManager.RateResponse) -> [StoreRate] {
+        return rates.compactMap { rate -> StoreRate? in
+            guard !rate.name.lowercased().contains("coin") else {
+                return nil
+            }
+            let newRate = StoreRate()
+            newRate.id = rate.code
+            newRate.rate = rate.rate*bchRate.rate
+            newRate.updatedAt = 0
+            
+            if rate.code == "USD" {
+                self.defaultRate = newRate
+            }
+            
+            return newRate
+        }
+    }
+
     init() {
         
-        // Load symbols + basic rates
+        // Load symbols + basic rates + locales
         // Then load the scheduler
         let ratesPath = Bundle.main.path(forResource: "rates", ofType: "json")
         let symbolsPath = Bundle.main.path(forResource: "symbols", ofType: "json")
-                
+        let localesPath = Bundle.main.path(forResource: "currency_to_locales", ofType: "json")
+
         do {
             let symbolsUrl = URL(fileURLWithPath: symbolsPath!)
             let symbolsData = try Data(contentsOf: symbolsUrl)
@@ -51,43 +93,16 @@ class RateManager {
             let ratesData = try Data(contentsOf: ratesUrl)
             let rates = try JSONDecoder().decode([RateResponse].self, from: ratesData)
             
+            let localesUrl = URL(fileURLWithPath: localesPath!)
+            let localesData = try Data(contentsOf: localesUrl)
+            currencyToCountryLocales = try JSONDecoder().decode([String:[CountryLocales]].self, from: localesData)
+
             guard let bchRate = rates.filter({ $0.code == "BCH" }).first else {
                 return
             }
             
-            var currencies = [String:StoreCurrency]()
-            
-            rates.forEach { rate in
-                let newCurrency = StoreCurrency()
-                newCurrency.name = rate.name
-                newCurrency.symbol = symbols[rate.code] ?? rate.code
-                newCurrency.ticker = rate.code
-                currencies[rate.code] = newCurrency
-                
-                if rate.code == "USD" {
-                    self.defaultCurrency = newCurrency
-                }
-            }
-            
-            let storeRates = rates.compactMap { rate -> StoreRate? in
-                guard rate.code != "BCH"
-                    , rate.code != "BCH_BTC"
-                    , rate.code != "BCC" else {
-                    return nil
-                }
-                
-                let newRate = StoreRate()
-                newRate.id = rate.code
-                newRate.rate = rate.rate*bchRate.rate
-                newRate.updatedAt = 0
-                
-                if rate.code == "USD" {
-                    self.defaultRate = newRate
-                }
-                
-                return newRate
-            }
-            
+            let currencies = createCurrencies(rates, symbols)
+            let storeRates = createRates(rates, bchRate)
             let storeCurrencies = currencies.compactMap({ $1 })
             
             let realm = try Realm()
@@ -124,25 +139,8 @@ class RateManager {
                 return
             }
             
-            let storeRates = rates.compactMap { rate -> StoreRate? in
-                guard rate.code != "BCH"
-                    , rate.code != "BCH_BTC"
-                    , rate.code != "BCC" else {
-                        return nil
-                }
-                
-                let newRate = StoreRate()
-                newRate.id = rate.code
-                newRate.rate = rate.rate*bchRate.rate
-                newRate.updatedAt = 0
-                
-                if rate.code == "USD" {
-                    self.defaultRate = newRate
-                }
-                
-                return newRate
-            }
-            
+            let storeRates = createRates(rates, bchRate)
+
             let realm = try Realm()
             try realm.write {
                 realm.add(storeRates, update: true)

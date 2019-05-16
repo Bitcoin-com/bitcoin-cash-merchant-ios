@@ -16,7 +16,7 @@ class GetCurrenciesInteractor {
             .objects(StoreCurrency.self)
             .sorted(byKeyPath: "name")
         
-        let currencies = Array(results)
+        let currencies = Array(results).filter({!$0.name.lowercased().contains("coin") && !$0.name.lowercased().contains("gemini")})
         return currencies
     }
 }

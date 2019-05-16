@@ -27,7 +27,13 @@ extension String {
     }
     
     func toDouble() -> Double {
-        return Double(self.replacingOccurrences(of: ",", with: ".")) ?? 0
+        // return Double(self.replacingOccurrences(of: ",", with: ".")) ?? 0
+        let f = NumberFormatter()
+        f.numberStyle = .decimal
+        f.locale = Locale.current
+        let n = f.number(from: self.replacingOccurrences(of: ",", with: f.decimalSeparator))
+        let dv : Double = n?.doubleValue ?? 0
+        return dv
     }
     
     func toFormat(_ ticker: String, symbol: String, strict: Bool = true) -> String {

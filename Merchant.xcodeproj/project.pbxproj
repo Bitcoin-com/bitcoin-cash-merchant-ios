@@ -72,6 +72,7 @@
 		3B86E2062281BB9F004BBB0D /* SecureAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E20022816A0B004BBB0D /* SecureAccessService.swift */; };
 		3B86E20C2281D9D1004BBB0D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 3B86E20B2281D9D0004BBB0D /* Podfile */; };
 		3B91DECB228316E200E41D31 /* qr_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B91DECA228316E200E41D31 /* qr_animation.json */; };
+		4EFB2360228DFD7A00D166DF /* currency_to_locales.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EFB235F228DFD7900D166DF /* currency_to_locales.json */; };
 		B473B38741D46B5A9144EEA0 /* libPods-MerchantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +171,7 @@
 		4E9FBF86227AF6CF00700253 /* PinPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPresenter.swift; sourceTree = "<group>"; };
 		4E9FBF87227AF6D000700253 /* PinController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinController.swift; sourceTree = "<group>"; };
 		4E9FBF88227AF6D000700253 /* PinBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinBuilder.swift; sourceTree = "<group>"; };
+		4EFB235F228DFD7900D166DF /* currency_to_locales.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currency_to_locales.json; sourceTree = "<group>"; };
 		88A57F2AEF2F3475CB6D522F /* Pods-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantUITests/Pods-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9666CC57B1123D7CAE96F46F /* Pods_All_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4423D46E73793DE7376E21B /* Pods-MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.release.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 		3B1BA8F6226DEE30002EED15 /* Merchant */ = {
 			isa = PBXGroup;
 			children = (
+				4EFB235F228DFD7900D166DF /* currency_to_locales.json */,
 				3B1BA9CF226EA608002EED15 /* rates.json */,
 				3B1BA9D0226EA608002EED15 /* symbols.json */,
 				3B1BA92D226DF1AC002EED15 /* App */,
@@ -587,6 +590,7 @@
 				3B1BA9D2226EA608002EED15 /* symbols.json in Resources */,
 				3B57ABCD2275E7220078D983 /* Localizable.strings in Resources */,
 				3B86E20C2281D9D1004BBB0D /* Podfile in Resources */,
+				4EFB2360228DFD7A00D166DF /* currency_to_locales.json in Resources */,
 				3B1BA9D1226EA608002EED15 /* rates.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
