@@ -49,8 +49,13 @@ extension UserManager {
     
     func setDestination(_ destination: String) {
         let storageProvider = InternalStorageProvider()
-        storageProvider.setString(destination, key: "destination")
-        self._destination = destination
+        if destination.count == 0 {
+            storageProvider.remove("destination")
+            self._destination = nil
+        } else {
+            storageProvider.setString(destination, key: "destination")
+            self._destination = destination
+        }
     }
     
     func setCompanyName(_ companyName: String) {
@@ -66,8 +71,13 @@ extension UserManager {
     
     func setPin(_ pin: String) {
         let storageProvider = InternalStorageProvider()
-        storageProvider.setString(pin, key: "pin")
-        self._pin = pin
+        if pin.count == 0 {
+            storageProvider.remove("pin")
+            self._pin = nil
+        } else {
+            storageProvider.setString(pin, key: "pin")
+            self._pin = pin
+        }
     }
     
     func hasPin() -> Bool {

@@ -79,17 +79,19 @@ class PaymentInputViewController: PinViewController {
         alertStackView.addArrangedSubview(messageLabel)
         alertStackView.addArrangedSubview(settingsButton)
         
-        view.addSubview(alertStackView)
-        alertStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        alertStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
         presenter?.viewDidLoad()
     }
     
     func showAlertSettings() {
+        blurView.removeFromSuperview()
         view.addSubview(blurView)
+        blurView.fillSuperView()
+        
+        alertStackView.removeFromSuperview()
         view.addSubview(alertStackView)
-        blurView.fillSuperView()        
+        alertStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        alertStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
     }
     
     func hideAlertSettings() {
@@ -116,7 +118,7 @@ class PaymentInputViewController: PinViewController {
     
     func onSetComma(_ hasComma: Bool) {
         self.hasComma = hasComma
-        commaButton?.setTitle(hasComma ? "," : "", for: .normal)
+        commaButton?.setTitle(hasComma ? "." : "", for: .normal)
     }
  
 }
@@ -134,7 +136,7 @@ extension PaymentInputViewController: PinViewControllerDelegate {
         }
         
         switch pin {
-        case ",":
+        case ".":
             if amountStr.contains(pin) {
                 return
             }

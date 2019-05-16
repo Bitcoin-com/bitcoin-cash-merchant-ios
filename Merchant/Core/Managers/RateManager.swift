@@ -112,8 +112,8 @@ class RateManager {
             .filterSuccessfulStatusCodes()
             .map([RateResponse].self)
             .observeOn(MainScheduler.asyncInstance)
-            .subscribe(onSuccess: { response in
-                self.storeData(withRates: response)
+            .subscribe(onSuccess: { [weak self] response in
+                self?.storeData(withRates: response)
             })
             .disposed(by: bag)
     }

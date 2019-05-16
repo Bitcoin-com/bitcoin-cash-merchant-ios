@@ -34,7 +34,7 @@ extension Int64 {
         for i in 0...satoshisStr.count-1 {
             if i%3 == 0 {
                 if i == 6 {
-                    satoshisStrWithSpace.insert(",", at: 0)
+                    satoshisStrWithSpace.insert(".", at: 0)
                 } else {
                     satoshisStrWithSpace.insert(" ", at: 0)
                 }

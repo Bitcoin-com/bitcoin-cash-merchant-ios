@@ -27,7 +27,7 @@ class PaymentInputPresenter {
         setupCurrency()
     }
     
-    func viewWillAppear() {
+    func viewWillAppear() {        
         let newCurrency = UserManager.shared.selectedCurrency
         
         if newCurrency != selectedCurrency {
@@ -36,9 +36,9 @@ class PaymentInputPresenter {
         }
         
         if UserManager.shared.destination != nil {
-            viewDelegate?.hideAlertSettings()
+            self.viewDelegate?.hideAlertSettings()
         } else {
-            viewDelegate?.showAlertSettings()
+            self.viewDelegate?.showAlertSettings()
         }
     }
 }
