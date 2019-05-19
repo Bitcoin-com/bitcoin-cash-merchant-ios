@@ -16,6 +16,11 @@ class PaymentInputViewController: PinViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    var currencyLabel: BDCLabel = {
+        let label = BDCLabel.build(.header)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     var amountView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +44,6 @@ class PaymentInputViewController: PinViewController {
     
     var presenter: PaymentInputPresenter?
     
-    var amount: Int = 0
     var amountStr: String = "0"
    
     private let notificationCenter: NotificationCenter = NotificationCenter.default
@@ -48,6 +52,7 @@ class PaymentInputViewController: PinViewController {
         DispatchQueue.main.async {
             self.onCleanAmount()
             self.presenter?.didSetAmount("0")
+            self.currencyLabel.text = UserManager.shared.selectedCurrency.ticker
         }
     }
     
@@ -57,9 +62,19 @@ class PaymentInputViewController: PinViewController {
                                        name: .currencyChanged, object: nil)
         super.viewDidLoad()
         
-        amountView.addSubview(amountLabel)
+        currencyLabel.text = UserManager.shared.selectedCurrency.ticker
+        currencyLabel.font = currencyLabel.font.withSize(18)
+        let stackTextViews = UIStackView(arrangedSubviews: [amountLabel, currencyLabel])
+        stackTextViews.axis = .vertical
+        stackTextViews.alignment = .center
+        stackTextViews.spacing = 16
+        stackTextViews.translatesAutoresizingMaskIntoConstraints = false
+        
+        amountView.addSubview(stackTextViews)
         amountLabel.centerXAnchor.constraint(equalTo: amountView.centerXAnchor).isActive =  true
         amountLabel.centerYAnchor.constraint(equalTo: amountView.centerYAnchor).isActive =  true
+        currencyLabel.centerXAnchor.constraint(equalTo: amountView.centerXAnchor).isActive =  true
+        currencyLabel.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 16).isActive =  true
 
         let stackView = UIStackView(arrangedSubviews: [amountView, pinCollectionView])
         stackView.axis = .vertical
@@ -117,7 +132,6 @@ class PaymentInputViewController: PinViewController {
     }
     
     func onCleanAmount() {
-        amount = 0
         amountStr = "0"
     }
     

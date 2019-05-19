@@ -93,6 +93,6 @@ extension PaymentInputPresenter {
     }
 
     fileprivate func setupAmount() {
-        viewDelegate?.onSetAmount(currentRawAmount.toDouble().toCurrency())
+        viewDelegate?.onSetAmount(currentRawAmount)
     }
 }
