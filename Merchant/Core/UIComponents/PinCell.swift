@@ -16,7 +16,7 @@ class PinCell: UICollectionViewCell {
     override init(frame: CGRect) {
         // Create button
         let pinButton = UIButton(frame: frame)
-        pinButton.setTitleColor(BDCColor.green.uiColor, for: .normal)
+        pinButton.setTitleColor(BDCColor.black.uiColor, for: .normal)
         pinButton.backgroundColor = BDCColor.whiteTwo.uiColor
         pinButton.translatesAutoresizingMaskIntoConstraints = false
         
