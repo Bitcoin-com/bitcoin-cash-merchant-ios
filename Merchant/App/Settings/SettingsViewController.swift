@@ -53,7 +53,7 @@ class SettingsViewController: BDCViewController {
         
         let closeButton = BDCButton.build(.type3)
         closeButton.setImage(UIImage(named: "close_icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        closeButton.tintColor = BDCColor.green.uiColor
+        closeButton.tintColor = BDCColor.black.uiColor
         closeButton.addTarget(self, action: #selector(didPushCloseSelectCurrency), for: .touchUpInside)
         
         let currenciesStackView = UIStackView(arrangedSubviews: [currenciesPickerView, closeButton])
