@@ -97,8 +97,15 @@ class SettingsViewController: BDCViewController {
         destinationAddressTextField.text = destination
     }
     
-    func onGetCurrency(_ currency: String) {
-        selectedCurrencyLabel.text = currency
+    func onGetCurrency(_ currency: StoreCurrency) {
+        var text = currency.name
+        let rate = GetRateInteractor().getRate(withCurrency: currency)
+        if let rate = rate?.rate {
+            if (rate > 0) {
+                text += ":  1 BCH = " + rate.toCurrency()
+            }
+        }
+        selectedCurrencyLabel.text = text
     }
     
     func onGetCurrencies(_ currencies: [StoreCurrency], selectedIndex: Int) {

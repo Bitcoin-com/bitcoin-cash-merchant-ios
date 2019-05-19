@@ -29,7 +29,7 @@ class SettingsPresenter {
         viewDelegate?.onGetDestination(destination)
         
         let currency = UserManager.shared.selectedCurrency
-        viewDelegate?.onGetCurrency(currency.name)
+        viewDelegate?.onGetCurrency(currency)
         
         guard let currencies = getCurrenciesInteractor?.getCurrencies() else {
             return
@@ -54,7 +54,7 @@ class SettingsPresenter {
     
     func didEditSelectedCurrency(_ newCurrency: StoreCurrency) {
         editUserInteractor?.editSelectedCurrency(newCurrency)
-        viewDelegate?.onGetCurrency(newCurrency.name)
+        viewDelegate?.onGetCurrency(newCurrency)
     }
     
     func didEditCompanyName(_ newCompanyName: String) {
