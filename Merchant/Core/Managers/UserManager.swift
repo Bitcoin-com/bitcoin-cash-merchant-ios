@@ -28,8 +28,7 @@ class UserManager {
 
     init() {
         let storageProvider = InternalStorageProvider()
-        let ticker = storageProvider.getString("selectedCurrencyTicker") ?? "USD"
-        
+        let ticker = storageProvider.getString("selectedCurrencyTicker") ?? Locale.current.currencyCode ?? "USD"
         let realm = try! Realm()
         _selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker) ?? RateManager.shared.defaultCurrency
         
