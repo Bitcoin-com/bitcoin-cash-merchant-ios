@@ -42,7 +42,7 @@ class PinController: PinViewController {
             pinCodeImageViews.append(pinCodeImageView)
             pinCodeImageView.layer.cornerRadius = 48/2
             pinCodeImageView.clipsToBounds = true
-            pinCodeImageView.backgroundColor = BDCColor.green.uiColor
+            pinCodeImageView.backgroundColor = BDCColor.warmGrey.uiColor
             pinCodeImageView.translatesAutoresizingMaskIntoConstraints = false
             pinCodeImageView.heightAnchor.constraint(equalToConstant: 48).isActive = true
             pinCodeImageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
