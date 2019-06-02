@@ -22,12 +22,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = Constants.Strings.scanner
-        
         view.backgroundColor = UIColor.white
-        
-        checkPermission()
     }
     
     fileprivate func checkPermission() {
@@ -137,9 +133,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         captureSession = nil
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupCamera()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkPermission()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
