@@ -10,8 +10,6 @@ import Foundation
 import RealmSwift
 
 class UserManager {
-    
-    // Singleton
     static let shared = UserManager()
     
     fileprivate var _selectedCurrency: StoreCurrency

@@ -27,10 +27,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     fileprivate func checkPermission() {
-        //Camera
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] success in
             if !success {
-                // Handle the case without permission
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) else {
                     return
                 }

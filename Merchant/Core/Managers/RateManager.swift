@@ -12,8 +12,6 @@ import RealmSwift
 import Moya
 
 class RateManager {
-    
-    // Singleton
     static let shared = RateManager()
     
     var defaultRate = StoreRate()

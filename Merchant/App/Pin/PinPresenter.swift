@@ -87,7 +87,6 @@ extension PinPresenter {
                         self.newPin = pin
                         
                         // Setup UI for second time
-                        // ..
                         viewDelegate?.setupPin(Constants.Strings.confirmNewPinCode)
                     }
                 case .change:

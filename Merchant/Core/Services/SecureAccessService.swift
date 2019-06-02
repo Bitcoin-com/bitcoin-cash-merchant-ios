@@ -19,9 +19,7 @@ class SecureAccessService: PinDelegate {
         self.successHandler = successHandler
         self.errorHandler = errorHandler
         
-        guard let window = UIApplication.shared.keyWindow
-            , let currentViewController = window.rootViewController else {
-                // Manage the error here
+        guard let window = UIApplication.shared.keyWindow, let currentViewController = window.rootViewController else {
             return
         }
         

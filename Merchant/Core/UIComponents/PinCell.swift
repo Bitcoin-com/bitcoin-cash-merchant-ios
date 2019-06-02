@@ -14,20 +14,14 @@ class PinCell: UICollectionViewCell {
     var pinButton: UIButton
     
     override init(frame: CGRect) {
-        // Create button
-        let pinButton = UIButton(frame: frame)
+        pinButton = UIButton(frame: frame)
         pinButton.setTitleColor(BDCColor.green.uiColor, for: .normal)
         pinButton.backgroundColor = BDCColor.whiteTwo.uiColor
         pinButton.translatesAutoresizingMaskIntoConstraints = false
         
-        // Fill attributes
-        self.pinButton = pinButton
-        
-        // Init
         super.init(frame: frame)
         backgroundColor = BDCColor.whiteTwo.uiColor
         
-        // Add views + constraints
         addSubview(pinButton)
         pinButton.fillSuperView()
         
