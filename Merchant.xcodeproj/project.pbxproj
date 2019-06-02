@@ -211,12 +211,12 @@
 			isa = PBXGroup;
 			children = (
 				3B1BA900226DEE32002EED15 /* LaunchScreen.storyboard */,
+				3B57ABCF2275E7220078D983 /* Localizable.strings */,
+				3B1BA903226DEE32002EED15 /* Info.plist */,
 				3B1BA9D0226EA608002EED15 /* symbols.json */,
 				3B1BA92C226DF1AC002EED15 /* success_animation.json */,
 				3B91DECA228316E200E41D31 /* qr_animation.json */,
-				3B57ABCF2275E7220078D983 /* Localizable.strings */,
 				3B1BA9CF226EA608002EED15 /* rates.json */,
-				3B1BA903226DEE32002EED15 /* Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
