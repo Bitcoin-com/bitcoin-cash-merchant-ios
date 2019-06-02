@@ -207,6 +207,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12A3938422A48A8E00D764E6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3B1BA900226DEE32002EED15 /* LaunchScreen.storyboard */,
+				3B1BA9D0226EA608002EED15 /* symbols.json */,
+				3B1BA92C226DF1AC002EED15 /* success_animation.json */,
+				3B91DECA228316E200E41D31 /* qr_animation.json */,
+				3B57ABCF2275E7220078D983 /* Localizable.strings */,
+				3B1BA9CF226EA608002EED15 /* rates.json */,
+				3B1BA903226DEE32002EED15 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		3B0624932272C95800899A4B /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,17 +266,11 @@
 		3B1BA8F6226DEE30002EED15 /* Merchant */ = {
 			isa = PBXGroup;
 			children = (
-				3B1BA9CF226EA608002EED15 /* rates.json */,
-				3B1BA9D0226EA608002EED15 /* symbols.json */,
 				3B1BA92D226DF1AC002EED15 /* App */,
 				3B1BA925226DF1AC002EED15 /* Core */,
-				3B1BA92C226DF1AC002EED15 /* success_animation.json */,
-				3B91DECA228316E200E41D31 /* qr_animation.json */,
 				3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */,
-				3B57ABCF2275E7220078D983 /* Localizable.strings */,
 				3B1BA8FE226DEE32002EED15 /* Assets.xcassets */,
-				3B1BA900226DEE32002EED15 /* LaunchScreen.storyboard */,
-				3B1BA903226DEE32002EED15 /* Info.plist */,
+				12A3938422A48A8E00D764E6 /* Supporting Files */,
 			);
 			path = Merchant;
 			sourceTree = "<group>";
@@ -973,7 +981,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
-				INFOPLIST_FILE = Merchant/Info.plist;
+				INFOPLIST_FILE = "Merchant/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -993,7 +1001,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
-				INFOPLIST_FILE = Merchant/Info.plist;
+				INFOPLIST_FILE = "Merchant/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
