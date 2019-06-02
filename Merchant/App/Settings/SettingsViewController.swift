@@ -14,18 +14,18 @@ class SettingsViewController: BDCViewController {
     
     fileprivate let cellId = "settingsCell"
     
-    var tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         return tableView
     }()
-    var companyNameTextField = BDCTextField.build(.type1)
-    var destinationAddressTextField = BDCTextField.build(.type1)
-    var pinCodeLabel = BDCLabel.build(.subtitle)
-    var selectedCurrencyLabel = BDCLabel.build(.subtitle)
-    var currenciesPickerView = UIPickerView(frame: .zero)
-    var currenciesView: UIView = {
+    let companyNameTextField = BDCTextField.build(.type1)
+    let destinationAddressTextField = BDCTextField.build(.type1)
+    let pinCodeLabel = BDCLabel.build(.subtitle)
+    let selectedCurrencyLabel = BDCLabel.build(.subtitle)
+    let currenciesPickerView = UIPickerView(frame: .zero)
+    let currenciesView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

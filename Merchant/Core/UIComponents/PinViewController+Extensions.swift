@@ -26,7 +26,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     let cellId = "pinCell"
     
     var pinDelegate: PinViewControllerDelegate?
-    var pinCollectionView: UICollectionView = {
+    let pinCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView

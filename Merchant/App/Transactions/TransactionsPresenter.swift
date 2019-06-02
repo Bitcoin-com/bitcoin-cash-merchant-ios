@@ -21,7 +21,7 @@ class TransactionsPresenter {
     var getTransactionsInteractor: GetTransactionsInteractor?
     weak var viewDelegate: TransactionsViewController?
     
-    fileprivate var bag = DisposeBag()
+    fileprivate let bag = DisposeBag()
     fileprivate var transactions = [StoreTransaction]()
     
     func viewDidLoad() {
