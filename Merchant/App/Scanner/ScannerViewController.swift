@@ -108,7 +108,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             self.previewLayer.videoGravity = .resizeAspectFill
             self.view.layer.addSublayer(self.previewLayer)
             
-            self.captureSession.startRunning()
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                self?.captureSession.startRunning()
+            }
             
             self.animationView = LOTAnimationView(name: "qr_animation")
             self.view.addSubview(self.animationView)
