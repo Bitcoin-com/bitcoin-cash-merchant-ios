@@ -38,8 +38,9 @@ class SocketService {
     
     init() {
         self.ws.event.close = { code, reason, clean in
-            sleep(2)
-            self.open()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.open()
+            }
         }
         
         self.ws.event.error = { error in
