@@ -36,16 +36,15 @@ class TransactionsPresenter {
     
     func setupTransactions(_ transactions: [StoreTransaction]) {
         if transactions.count != self.transactions.count {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .medium
+            dateFormatter.locale = Locale(identifier: "en_US")
+            
             // Actual code to fetch the transactions
             let outputs = transactions.compactMap { tx -> TransactionOutput in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .medium
-                dateFormatter.timeStyle = .medium
-                dateFormatter.locale = Locale(identifier: "en_US") // US English Locale (en_US)
-                
                 let dateStr = dateFormatter.string(from: tx.date) // Jan 2, 2001
                 let amountInBCH = tx.amountInSatoshis.toBCHFormat()
-                
                 return TransactionOutput(txid: tx.txid, date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
             }
             
