@@ -36,7 +36,7 @@ class SocketService {
     
     var addressObs: PublishSubject<WebSocketTransactionResponse>?
     
-    init() {
+    private init() {
         self.ws.event.close = { code, reason, clean in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
                 self?.open()

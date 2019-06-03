@@ -24,7 +24,7 @@ class UserManager {
     fileprivate var _pin: String?
     var pin: String? { get { return _pin } }
 
-    init() {
+    private init() {
         let storageProvider = InternalStorageProvider()
         let ticker = storageProvider.getString("selectedCurrencyTicker") ?? "USD"
         

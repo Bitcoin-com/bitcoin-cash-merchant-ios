@@ -33,7 +33,7 @@ class RateManager {
         var rate: Double
     }
     
-    init() {
+    private init() {
         
         // Load symbols + basic rates
         // Then load the scheduler
