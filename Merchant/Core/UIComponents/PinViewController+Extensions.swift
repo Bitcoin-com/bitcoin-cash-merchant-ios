@@ -54,11 +54,9 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     }
     
     @objc func didPushPin(sender: UIButton) {
-        guard let pin = sender.currentTitle else {
-            return
+        if let pin = sender.currentTitle {
+            pinDelegate?.onPushPin(pin)
         }
-        
-        pinDelegate?.onPushPin(pin)
     }
     
     // Datasource

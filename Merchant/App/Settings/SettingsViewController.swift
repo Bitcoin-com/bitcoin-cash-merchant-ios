@@ -220,27 +220,21 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SettingsViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
-
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-
         if textField == companyNameTextField {
-
-            guard let newCompanyName = companyNameTextField.text else {
-                return
+            if let newCompanyName = companyNameTextField.text {
+                presenter?.didEditCompanyName(newCompanyName)
             }
-
-            presenter?.didEditCompanyName(newCompanyName)
-        } else if textField == destinationAddressTextField {
-
-            guard let newDestination = destinationAddressTextField.text else {
-                return
+        }
+        
+        if textField == destinationAddressTextField {
+            if let newDestination = destinationAddressTextField.text {
+                presenter?.didEditDestination(newDestination)
             }
-
-            presenter?.didEditDestination(newDestination)
         }
     }
 }

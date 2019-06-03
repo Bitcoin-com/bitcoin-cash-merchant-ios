@@ -57,19 +57,17 @@ class TransactionsPresenter {
     func didPushViewTransaction(forIndex index: Int) {
         let transaction = transactions[index]
         
-        guard let url = URL(string: "https://explorer.bitcoin.com/bch/tx/\(transaction.txid)") else {
-            return
+        if let url = URL(string: "https://explorer.bitcoin.com/bch/tx/\(transaction.txid)") {
+            UIApplication.shared.open(url)
         }
-        UIApplication.shared.open(url)
     }
     
     func didPushViewAddress(forIndex index: Int) {
         let transaction = transactions[index]
         
-        guard let url = URL(string: "https://explorer.bitcoin.com/bch/address/\(transaction.toAddress)") else {
-            return
+        if let url = URL(string: "https://explorer.bitcoin.com/bch/address/\(transaction.toAddress)") {
+            UIApplication.shared.open(url)
         }
-        UIApplication.shared.open(url)
     }
     
     func didPushCopyTransaction(forIndex index: Int) {
