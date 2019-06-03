@@ -23,7 +23,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Constants.Strings.scanner
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .black
     }
     
     fileprivate func checkPermission() {
