@@ -62,7 +62,7 @@ extension PinPresenter {
                 case .set:
                     if let newPin = self.newPin {
                         if pin == newPin {
-                            UserManager.shared.setPin(newPin)
+                            UserManager.shared.pin = newPin
                             
                             viewDelegate?.showAlert(Constants.Strings.success, message: Constants.Strings.pinHasBeenChanged, action: Constants.Strings.ok, actionHandler: { [weak self] in
                                 self?.router?.transitBack()

@@ -11,71 +11,53 @@ import RealmSwift
 
 class UserManager {
     static let shared = UserManager()
+    fileprivate let storage = InternalStorageProvider()
     
-    fileprivate var _selectedCurrency: StoreCurrency
-    var selectedCurrency: StoreCurrency { get { return _selectedCurrency } }
+    // MARK: User Properties
+    var destination: String? {
+        didSet {
+            if destination?.count == 0 {
+                destination = nil
+            }
+            
+            (destination == nil) ? storage.remove("destination") : storage.setString(destination!, key: "destination")
+        }
+    }
     
-    fileprivate var _destination: String?
-    var destination: String? { get { return _destination } }
+    var companyName: String? {
+        didSet {
+            if companyName?.count == 0 {
+                companyName = nil
+            }
+            
+            (companyName == nil) ? storage.remove("companyName") : storage.setString(companyName!, key: "companyName")
+        }
+    }
     
-    fileprivate var _companyName: String?
-    var companyName: String? { get { return _companyName } }
+    var pin: String? {
+        didSet {
+            if pin?.count == 0 {
+                pin = nil
+            }
+            
+            (pin == nil) ? storage.remove("pin") : storage.setString(pin!, key: "pin")
+        }
+    }
     
-    fileprivate var _pin: String?
-    var pin: String? { get { return _pin } }
-
+    var selectedCurrency: StoreCurrency {
+        didSet {
+            storage.setString(selectedCurrency.ticker, key: "selectedCurrencyTicker")
+        }
+    }
+    
     private init() {
-        let storageProvider = InternalStorageProvider()
-        let ticker = storageProvider.getString("selectedCurrencyTicker") ?? "USD"
-        
+        let ticker = storage.getString("selectedCurrencyTicker") ?? "USD"
         let realm = try! Realm()
-        _selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker) ?? RateManager.shared.defaultCurrency
         
-        _destination = storageProvider.getString("destination")
-        _companyName = storageProvider.getString("companyName")
-        _pin = storageProvider.getString("pin")
-    }
-}
-
-extension UserManager {
-    
-    func setSelectedCurrency(_ selectedCurrency: StoreCurrency) {
-        let storageProvider = InternalStorageProvider()
-        storageProvider.setString(selectedCurrency.ticker, key: "selectedCurrencyTicker")
-        self._selectedCurrency = selectedCurrency
-    }
-    
-    func setDestination(_ destination: String) {
-        let storageProvider = InternalStorageProvider()
-        if destination.count == 0 {
-            storageProvider.remove("destination")
-            self._destination = nil
-        } else {
-            storageProvider.setString(destination, key: "destination")
-            self._destination = destination
-        }
-    }
-    
-    func setCompanyName(_ companyName: String) {
-        let storageProvider = InternalStorageProvider()
-        if companyName.count == 0 {
-            storageProvider.remove("companyName")
-            self._companyName = nil
-        } else {
-            storageProvider.setString(companyName, key: "companyName")
-            self._companyName = companyName
-        }
-    }
-    
-    func setPin(_ pin: String) {
-        let storageProvider = InternalStorageProvider()
-        if pin.count == 0 {
-            storageProvider.remove("pin")
-            self._pin = nil
-        } else {
-            storageProvider.setString(pin, key: "pin")
-            self._pin = pin
-        }
+        selectedCurrency = realm.object(ofType: StoreCurrency.self, forPrimaryKey: ticker) ?? RateManager.shared.defaultCurrency
+        destination = storage.getString("destination")
+        companyName = storage.getString("companyName")
+        pin = storage.getString("pin")
     }
     
     func hasPin() -> Bool {

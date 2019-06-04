@@ -12,11 +12,11 @@ import BitcoinKit
 class EditUserInteractor {
     
     func editSelectedCurrency(_ newCurrency: StoreCurrency) {
-        UserManager.shared.setSelectedCurrency(newCurrency)
+        UserManager.shared.selectedCurrency = newCurrency
     }
     
     func editCompanyName(_ newCompanyName: String) {
-        UserManager.shared.setCompanyName(newCompanyName)
+        UserManager.shared.companyName = newCompanyName
     }
     
     func editDestination(_ newDestination: String) -> Bool {
@@ -25,7 +25,7 @@ class EditUserInteractor {
             return false
         }
         
-        UserManager.shared.setDestination(newDestination)
+        UserManager.shared.destination = newDestination
         
         return true
     }
