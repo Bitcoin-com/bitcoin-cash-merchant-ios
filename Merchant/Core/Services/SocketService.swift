@@ -37,19 +37,16 @@ class SocketService {
     var addressObs: PublishSubject<WebSocketTransactionResponse>?
     
     init() {
-        self.ws.event.close = { code, reason, clean in
+        self.ws.event.close = { [weak self] code, reason, clean in
             sleep(2)
-            self.open()
+            self?.open()
         }
         
         self.ws.event.error = { error in
-            
-            print("error \(error)")
-            
             // TODO: Show a red bar if the connection is lost.
         }
         
-        self.ws.event.message = { message in
+        self.ws.event.message = { [weak self] message in
             let message = message as? String
             let data = message?.data(using: .utf8)
             
@@ -57,9 +54,7 @@ class SocketService {
                 return
             }
             
-            print("received transaction", transaction)
-            
-            self.addressObs?.onNext(transaction)
+            self?.addressObs?.onNext(transaction)
             
             // Received from the websocket : {"txid":"04dc5f2c5c012ef20de56fde1582139c477f7656de33b1342ed003009eabdf41","fees":0,"confirmations":0,"amount":16983,"outputs":[{"address":"3JL2QfYGqb6jbXNUKVY2RES3exxpRZAi1a","value":16983}]}
         }

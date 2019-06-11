@@ -10,8 +10,9 @@
 import UIKit
 import Lottie
 import AVKit
+import BDCKit
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScannerViewController: BDCViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var presenter: ScannerPresenter?
     
@@ -24,8 +25,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         super.viewDidLoad()
         
         title = Constants.Strings.scanner
-        
-        view.backgroundColor = UIColor.white
         
         checkPermission()
     }
@@ -130,7 +129,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     fileprivate func failed() {
         let ac = UIAlertController(title: Constants.Strings.scanningNotSupported, message: Constants.Strings.scanningNotSupportedDetails, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: Constants.Strings.ok, style: .default))
+        ac.addAction(UIAlertAction(title: Constants.Strings.ok, style: .default, handler: { [weak self] _ in
+            self?.presenter?.didPushClose()
+        }))
         present(ac, animated: true)
         captureSession = nil
     }
