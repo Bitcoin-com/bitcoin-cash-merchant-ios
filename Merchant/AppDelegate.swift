@@ -102,9 +102,9 @@ extension AppDelegate {
                 realm.deleteAll()
             }
             
-            UserManager.shared.setPin("")
-            UserManager.shared.setDestination("")
-            UserManager.shared.setCompanyName("Your company name")
+            UserManager.shared.pin = ""
+            UserManager.shared.destination = ""
+            UserManager.shared.companyName = "Your company name"
         }
     }
 }

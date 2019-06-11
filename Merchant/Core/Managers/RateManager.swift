@@ -12,8 +12,6 @@ import RealmSwift
 import Moya
 
 class RateManager {
-    
-    // Singleton
     static let shared = RateManager()
     
     var defaultRate = StoreRate()
@@ -35,7 +33,7 @@ class RateManager {
         var rate: Double
     }
     
-    init() {
+    private init() {
         
         // Load symbols + basic rates
         // Then load the scheduler

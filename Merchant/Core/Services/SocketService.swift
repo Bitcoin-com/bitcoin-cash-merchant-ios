@@ -36,10 +36,11 @@ class SocketService {
     
     var addressObs: PublishSubject<WebSocketTransactionResponse>?
     
-    init() {
+    private init() {
         self.ws.event.close = { code, reason, clean in
-            sleep(2)
-            self.open()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.open()
+            }
         }
         
         self.ws.event.error = { error in
@@ -53,15 +54,11 @@ class SocketService {
             let message = message as? String
             let data = message?.data(using: .utf8)
             
-            guard let transaction = try? JSONDecoder().decode(WebSocketTransactionResponse.self, from: data!) else {
-                return
+            if let transaction = try? JSONDecoder().decode(WebSocketTransactionResponse.self, from: data!) {
+                print("received transaction", transaction)
+                self.addressObs?.onNext(transaction)
+                // Received from the websocket : {"txid":"04dc5f2c5c012ef20de56fde1582139c477f7656de33b1342ed003009eabdf41","fees":0,"confirmations":0,"amount":16983,"outputs":[{"address":"3JL2QfYGqb6jbXNUKVY2RES3exxpRZAi1a","value":16983}]}
             }
-            
-            print("received transaction", transaction)
-            
-            self.addressObs?.onNext(transaction)
-            
-            // Received from the websocket : {"txid":"04dc5f2c5c012ef20de56fde1582139c477f7656de33b1342ed003009eabdf41","fees":0,"confirmations":0,"amount":16983,"outputs":[{"address":"3JL2QfYGqb6jbXNUKVY2RES3exxpRZAi1a","value":16983}]}
         }
         
         open()

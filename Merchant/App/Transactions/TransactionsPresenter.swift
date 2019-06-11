@@ -21,7 +21,7 @@ class TransactionsPresenter {
     var getTransactionsInteractor: GetTransactionsInteractor?
     weak var viewDelegate: TransactionsViewController?
     
-    fileprivate var bag = DisposeBag()
+    fileprivate let bag = DisposeBag()
     fileprivate var transactions = [StoreTransaction]()
     
     func viewDidLoad() {
@@ -36,20 +36,15 @@ class TransactionsPresenter {
     
     func setupTransactions(_ transactions: [StoreTransaction]) {
         if transactions.count != self.transactions.count {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .medium
+            dateFormatter.locale = Locale(identifier: "en_US")
+            
             // Actual code to fetch the transactions
             let outputs = transactions.compactMap { tx -> TransactionOutput in
-                
-                // Date
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .medium
-                dateFormatter.timeStyle = .medium
-                
-                // US English Locale (en_US)
-                dateFormatter.locale = Locale(identifier: "en_US")
                 let dateStr = dateFormatter.string(from: tx.date) // Jan 2, 2001
-                
                 let amountInBCH = tx.amountInSatoshis.toBCHFormat()
-                
                 return TransactionOutput(txid: tx.txid, date: dateStr, amountInFiat: tx.amountInFiat, amountInBCH: amountInBCH)
             }
             
@@ -62,19 +57,17 @@ class TransactionsPresenter {
     func didPushViewTransaction(forIndex index: Int) {
         let transaction = transactions[index]
         
-        guard let url = URL(string: "https://explorer.bitcoin.com/bch/tx/\(transaction.txid)") else {
-            return
+        if let url = URL(string: "https://explorer.bitcoin.com/bch/tx/\(transaction.txid)") {
+            UIApplication.shared.open(url)
         }
-        UIApplication.shared.open(url)
     }
     
     func didPushViewAddress(forIndex index: Int) {
         let transaction = transactions[index]
         
-        guard let url = URL(string: "https://explorer.bitcoin.com/bch/address/\(transaction.toAddress)") else {
-            return
+        if let url = URL(string: "https://explorer.bitcoin.com/bch/address/\(transaction.toAddress)") {
+            UIApplication.shared.open(url)
         }
-        UIApplication.shared.open(url)
     }
     
     func didPushCopyTransaction(forIndex index: Int) {

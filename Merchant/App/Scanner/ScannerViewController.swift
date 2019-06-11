@@ -22,19 +22,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = Constants.Strings.scanner
-        
-        view.backgroundColor = UIColor.white
-        
-        checkPermission()
+        view.backgroundColor = .black
     }
     
     fileprivate func checkPermission() {
-        //Camera
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] success in
             if !success {
-                // Handle the case without permission
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) else {
                     return
                 }
@@ -108,7 +102,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             self.previewLayer.videoGravity = .resizeAspectFill
             self.view.layer.addSublayer(self.previewLayer)
             
-            self.captureSession.startRunning()
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                self?.captureSession.startRunning()
+            }
             
             self.animationView = LOTAnimationView(name: "qr_animation")
             self.view.addSubview(self.animationView)
@@ -135,9 +131,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         captureSession = nil
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupCamera()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkPermission()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -11,7 +11,7 @@ import BDCKit
 
 class PinController: PinViewController {
 
-    var pinMessageLabel: BDCLabel = {
+    let pinMessageLabel: BDCLabel = {
         let label = BDCLabel.build(.header)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,7 @@ class PinController: PinViewController {
         return label
     }()
 
-    var pinView: UIView = {
+    let pinView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false

@@ -11,18 +11,18 @@ import BDCKit
 
 class PaymentInputViewController: PinViewController {
     
-    var amountLabel: BDCLabel = {
+    let amountLabel: BDCLabel = {
         let label = BDCLabel.build(.header)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    var amountView: UIView = {
+    let amountView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var alertStackView: UIStackView = {
+    let alertStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
@@ -30,7 +30,7 @@ class PaymentInputViewController: PinViewController {
         return stackView
     }()
     
-    var blurView: UIVisualEffectView = {
+    let blurView: UIVisualEffectView = {
         let blurView = UIVisualEffectView(effect: nil)
         blurView.effect = UIBlurEffect(style: .extraLight)
         blurView.alpha = 0.8

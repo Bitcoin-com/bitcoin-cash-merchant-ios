@@ -26,7 +26,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     let cellId = "pinCell"
     
     var pinDelegate: PinViewControllerDelegate?
-    var pinCollectionView: UICollectionView = {
+    let pinCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
@@ -54,18 +54,12 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
     }
     
     @objc func didPushPin(sender: UIButton) {
-        guard let pin = sender.currentTitle else {
-            return
+        if let pin = sender.currentTitle {
+            pinDelegate?.onPushPin(pin)
         }
-        
-        pinDelegate?.onPushPin(pin)
     }
     
     // Datasource
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return hasValid ? items.count : items.count - 1
     }
