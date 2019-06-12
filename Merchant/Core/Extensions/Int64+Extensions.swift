@@ -21,12 +21,10 @@ extension Int64 {
     func toBCHFormat() -> String {
         var satoshisStr: [Character] = self.description.reversed()
         
-        // Make sure our str has minimum 8 characters
         while (satoshisStr.count < 9) {
             satoshisStr.append("0")
         }
-                
-        // Then add space when it is needed
+        
         var satoshisStrWithSpace = [Character]()
         satoshisStrWithSpace.insert(satoshisStr.removeFirst(), at: 0)
         satoshisStrWithSpace.insert(satoshisStr.removeFirst(), at: 0)

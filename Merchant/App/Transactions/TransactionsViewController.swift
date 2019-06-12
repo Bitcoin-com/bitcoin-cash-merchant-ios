@@ -60,18 +60,11 @@ class TransactionsViewController: BDCViewController {
 }
 
 extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    // Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 1
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let viewAddressAction = UIAlertAction(title: "View address on explorer", style: .default, handler: { _ in
