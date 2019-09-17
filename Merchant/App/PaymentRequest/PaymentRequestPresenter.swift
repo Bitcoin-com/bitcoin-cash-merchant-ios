@@ -52,4 +52,16 @@ class PaymentRequestPresenter {
     func didPushClose() {
         router?.transitBackTo()
     }
+    
+    func showTransactionAlert(title: String, message: String, isSuccess: Bool) {
+        self.viewDelegate?.showAlert(title,
+                                     message: message,
+                                     action: "OK",
+                                     actionHandler: { [weak self] in
+                                        if isSuccess {
+                                            self?.viewDelegate?.onSuccess()
+                                            self?.requestDelegate?.paymentReceived()
+                                        }
+        })
+    }
 }
