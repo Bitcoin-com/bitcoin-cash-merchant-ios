@@ -32,7 +32,13 @@ class WaitTransactionInteractor {
                 .observeAddress(withAddress: legacyAddress)
                 .subscribe(onNext: { [weak self] transaction in
                     
-                    self?.showAlertIfIncorrectAmount(transaction: transaction, pr: pr, legacyAddress: legacyAddress)
+                    if let checkAmount = self?.isIncorrectAmount(transaction: transaction,
+                                                                 pr: pr,
+                                                                 legacyAddress: legacyAddress),
+                        checkAmount.isIncorrectAmount {
+                        self?.showIncorrectAmountAlert(receivedAmount: checkAmount.receivedAmount,
+                                                       expectedAmount: pr.amountInSatoshis)
+                    }
                     
                     let realm = try! Realm()
                     let numberOfResult = realm
@@ -45,17 +51,7 @@ class WaitTransactionInteractor {
                         return
                     }
                     
-                    let storeTransaction = StoreTransaction()
-                    storeTransaction.amountInFiat = pr.amountInFiat
-                    storeTransaction.amountInSatoshis = pr.amountInSatoshis
-                    storeTransaction.toAddress = pr.toAddress
-                    storeTransaction.txid = transaction.txid
-                    storeTransaction.date = Date()
-                    
-                    try! realm.write {
-                        realm.add(storeTransaction)
-                    }
-                    
+                    self?.saveTransaction(txId: transaction.txid, pr: pr, realm: realm)
                     single(.success(true))
                 })
             
@@ -68,21 +64,44 @@ class WaitTransactionInteractor {
     
     // MARK: - Private
     /*
-     * Alert sender that he was overpaid/underpaid
+     * Check if overpaid/underpaid
      */
-    fileprivate func showAlertIfIncorrectAmount(transaction: SocketService.WebSocketTransactionResponse,
-                                                pr: PaymentRequest,
-                                                legacyAddress: String) {
+    fileprivate func isIncorrectAmount(transaction: SocketService.WebSocketTransactionResponse,
+                                       pr: PaymentRequest,
+                                       legacyAddress: String) -> (isIncorrectAmount: Bool, receivedAmount: Int64) {
         let amount = transaction.outputs
             .filter({ $0.address == legacyAddress })
             .reduce(0, { $0 + $1.value })
         
-        if pr.amountInSatoshis != amount {
-            let diff = pr.amountInSatoshis - Int64(amount)
-            let message = diff > 0 ? "You overpaid by \(diff)" :
-            "You didn’t pay the full amount, you underpaid by \(UInt(diff))"
-            
-            self.presenter?.showTransactionAlert(title: "", message: message, isSuccess: true)
+        return (pr.amountInSatoshis != amount, Int64(amount))
+    }
+    
+    /*
+     * Show Alert if overpaid/underpaid
+     */
+    fileprivate func showIncorrectAmountAlert(receivedAmount: Int64, expectedAmount: Int64) {
+        let diff = receivedAmount - expectedAmount
+        let message = diff > 0 ? "You overpaid by \(diff)" :
+        "You didn’t pay the full amount, you underpaid by \(UInt(diff))"
+        
+        self.presenter?.showTransactionAlert(title: "", message: message, isSuccess: true)
+    }
+    
+    /*
+     * Save Transaction locally
+     */
+    fileprivate func saveTransaction(txId: String, pr: PaymentRequest, realm: Realm?) {
+        let newRealm: Realm = (realm == nil) ? try! Realm() : realm!
+
+        let storeTransaction = StoreTransaction()
+        storeTransaction.amountInFiat = pr.amountInFiat
+        storeTransaction.amountInSatoshis = pr.amountInSatoshis
+        storeTransaction.toAddress = pr.toAddress
+        storeTransaction.txid = txId
+        storeTransaction.date = Date()
+        
+        try! newRealm.write {
+            newRealm.add(storeTransaction)
         }
     }
 }
