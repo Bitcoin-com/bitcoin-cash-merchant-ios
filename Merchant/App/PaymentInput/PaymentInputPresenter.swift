@@ -27,7 +27,8 @@ class PaymentInputPresenter {
         setupCurrency()
     }
     
-    func viewWillAppear() {        
+    func viewWillAppear() {
+        cleanupInputField()
         let newCurrency = UserManager.shared.selectedCurrency
         
         if newCurrency != selectedCurrency {
