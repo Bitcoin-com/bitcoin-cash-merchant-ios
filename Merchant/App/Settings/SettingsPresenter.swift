@@ -14,7 +14,7 @@ class SettingsPresenter {
     var getCurrenciesInteractor: GetCurrenciesInteractor?
     var editUserInteractor: EditUserInteractor?
     
-    weak var viewDelegate: SettingsViewController?
+    weak var viewDelegate: SettingsViewProtocol?
     var router: SettingsRouter?
     
     init() {
@@ -37,6 +37,10 @@ class SettingsPresenter {
         
         let selectedIndex = currencies.firstIndex(where: { $0.ticker == currency.ticker }) ?? 0
         viewDelegate?.onGetCurrencies(currencies, selectedIndex: selectedIndex)
+    }
+    
+    func didPushSave() {
+        
     }
     
     func didPushScan() {

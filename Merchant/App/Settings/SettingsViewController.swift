@@ -10,6 +10,13 @@ import UIKit
 import Lottie
 import BDCKit
 
+protocol SettingsViewProtocol: class {
+    func onGetCompanyName(_ companyName: String)
+    func onGetDestination(_ destination: String)
+    func onGetCurrency(_ currency: String)
+    func onGetCurrencies(_ currencies: [StoreCurrency], selectedIndex: Int)
+}
+
 class SettingsViewController: BDCViewController {
     
     fileprivate let cellId = "settingsCell"
@@ -24,6 +31,7 @@ class SettingsViewController: BDCViewController {
     let destinationAddressTextField = BDCTextField.build(.type1)
     let pinCodeLabel = BDCLabel.build(.subtitle)
     let selectedCurrencyLabel = BDCLabel.build(.subtitle)
+    let saveButton = BDCButton.build(.type2)
     let currenciesPickerView = UIPickerView(frame: .zero)
     let currenciesView: UIView = {
         let view = UIView(frame: .zero)
@@ -37,17 +45,33 @@ class SettingsViewController: BDCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Constants.Strings.settings
+        setupNavigation()
+        setupTableView()
+        setupCurrencyView()
+        hideKeyboardWhenTappedAround()
         
+        presenter?.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
+    // MARK: - Private
+    fileprivate func setupNavigation() {
+        title = Constants.Strings.settings
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
+    }
+    
+    fileprivate func setupTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
         tableView.fillSuperView()
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(didPushClose))
-        
-        // Currency Picker
+    }
+    
+    fileprivate func setupCurrencyView() {
         currenciesPickerView.dataSource = self
         currenciesPickerView.delegate = self
         
@@ -74,21 +98,48 @@ class SettingsViewController: BDCViewController {
         currenciesStackView.bottomAnchor.constraint(equalTo: currenciesView.bottomAnchor, constant: -32).isActive = true
         currenciesStackView.leadingAnchor.constraint(equalTo: currenciesView.leadingAnchor, constant: 0).isActive = true
         currenciesStackView.trailingAnchor.constraint(equalTo: currenciesView.trailingAnchor, constant: 0).isActive = true
-        
-        hideKeyboardWhenTappedAround()
-        
-        presenter?.viewDidLoad()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
-    
-    @objc func didPushClose() {
+}
+
+extension SettingsViewController {
+    @objc fileprivate func didPushClose() {
         dismissKeyboard()
         presenter?.didPushClose()
     }
     
+    @objc func didPushSelectCurrency() {
+        dismissKeyboard()
+        
+        currenciesView.alpha = 0
+        view.addSubview(currenciesView)
+        currenciesView.fillSuperView()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.currenciesView.alpha = 1
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+    }
+    
+    @objc func didPushScan() {
+        presenter?.didPushScan()
+    }
+    
+    @objc func didPushChangePin() {
+        presenter?.didPushChangePin()
+    }
+    
+    @objc func didPushCloseSelectCurrency() {
+        currenciesView.removeFromSuperview()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    @objc func didPushSave() {
+        presenter?.didPushSave()
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SettingsViewController: SettingsViewProtocol {
     func onGetCompanyName(_ companyName: String) {
         companyNameTextField.text = companyName
     }
@@ -183,32 +234,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         stackView.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -16).isActive = true
         
         return cell
-    }
-    
-    @objc func didPushSelectCurrency() {
-        dismissKeyboard()
-        
-        currenciesView.alpha = 0
-        view.addSubview(currenciesView)
-        currenciesView.fillSuperView()
-        
-        UIView.animate(withDuration: 0.2) {
-            self.currenciesView.alpha = 1
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-        }
-    }
-    
-    @objc func didPushScan() {
-        presenter?.didPushScan()
-    }
-    
-    @objc func didPushChangePin() {
-        presenter?.didPushChangePin()
-    }
-    
-    @objc func didPushCloseSelectCurrency() {
-        currenciesView.removeFromSuperview()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
