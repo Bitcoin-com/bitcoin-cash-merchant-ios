@@ -30,7 +30,7 @@ class SocketService {
     
     static let shared = SocketService()
 
-    fileprivate let ws = WebSocket("ws://47.254.143.172:80/v1/address")
+    fileprivate let ws = WebSocket("wss://bch.api.wallet.bitcoin.com/bws/api/socket/v1/address")
     fileprivate var shouldListen = false
     fileprivate var address: String?
     
