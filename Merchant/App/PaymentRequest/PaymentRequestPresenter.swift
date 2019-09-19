@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol PaymentRequestPresenterDelegate {
-    func paymentReceived()
+    func cleanupInputField()
 }
 
 class PaymentRequestPresenter {
@@ -38,7 +38,7 @@ class PaymentRequestPresenter {
             .waitTransaction(withPr: pr)
             .subscribe(onSuccess: { isSuccess in
                 self.viewDelegate?.onSuccess()
-                self.requestDelegate?.paymentReceived()
+                self.requestDelegate?.cleanupInputField()
             }, onError: { error in
                 // Handle error
             })
@@ -60,7 +60,7 @@ class PaymentRequestPresenter {
                                      actionHandler: { [weak self] in
                                         if isSuccess {
                                             self?.viewDelegate?.onSuccess()
-                                            self?.requestDelegate?.paymentReceived()
+                                            self?.requestDelegate?.cleanupInputField()
                                         }
         })
     }

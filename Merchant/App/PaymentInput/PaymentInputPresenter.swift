@@ -45,7 +45,7 @@ class PaymentInputPresenter {
 
 extension PaymentInputPresenter: PaymentRequestPresenterDelegate {
     
-    func paymentReceived() {
+    func cleanupInputField() {
         viewDelegate?.onCleanAmount()
         didSetAmount("0")
     }
