@@ -17,6 +17,10 @@ class SettingsPresenter {
     weak var viewDelegate: SettingsViewProtocol?
     var router: SettingsRouter?
     
+    fileprivate var selectedCurrency: StoreCurrency?
+    fileprivate var companyName: String?
+    fileprivate var destination: String?
+
     init() {
         
     }
@@ -40,7 +44,17 @@ class SettingsPresenter {
     }
     
     func didPushSave() {
+        if let currency = selectedCurrency {
+            editUserInteractor?.editSelectedCurrency(currency)
+        }
+
+        if let name = companyName {
+            editUserInteractor?.editCompanyName(name)
+        }
         
+        if let destination = destination {
+            let _ = editUserInteractor?.editDestination(destination)
+        }
     }
     
     func didPushScan() {
@@ -57,24 +71,17 @@ class SettingsPresenter {
     }
     
     func didEditSelectedCurrency(_ newCurrency: StoreCurrency) {
-        editUserInteractor?.editSelectedCurrency(newCurrency)
+        selectedCurrency = newCurrency
         viewDelegate?.onGetCurrency(newCurrency.name)
     }
     
     func didEditCompanyName(_ newCompanyName: String) {
-        editUserInteractor?.editCompanyName(newCompanyName)
+        companyName = newCompanyName
     }
     
     func didEditDestination(_ newDestination: String) {
-        
-        guard let editUserInteractor = self.editUserInteractor else {
-            return
-        }
-        
-        if !editUserInteractor.editDestination(newDestination) {
-            let destination: String = UserManager.shared.destination ?? ""
-            viewDelegate?.onGetDestination(destination)
-        }
+        destination = newDestination
+        viewDelegate?.onGetDestination(newDestination)
     }
 }
 

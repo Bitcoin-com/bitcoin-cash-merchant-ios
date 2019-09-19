@@ -31,7 +31,7 @@ class SettingsViewController: BDCViewController {
     let destinationAddressTextField = BDCTextField.build(.type1)
     let pinCodeLabel = BDCLabel.build(.subtitle)
     let selectedCurrencyLabel = BDCLabel.build(.subtitle)
-    let saveButton = BDCButton.build(.type2)
+    let saveButton = BDCButton.build(.type1)
     let currenciesPickerView = UIPickerView(frame: .zero)
     let currenciesView: UIView = {
         let view = UIView(frame: .zero)
@@ -48,6 +48,7 @@ class SettingsViewController: BDCViewController {
         setupNavigation()
         setupTableView()
         setupCurrencyView()
+        setupSaveButton()
         hideKeyboardWhenTappedAround()
         
         presenter?.viewDidLoad()
@@ -98,6 +99,18 @@ class SettingsViewController: BDCViewController {
         currenciesStackView.bottomAnchor.constraint(equalTo: currenciesView.bottomAnchor, constant: -32).isActive = true
         currenciesStackView.leadingAnchor.constraint(equalTo: currenciesView.leadingAnchor, constant: 0).isActive = true
         currenciesStackView.trailingAnchor.constraint(equalTo: currenciesView.trailingAnchor, constant: 0).isActive = true
+    }
+    
+    fileprivate func setupSaveButton() {
+        self.saveButton.titleLabel?.font = saveButton.titleLabel?.font.withSize(17)
+        self.saveButton.setTitle("Save", for: .normal)
+        self.saveButton.addTarget(self, action: #selector(didPushSave), for: .touchUpInside)
+        self.view.addSubview(self.saveButton)
+        
+        saveButton.heightAnchor.constraint(equalToConstant: 70.0)
+        saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
     }
 }
 
