@@ -16,7 +16,8 @@ extension Double {
         
         let multiplicand = Decimal(floatLiteral: self)
         let product = multiplicand * multiplier
-        return (product as NSDecimalNumber).int64Value
+        let productDouble = NSDecimalNumber(decimal: product).doubleValue
+        return Int64(productDouble)
     }
     
     func toBCH() -> Double {
