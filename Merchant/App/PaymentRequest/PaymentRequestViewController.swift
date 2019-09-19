@@ -89,7 +89,7 @@ class PaymentRequestViewController: BDCViewController {
         successAnimation.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         interactionController = CircleInteractionController(viewController: self)
-}
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         presenter?.viewDidDisappear()
@@ -114,6 +114,17 @@ class PaymentRequestViewController: BDCViewController {
         UIView.animate(withDuration: 0.2) {
             self.waitingLabel.alpha = 0
         }
+    }
+    
+    func showAlert(_ title: String, message: String, action: String, actionHandler: (() -> ())? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: action, style: .default) { _ in
+            if let handler = actionHandler {
+                handler()
+            }
+        }
+        alert.addAction(alertAction)
+        present(alert, animated: true)
     }
 }
 

@@ -10,7 +10,24 @@ import Foundation
 
 extension Double {
     func toSatoshis() -> Int64 {
-        return Int64(self*100000000)
+        guard let multiplier = Decimal(string: "100000000") else {
+            return Int64(self*100000000)
+        }
+        
+        let multiplicand = Decimal(floatLiteral: self)
+        let product = multiplicand * multiplier
+        let productDouble = NSDecimalNumber(decimal: product).doubleValue
+        return Int64(productDouble)
+    }
+    
+    func toBCH() -> Double {
+        guard let divisor = Decimal(string: "100000000") else {
+            return self / 100000000
+        }
+        
+        let dividend = Decimal(floatLiteral: self)
+        let quotient = dividend / divisor
+        return (quotient as NSDecimalNumber).doubleValue
     }
     
     func toString() -> String {

@@ -15,7 +15,7 @@ extension Int64 {
     }
     
     func toBCH() -> Double {
-        return self.toDouble()/100000000
+        return self.toDouble().toBCH()
     }
     
     func toBCHFormat() -> String {

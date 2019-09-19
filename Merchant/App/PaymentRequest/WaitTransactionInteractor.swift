@@ -13,6 +13,8 @@ import SwiftWebSocket
 
 class WaitTransactionInteractor {
     
+    weak var presenter: PaymentRequestPresenter?
+    
     enum WaitTransactionInteractorError: Error {
         case wrongAmount
     }
@@ -28,16 +30,9 @@ class WaitTransactionInteractor {
             let disposable = SocketService
                 .shared
                 .observeAddress(withAddress: legacyAddress)
-                .subscribe(onNext: { transaction in
+                .subscribe(onNext: { [weak self] transaction in
                     
-                    let amount = transaction.outputs
-                        .filter({ $0.address == legacyAddress })
-                        .reduce(0, { $0 + $1.value })
-                    
-                    guard pr.amountInSatoshis == amount else {
-                        // Not the right amount, we wait
-                        return
-                    }
+                    self?.showAlertIfIncorrectAmount(transaction: transaction, pr: pr, legacyAddress: legacyAddress)
                     
                     let realm = try! Realm()
                     let numberOfResult = realm
@@ -60,7 +55,7 @@ class WaitTransactionInteractor {
                     try! realm.write {
                         realm.add(storeTransaction)
                     }
-                                        
+                    
                     single(.success(true))
                 })
             
@@ -69,5 +64,25 @@ class WaitTransactionInteractor {
             }
         }
         
+    }
+    
+    // MARK: - Private
+    /*
+     * Alert sender that he was overpaid/underpaid
+     */
+    fileprivate func showAlertIfIncorrectAmount(transaction: SocketService.WebSocketTransactionResponse,
+                                                pr: PaymentRequest,
+                                                legacyAddress: String) {
+        let amount = transaction.outputs
+            .filter({ $0.address == legacyAddress })
+            .reduce(0, { $0 + $1.value })
+        
+        if pr.amountInSatoshis != amount {
+            let diff = pr.amountInSatoshis - Int64(amount)
+            let message = diff > 0 ? "You overpaid by \(diff)" :
+            "You didn’t pay the full amount, you underpaid by \(UInt(diff))"
+            
+            self.presenter?.showTransactionAlert(title: "", message: message, isSuccess: true)
+        }
     }
 }
