@@ -31,7 +31,19 @@ class WaitTransactionInteractor {
                 .shared
                 .observeAddress(withAddress: legacyAddress)
                 .subscribe(onNext: { [weak self] transaction in
-                    self?.saveTransaction(txId: transaction.txid, pr: pr)
+                    let realm = try! Realm()
+                    let numberOfResult = realm
+                        .objects(StoreTransaction.self)
+                        .filter("txid = %@", transaction.txid)
+                        .count
+                    
+                    guard numberOfResult == 0 else {
+                        // Parasite, we wait
+                        return
+                    }
+                    
+                    self?.saveTransaction(txId: transaction.txid, pr: pr, realm: realm)
+                    
                     single(.success(true))
                 })
             
@@ -70,32 +82,18 @@ class WaitTransactionInteractor {
     /*
      * Save Transaction locally
      */
-    fileprivate func saveTransaction(txId: String, pr: PaymentRequest) {
-        var transactionId = txId
-        
-        let realm = try! Realm()
-        let numberOfResult = realm
-            .objects(StoreTransaction.self)
-            .filter("txid = %@", transactionId)
-            .count
-        
-        if numberOfResult > 0 {
-            // For some reasons, the txId already existed
-            // Need to modify the transactionId so it doesn't crash the local db
-            transactionId = "\(transactionId)-\(numberOfResult)"
-            debugPrint("txId: ", txId)
-            debugPrint("transactionId: ", transactionId)
-        }
+    fileprivate func saveTransaction(txId: String, pr: PaymentRequest, realm: Realm?) {
+        let newRealm: Realm = (realm == nil) ? try! Realm() : realm!
 
         let storeTransaction = StoreTransaction()
         storeTransaction.amountInFiat = pr.amountInFiat
         storeTransaction.amountInSatoshis = pr.amountInSatoshis
         storeTransaction.toAddress = pr.toAddress
-        storeTransaction.txid = transactionId
+        storeTransaction.txid = txId
         storeTransaction.date = Date()
         
-        try! realm.write {
-            realm.add(storeTransaction)
+        try! newRealm.write {
+            newRealm.add(storeTransaction)
         }
     }
 }
