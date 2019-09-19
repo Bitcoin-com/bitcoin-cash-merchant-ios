@@ -31,27 +31,7 @@ class WaitTransactionInteractor {
                 .shared
                 .observeAddress(withAddress: legacyAddress)
                 .subscribe(onNext: { [weak self] transaction in
-                    
-                    if let checkAmount = self?.isIncorrectAmount(transaction: transaction,
-                                                                 pr: pr,
-                                                                 legacyAddress: legacyAddress),
-                        checkAmount.isIncorrectAmount {
-                        self?.showIncorrectAmountAlert(receivedAmount: checkAmount.receivedAmount,
-                                                       expectedAmount: pr.amountInSatoshis)
-                    }
-                    
-                    let realm = try! Realm()
-                    let numberOfResult = realm
-                        .objects(StoreTransaction.self)
-                        .filter("txid = %@", transaction.txid)
-                        .count
-                    
-                    guard numberOfResult == 0 else {
-                        // Parasite, we wait
-                        return
-                    }
-                    
-                    self?.saveTransaction(txId: transaction.txid, pr: pr, realm: realm)
+                    self?.saveTransaction(txId: transaction.txid, pr: pr)
                     single(.success(true))
                 })
             
@@ -90,18 +70,32 @@ class WaitTransactionInteractor {
     /*
      * Save Transaction locally
      */
-    fileprivate func saveTransaction(txId: String, pr: PaymentRequest, realm: Realm?) {
-        let newRealm: Realm = (realm == nil) ? try! Realm() : realm!
+    fileprivate func saveTransaction(txId: String, pr: PaymentRequest) {
+        var transactionId = txId
+        
+        let realm = try! Realm()
+        let numberOfResult = realm
+            .objects(StoreTransaction.self)
+            .filter("txid = %@", transactionId)
+            .count
+        
+        if numberOfResult > 0 {
+            // For some reasons, the txId already existed
+            // Need to modify the transactionId so it doesn't crash the local db
+            transactionId = "\(transactionId)-\(numberOfResult)"
+            debugPrint("txId: ", txId)
+            debugPrint("transactionId: ", transactionId)
+        }
 
         let storeTransaction = StoreTransaction()
         storeTransaction.amountInFiat = pr.amountInFiat
         storeTransaction.amountInSatoshis = pr.amountInSatoshis
         storeTransaction.toAddress = pr.toAddress
-        storeTransaction.txid = txId
+        storeTransaction.txid = transactionId
         storeTransaction.date = Date()
         
-        try! newRealm.write {
-            newRealm.add(storeTransaction)
+        try! realm.write {
+            realm.add(storeTransaction)
         }
     }
 }
