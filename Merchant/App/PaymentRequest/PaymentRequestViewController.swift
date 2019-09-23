@@ -16,12 +16,12 @@ class PaymentRequestViewController: BDCViewController {
     var presenter: PaymentRequestPresenter?
     var interactionController: CircleInteractionController?
     
-    let qrImageView: UIImageView = {
+    fileprivate let qrImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    let waitingLabel: BDCLabel = {
+    fileprivate let waitingLabel: BDCLabel = {
         let label = BDCLabel.build(.title)
         label.text = Constants.Strings.waitingForPayment
         label.textColor = .red
@@ -29,24 +29,25 @@ class PaymentRequestViewController: BDCViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let fiatAmountLabel: BDCLabel = {
+    fileprivate let fiatAmountLabel: BDCLabel = {
         let label = BDCLabel.build(.header)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let bchAmountLabel: BDCLabel = {
+    fileprivate let bchAmountLabel: BDCLabel = {
         let label = BDCLabel.build(.subtitle)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let successAnimation: LOTAnimationView = {
+    fileprivate let successAnimation: LOTAnimationView = {
         let animationView = LOTAnimationView(name: "success_animation")
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.isHidden = true
         return animationView
     }()
+    fileprivate let closeButton = BDCButton.build(.type7)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +91,8 @@ class PaymentRequestViewController: BDCViewController {
         successAnimation.heightAnchor.constraint(equalToConstant: qrSize).isActive = true
         
         interactionController = CircleInteractionController(viewController: self)
+        
+        self.setupCloseButton()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -129,6 +132,20 @@ class PaymentRequestViewController: BDCViewController {
     }
 }
 
+extension PaymentRequestViewController {
+    fileprivate func setupCloseButton() {
+        self.closeButton.setTitle("Close", for: .normal)
+        self.closeButton.addTarget(self, action: #selector(didPushClose), for: .touchUpInside)
+        self.view.addSubview(self.closeButton)
+        
+        closeButton.heightAnchor.constraint(equalToConstant: 70.0)
+        closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+    }
+}
+
+// MARK: - QR
 extension PaymentRequestViewController {
     
     fileprivate func generateQRCode(withData data: String) -> UIImage? {
