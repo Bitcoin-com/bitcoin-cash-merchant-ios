@@ -31,7 +31,7 @@ class SettingsViewController: BDCViewController {
     let destinationAddressTextField = BDCTextField.build(.type1)
     let pinCodeLabel = BDCLabel.build(.subtitle)
     let selectedCurrencyLabel = BDCLabel.build(.subtitle)
-    let saveButton = BDCButton.build(.type1)
+    let saveButton = BDCButton.build(.type7)
     let currenciesPickerView = UIPickerView(frame: .zero)
     let currenciesView: UIView = {
         let view = UIView(frame: .zero)
@@ -102,7 +102,6 @@ class SettingsViewController: BDCViewController {
     }
     
     fileprivate func setupSaveButton() {
-        self.saveButton.titleLabel?.font = saveButton.titleLabel?.font.withSize(17)
         self.saveButton.setTitle("Save", for: .normal)
         self.saveButton.addTarget(self, action: #selector(didPushSave), for: .touchUpInside)
         self.view.addSubview(self.saveButton)
