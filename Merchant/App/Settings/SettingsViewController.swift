@@ -32,6 +32,7 @@ class SettingsViewController: BDCViewController {
     let pinCodeLabel = BDCLabel.build(.subtitle)
     let selectedCurrencyLabel = BDCLabel.build(.subtitle)
     let saveButton = BDCButton.build(.type7)
+    let saveCurrencyButton = BDCButton.build(.type7)
     let currenciesPickerView = UIPickerView(frame: .zero)
     let currenciesView: UIView = {
         let view = UIView(frame: .zero)
@@ -49,6 +50,7 @@ class SettingsViewController: BDCViewController {
         setupTableView()
         setupCurrencyView()
         setupSaveButton()
+        setupCurrencySaveButton()
         hideKeyboardWhenTappedAround()
         
         presenter?.viewDidLoad()
@@ -76,12 +78,7 @@ class SettingsViewController: BDCViewController {
         currenciesPickerView.dataSource = self
         currenciesPickerView.delegate = self
         
-        let closeButton = BDCButton.build(.type3)
-        closeButton.setImage(UIImage(named: "close_icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        closeButton.tintColor = BDCColor.green.uiColor
-        closeButton.addTarget(self, action: #selector(didPushCloseSelectCurrency), for: .touchUpInside)
-        
-        let currenciesStackView = UIStackView(arrangedSubviews: [currenciesPickerView, closeButton])
+        let currenciesStackView = UIStackView(arrangedSubviews: [currenciesPickerView, saveCurrencyButton])
         currenciesStackView.translatesAutoresizingMaskIntoConstraints = false
         currenciesStackView.axis = .vertical
         currenciesStackView.distribution = .fill
@@ -110,6 +107,15 @@ class SettingsViewController: BDCViewController {
         saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+    }
+    
+    fileprivate func setupCurrencySaveButton() {
+        self.saveCurrencyButton.setTitle("Save", for: .normal)
+        self.saveCurrencyButton.addTarget(self, action: #selector(didPushCloseSelectCurrency), for: .touchUpInside)
+        saveCurrencyButton.heightAnchor.constraint(equalToConstant: 70.0)
+        saveCurrencyButton.bottomAnchor.constraint(equalTo: currenciesView.bottomAnchor, constant: -50).isActive = true
+        saveCurrencyButton.leadingAnchor.constraint(equalTo: currenciesView.leadingAnchor, constant: 20).isActive = true
+        saveCurrencyButton.trailingAnchor.constraint(equalTo: currenciesView.trailingAnchor, constant: -20).isActive = true
     }
 }
 
