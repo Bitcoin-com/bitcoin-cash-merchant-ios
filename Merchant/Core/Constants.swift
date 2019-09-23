@@ -63,4 +63,6 @@ struct Constants {
         static let confirmNewPinCode = "confirm_new_pin_code".localized
         static let enterNewPinCode = "enter_new_pin_code".localized
     }
+    
+    static let transactionBufferInSatoshis: Int64 = 1000
 }

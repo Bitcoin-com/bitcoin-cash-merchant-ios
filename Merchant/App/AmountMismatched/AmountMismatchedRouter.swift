@@ -11,6 +11,6 @@ import BDCKit
 
 class AmountMismatchedRouter: BDCRouter {
     func transitBackTo() {
-        viewController?.navigationController?.popToRootViewController(animated: true)
+        viewController?.navigationController?.dismiss(animated: true, completion: nil)
     }
 }

@@ -14,4 +14,10 @@ class PaymentRequestRouter: BDCRouter {
     func transitBackTo() {
         viewController?.dismiss(animated: true, completion: nil)
     }
+    
+    func transitToAmountMismatched(receivedAmount: Int64, expectedAmount: Int64) {
+        let vc = AmountMismatchedBuilder().provide(expectedAmount: expectedAmount, receivedAmount: receivedAmount)
+        let navController = UINavigationController(rootViewController: vc)
+        viewController?.present(navController, animated: true, completion: nil)
+    }
 }

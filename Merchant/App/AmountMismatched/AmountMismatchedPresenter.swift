@@ -13,7 +13,6 @@ class AmountMismatchedPresenter {
     var router: AmountMismatchedRouter!
     weak var viewDelegate: AmountMismatchedViewDelegate!
 
-    fileprivate let transactionBufferInSatoshis: Int64 = 1000
     fileprivate var expectedAmountInSatoshis: Int64 = 0
     fileprivate var receivedAmountInSatoshis: Int64 = 0
 
@@ -32,11 +31,12 @@ class AmountMismatchedPresenter {
     
     fileprivate func checkAmount() {
         let difference = expectedAmountInSatoshis - receivedAmountInSatoshis
+        let txBuffer = Constants.transactionBufferInSatoshis
         
-        if difference > transactionBufferInSatoshis {
+        if difference > txBuffer {
             //underpaid
             viewDelegate.showUnderpaid(by: difference)
-        } else if difference < -transactionBufferInSatoshis {
+        } else if difference < -txBuffer {
             //overpaid
             viewDelegate.showOverpaid(by: difference)
         }
