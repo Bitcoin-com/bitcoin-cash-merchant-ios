@@ -57,7 +57,7 @@ class PaymentInputViewController: PinViewController {
         
         view.addSubview(stackView)
         
-        stackView.fillSuperView()
+        stackView.fillSuperView(true, withPadding: 0)
         
         pinDelegate = self
         
