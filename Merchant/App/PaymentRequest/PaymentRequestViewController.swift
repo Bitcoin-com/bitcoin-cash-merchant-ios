@@ -12,6 +12,7 @@ import BDCKit
 
 class PaymentRequestViewController: BDCViewController {
     
+    fileprivate let qrSize: CGFloat = 300
     var presenter: PaymentRequestPresenter?
     var interactionController: CircleInteractionController?
     
@@ -59,8 +60,8 @@ class PaymentRequestViewController: BDCViewController {
         qrView.addSubview(qrImageView)
         
         // QR Code Image View
-        qrImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        qrImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        qrImageView.widthAnchor.constraint(equalToConstant: qrSize).isActive = true
+        qrImageView.heightAnchor.constraint(equalToConstant: qrSize).isActive = true
         qrImageView.centerXAnchor.constraint(equalTo: qrView.centerXAnchor).isActive = true
         qrImageView.centerYAnchor.constraint(equalTo: qrView.centerYAnchor).isActive = true
         
@@ -76,7 +77,7 @@ class PaymentRequestViewController: BDCViewController {
         stackView.spacing = 32
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        qrView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        qrView.heightAnchor.constraint(equalToConstant: qrSize).isActive = true
         
         view.addSubview(stackView)
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -85,8 +86,8 @@ class PaymentRequestViewController: BDCViewController {
         qrImageView.addSubview(successAnimation)
         successAnimation.centerXAnchor.constraint(equalTo: qrImageView.centerXAnchor).isActive = true
         successAnimation.centerYAnchor.constraint(equalTo: qrImageView.centerYAnchor).isActive = true
-        successAnimation.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        successAnimation.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        successAnimation.widthAnchor.constraint(equalToConstant: qrSize).isActive = true
+        successAnimation.heightAnchor.constraint(equalToConstant: qrSize).isActive = true
         
         interactionController = CircleInteractionController(viewController: self)
     }
