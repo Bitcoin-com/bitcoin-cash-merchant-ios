@@ -79,7 +79,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BDCKit:
-    :commit: a066eb395a04261545af6d069564ec949ab5bd87
+    :commit: 336673d0be64f14cf576cae7cbe5524d5d86c0ff
     :git: https://github.com/bitcoin-com/bdc-kit-ios
   SwiftWebSocket:
     :commit: 1f3049d4958ffb4e7586e58e158fba80dec86ff7
@@ -87,7 +87,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  BDCKit: ee497c5a0680256fff72dffe2ab792f2822b8e4c
+  BDCKit: 5b89e845125d669f0ef996f74e6f627f4393bbe8
   BitcoinKit: aad4c997e2500f7a89e1a82bd5aff6d9d6fab90d
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655

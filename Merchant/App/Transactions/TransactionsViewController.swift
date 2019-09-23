@@ -32,7 +32,7 @@ class TransactionsViewController: BDCViewController {
         let tableView = BDCTableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(I_T_TS_TableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(I_T_TS_ViewCell.self, forCellReuseIdentifier: cellId)
         view.addSubview(tableView)
         tableView.fillSuperView()
         
@@ -90,7 +90,9 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! I_T_TS_TableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? BDCTableViewCell<I_T_TS_ViewCell> else {
+            return UITableViewCell()
+        }
         let item = items[indexPath.item]
         
         cell.viewCell?.iconImageView.image = UIImage(named: "checkmark_icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
