@@ -43,11 +43,9 @@ class WaitTransactionInteractor {
                     if let isWithinTxBuffer = self?.isWithinTxBuffer(transaction: transaction, pr: pr, legacyAddress: legacyAddress), !isWithinTxBuffer.isWithinTxBuffer {
                         self?.showIncorrectAmountAlert(receivedAmount: isWithinTxBuffer.receivedAmount,
                                                        expectedAmount: pr.amountInSatoshis)
-                        single(.success(false))
-                    } else {
-                        single(.success(true))
                     }
                     
+                    single(.success(true))
                 })
             
             return Disposables.create {
