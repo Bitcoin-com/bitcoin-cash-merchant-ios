@@ -10,7 +10,6 @@ import Foundation
 
 class AmountMismatchedPresenter {
     
-    var router: AmountMismatchedRouter!
     weak var viewDelegate: AmountMismatchedViewDelegate!
 
     fileprivate var expectedAmountInSatoshis: Int64 = 0
@@ -23,10 +22,6 @@ class AmountMismatchedPresenter {
     
     func viewDidLoad() {
         checkAmount()
-    }
-    
-    func didPushClose() {
-        router.transitBackTo()
     }
     
     fileprivate func checkAmount() {

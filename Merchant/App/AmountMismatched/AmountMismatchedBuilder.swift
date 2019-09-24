@@ -13,10 +13,8 @@ class AmountMismatchedBuilder {
         let viewController = AmountMismatchedViewController()
         let presenter = AmountMismatchedPresenter(expectedAmount: expectedAmount,
                                                   receivedAmount: receivedAmount)
-        let router = AmountMismatchedRouter(viewController)
         
         presenter.viewDelegate = viewController
-        presenter.router = router
         viewController.presenter = presenter
         
         return viewController
