@@ -74,6 +74,7 @@
 		3B8CA4E022897EE300BFA499 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3B8CA4DF22897EE200BFA499 /* README.md */; };
 		3B91DECB228316E200E41D31 /* qr_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B91DECA228316E200E41D31 /* qr_animation.json */; };
 		B473B38741D46B5A9144EEA0 /* libPods-MerchantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */; };
+		E672DF722339D10F001849A2 /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E672DF712339D10F001849A2 /* UIScreen+Extensions.swift */; };
 		E6E10FA62338F0CF00E2493F /* AmountMismatchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E10FA52338F0CF00E2493F /* AmountMismatchedViewController.swift */; };
 		E6E10FA82338F0DB00E2493F /* AmountMismatchedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E10FA72338F0DB00E2493F /* AmountMismatchedPresenter.swift */; };
 		E6E10FAA2338F0E400E2493F /* AmountMismatchedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E10FA92338F0E400E2493F /* AmountMismatchedRouter.swift */; };
@@ -181,6 +182,7 @@
 		B4423D46E73793DE7376E21B /* Pods-MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.release.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
 		C754691B3616FAE1C49BB4A6 /* libPods-MerchantUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MerchantUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5805DB52B3B173588EDD0D5 /* Pods-MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-MerchantUITests/Pods-MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E672DF712339D10F001849A2 /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
 		E6E10FA52338F0CF00E2493F /* AmountMismatchedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountMismatchedViewController.swift; sourceTree = "<group>"; };
 		E6E10FA72338F0DB00E2493F /* AmountMismatchedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountMismatchedPresenter.swift; sourceTree = "<group>"; };
 		E6E10FA92338F0E400E2493F /* AmountMismatchedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountMismatchedRouter.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 		3B1BA99B226DF2B7002EED15 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E672DF712339D10F001849A2 /* UIScreen+Extensions.swift */,
 				3B1BA9E3226EE48F002EED15 /* String+Extensions.swift */,
 				3B1BA99C226DF2B7002EED15 /* UserDefaults+Extensions.swift */,
 				3B1BA9E5226EE6CD002EED15 /* Double+Extensions.swift */,
@@ -811,6 +814,7 @@
 				3B1BA9CE226EA545002EED15 /* StoreCurrency.swift in Sources */,
 				3B0624A822743C7800899A4B /* ScannerRouter.swift in Sources */,
 				3B86E2032281B93A004BBB0D /* PinPresenter.swift in Sources */,
+				E672DF722339D10F001849A2 /* UIScreen+Extensions.swift in Sources */,
 				3B06249F2274050200899A4B /* CircleInteractionController.swift in Sources */,
 				3B1BA9D4226EAAC6002EED15 /* EditUserInteractor.swift in Sources */,
 				3B0624952272C97600899A4B /* RateNetwork.swift in Sources */,

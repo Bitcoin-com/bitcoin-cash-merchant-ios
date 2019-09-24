@@ -54,6 +54,6 @@ class PaymentRequestPresenter {
     }
     
     func showAmountMismatched(receivedAmount: Int64, expectedAmount: Int64) {
-        router?.transitToAmountMismatched(receivedAmount: receivedAmount, expectedAmount: expectedAmount)
+        router?.openPopup(receivedAmount: receivedAmount, expectedAmount: expectedAmount)
     }
 }

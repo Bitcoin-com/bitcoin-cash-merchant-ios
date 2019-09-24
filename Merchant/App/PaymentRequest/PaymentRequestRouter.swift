@@ -15,9 +15,20 @@ class PaymentRequestRouter: BDCRouter {
         viewController?.dismiss(animated: true, completion: nil)
     }
     
-    func transitToAmountMismatched(receivedAmount: Int64, expectedAmount: Int64) {
-        let vc = AmountMismatchedBuilder().provide(expectedAmount: expectedAmount, receivedAmount: receivedAmount)
-        let navController = UINavigationController(rootViewController: vc)
-        viewController?.present(navController, animated: true, completion: nil)
+    func openPopup(receivedAmount: Int64, expectedAmount: Int64) {
+        let pvc = AmountMismatchedBuilder().provide(expectedAmount: expectedAmount, receivedAmount: receivedAmount)
+        pvc.modalPresentationStyle = .popover
+        pvc.preferredContentSize = CGSize(width: 374, height: 350)
+        pvc.actionButtonHandler = {
+            pvc.dismiss(animated: true, completion: nil)
+        }
+        
+        let popover: UIPopoverPresentationController = pvc.popoverPresentationController!
+        popover.delegate = viewController as? UIPopoverPresentationControllerDelegate
+        popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        popover.sourceRect = UIScreen.main.center
+        popover.sourceView = viewController?.view
+        
+        viewController?.present(pvc, animated: true, completion: nil)
     }
 }

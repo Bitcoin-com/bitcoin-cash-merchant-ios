@@ -34,6 +34,8 @@ class AmountMismatchedViewController: BDCViewController {
         return label
     }()
     
+    var actionButtonHandler: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,8 +44,15 @@ class AmountMismatchedViewController: BDCViewController {
     }
     
     fileprivate func setupUI() {
-        let closeButton = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(didPushClose))
-        navigationItem.leftBarButtonItem = closeButton
+        let closeButton = BDCButton.build(.type7)
+        closeButton.setTitle("Close", for: .normal)
+        closeButton.addTarget(self, action: #selector(didTapActionButton(_:)), for: .touchUpInside)
+        view.addSubview(closeButton)
+
+        closeButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel, amountInCoinLabel])
         stackView.axis = .vertical
@@ -57,9 +66,9 @@ class AmountMismatchedViewController: BDCViewController {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive =  true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive =  true
     }
-    
-    @objc func didPushClose() {
-        presenter.didPushClose()
+
+    @IBAction func didTapActionButton(_ sender: UIButton) {
+        actionButtonHandler?()
     }
 }
 
