@@ -47,12 +47,15 @@ class AmountMismatchedViewController: BDCViewController {
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel, amountInCoinLabel])
         stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
         stackView.spacing = 16
-        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
-        stackView.fillSuperView(true, withPadding: 16)
+
+        stackView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        stackView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive =  true
+        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive =  true
     }
     
     @objc func didPushClose() {
