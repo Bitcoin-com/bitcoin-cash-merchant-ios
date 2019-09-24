@@ -11,24 +11,9 @@ import RxSwift
 import RealmSwift
 import SwiftWebSocket
 
-enum TransactionError: Error {
-    case amountMismatched
-    
-    var localizedDescription: String {
-        switch self {
-        case .amountMismatched:
-            return "Incorrect amount of satoshis received"
-        }
-    }
-}
-
 class WaitTransactionInteractor {
     
     weak var presenter: PaymentRequestPresenter?
-    
-    enum WaitTransactionInteractorError: Error {
-        case wrongAmount
-    }
     
     fileprivate let bag = DisposeBag()
     
@@ -58,7 +43,7 @@ class WaitTransactionInteractor {
                     if let isWithinTxBuffer = self?.isWithinTxBuffer(transaction: transaction, pr: pr, legacyAddress: legacyAddress), !isWithinTxBuffer.isWithinTxBuffer {
                         self?.showIncorrectAmountAlert(receivedAmount: isWithinTxBuffer.receivedAmount,
                                                        expectedAmount: pr.amountInSatoshis)
-                        single(.error(TransactionError.amountMismatched))
+                        single(.success(false))
                     } else {
                         single(.success(true))
                     }
