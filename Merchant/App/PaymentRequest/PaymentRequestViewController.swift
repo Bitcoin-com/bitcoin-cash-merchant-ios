@@ -171,4 +171,9 @@ extension PaymentRequestViewController: UIPopoverPresentationControllerDelegate 
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
+    
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        self.view.backgroundColor = BDCColor.warmGrey.uiColor
+    }
+
 }

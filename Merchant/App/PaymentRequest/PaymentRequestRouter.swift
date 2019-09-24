@@ -14,13 +14,15 @@ class PaymentRequestRouter: BDCRouter {
     func transitBackTo() {
         viewController?.dismiss(animated: true, completion: nil)
     }
-    
+
     func openPopup(receivedAmount: Int64, expectedAmount: Int64) {
         let pvc = AmountMismatchedBuilder().provide(expectedAmount: expectedAmount, receivedAmount: receivedAmount)
         pvc.modalPresentationStyle = .popover
         pvc.preferredContentSize = CGSize(width: 374, height: 350)
-        pvc.actionButtonHandler = {
-            pvc.dismiss(animated: true, completion: nil)
+        pvc.actionButtonHandler = { [weak self] in
+            pvc.dismiss(animated: true, completion: {
+                self?.transitBackTo()
+            })
         }
         
         let popover: UIPopoverPresentationController = pvc.popoverPresentationController!
