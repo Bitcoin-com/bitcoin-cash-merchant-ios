@@ -35,10 +35,10 @@ class AmountMismatchedPresenter {
         
         if difference > txBuffer {
             //underpaid
-            viewDelegate.showUnderpaid(by: difference)
+            viewDelegate.showUnderpaid(by: abs(difference))
         } else if difference < -txBuffer {
             //overpaid
-            viewDelegate.showOverpaid(by: difference)
+            viewDelegate.showOverpaid(by: abs(difference))
         }
     }
 }
