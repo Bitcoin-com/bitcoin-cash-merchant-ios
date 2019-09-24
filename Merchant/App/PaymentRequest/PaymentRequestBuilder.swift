@@ -18,6 +18,7 @@ class PaymentRequestBuilder {
         
         let presenter = PaymentRequestPresenter(pr)
         
+        waitTransactionInteractor.presenter = presenter
         presenter.waitTransactionInteractor = waitTransactionInteractor
         presenter.viewDelegate = viewController
         presenter.requestDelegate = requestDelegate
