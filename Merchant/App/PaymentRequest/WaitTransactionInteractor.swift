@@ -15,10 +15,6 @@ class WaitTransactionInteractor {
     
     weak var presenter: PaymentRequestPresenter?
     
-    enum WaitTransactionInteractorError: Error {
-        case wrongAmount
-    }
-    
     fileprivate let bag = DisposeBag()
     
     func waitTransaction(withPr pr: PaymentRequest) -> Single<Bool> {
@@ -44,6 +40,11 @@ class WaitTransactionInteractor {
                     
                     self?.saveTransaction(txId: transaction.txid, pr: pr, realm: realm)
                     
+                    if let isWithinTxBuffer = self?.isWithinTxBuffer(transaction: transaction, pr: pr, legacyAddress: legacyAddress), !isWithinTxBuffer.isWithinTxBuffer {
+                        self?.showIncorrectAmountAlert(receivedAmount: isWithinTxBuffer.receivedAmount,
+                                                       expectedAmount: pr.amountInSatoshis)
+                    }
+                    
                     single(.success(true))
                 })
             
@@ -56,27 +57,29 @@ class WaitTransactionInteractor {
     
     // MARK: - Private
     /*
-     * Check if overpaid/underpaid
+     * Check if overpaid/underpaid,
+     * If yes, check if it's withint tx buffer
      */
-    fileprivate func isIncorrectAmount(transaction: SocketService.WebSocketTransactionResponse,
+    fileprivate func isWithinTxBuffer(transaction: SocketService.WebSocketTransactionResponse,
                                        pr: PaymentRequest,
-                                       legacyAddress: String) -> (isIncorrectAmount: Bool, receivedAmount: Int64) {
+                                       legacyAddress: String) -> (isWithinTxBuffer: Bool, receivedAmount: Int64) {
         let amount = transaction.outputs
             .filter({ $0.address == legacyAddress })
             .reduce(0, { $0 + $1.value })
+        let receivedAmount = Int64(amount)
         
-        return (pr.amountInSatoshis != amount, Int64(amount))
+        if abs(pr.amountInSatoshis - receivedAmount) > Constants.transactionBufferInSatoshis {
+            return (false, receivedAmount)
+        }
+
+        return (true, receivedAmount)
     }
     
     /*
-     * Show Alert if overpaid/underpaid
+     * Show Screen if overpaid/underpaid
      */
     fileprivate func showIncorrectAmountAlert(receivedAmount: Int64, expectedAmount: Int64) {
-        let diff = receivedAmount - expectedAmount
-        let message = diff > 0 ? "You overpaid by \(diff)" :
-        "You didn’t pay the full amount, you underpaid by \(UInt(diff))"
-        
-        self.presenter?.showTransactionAlert(title: "", message: message, isSuccess: true)
+        self.presenter?.showAmountMismatched(receivedAmount: receivedAmount, expectedAmount: expectedAmount)
     }
     
     /*

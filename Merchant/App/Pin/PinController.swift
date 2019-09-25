@@ -74,9 +74,9 @@ class PinController: PinViewController {
         stackView.alignment = .fill
         view.addSubview(stackView)
 
-        stackView.fillSuperView()
+        stackView.fillSuperView(true, withPadding: 0)
         stackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        
+
         view.backgroundColor = BDCColor.whiteTwo.uiColor
         hasComma = false
 

@@ -53,15 +53,7 @@ class PaymentRequestPresenter {
         router?.transitBackTo()
     }
     
-    func showTransactionAlert(title: String, message: String, isSuccess: Bool) {
-        self.viewDelegate?.showAlert(title,
-                                     message: message,
-                                     action: "OK",
-                                     actionHandler: { [weak self] in
-                                        if isSuccess {
-                                            self?.viewDelegate?.onSuccess()
-                                            self?.requestDelegate?.cleanupInputField()
-                                        }
-        })
+    func showAmountMismatched(receivedAmount: Int64, expectedAmount: Int64) {
+        router?.openPopup(receivedAmount: receivedAmount, expectedAmount: expectedAmount)
     }
 }

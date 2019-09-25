@@ -44,7 +44,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
         view.addSubview(pinCollectionView)
         
         pinCollectionView.heightAnchor.constraint(equalToConstant: 50*4 + (hasValid ? 80 : 0) + 5 * inset).isActive = true
-        
+
         pinCollectionView.dataSource = self
         pinCollectionView.delegate = self
     }
@@ -71,7 +71,8 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
         
          if item == "valid" {
             cell.pinButton.setImage(UIImage(named: "checkmark_icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            cell.pinButton.tintColor = BDCColor.green.uiColor
+            cell.pinButton.tintColor = BDCColor.white.uiColor
+            cell.pinButton.backgroundColor = BDCColor.green.uiColor
             cell.pinButton.addTarget(self, action: #selector(didPushValid), for: .touchUpInside)
         } else {
             if item == "." {
