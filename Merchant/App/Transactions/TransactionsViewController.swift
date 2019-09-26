@@ -32,7 +32,7 @@ class TransactionsViewController: BDCViewController {
         let tableView = BDCTableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(I_T_TS_ViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(BDCTableViewCell<I_T_TS_ViewCell>.self, forCellReuseIdentifier: cellId)
         view.addSubview(tableView)
         tableView.fillSuperView()
         
