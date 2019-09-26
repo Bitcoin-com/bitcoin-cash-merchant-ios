@@ -47,7 +47,7 @@ class PaymentRequestViewController: BDCViewController {
         animationView.isHidden = true
         return animationView
     }()
-    fileprivate let closeButton = BDCButton.build(.type7)
+    fileprivate let closeButton = BDCButton.build(.type2)
     
     override func viewDidLoad() {
         super.viewDidLoad()

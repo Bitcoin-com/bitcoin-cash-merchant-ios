@@ -31,8 +31,8 @@ class SettingsViewController: BDCViewController {
     let destinationAddressTextField = BDCTextField.build(.type1)
     let pinCodeLabel = BDCLabel.build(.subtitle)
     let selectedCurrencyLabel = BDCLabel.build(.subtitle)
-    let saveButton = BDCButton.build(.type7)
-    let saveCurrencyButton = BDCButton.build(.type7)
+    let saveButton = BDCButton.build(.type2)
+    let saveCurrencyButton = BDCButton.build(.type2)
     let currenciesPickerView = UIPickerView(frame: .zero)
     let currenciesView: UIView = {
         let view = UIView(frame: .zero)

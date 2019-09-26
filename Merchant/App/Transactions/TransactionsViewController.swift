@@ -96,7 +96,7 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         let item = items[indexPath.item]
         
         cell.viewCell?.iconImageView.image = UIImage(named: "checkmark_icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        cell.viewCell?.iconImageView.tintColor = BDCColor.green.uiColor
+        cell.viewCell?.iconImageView.tintColor = BDCColor.primary.uiColor
         cell.viewCell?.title1Label.text = item.amountInFiat
         cell.viewCell?.title2Label.text = item.amountInBCH
         cell.viewCell?.subtitleLabel.text = item.date

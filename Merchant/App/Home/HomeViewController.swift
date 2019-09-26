@@ -24,7 +24,7 @@ class HomeViewController: UITabBarController {
         
         viewControllers = [paymentController, txsController]
         
-        tabBar.tintColor = BDCColor.green.uiColor
+        tabBar.tintColor = BDCColor.primary.uiColor
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings_icon"), style: .plain, target: self, action: #selector(didPushSettings))
     }

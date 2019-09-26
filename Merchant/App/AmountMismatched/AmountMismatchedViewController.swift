@@ -44,7 +44,7 @@ class AmountMismatchedViewController: BDCViewController {
     }
     
     fileprivate func setupUI() {
-        let closeButton = BDCButton.build(.type7)
+        let closeButton = BDCButton.build(.type2)
         closeButton.setTitle("Close", for: .normal)
         closeButton.addTarget(self, action: #selector(didTapActionButton(_:)), for: .touchUpInside)
         view.addSubview(closeButton)

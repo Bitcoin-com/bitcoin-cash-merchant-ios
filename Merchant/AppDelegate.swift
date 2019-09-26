@@ -36,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navStyles = UINavigationBar.appearance()
         navStyles.barTintColor = BDCColor.white.uiColor
-        navStyles.tintColor = BDCColor.green.uiColor
-        navStyles.titleTextAttributes = [NSAttributedString.Key.foregroundColor:BDCColor.green.uiColor]
+        navStyles.tintColor = BDCColor.primary.uiColor
+        navStyles.titleTextAttributes = [NSAttributedString.Key.foregroundColor:BDCColor.primary.uiColor]
         
         window!.makeKeyAndVisible()
         

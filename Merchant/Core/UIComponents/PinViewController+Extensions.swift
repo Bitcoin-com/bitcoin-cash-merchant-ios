@@ -72,7 +72,7 @@ class PinViewController: BDCViewController, UICollectionViewDelegate, UICollecti
          if item == "valid" {
             cell.pinButton.setImage(UIImage(named: "checkmark_icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
             cell.pinButton.tintColor = BDCColor.white.uiColor
-            cell.pinButton.backgroundColor = BDCColor.green.uiColor
+            cell.pinButton.backgroundColor = BDCColor.primary.uiColor
             cell.pinButton.addTarget(self, action: #selector(didPushValid), for: .touchUpInside)
         } else {
             if item == "." {
