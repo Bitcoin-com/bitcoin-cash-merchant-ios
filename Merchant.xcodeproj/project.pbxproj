@@ -110,7 +110,7 @@
 		3B0624A322743C7800899A4B /* ScannerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerRouter.swift; sourceTree = "<group>"; };
 		3B0624A422743C7800899A4B /* ScannerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerBuilder.swift; sourceTree = "<group>"; };
 		3B0624A522743C7800899A4B /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
-		3B1BA8F4226DEE30002EED15 /* Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merchant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B1BA8F4226DEE30002EED15 /* Pay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1BA8F7226DEE30002EED15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B1BA8FE226DEE32002EED15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B1BA901226DEE32002EED15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 		3B1BA8F5226DEE30002EED15 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B1BA8F4226DEE30002EED15 /* Merchant.app */,
+				3B1BA8F4226DEE30002EED15 /* Pay.app */,
 				3B1BA908226DEE32002EED15 /* MerchantTests.xctest */,
 				3B1BA913226DEE32002EED15 /* MerchantUITests.xctest */,
 			);
@@ -518,7 +518,7 @@
 			);
 			name = Merchant;
 			productName = Merchant;
-			productReference = 3B1BA8F4226DEE30002EED15 /* Merchant.app */;
+			productReference = 3B1BA8F4226DEE30002EED15 /* Pay.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3B1BA907226DEE32002EED15 /* MerchantTests */ = {
@@ -1007,6 +1007,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = "Merchant/Supporting Files/Info.plist";
@@ -1015,8 +1016,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pay;
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1029,6 +1031,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = "Merchant/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1036,8 +1039,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pay;
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

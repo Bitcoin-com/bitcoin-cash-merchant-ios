@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-               BuildableName = "Merchant.app"
+               BuildableName = "Pay.app"
                BlueprintName = "Merchant"
                ReferencedContainer = "container:Merchant.xcodeproj">
             </BuildableReference>
@@ -26,14 +26,23 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
+            BuildableName = "Pay.app"
+            BlueprintName = "Merchant"
+            ReferencedContainer = "container:Merchant.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Merchant.app"
+            BuildableName = "Pay.app"
             BlueprintName = "Merchant"
             ReferencedContainer = "container:Merchant.xcodeproj">
          </BuildableReference>
@@ -60,17 +69,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Merchant.app"
-            BlueprintName = "Merchant"
-            ReferencedContainer = "container:Merchant.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -87,13 +85,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Merchant.app"
+            BuildableName = "Pay.app"
             BlueprintName = "Merchant"
             ReferencedContainer = "container:Merchant.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -106,7 +102,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Merchant.app"
+            BuildableName = "Pay.app"
             BlueprintName = "Merchant"
             ReferencedContainer = "container:Merchant.xcodeproj">
          </BuildableReference>

@@ -69,3 +69,6 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 *.coverage.txt
+/.idea/bitcoin-cash-merchant-ios.iml
+.idea/
+.gitattributes
