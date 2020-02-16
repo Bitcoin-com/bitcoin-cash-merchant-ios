@@ -42,7 +42,7 @@ sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer/
 
 ## Authors & Maintainers
 - Jean-Baptiste Dominguez [[Github](https://github.com/jbdtky), [Twitter](https://twitter.com/jbdtky)]
-- Xavier Kral [[Github](https://github.com/JavaNoobsyBoobsy), [Twitter](https://twitter.com/kral_xavier)]
+- Djuro Alfirevic [[Github](https://github.com/djalfirevic), [Twitter](https://twitter.com/djalfirevic)]
 
 ## References
 - [BitcoinKit](https://github.com/Bitcoin-com/BitcoinKit)
