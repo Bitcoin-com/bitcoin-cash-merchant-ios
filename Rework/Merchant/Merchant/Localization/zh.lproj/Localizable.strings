@@ -1,0 +1,131 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Bitcoin Cash Register";
+
+"action_settings" = "设定";
+
+"pin_code_create_error" = "输入两个匹配的4位PIN码";
+
+"pin_code_enter_error" = "PIN码不正确";
+
+"prompt_ok" = "确定";
+
+"prompt_ko" = "取消";
+
+"create_pin" = "创建密码";
+
+"confirm_pin" = "确认密码";
+
+"unrecognized_xpub" = "无法识别的公钥格式";
+
+"payment_received" = "付款完成。谢谢。";
+
+"unable_to_generate_address" = "目前无法生成地址。请检查您的网络连接，然后重试。";
+
+"invalid_amount" = "无效的金额。";
+
+"removed_by_bip70_insufficient_payment" = "付款的金额不足。";
+
+"removed_by_bip70_re_payment_remainder" = "余额：";
+
+"removed_by_bip70_re_payment_requested" = "已请求：";
+
+"removed_by_bip70_re_payment_received" = "已收到:";
+
+"removed_by_bip70_insufficient_payment_continue" = "更新QR码以支付剩余金额？";
+
+"removed_by_bip70_overpaid_amount" = "收到的金额高于定价。";
+
+"options_payment_address" = "付额钱包地址";
+
+"options_receiving_payments" = "收款中";
+
+"scan" = "扫瞄";
+
+"paste" = "贴上";
+
+"obligatory_receiver" = "您必须提供一个比特币现金地址以接收付款。";
+
+"waiting_for_payment" = "扫描付款";
+
+"confirm_request" = "结帐";
+
+"button_cancel" = "取消";
+
+"button_done" = "完成";
+
+"powered_by" = "技术提供";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "输入密码";
+
+"syncing_xpub" = "xpub 同步中...…";
+
+"synced_xpub" = "xpub已同步！";
+
+"no_history_text" = "没有交易记录。";
+
+"options_explain_payment_address" = "目标地址可以是比特币现金地址，也可以是扩展公共密钥（xpub）";
+
+"options_add_payment_address" = "添加收款地址";
+
+"button_save" = "储存";
+
+"payment_enter_an_amount" = "输入金额";
+
+"menu_profile" = "简介";
+
+"menu_cash_register" = "收银机";
+
+"menu_transactions" = "交易记录";
+
+"menu_settings" = "设定";
+
+"menu_help" = "技术支持";
+
+"menu_about" = "关于";
+
+"settings_merchant_name" = "商家名称";
+
+"settings_destination_address" = "收款地址";
+
+"settings_local_currency" = "当地货币";
+
+"settings_pin_code" = "PIN码";
+
+"ad_title_local_bitcoin_cash" = "本地比特币现金";
+
+"ad_content_local_bitcoin_cash" = "卖掉您的比特币现金(BCH) 以兑换现金";
+
+"not_supported" = "不支持";
+
+"grant_camera_permission" = "请授予相机使用QR码扫描的权限";
+
+"view_transaction" = "查看交易";
+
+"copy_transaction" = "复制交易";
+
+"view_address" = "查看地址";
+
+"copy_address" = "复制地址";
+
+"menu_terms_of_use" = "使用条款";
+
+"menu_service_terms" = "服务条款";
+
+"menu_privacy_policy" = "隐私条约";
+
+"contract_agreement_summary" = "By continuing, I agree to the\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        and <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+
+"contract_button_ok" = "同意";
+
+"error" = "错误";
+
+"notify_changes_have_been_saved" = "已储存设定";

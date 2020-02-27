@@ -1,0 +1,132 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Bitcoin Cash Register";
+
+"action_settings" = "Impostazioni";
+
+"pin_code_create_error" = "Inserisci due PIN a 4 cifre corrispondenti";
+
+"pin_code_enter_error" = "Codice PIN errato";
+
+"prompt_ok" = "OK";
+
+"prompt_ko" = "ANNULLA";
+
+"create_pin" = "Create PIN";
+
+"confirm_pin" = "Confirm PIN";
+
+"unrecognized_xpub" = "Unrecognized public key format";
+
+"payment_received" = "Payment complete. Thank you.";
+
+"unable_to_generate_address" = "An address cannot be generated at this time. Please check your installation and try again.";
+
+"invalid_amount" = "Invalid amount.";
+
+"removed_by_bip70_insufficient_payment" = "Insufficient payment received.";
+
+"removed_by_bip70_re_payment_remainder" = "Remainder:";
+
+"removed_by_bip70_re_payment_requested" = "Requested:";
+
+"removed_by_bip70_re_payment_received" = "Received:";
+
+"removed_by_bip70_insufficient_payment_continue" = "Update QR code for remaining amount due?";
+
+"removed_by_bip70_overpaid_amount" = "The amount received is higher than expected.";
+
+"options_payment_address" = "Payment address";
+
+"options_receiving_payments" = "Receiving payments";
+
+"scan" = "Scan";
+
+"paste" = "Paste";
+
+"obligatory_receiver" = "You must provide a Bitcoin Cash address to receive payments.";
+
+"waiting_for_payment" = "Scan to Pay";
+
+"confirm_request" = "Checkout";
+
+"button_cancel" = "Cancel";
+
+"button_done" = "Done";
+
+"powered_by" = "Powered by";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "Enter PIN";
+
+"syncing_xpub" = "Syncing xpub…";
+
+"synced_xpub" = "xpub synced!";
+
+"no_history_text" = "There is no transaction history.";
+
+"options_explain_payment_address" = "A destination address can either be a Bitcoin Cash address, or an Extended Public Key (xpub) or a merchant API key or pairing code";
+
+"options_add_payment_address" = "Add destination address";
+
+"button_save" = "Save";
+
+"payment_enter_an_amount" = "Enter an amount";
+
+"menu_profile" = "Profile";
+
+"menu_cash_register" = "Cash Register";
+
+"menu_transactions" = "Transactions";
+
+"menu_settings" = "Settings";
+
+"menu_help" = "Help";
+
+"menu_about" = "About";
+
+"settings_merchant_name" = "Merchant Name";
+
+"settings_destination_address" = "Destination Address";
+
+"settings_local_currency" = "Local Currency";
+
+"settings_pin_code" = "PIN Code";
+
+"ad_title_local_bitcoin_cash" = "Local Bitcoin Cash";
+
+"ad_content_local_bitcoin_cash" = "Sell your Bitcoin Cash (BCH) for Cash";
+
+"not_supported" = "Not supported";
+
+"grant_camera_permission" = "Please grant camera permission to use the QR code Scanner";
+
+"view_transaction" = "View transaction";
+
+"copy_transaction" = "Copy transaction";
+
+"view_address" = "View address";
+
+"copy_address" = "Copy address";
+
+"menu_terms_of_use" = "Terms of use";
+
+"menu_service_terms" = "Service terms";
+
+"menu_privacy_policy" = "Privacy policy";
+
+"contract_agreement_summary" = "By continuing, I agree to the\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        and <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+
+"contract_button_ok" = "I agree";
+
+"error" = "Error";
+
+"notify_changes_have_been_saved" = "Change has been saved";
+

@@ -1,0 +1,131 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Bitcoin Cash Register";
+
+"action_settings" = "Настройки";
+
+"pin_code_create_error" = "Введите два подходящих 4-значных PIN-кода";
+
+"pin_code_enter_error" = "Неправильный PIN-код";
+
+"prompt_ok" = "ОК";
+
+"prompt_ko" = "Отмена";
+
+"create_pin" = "Создать PIN-код";
+
+"confirm_pin" = "Подтвердите PIN-код";
+
+"unrecognized_xpub" = "Нераспознанный формат публичного ключа";
+
+"payment_received" = "Платёж завершен. Спасибо.";
+
+"unable_to_generate_address" = "Адрес не может быть сгенерирован в данный момент. Пожалуйста, проверьте настройки и попробуйте еще раз.";
+
+"invalid_amount" = "Неверная сумма.";
+
+"removed_by_bip70_insufficient_payment" = "Получена неполная оплата.";
+
+"removed_by_bip70_re_payment_remainder" = "Остаток:";
+
+"removed_by_bip70_re_payment_requested" = "Запрошено:";
+
+"removed_by_bip70_re_payment_received" = "Получено:";
+
+"removed_by_bip70_insufficient_payment_continue" = "Обновить QR-код на оставшуюся сумму?";
+
+"removed_by_bip70_overpaid_amount" = "Полученная сумма выше, чем ожидалось.";
+
+"options_payment_address" = "Адрес платежа";
+
+"options_receiving_payments" = "Получение платежей";
+
+"scan" = "Сканировать";
+
+"paste" = "Вставить";
+
+"obligatory_receiver" = "Для получения платежей необходимо указать адрес Bitcoin Cash.";
+
+"waiting_for_payment" = "Отсканируйте, чтобы оплатить";
+
+"confirm_request" = "Проверка";
+
+"button_cancel" = "Отмена";
+
+"button_done" = "Готово";
+
+"powered_by" = "Сделано";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "Введите PIN-код";
+
+"syncing_xpub" = "Ключ xpub синхронизируется";
+
+"synced_xpub" = "Ключ xpub синхронизировался";
+
+"no_history_text" = "Нет истории транзакций.";
+
+"options_explain_payment_address" = "Адрес платежа - это адрес Bitcoin Cash, который принадлежит вам или расширенный открытый ключ (xPub) вашего кошелька или АПИ ключ продавца или pairing code";
+
+"options_add_payment_address" = "Добавить адрес платежа";
+
+"button_save" = "Сохранить";
+
+"payment_enter_an_amount" = "Введите сумму";
+
+"menu_profile" = "Профиль";
+
+"menu_cash_register" = "Cash Register (Касса)";
+
+"menu_transactions" = "Транзакции";
+
+"menu_settings" = "Настройки";
+
+"menu_help" = "Помощь";
+
+"menu_about" = "О проекте";
+
+"settings_merchant_name" = "Название компании";
+
+"settings_destination_address" = "Адрес платежа";
+
+"settings_local_currency" = "Местная валюта";
+
+"settings_pin_code" = "PIN код";
+
+"ad_title_local_bitcoin_cash" = "Local Bitcoin Cash";
+
+"ad_content_local_bitcoin_cash" = "Продайте Bitcoin Cash (BCH) за наличные";
+
+"not_supported" = "Не поддерживается";
+
+"grant_camera_permission" = "Пожалуйста, разрешите камере использовать сканер QR-кода";
+
+"view_transaction" = "Просмотр транзакции";
+
+"copy_transaction" = "Копировать транзакцию";
+
+"view_address" = "Посмотреть адрес";
+
+"copy_address" = "Скопировать адрес";
+
+"menu_terms_of_use" = "Условия использования";
+
+"menu_service_terms" = "Условия предоставления сервиса";
+
+"menu_privacy_policy" = "Политика конфиденциальности";
+
+"contract_agreement_summary" = "Продолжая пользоваться приложением,  я соглашаюсь со следующим\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        and <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+
+"contract_button_ok" = "Подтверждаю согласие";
+
+"error" = "Ошибка";
+
+"notify_changes_have_been_saved" = "Изменения сохранены";

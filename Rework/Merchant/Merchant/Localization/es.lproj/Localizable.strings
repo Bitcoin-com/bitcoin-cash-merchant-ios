@@ -1,0 +1,131 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Bitcoin Cash Register";
+
+"action_settings" = "Configuraciones";
+
+"pin_code_create_error" = "Ingrese dos códigos iguales PIN de 4 dígitos";
+
+"pin_code_enter_error" = "Código PIN incorrecto";
+
+"prompt_ok" = "OK";
+
+"prompt_ko" = "Cancelar";
+
+"create_pin" = "Crear PIN";
+
+"confirm_pin" = "Confirmar PIN";
+
+"unrecognized_xpub" = "Formato de llame pública no reconocido";
+
+"payment_received" = "Pago recibido. Gracias.";
+
+"unable_to_generate_address" = "Una dirección no pudo ser generada en este momento. Por favor revisa tu instalación e inténtalo de nuevo.";
+
+"invalid_amount" = "Cantidad no válida.";
+
+"removed_by_bip70_insufficient_payment" = "Pago insuficiente recibido.";
+
+"removed_by_bip70_re_payment_remainder" = "Recordatorio:";
+
+"removed_by_bip70_re_payment_requested" = "Pedido:";
+
+"removed_by_bip70_re_payment_received" = "Recibido:";
+
+"removed_by_bip70_insufficient_payment_continue" = "¿Actualizar el código QR para la cantidad restante pendiente?";
+
+"removed_by_bip70_overpaid_amount" = "El monto recibido es mayor de lo esperado.";
+
+"options_payment_address" = "Dirección de pago";
+
+"options_receiving_payments" = "Recibir pagos";
+
+"scan" = "Escanear";
+
+"paste" = "Pegar";
+
+"obligatory_receiver" = "Debe proporcionar una dirección Bitcoin Cash para recibir pagos.";
+
+"waiting_for_payment" = "Esperando pago";
+
+"confirm_request" = "Revisa";
+
+"button_cancel" = "Cancelar";
+
+"button_done" = "Hecho";
+
+"powered_by" = "Energizado por";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "Introducir PIN";
+
+"syncing_xpub" = "Sincronizando xpub ...";
+
+"synced_xpub" = "xpub sincronizado!";
+
+"no_history_text" = "No hay historial de transacciones.";
+
+"options_explain_payment_address" = "La dirección de destino puede ser una dirección Bitcoin Cash, o una llave publica extendida (xpub) o una llave de comerciante API o un codigo de emparejamiento";
+
+"options_add_payment_address" = "Añadir dirección de pago";
+
+"button_save" = "Salvar";
+
+"payment_enter_an_amount" = "Ingrese una cantidad";
+
+"menu_profile" = "Perfil";
+
+"menu_cash_register" = "Caja registradora";
+
+"menu_transactions" = "Actas";
+
+"menu_settings" = "Configuraciones";
+
+"menu_help" = "Ayuda";
+
+"menu_about" = "Acerca de";
+
+"settings_merchant_name" = "Nombre del comerciante";
+
+"settings_destination_address" = "Dirección de destino";
+
+"settings_local_currency" = "Moneda local";
+
+"settings_pin_code" = "Código PIN";
+
+"ad_title_local_bitcoin_cash" = "Bitcoin Cash local";
+
+"ad_content_local_bitcoin_cash" = "Vende tu Bitcoin Cash (BCH) por dinero en efectivo";
+
+"not_supported" = "No soportado";
+
+"grant_camera_permission" = "Otorgue permiso a la cámara para usar el escáner de código QR";
+
+"view_transaction" = "Ver transacción";
+
+"copy_transaction" = "Copiar transacción";
+
+"view_address" = "Ver dirección";
+
+"copy_address" = "Dirección de copia";
+
+"menu_terms_of_use" = "Terminos de uso";
+
+"menu_service_terms" = "Terminos de Servicio";
+
+"menu_privacy_policy" = "Politica de Privacidad";
+
+"contract_agreement_summary" = "Para continuar, Yo estoy de acuerdo con\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        and <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+
+"contract_button_ok" = "Estoy de acuerdo";
+
+"error" = "Error";
+
+"notify_changes_have_been_saved" = "Los cambios han sido guardados";
