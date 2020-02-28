@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9693A049E3A4A3E7314A01E8 /* Pods_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */; };
 		A87AC8124A72CD7035A43C1F /* Pods_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAA19CAA1F377C630BDE3D7 /* Pods_MerchantTests.framework */; };
+		C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441ABD0240927FC00A2253A /* WebSocket.swift */; };
 		C445557824004D8500F4B3E0 /* BIP70Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557724004D8500F4B3E0 /* BIP70Service.swift */; };
 		C445557B24004DD600F4B3E0 /* InvoiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557A24004DD600F4B3E0 /* InvoiceRequest.swift */; };
 		C445557D24004E9F00F4B3E0 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557C24004E9F00F4B3E0 /* Endpoints.swift */; };
@@ -97,6 +98,7 @@
 		79AE22CA693F028AFEB110A4 /* Pods-Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant.debug.xcconfig"; path = "Target Support Files/Pods-Merchant/Pods-Merchant.debug.xcconfig"; sourceTree = "<group>"; };
 		7C86A23622A67FF85A7B51C6 /* Pods-Merchant-MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8E499E13B7E722CF3729BC4A /* Pods-MerchantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C441ABD0240927FC00A2253A /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		C445557724004D8500F4B3E0 /* BIP70Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIP70Service.swift; sourceTree = "<group>"; };
 		C445557A24004DD600F4B3E0 /* InvoiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceRequest.swift; sourceTree = "<group>"; };
 		C445557C24004E9F00F4B3E0 /* Endpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				C445557E2400662A00F4B3E0 /* RESTManager.swift */,
 				C44555952401121400F4B3E0 /* UserManager.swift */,
 				C4BA0C8E2404334400A3D74B /* CurrencyManager.swift */,
+				C441ABD0240927FC00A2253A /* WebSocket.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				C445558C24007E4900F4B3E0 /* Bundle+Extensions.swift in Sources */,
 				C453938A2402AC1600CC3CA5 /* UserDefaults+Extensions.swift in Sources */,
 				C49F1FBE23FECC1C00416058 /* UIColor+Extensions.swift in Sources */,
+				C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */,
 				C445559424010C7400F4B3E0 /* TransactionTableViewCell.swift in Sources */,
 				C445558E24007F0700F4B3E0 /* Date+Extensions.swift in Sources */,
 				C445559C24016ECB00F4B3E0 /* ItemsView.swift in Sources */,

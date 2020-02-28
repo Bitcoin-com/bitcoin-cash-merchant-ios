@@ -46,7 +46,7 @@ final class PaymentRequestViewController: UIViewController {
             setupSocket()
         }
     }
-    var webSocketTask: URLSessionWebSocketTask?
+    var webSocket: WebSocket?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -60,8 +60,7 @@ final class PaymentRequestViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        webSocketTask?.cancel(with: .goingAway, reason: nil)
-        webSocketTask = nil
+        webSocket?.close()
     }
     
     // MARK: - Actions
@@ -270,7 +269,7 @@ final class PaymentRequestViewController: UIViewController {
         let realm = try! Realm()
 
         let transaction = StoreTransaction()
-        transaction.amountInFiat = "\(invoice.fiatRate)"
+        transaction.amountInFiat = "\(invoice.fiatTotal)"
         transaction.amountInSatoshis = 0
         
         if let amount = invoice.outputs.first?.amount {
@@ -299,66 +298,37 @@ final class PaymentRequestViewController: UIViewController {
         guard let invoice = invoice else { return }
         
         if let url = URL(string: "\(Endpoints.websocket)/\(invoice.paymentId)") {
-            let urlSession = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
-            let webSocketTask = urlSession.webSocketTask(with: url)
-            
-            webSocketTask.receive { [weak self] result in
-                guard let self = self else { return }
-                
-                switch result {
-                case .failure(let error):
-                    Logger.log(message: "Failed to receive message: \(error.localizedDescription)", type: .error)
-                case .success(let message):
-                    switch message {
-                    case .string(let text):
-                        Logger.log(message: "Received text message: \(text)", type: .success)
-                    case .data(let data):
-                        Logger.log(message: "Received binary message", type: .success)
-                        if let invoiceStatus = try? JSONDecoder().decode(InvoiceStatus.self, from: data) {
-                            if invoiceStatus.isPaid {
-                                self.showPaymentCompletedView()
-                            }
+            let webSocket = WebSocket(request: URLRequest(url: url))
+            webSocket.event.message = { message in
+                print(message)
+                if let messageString = message as? String, let data = messageString.data(using: .utf8) {
+                    Logger.log(message: "Received message", type: .success)
+                    if let invoiceStatus = try? JSONDecoder().decode(InvoiceStatus.self, from: data) {
+                        if invoiceStatus.isPaid {
+                            self.saveTransaction()
+                            self.showPaymentCompletedView()
                         }
-                    @unknown default:
-                        fatalError()
                     }
                 }
             }
+            webSocket.event.open = { [weak self] in
+                Logger.log(message: "Socket did open", type: .success)
+                self?.connectionStatusImageView.image = UIImage(imageLiteralResourceName: "connected")
+            }
             
-            webSocketTask.resume()
+            webSocket.event.close = { [weak self] code, reason, clean in
+                Logger.log(message: "Socket did close", type: .debug)
+                self?.connectionStatusImageView.image = UIImage(imageLiteralResourceName: "disconnected")
+            }
             
-            self.webSocketTask = webSocketTask
+            self.webSocket = webSocket
         }
     }
     
     private func pingWebSocket() {
-        webSocketTask?.sendPing { [weak self] error in
-            if let error = error {
-                Logger.log(message: "Ping failed: \(error.localizedDescription)", type: .error)
-                
-                self?.webSocketTask?.cancel(with: .goingAway, reason: nil)
-                self?.webSocketTask = nil
-            } else {
-                print("Ping...")
-            }
-        }
+        webSocket?.ping()
     }
 
-}
-
-extension PaymentRequestViewController: URLSessionWebSocketDelegate {
-    
-    // MARK: - URLSessionWebSocketDelegate
-    func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
-        Logger.log(message: "Socket did open", type: .success)
-        connectionStatusImageView.image = UIImage(imageLiteralResourceName: "connected")
-    }
-    
-    func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
-        Logger.log(message: "Socket did close", type: .debug)
-        connectionStatusImageView.image = UIImage(imageLiteralResourceName: "disconnected")
-    }
-    
 }
 
 private struct Localized {
