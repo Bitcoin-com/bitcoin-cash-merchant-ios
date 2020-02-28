@@ -65,6 +65,7 @@ final class PaymentRequestViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func cancelButtonTapped() {
+        UserManager.shared.activeInvoice = nil
         dismiss(animated: true)
     }
     
@@ -80,6 +81,7 @@ final class PaymentRequestViewController: UIViewController {
             timer?.invalidate()
             timer = nil
             
+            UserManager.shared.activeInvoice = nil
             dismiss(animated: true)
         }
         
@@ -221,12 +223,19 @@ final class PaymentRequestViewController: UIViewController {
     
     private func localize() {
         cancelButton.setTitle(Localized.cancel, for: .normal)
-        timeRemainingLabel.text = "0:00"
         scanToPayLabel.text = Localized.scanToPay
-        amountLabel.text = "\(numberFormatter.string(from: NSNumber(value: amount)) ?? "")"
+        timeRemainingLabel.text = "0:00"
+        
+        if let invoice = invoice {
+            amountLabel.text = "\(numberFormatter.string(from: NSNumber(value: invoice.fiatTotal)) ?? "")"
+        } else {
+            amountLabel.text = "\(numberFormatter.string(from: NSNumber(value: amount)) ?? "")"
+        }
     }
     
     private func createInvoice() {
+        guard invoice == nil else { return }
+        
         let invoice = InvoiceRequest(fiatAmount: amount,
                                      fiat: UserManager.shared.selectedCurrency.currency,
                                      apiKey: "sexqvmkxafvzhzfageoojrkchdekfwmuqpfqywsf",
@@ -236,6 +245,7 @@ final class PaymentRequestViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.invoice = try? JSONDecoder().decode(InvoiceStatus.self, from: data)
+                UserManager.shared.activeInvoice = self.invoice
             case .failure(let error):
                 Logger.log(message: "Error creating invoice: \(error.localizedDescription)", type: .error)
             }
@@ -307,6 +317,7 @@ final class PaymentRequestViewController: UIViewController {
                         if invoiceStatus.isPaid {
                             self.saveTransaction()
                             self.showPaymentCompletedView()
+                            UserManager.shared.activeInvoice = nil
                         }
                     }
                 }

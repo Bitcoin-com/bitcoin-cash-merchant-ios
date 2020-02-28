@@ -69,6 +69,26 @@ final class UserManager {
     var hasDestinationAddress: Bool {
         return destination != nil
     }
+    var activeInvoice: InvoiceStatus? {
+        get {
+            if let data = defaults.data(forKey: Constants.ACTIVE_INVOICE_KEY) {
+                return try? JSONDecoder().decode(InvoiceStatus.self, from: data)
+            }
+            
+            return nil
+        }
+        set {
+            if newValue == nil {
+                defaults.removeObject(forKey: Constants.ACTIVE_INVOICE_KEY)
+            }
+            
+            if let invoice = newValue {
+                if let data = try? JSONEncoder().encode(invoice) {
+                    defaults.set(data, forKey: Constants.ACTIVE_INVOICE_KEY)
+                }
+            }
+        }
+    }
     
     // MARK: - Initializer
     private init() {}
@@ -95,4 +115,5 @@ private struct Constants {
     static let COMPANY_NAME_KEY = "companyName"
     static let PIN_KEY = "pin"
     static let SELECTED_CURRENCY_KEY = "selectedCurrency"
+    static let ACTIVE_INVOICE_KEY = "activeInvoice"
 }

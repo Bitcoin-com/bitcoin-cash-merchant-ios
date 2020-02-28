@@ -47,6 +47,14 @@ final class PaymentInputViewController: UIViewController {
         localize()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let invoice = UserManager.shared.activeInvoice, invoice.isOpen {
+            showInvoice(invoice)
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -185,6 +193,13 @@ final class PaymentInputViewController: UIViewController {
         enterAmountLabel.text = Localized.enterAmount
         currencyLabel.text = numberFormatter.currencySymbol
         amountLabel.text = amountString
+    }
+    
+    private func showInvoice(_ invoice: InvoiceStatus) {
+        let paymentRequestViewController = PaymentRequestViewController()
+        paymentRequestViewController.invoice = invoice
+        paymentRequestViewController.modalPresentationStyle = .fullScreen
+        present(paymentRequestViewController, animated: true)
     }
 
 }
