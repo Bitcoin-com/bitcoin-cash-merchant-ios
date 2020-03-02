@@ -14,6 +14,7 @@ final class PaymentRequestViewController: UIViewController {
 
     // MARK: - Properties
     private var cancelButton = UIButton()
+    private var shareButton = UIButton()
     private var connectionStatusImageView = UIImageView()
     private var qrContainerView = CardView()
     private var qrImageView = UIImageView()
@@ -69,6 +70,15 @@ final class PaymentRequestViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @objc private func shareButtonTapped() {
+        guard let invoice = invoice else { return }
+        
+        let url = "\(Endpoints.wallet)\(BASE_URL)/i/\(invoice.paymentId)"
+        
+        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activityViewController, animated: true)
+    }
+    
     @objc private func timerTick() {
         guard let invoice = invoice else { return }
         
@@ -103,6 +113,7 @@ final class PaymentRequestViewController: UIViewController {
         view.backgroundColor = .white
         
         setupCancelButton()
+        setupShareButton()
         setupConnectionStatusImageView()
         setupQrContainerView()
         setupQrImageView()
@@ -113,17 +124,33 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupCancelButton() {
-        cancelButton.titleLabel?.font = .boldSystemFont(ofSize: 16.0)
-        cancelButton.backgroundColor = .bitcoinGreen
+        cancelButton.setImage(UIImage(imageLiteralResourceName: "close"), for: .normal)
+        cancelButton.tintColor = .black
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.layer.cornerRadius = Constants.CANCEL_BUTTON_HEIGHT / 2
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         view.addSubview(cancelButton)
         NSLayoutConstraint.activate([
-            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
-            cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
-            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -AppConstants.GENERAL_MARGIN),
-            cancelButton.heightAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_HEIGHT)
+            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CANCEL_BUTTON_LEADING_MARGIN),
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.CANCEL_BUTTON_TOP_MARGIN),
+            cancelButton.widthAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE),
+            cancelButton.heightAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE)
+        ])
+    }
+    
+    private func setupShareButton() {
+        shareButton.setImage(UIImage(imageLiteralResourceName: "share"), for: .normal)
+        shareButton.tintColor = .white
+        shareButton.backgroundColor = .bitcoinGreen
+        shareButton.translatesAutoresizingMaskIntoConstraints = false
+        shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+        shareButton.addStandardCornedRadiusAndShadow()
+        shareButton.layer.cornerRadius = Constants.SHARE_BUTTON_SIZE / 2
+        view.addSubview(shareButton)
+        NSLayoutConstraint.activate([
+            shareButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.SHARE_BUTTON_TRAILING_MARGIN),
+            shareButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.SHARE_BUTTON_BOTTOM_MARGIN),
+            shareButton.widthAnchor.constraint(equalToConstant: Constants.SHARE_BUTTON_SIZE),
+            shareButton.heightAnchor.constraint(equalToConstant: Constants.SHARE_BUTTON_SIZE)
         ])
     }
     
@@ -222,7 +249,6 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func localize() {
-        cancelButton.setTitle(Localized.cancel, for: .normal)
         scanToPayLabel.text = Localized.scanToPay
         timeRemainingLabel.text = "0:00"
         
@@ -343,15 +369,18 @@ final class PaymentRequestViewController: UIViewController {
 }
 
 private struct Localized {
-    static var cancel: String { NSLocalizedString("button_cancel", comment: "") }
     static var scanToPay: String { NSLocalizedString("waiting_for_payment", comment: "") }
 }
 
 private struct Constants {
     static let CONNECTION_STATUS_IMAGE_VIEW_MARGIN: CGFloat = 20.0
     static let CONNECTION_STATUS_IMAGE_VIEW_SIZE: CGFloat = 30.0
-    static let CANCEL_BUTTON_HEIGHT: CGFloat = 55.0
-    static let CANCEL_BUTTON_BOTTOM_MARGIN: CGFloat = 50.0
+    static let CANCEL_BUTTON_SIZE: CGFloat = 44.0
+    static let CANCEL_BUTTON_LEADING_MARGIN: CGFloat = 10.0
+    static let CANCEL_BUTTON_TOP_MARGIN: CGFloat = 10.0
+    static let SHARE_BUTTON_SIZE: CGFloat = 50.0
+    static let SHARE_BUTTON_TRAILING_MARGIN: CGFloat = 20.0
+    static let SHARE_BUTTON_BOTTOM_MARGIN: CGFloat = 20.0
     static let QR_CONTAINER_VIEW_SIZE: CGFloat = UIScreen.main.bounds.size.width / 2
     static let QR_IMAGE_VIEW_PADDING: CGFloat = 10.0
     static let TIME_REMAINING_LABEL_FONT_SIZE: CGFloat = 18.0
