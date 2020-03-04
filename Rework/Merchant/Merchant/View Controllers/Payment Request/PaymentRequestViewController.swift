@@ -48,6 +48,7 @@ final class PaymentRequestViewController: UIViewController {
         }
     }
     var webSocket: WebSocket?
+    var qrImage: UIImage?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -73,9 +74,17 @@ final class PaymentRequestViewController: UIViewController {
     @objc private func shareButtonTapped() {
         guard let invoice = invoice else { return }
         
-        let url = "\(Endpoints.wallet)\(BASE_URL)/i/\(invoice.paymentId)"
+        var activityItems = [Any]()
         
-        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        if let image = qrImage {
+            activityItems.append(image)
+        }
+        
+        let paymentUrl = "\(BASE_URL)/i/\(invoice.paymentId)"
+        let pleasePay = "\(Localized.pleasePayYourInvoiceHere): \(paymentUrl)"
+        activityItems.append(pleasePay)
+        
+        let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         present(activityViewController, animated: true)
     }
     
@@ -285,6 +294,7 @@ final class PaymentRequestViewController: UIViewController {
             if let data = try? Data(contentsOf: url) {
                 DispatchQueue.main.async {
                     self.qrImageView.image = UIImage(data: data)
+                    self.qrImage = UIImage(data: data)
                     self.qrImageView.isUserInteractionEnabled = true
                 }
             }
@@ -370,6 +380,7 @@ final class PaymentRequestViewController: UIViewController {
 
 private struct Localized {
     static var scanToPay: String { NSLocalizedString("waiting_for_payment", comment: "") }
+    static var pleasePayYourInvoiceHere: String { NSLocalizedString("Please pay your invoice here", comment: "") }
 }
 
 private struct Constants {
