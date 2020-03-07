@@ -18,6 +18,7 @@ final class SettingsViewController: UIViewController {
     private var localBitcoinCashView = UIView()
     private var bitcoinExchangeButton = UIButton()
     private var sellYourBitcoinCashLabel = UILabel()
+    private var itemsViewHeightConstraint: NSLayoutConstraint?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -92,11 +93,14 @@ final class SettingsViewController: UIViewController {
         itemsView.delegate = self
         itemsView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(itemsView)
+        
+        itemsViewHeightConstraint = itemsView.heightAnchor.constraint(equalToConstant: itemsView.height)
+        
         NSLayoutConstraint.activate([
             itemsView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             itemsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             itemsView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            itemsView.heightAnchor.constraint(equalToConstant: itemsView.height)
+            itemsViewHeightConstraint!
         ])
     }
     
@@ -220,10 +224,10 @@ final class SettingsViewController: UIViewController {
         let pasteAction = UIAlertAction(title: Localized.paste, style: .default) { [weak self] _ in
             guard let self = self else { return }
             
-            if let address = UIPasteboard.general.string, self.validateAddress(address) {
-                UserManager.shared.destination = address
-                Logger.log(message: "Pasted BCH address: \(address)", type: .success)
-                self.refreshAndShowSuccessMessage()
+            if let address = UIPasteboard.general.string {
+                Logger.log(message: "Pasted BCH address: \(address)", type: .info)
+                
+                self.validateAddress(address)
             } else {
                 self.showFailureMessage()
             }
@@ -233,17 +237,16 @@ final class SettingsViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    private func validateAddress(_ address: String) -> Bool {
-       if let _ = try? BitcoinAddress(cashaddr: address) {
-            return true
-        } else if let _ = try? BitcoinAddress(legacy: address) {
-            return true
-        } else if let _ = try? AddressFactory.create(address) {
-            return true
-        }
+    private func validateAddress(_ address: String) {
+        let paymentTarget = PaymentTarget(address: address, type: .address)
         
-        showFailureMessage()
-        return false
+        if paymentTarget.type == .invalid {
+            showFailureMessage()
+        } else {
+            UserManager.shared.destination = paymentTarget.address
+            UserManager.shared.activePaymentTarget = paymentTarget
+            refreshAndShowSuccessMessage()
+        }
     }
     
     private func createPin() {
@@ -271,6 +274,9 @@ final class SettingsViewController: UIViewController {
     
     private func refreshAndShowSuccessMessage() {
         itemsView.refresh()
+        itemsViewHeightConstraint?.constant = itemsView.height
+        view.layoutIfNeeded()
+        
         ToastManager.shared.showMessage(Localized.changesHaveBeenSaved, forStatus: .success)
     }
     
@@ -332,14 +338,9 @@ extension SettingsViewController: ScannerViewControllerDelegate {
         viewController.dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
             
-            if self.validateAddress(stringValue) {
-                UserManager.shared.destination = stringValue
-                Logger.log(message: "Scanned BCH address: \(stringValue)", type: .success)
-                
-                self.refreshAndShowSuccessMessage()
-            } else {
-                self.showFailureMessage()
-            }
+            Logger.log(message: "Scanned BCH address: \(stringValue)", type: .info)
+            
+            self.validateAddress(stringValue)
         }
     }
     

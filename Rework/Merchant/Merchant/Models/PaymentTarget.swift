@@ -19,7 +19,7 @@ enum PaymentTargetType: Int, Codable {
 final class PaymentTarget: Codable {
     
     // MARK: - Properties
-    let address: String
+    var address: String
     var type: PaymentTargetType
 
     // MARK: - Initializer
@@ -39,13 +39,19 @@ final class PaymentTarget: Codable {
             return
         }
         
-        if isLegacyAddress() {
-            type = .address
+        if isXPub() {
+            type = .xPub
             return
         }
         
-        if isXPub() {
-            type = .xPub
+        if isLegacyAddress() {
+            type = .address
+            return
+        } else {
+            address = "bitcoincash:\(address)"
+            if isLegacyAddress() {
+                type = .address
+            }
         }
     }
     
@@ -55,10 +61,10 @@ final class PaymentTarget: Codable {
     
     private func isXPub() -> Bool {
         guard let data = Base58.decode(address) else { return false }
-        
+                
         let xpubBytes = [UInt8](data)
         
-        if (xpubBytes.count != 78) { return false }
+        if (xpubBytes.count != 82) { return false }
         
         let fourBytes = [UInt8](xpubBytes[0...3])
         
@@ -71,7 +77,7 @@ final class PaymentTarget: Codable {
             return false
         }
         
-        let subdata = data.advanced(by: 41)
+        let subdata = data.advanced(by: 45)
         let array = [UInt8](subdata.dropLast(subdata.count - 1))
         
         let firstByte = array[0]
@@ -83,15 +89,31 @@ final class PaymentTarget: Codable {
     }
     
     private func isLegacyAddress() -> Bool {
-        if let _ = try? BitcoinAddress(cashaddr: address) {
+        return isLegacy() || isCashAddress()
+    }
+    
+    private func isLegacy() -> Bool {
+        do {
+            let legacy = try BitcoinAddress(legacy: address)
+            address = legacy.cashaddr
+            
             return true
-        } else if let _ = try? BitcoinAddress(legacy: address) {
-            return true
-        } else if let _ = try? AddressFactory.create(address) {
-            return true
+        } catch {
+            Logger.log(message: "Invalid Legacy Bitcoin address: \(error.localizedDescription)", type: .error)
+            return false
         }
-        
-        return true
+    }
+    
+    private func isCashAddress() -> Bool {
+        do {
+            let cashAddress = try BitcoinAddress(cashaddr: address)
+            address = cashAddress.cashaddr
+            
+            return true
+        } catch {
+            Logger.log(message: "Invalid Bitcoin address: \(error.localizedDescription)", type: .error)
+            return false
+        }
     }
     
 }

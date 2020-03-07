@@ -29,7 +29,7 @@ final class ItemsView: CardView {
         }
     }
     var height: CGFloat {
-        return CGFloat(items.count - 1) * Constants.CELL_HEIGHT + Constants.DESTINATION_CELL_HEIGHT
+        return calculateHeight()
     }
     var isScrollEnabled: Bool {
         get {
@@ -85,6 +85,18 @@ final class ItemsView: CardView {
         ])
     }
     
+    private func calculateHeight() -> CGFloat {
+        var height =  CGFloat(items.count - 1) * Constants.CELL_HEIGHT
+        
+        if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
+            height += Constants.XPUB_DESTINATION_CELL_HEIGHT
+        } else {
+            height += Constants.DESTINATION_CELL_HEIGHT
+        }
+        
+        return height
+    }
+    
 }
 
 extension ItemsView: UITableViewDataSource, UITableViewDelegate {
@@ -112,12 +124,21 @@ extension ItemsView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = items[indexPath.row]
         
-        return item.title == UserItem.destinationAddress.title ? Constants.DESTINATION_CELL_HEIGHT : Constants.CELL_HEIGHT
+        if item.title == UserItem.destinationAddress.title {
+            if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
+                return Constants.XPUB_DESTINATION_CELL_HEIGHT
+            }
+            
+            return Constants.DESTINATION_CELL_HEIGHT
+        }
+        
+        return Constants.CELL_HEIGHT
     }
     
 }
 
 private struct Constants {
+    static let XPUB_DESTINATION_CELL_HEIGHT: CGFloat = 100.0
     static let DESTINATION_CELL_HEIGHT: CGFloat = 80.0
     static let CELL_HEIGHT: CGFloat = 65.0
 }

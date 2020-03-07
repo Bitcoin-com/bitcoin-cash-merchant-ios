@@ -89,6 +89,38 @@ final class UserManager {
             }
         }
     }
+    var activePaymentTarget: PaymentTarget? {
+        get {
+            if let data = defaults.data(forKey: Constants.ACTIVE_PAYMENT_TARGET_KEY) {
+                return try? JSONDecoder().decode(PaymentTarget.self, from: data)
+            }
+            
+            if let destination = destination {
+                let paymentTarget = PaymentTarget(address: destination, type: .address)
+                
+                if paymentTarget.type != .invalid {
+                    if let data = try? JSONEncoder().encode(paymentTarget) {
+                        defaults.set(data, forKey: Constants.ACTIVE_PAYMENT_TARGET_KEY)
+                    }
+                    
+                    return paymentTarget
+                }
+            }
+            
+            return nil
+        }
+        set {
+            if newValue == nil {
+                defaults.removeObject(forKey: Constants.ACTIVE_PAYMENT_TARGET_KEY)
+            }
+            
+            if let paymentTarget = newValue {
+                if let data = try? JSONEncoder().encode(paymentTarget) {
+                    defaults.set(data, forKey: Constants.ACTIVE_PAYMENT_TARGET_KEY)
+                }
+            }
+        }
+    }
     
     // MARK: - Initializer
     private init() {}
@@ -116,4 +148,5 @@ private struct Constants {
     static let PIN_KEY = "pin"
     static let SELECTED_CURRENCY_KEY = "selectedCurrency"
     static let ACTIVE_INVOICE_KEY = "activeInvoice"
+    static let ACTIVE_PAYMENT_TARGET_KEY = "activePaymentTarget"
 }
