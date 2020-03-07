@@ -37,6 +37,7 @@
 		C4456E0723FEBC430025FD06 /* TransactionsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456E0623FEBC430025FD06 /* TransactionsHistoryViewController.swift */; };
 		C4456E0923FEBC530025FD06 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456E0823FEBC530025FD06 /* PinViewController.swift */; };
 		C4456E0B23FEBC630025FD06 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456E0A23FEBC630025FD06 /* SettingsViewController.swift */; };
+		C44E3AA52411550E002BC53C /* AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3AA42411550E002BC53C /* AddressTests.swift */; };
 		C453938A2402AC1600CC3CA5 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45393892402AC1600CC3CA5 /* UserDefaults+Extensions.swift */; };
 		C453938C2402B9D200CC3CA5 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C453938B2402B9D200CC3CA5 /* Int+Extensions.swift */; };
 		C453938E2402BA0F00CC3CA5 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C453938D2402BA0F00CC3CA5 /* Double+Extensions.swift */; };
@@ -126,6 +127,7 @@
 		C4456E0623FEBC430025FD06 /* TransactionsHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryViewController.swift; sourceTree = "<group>"; };
 		C4456E0823FEBC530025FD06 /* PinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		C4456E0A23FEBC630025FD06 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C44E3AA42411550E002BC53C /* AddressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTests.swift; sourceTree = "<group>"; };
 		C45393892402AC1600CC3CA5 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		C453938B2402B9D200CC3CA5 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		C453938D2402BA0F00CC3CA5 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				C4AF259D23FEB3BC0050AD41 /* MerchantTests.swift */,
+				C44E3AA42411550E002BC53C /* AddressTests.swift */,
 				C4AF259F23FEB3BC0050AD41 /* Info.plist */,
 			);
 			path = MerchantTests;
@@ -841,6 +844,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C44E3AA52411550E002BC53C /* AddressTests.swift in Sources */,
 				C4AF259E23FEB3BC0050AD41 /* MerchantTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,17 +1028,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1044,17 +1049,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

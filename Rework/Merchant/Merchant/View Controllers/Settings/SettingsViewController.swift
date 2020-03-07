@@ -118,6 +118,8 @@ final class SettingsViewController: UIViewController {
         // Image.
         let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "localbch_banner"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         localBitcoinCashView.addSubview(imageView)
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: localBitcoinCashView.leadingAnchor),
@@ -145,12 +147,14 @@ final class SettingsViewController: UIViewController {
     
     private func setupBitcoinExchangeButton() {
         bitcoinExchangeButton.setImage(UIImage(imageLiteralResourceName: "bce_banner"), for: .normal)
+        bitcoinExchangeButton.imageView?.contentMode = .scaleAspectFit
+        bitcoinExchangeButton.imageView?.clipsToBounds = true
         bitcoinExchangeButton.addTarget(self, action: #selector(bitcoinExchangeButtonTapped), for: .touchUpInside)
         bitcoinExchangeButton.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(bitcoinExchangeButton)
         NSLayoutConstraint.activate([
-            bitcoinExchangeButton.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
-            bitcoinExchangeButton.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
+            bitcoinExchangeButton.leadingAnchor.constraint(equalTo: localBitcoinCashView.leadingAnchor),
+            bitcoinExchangeButton.trailingAnchor.constraint(equalTo: localBitcoinCashView.trailingAnchor),
             bitcoinExchangeButton.topAnchor.constraint(equalTo: localBitcoinCashView.bottomAnchor, constant: Constants.BUTTON_TOP_PADDING),
             bitcoinExchangeButton.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
         ])
@@ -230,12 +234,16 @@ final class SettingsViewController: UIViewController {
     }
     
     private func validateAddress(_ address: String) -> Bool {
-        guard let _ = try? BitcoinAddress(legacy: address) else {
-            showFailureMessage()
-            return false
+       if let _ = try? BitcoinAddress(cashaddr: address) {
+            return true
+        } else if let _ = try? BitcoinAddress(legacy: address) {
+            return true
+        } else if let _ = try? AddressFactory.create(address) {
+            return true
         }
         
-        return true
+        showFailureMessage()
+        return false
     }
     
     private func createPin() {
@@ -322,10 +330,16 @@ extension SettingsViewController: ScannerViewControllerDelegate {
     // MARK: - ScannerViewControllerDelegate
     func scannerViewController(_ viewController: ScannerViewController, didScanStringValue stringValue: String) {
         viewController.dismiss(animated: true) { [weak self] in
-            UserManager.shared.destination = stringValue
-            Logger.log(message: "Scanned BCH address: \(stringValue)", type: .success)
+            guard let self = self else { return }
             
-            self?.refreshAndShowSuccessMessage()
+            if self.validateAddress(stringValue) {
+                UserManager.shared.destination = stringValue
+                Logger.log(message: "Scanned BCH address: \(stringValue)", type: .success)
+                
+                self.refreshAndShowSuccessMessage()
+            } else {
+                self.showFailureMessage()
+            }
         }
     }
     

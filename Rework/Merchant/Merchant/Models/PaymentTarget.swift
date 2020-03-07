@@ -9,19 +9,19 @@
 import Foundation
 import BitcoinKit
 
-enum PaymentTargetType {
+enum PaymentTargetType: Int, Codable {
     case invalid
     case xPub
     case address
     case apiKey
 }
 
-final class PaymentTarget {
+final class PaymentTarget: Codable {
     
     // MARK: - Properties
     let address: String
     var type: PaymentTargetType
-    
+
     // MARK: - Initializer
     init(address: String, type: PaymentTargetType) {
         self.address = address
@@ -32,12 +32,20 @@ final class PaymentTarget {
     
     // MARK: - Private API
     private func setup() {
+        type = .invalid
+        
         if isApiKey() {
             type = .apiKey
+            return
         }
         
         if isLegacyAddress() {
             type = .address
+            return
+        }
+        
+        if isXPub() {
+            type = .xPub
         }
     }
     
@@ -45,65 +53,54 @@ final class PaymentTarget {
         return NSPredicate(format:"SELF MATCHES %@", "[a-z]{40}").evaluate(with: address)
     }
     
-    private func isLegacyAddress() -> Bool {
-        guard let _ = try? BitcoinAddress(legacy: address) else { return false }
-        
-        return true
-    }
-    
     private func isXPub() -> Bool {
         guard let data = Base58.decode(address) else { return false }
         
-        let bytes = [UInt8](data)
+        let xpubBytes = [UInt8](data)
         
-        if bytes.count != 78 {
+        if (xpubBytes.count != 78) { return false }
+        
+        let fourBytes = [UInt8](xpubBytes[0...3])
+        
+        let bigEndianValue = fourBytes.withUnsafeBufferPointer {
+            ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 1) { $0 })
+        }.pointee
+        let version = UInt32(bigEndian: bigEndianValue)
+        
+        if (version != Constants.MAGIC_XPUB && version != Constants.MAGIC_TPUB && version != Constants.MAGIC_YPUB && version != Constants.MAGIC_UPUB && version != Constants.MAGIC_ZPUB && version != Constants.MAGIC_VPUB) {
             return false
         }
         
-        let chain = Data(capacity: 32)
-        let pub = Data(capacity: 33)
-        
         let subdata = data.advanced(by: 41)
-        let array = [UInt8](subdata.dropFirst(subdata.count - 1))
+        let array = [UInt8](subdata.dropLast(subdata.count - 1))
         
-        if let firstByte = bytes.first {
-            if firstByte == 0x02 || firstByte == 0x03 {
-                return true
-            }
+        let firstByte = array[0]
+        if (firstByte == 0x02 || firstByte == 0x03) {
+            return true
         }
         
         return false
     }
     
+    private func isLegacyAddress() -> Bool {
+        if let _ = try? BitcoinAddress(cashaddr: address) {
+            return true
+        } else if let _ = try? BitcoinAddress(legacy: address) {
+            return true
+        } else if let _ = try? AddressFactory.create(address) {
+            return true
+        }
+        
+        return true
+    }
+    
 }
 
-/**
- 
- public boolean isValidXpub(String xpub) {
-     try {
-         byte[] xpubBytes = Base58.decodeChecked(xpub);
-         ByteBuffer byteBuffer = ByteBuffer.wrap(xpubBytes);
-         if (byteBuffer.getInt() != 76067358) {
-             throw new AddressFormatException("invalid version: " + xpub);
-         } else {
-             byte[] chain = new byte[32];
-             byte[] pub = new byte[33];
-             byteBuffer.get();
-             byteBuffer.getInt();
-             byteBuffer.getInt();
-             byteBuffer.get(chain);
-             byteBuffer.get(pub);
-             ByteBuffer pubBytes = ByteBuffer.wrap(pub);
-             int firstByte = pubBytes.get();
-             if (firstByte != 2 && firstByte != 3) {
-                 throw new AddressFormatException("invalid format: " + xpub);
-             } else {
-                 return true;
-             }
-         }
-     } catch (Exception var8) {
-         return false;
-     }
- }
- 
- */
+private struct Constants {
+    static let MAGIC_XPUB = 0x0488B21E
+    static let MAGIC_TPUB = 0x043587CF
+    static let MAGIC_YPUB = 0x049D7CB2
+    static let MAGIC_UPUB = 0x044A5262
+    static let MAGIC_ZPUB = 0x04B24746
+    static let MAGIC_VPUB = 0x045F1CF6
+}
