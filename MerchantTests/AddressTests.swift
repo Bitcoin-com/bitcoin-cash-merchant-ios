@@ -8,7 +8,7 @@
 
 import XCTest
 import BitcoinKit
-@testable import Merchant
+@testable import Bitcoin_Cash_Register
 
 class AddressTests: XCTestCase {
     

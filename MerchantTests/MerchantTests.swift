@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Merchant
+@testable import Bitcoin_Cash_Register
 
 class MerchantTests: XCTestCase {
     
