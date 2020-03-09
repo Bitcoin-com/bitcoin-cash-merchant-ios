@@ -89,7 +89,7 @@ final class ContainerViewController: UIViewController {
         }
     }
     
-    @objc private func authorizeWithPin() {
+    @objc private func openSettings() {
         let pinViewController = PinViewController()
         pinViewController.state = .authorize
         pinViewController.view.frame.origin.y = UIScreen.main.bounds.size.height
@@ -109,6 +109,7 @@ final class ContainerViewController: UIViewController {
         pinViewController.state = .create
         pinViewController.view.frame.origin.y = UIScreen.main.bounds.size.height
         pinViewController.delegate = self
+        pinViewController.isCancelHidden = true
         
         addChild(pinViewController)
         view.addSubview(pinViewController.view)
@@ -146,7 +147,7 @@ final class ContainerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(hideSideMenu), name: .hideSideMenu, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(openViewController(_:)), name: .openViewController, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(openLink(_:)), name: .openLink, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(authorizeWithPin), name: .authorizeWithPin, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(openSettings), name: .openSettings, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(createPin), name: .createPin, object: nil)
     }
     
@@ -160,6 +161,12 @@ final class ContainerViewController: UIViewController {
         let settingsViewController = SettingsViewController()
         mainNavigationController.pushViewController(settingsViewController, animated: false)
     }
+    
+    private func closePinViewController(_ viewController: PinViewController) {
+        UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
+            viewController.view.frame.origin.y = UIScreen.main.bounds.size.height
+        }
+    }
 
 }
 
@@ -167,15 +174,16 @@ extension ContainerViewController: PinViewControllerDelegate {
     
     // MARK: - PinViewControllerDelegate
     func pinViewControllerDidEnterPinSuccessfully(_ viewController: PinViewController) {
-        UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
-            viewController.view.frame.origin.y = UIScreen.main.bounds.size.height
-        }
+        showSettings()
+        closePinViewController(viewController)
     }
     
     func pinViewControllerDidCreatePinSuccessfully(_ viewController: PinViewController) {
-        UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
-            viewController.view.frame.origin.y = UIScreen.main.bounds.size.height
-        }
+        closePinViewController(viewController)
+    }
+    
+    func pinViewControllerDidClose(_ viewController: PinViewController) {
+        closePinViewController(viewController)
     }
     
 }

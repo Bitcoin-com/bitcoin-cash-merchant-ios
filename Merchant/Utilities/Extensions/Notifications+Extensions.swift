@@ -13,7 +13,7 @@ extension NSNotification.Name {
 	static let hideSideMenu = NSNotification.Name("HideSideMenuNotification")
     static let openViewController = NSNotification.Name("OpenViewControllerNotification")
     static let openLink = NSNotification.Name("OpenLinkNotification")
-    static let authorizeWithPin = NSNotification.Name("AuthorizeWithPinNotification")
+    static let openSettings = NSNotification.Name("OpenSettingsNotification")
     static let createPin = NSNotification.Name("CreatePinNotification")
     static let refreshSettings = NSNotification.Name("RefreshSettingsNotification")
     static let settingsUpdated = NSNotification.Name("SettingsUpdatedNotification")

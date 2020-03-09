@@ -409,7 +409,7 @@ private struct Constants {
     static let SHARE_BUTTON_SIZE: CGFloat = 50.0
     static let SHARE_BUTTON_TRAILING_MARGIN: CGFloat = 20.0
     static let SHARE_BUTTON_BOTTOM_MARGIN: CGFloat = 20.0
-    static let QR_CONTAINER_VIEW_SIZE: CGFloat = UIScreen.main.bounds.size.width / 2
+    static let QR_CONTAINER_VIEW_SIZE: CGFloat = UIScreen.main.bounds.size.width - 100.0
     static let QR_IMAGE_VIEW_PADDING: CGFloat = 10.0
     static let TIME_REMAINING_LABEL_FONT_SIZE: CGFloat = 18.0
     static let TIME_REMAINING_LABEL_TOP_MARGIN: CGFloat = 20.0

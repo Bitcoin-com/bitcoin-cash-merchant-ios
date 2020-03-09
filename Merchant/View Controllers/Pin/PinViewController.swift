@@ -17,11 +17,13 @@ enum PinViewControllerState {
 protocol PinViewControllerDelegate: class {
     func pinViewControllerDidEnterPinSuccessfully(_ viewController: PinViewController)
     func pinViewControllerDidCreatePinSuccessfully(_ viewController: PinViewController)
+    func pinViewControllerDidClose(_ viewController: PinViewController)
 }
 
 final class PinViewController: UIViewController {
 
     // MARK: - Properties
+    private var cancelButton = UIButton()
     private var verificationView = VerificationView()
     private var explanationLabel = UILabel()
     private var keypadView = KeypadView()
@@ -29,6 +31,11 @@ final class PinViewController: UIViewController {
     private var verifyCode = ""
     var state: PinViewControllerState = .authorize
     weak var delegate: PinViewControllerDelegate?
+    var isCancelHidden = false {
+        didSet {
+            cancelButton.isHidden = isCancelHidden
+        }
+    }
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -38,13 +45,33 @@ final class PinViewController: UIViewController {
         localize()
     }
     
+    // MARK: - Actions
+    @objc private func cancelButtonTapped() {
+        delegate?.pinViewControllerDidClose(self)
+    }
+    
     // MARK: - Private API
     private func setupView() {
         view.backgroundColor = .white
         
+        setupCancelButton()
         setupKeypadView()
         setupVerificationView()
         setupExpalanationLabel()
+    }
+    
+    private func setupCancelButton() {
+        cancelButton.setImage(UIImage(imageLiteralResourceName: "close"), for: .normal)
+        cancelButton.tintColor = .black
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        view.addSubview(cancelButton)
+        NSLayoutConstraint.activate([
+            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CANCEL_BUTTON_LEADING_MARGIN),
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.CANCEL_BUTTON_TOP_MARGIN),
+            cancelButton.widthAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE),
+            cancelButton.heightAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE)
+        ])
     }
     
     private func setupKeypadView() {
@@ -195,6 +222,9 @@ private struct Localized {
 }
 
 private struct Constants {
+    static let CANCEL_BUTTON_SIZE: CGFloat = 44.0
+    static let CANCEL_BUTTON_LEADING_MARGIN: CGFloat = 10.0
+    static let CANCEL_BUTTON_TOP_MARGIN: CGFloat = 10.0
     static let VERIFICATION_VIEW_BOTTOM_MARGIN: CGFloat = 100.0
     static let VERIFICATION_VIEW_HORIZONTAL_PADDING: CGFloat = 10.0
     static let VERIFICATION_VIEW_HEIGHT: CGFloat = 60.0

@@ -331,6 +331,10 @@ extension SettingsViewController: PinViewControllerDelegate {
         }
     }
     
+    func pinViewControllerDidClose(_ viewController: PinViewController) {
+        viewController.dismiss(animated: true)
+    }
+    
 }
 
 extension SettingsViewController: ScannerViewControllerDelegate {

@@ -74,9 +74,7 @@ final class SideMenuViewController: UIViewController {
             let transactionsHistoryViewController = TransactionsHistoryViewController()
             NotificationCenter.default.post(name: .openViewController, object: transactionsHistoryViewController)
         case .settings:
-            let settingsViewController = SettingsViewController()
-            NotificationCenter.default.post(name: .openViewController, object: settingsViewController)
-            NotificationCenter.default.post(name: .authorizeWithPin, object: settingsViewController)
+            NotificationCenter.default.post(name: .openSettings, object: nil)
         case .termsOfUse:
             NotificationCenter.default.post(name: .openLink, object: Endpoints.termsOfUse)
         case .serviceTerms:
