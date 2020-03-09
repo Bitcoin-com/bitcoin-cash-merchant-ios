@@ -37,6 +37,8 @@
 		C4456E0723FEBC430025FD06 /* TransactionsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456E0623FEBC430025FD06 /* TransactionsHistoryViewController.swift */; };
 		C4456E0923FEBC530025FD06 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456E0823FEBC530025FD06 /* PinViewController.swift */; };
 		C4456E0B23FEBC630025FD06 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456E0A23FEBC630025FD06 /* SettingsViewController.swift */; };
+		C44A90EF24142EE900750D34 /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44A90EE24142EE900750D34 /* WalletManager.swift */; };
+		C44A90F12414353F00750D34 /* AddressDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44A90F02414353F00750D34 /* AddressDetails.swift */; };
 		C44E3AA52411550E002BC53C /* AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3AA42411550E002BC53C /* AddressTests.swift */; };
 		C453938A2402AC1600CC3CA5 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45393892402AC1600CC3CA5 /* UserDefaults+Extensions.swift */; };
 		C453938C2402B9D200CC3CA5 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C453938B2402B9D200CC3CA5 /* Int+Extensions.swift */; };
@@ -127,6 +129,8 @@
 		C4456E0623FEBC430025FD06 /* TransactionsHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryViewController.swift; sourceTree = "<group>"; };
 		C4456E0823FEBC530025FD06 /* PinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		C4456E0A23FEBC630025FD06 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C44A90EE24142EE900750D34 /* WalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
+		C44A90F02414353F00750D34 /* AddressDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDetails.swift; sourceTree = "<group>"; };
 		C44E3AA42411550E002BC53C /* AddressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTests.swift; sourceTree = "<group>"; };
 		C45393892402AC1600CC3CA5 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		C453938B2402B9D200CC3CA5 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				C445558224006AFC00F4B3E0 /* InvoiceStatusOutput.swift */,
 				C445559124010C1D00F4B3E0 /* StoreTransaction.swift */,
 				C4BA0C902404354D00A3D74B /* CountryCurrency.swift */,
+				C44A90F02414353F00750D34 /* AddressDetails.swift */,
 				C4BA0CB624057D3E00A3D74B /* PaymentTarget.swift */,
 			);
 			path = Models;
@@ -346,6 +351,7 @@
 				C44555952401121400F4B3E0 /* UserManager.swift */,
 				C4BA0C8E2404334400A3D74B /* CurrencyManager.swift */,
 				C441ABD0240927FC00A2253A /* WebSocket.swift */,
+				C44A90EE24142EE900750D34 /* WalletManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -808,6 +814,7 @@
 				C49F1FF823FFB3EC00416058 /* SideMenuTableHeaderView.swift in Sources */,
 				C445559A24014C5000F4B3E0 /* VerificationView.swift in Sources */,
 				C4456E0923FEBC530025FD06 /* PinViewController.swift in Sources */,
+				C44A90EF24142EE900750D34 /* WalletManager.swift in Sources */,
 				C4BA0C8F2404334400A3D74B /* CurrencyManager.swift in Sources */,
 				C445557D24004E9F00F4B3E0 /* Endpoints.swift in Sources */,
 				C445558524006B0D00F4B3E0 /* InvoiceRequestOutput.swift in Sources */,
@@ -820,6 +827,7 @@
 				C445558124006AEE00F4B3E0 /* InvoiceStatus.swift in Sources */,
 				C44555A62401DB7400F4B3E0 /* UILabel+BuilderCompatible.swift in Sources */,
 				C49F1FDD23FEF2B500416058 /* ToastViewController.swift in Sources */,
+				C44A90F12414353F00750D34 /* AddressDetails.swift in Sources */,
 				C445557B24004DD600F4B3E0 /* InvoiceRequest.swift in Sources */,
 				C4BA0CB724057D3E00A3D74B /* PaymentTarget.swift in Sources */,
 				C4BA0CAA240451BC00A3D74B /* CurrenciesViewController.swift in Sources */,
@@ -1028,7 +1036,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1049,7 +1057,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

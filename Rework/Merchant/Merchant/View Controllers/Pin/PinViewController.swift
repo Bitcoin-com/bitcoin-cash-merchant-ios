@@ -56,7 +56,7 @@ final class PinViewController: UIViewController {
         NSLayoutConstraint.activate([
             keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
             keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
-            keypadView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.KEYPAD_VIEW_BOTTOM_MARGIN),
+            keypadView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: Constants.KEYPAD_VIEW_CENTER_OFFSET),
             keypadView.heightAnchor.constraint(equalToConstant: 4 * KeypadView.KEYPAD_BUTTON_SIZE)
         ])
     }
@@ -68,7 +68,7 @@ final class PinViewController: UIViewController {
         NSLayoutConstraint.activate([
             verificationView.leadingAnchor.constraint(equalTo: keypadView.leadingAnchor, constant: Constants.VERIFICATION_VIEW_HORIZONTAL_PADDING),
             verificationView.trailingAnchor.constraint(equalTo: keypadView.trailingAnchor, constant: -Constants.VERIFICATION_VIEW_HORIZONTAL_PADDING),
-            verificationView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.VERIFICATION_VIEW_TOP_MARGIN),
+            verificationView.bottomAnchor.constraint(equalTo: keypadView.topAnchor, constant: -Constants.VERIFICATION_VIEW_BOTTOM_MARGIN),
             verificationView.heightAnchor.constraint(equalToConstant: Constants.VERIFICATION_VIEW_HEIGHT)
         ])
         
@@ -195,9 +195,9 @@ private struct Localized {
 }
 
 private struct Constants {
-    static let VERIFICATION_VIEW_TOP_MARGIN: CGFloat = 130.0
+    static let VERIFICATION_VIEW_BOTTOM_MARGIN: CGFloat = 100.0
     static let VERIFICATION_VIEW_HORIZONTAL_PADDING: CGFloat = 10.0
     static let VERIFICATION_VIEW_HEIGHT: CGFloat = 60.0
-    static let EXPLANATION_LABEL_TOP_MARGIN: CGFloat = 30.0
-    static let KEYPAD_VIEW_BOTTOM_MARGIN: CGFloat = 50.0
+    static let EXPLANATION_LABEL_TOP_MARGIN: CGFloat = 20.0
+    static let KEYPAD_VIEW_CENTER_OFFSET: CGFloat = 100.0
 }

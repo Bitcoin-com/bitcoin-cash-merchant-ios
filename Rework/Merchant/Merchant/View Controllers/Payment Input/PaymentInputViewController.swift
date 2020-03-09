@@ -92,12 +92,25 @@ final class PaymentInputViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         
-        setupCheckoutButton()
         setupKeypadView()
+        setupCheckoutButton()
         setupEnterAmountLabel()
         setupLabelsStackView()
         setupOverlayButton()
         setupMenuButton()
+    }
+    
+    private func setupKeypadView() {
+        keypadView.backgroundColor = .white
+        keypadView.translatesAutoresizingMaskIntoConstraints = false
+        keypadView.delegate = self
+        view.addSubview(keypadView)
+        NSLayoutConstraint.activate([
+            keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
+            keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
+            keypadView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: Constants.KEYPAD_VIEW_CENTER_OFFSET),
+            keypadView.heightAnchor.constraint(equalToConstant: 4 * KeypadView.KEYPAD_BUTTON_SIZE)
+        ])
     }
     
     private func setupCheckoutButton() {
@@ -108,23 +121,10 @@ final class PaymentInputViewController: UIViewController {
         checkoutButton.addTarget(self, action: #selector(checkoutButtonTapped), for: .touchUpInside)
         view.addSubview(checkoutButton)
         NSLayoutConstraint.activate([
-            checkoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
-            checkoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
-            checkoutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -AppConstants.GENERAL_MARGIN),
+            checkoutButton.leadingAnchor.constraint(equalTo: keypadView.leadingAnchor),
+            checkoutButton.trailingAnchor.constraint(equalTo: keypadView.trailingAnchor),
+            checkoutButton.topAnchor.constraint(equalTo: keypadView.bottomAnchor, constant: AppConstants.GENERAL_MARGIN),
             checkoutButton.heightAnchor.constraint(equalToConstant: Constants.CHECKOUT_BUTTON_HEIGHT)
-        ])
-    }
-    
-    private func setupKeypadView() {
-        keypadView.backgroundColor = .white
-        keypadView.translatesAutoresizingMaskIntoConstraints = false
-        keypadView.delegate = self
-        view.addSubview(keypadView)
-        NSLayoutConstraint.activate([
-            keypadView.leadingAnchor.constraint(equalTo: checkoutButton.leadingAnchor),
-            keypadView.trailingAnchor.constraint(equalTo: checkoutButton.trailingAnchor),
-            keypadView.bottomAnchor.constraint(equalTo: checkoutButton.topAnchor, constant: -AppConstants.GENERAL_MARGIN),
-            keypadView.heightAnchor.constraint(equalToConstant: 4 * KeypadView.KEYPAD_BUTTON_SIZE)
         ])
     }
     
@@ -250,4 +250,5 @@ private struct Constants {
     static let MENU_BUTTON_MARGIN: CGFloat = 20.0
     static let OVERLAY_BUTTON_VISIBLE_ALPHA: CGFloat = 0.7
     static let MAX_ALLOWED_NUMBER_OF_DIGITS = 12
+    static let KEYPAD_VIEW_CENTER_OFFSET: CGFloat = 50.0
 }
