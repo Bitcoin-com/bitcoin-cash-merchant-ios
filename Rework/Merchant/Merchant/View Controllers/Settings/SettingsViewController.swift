@@ -278,6 +278,8 @@ final class SettingsViewController: UIViewController {
         view.layoutIfNeeded()
         
         ToastManager.shared.showMessage(Localized.changesHaveBeenSaved, forStatus: .success)
+        
+        NotificationCenter.default.post(name: .settingsUpdated, object: nil)
     }
     
     private func showFailureMessage() {

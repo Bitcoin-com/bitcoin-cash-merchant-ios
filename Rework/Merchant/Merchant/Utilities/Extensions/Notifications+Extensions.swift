@@ -16,4 +16,5 @@ extension NSNotification.Name {
     static let authorizeWithPin = NSNotification.Name("AuthorizeWithPinNotification")
     static let createPin = NSNotification.Name("CreatePinNotification")
     static let refreshSettings = NSNotification.Name("RefreshSettingsNotification")
+    static let settingsUpdated = NSNotification.Name("SettingsUpdatedNotification")
 }

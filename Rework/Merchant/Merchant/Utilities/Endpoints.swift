@@ -20,7 +20,8 @@ struct Endpoints {
     static let localBitcoin = "https://local.bitcoin.com"
     static let exchangeBitcoin = "https://exchange.bitcoin.com"
     static let restBitcoin = "https://rest.bitcoin.com/v2"
-    static let explorerBitcoin = "https://explorer.bitcoin.com/bch/"
+    static let explorerBitcoin = "https://explorer.bitcoin.com/bch"
     static let websocket = "wss://pay.bitcoin.com/s"
     static let wallet = "bitcoincash:?r="
+    static let addressDetails = "\(Endpoints.restBitcoin)/address/details"
 }

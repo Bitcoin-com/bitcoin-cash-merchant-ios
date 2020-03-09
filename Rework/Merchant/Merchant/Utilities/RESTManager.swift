@@ -27,6 +27,44 @@ final class RESTManager: NSObject {
     }
     
     // MARK: - Public API
+    func GET(from urlString: String, withBody body: Data? = nil, completion: @escaping (Result<Data, Error>) -> Void) {
+        guard NetworkManager.shared.isConnected else { return }
+        
+        guard let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encoded) else {
+            fatalError("🛑 URL not in proper format")
+        }
+        
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
+        let request = configureRequest(for: url, method: .get, body: body)
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            // Error occured
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                    Logger.log(message: "Error = \(String(describing: error))", type: .error)
+                }
+            }
+            
+            // Data acquired
+            if let data = data {
+                //Logger.log(message: "Data: \(String(describing: String(data: data, encoding: .utf8)))", type: .info)
+                
+                DispatchQueue.main.async {
+                    completion(.success(data))
+                }
+            } else {
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
     func POST(from urlString: String, withBody body: Data?, completion: @escaping (Result<Data, Error>) -> Void) {
         guard NetworkManager.shared.isConnected else { return }
         
@@ -83,7 +121,7 @@ extension RESTManager: URLSessionDelegate {
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            if challenge.protectionSpace.host == "pay.bitcoin.com" {
+            if challenge.protectionSpace.host.contains("bitcoin.com") {
                 if let trust = challenge.protectionSpace.serverTrust {
                     completionHandler(.useCredential, URLCredential(trust: trust))
                 }

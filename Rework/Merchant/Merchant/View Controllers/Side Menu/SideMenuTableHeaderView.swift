@@ -29,6 +29,11 @@ final class SideMenuTableHeaderView: UIView {
         setupView()
     }
     
+    // MARK: - Actions
+    @objc private func refresh() {
+        merchantNameLabel.text = UserManager.shared.companyName
+    }
+    
     // MARK: - Private API
     private func setupView() {
         backgroundColor = .bitcoinGreen
@@ -36,6 +41,7 @@ final class SideMenuTableHeaderView: UIView {
         setupIconContainerView()
         setupIconImageView()
         setupMerchantNameLabel()
+        registerForNotifications()
     }
     
     private func setupIconContainerView() {
@@ -67,7 +73,7 @@ final class SideMenuTableHeaderView: UIView {
     }
     
     private func setupMerchantNameLabel() {
-        merchantNameLabel.text = "Djuro"
+        merchantNameLabel.text = UserManager.shared.companyName
         merchantNameLabel.textColor = .white
         merchantNameLabel.font = .boldSystemFont(ofSize: 16.0)
         merchantNameLabel.numberOfLines = 0
@@ -80,6 +86,10 @@ final class SideMenuTableHeaderView: UIView {
             merchantNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.MERCHANT_NAME_LABEL_PADDING),
             merchantNameLabel.topAnchor.constraint(equalTo: iconContainerView.bottomAnchor, constant: Constants.MERCHANT_NAME_LABEL_PADDING)
         ])
+    }
+    
+    private func registerForNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .settingsUpdated, object: nil)
     }
     
 }
