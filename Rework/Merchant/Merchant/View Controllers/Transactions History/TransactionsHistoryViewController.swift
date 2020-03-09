@@ -14,6 +14,8 @@ final class TransactionsHistoryViewController: UIViewController {
     // MARK: - Properties
     private var navigationBar = NavigationBar()
     private var tableView = UITableView()
+    private var noHistoryImageView = UIImageView()
+    private var noHistoryLabel = UILabel()
     private var transactions = [StoreTransaction]()
     var selectedTransaction: StoreTransaction?
     
@@ -37,6 +39,8 @@ final class TransactionsHistoryViewController: UIViewController {
         
         setupNavigationBar()
         setupTableView()
+        setupNoHistoryImageView()
+        setupNoHistoryLabel()
     }
     
     private func setupNavigationBar() {
@@ -71,8 +75,37 @@ final class TransactionsHistoryViewController: UIViewController {
         ])
     }
     
+    private func setupNoHistoryImageView() {
+        noHistoryImageView.image = UIImage(imageLiteralResourceName: "notxhistory")
+        noHistoryImageView.contentMode = .scaleAspectFit
+        noHistoryImageView.clipsToBounds = true
+        noHistoryImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(noHistoryImageView)
+        NSLayoutConstraint.activate([
+            noHistoryImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noHistoryImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noHistoryImageView.widthAnchor.constraint(equalToConstant: Constants.NO_HISTORY_IMAGE_VIEW_SIZE),
+            noHistoryImageView.heightAnchor.constraint(equalToConstant: Constants.NO_HISTORY_IMAGE_VIEW_SIZE)
+        ])
+    }
+    
+    private func setupNoHistoryLabel() {
+        noHistoryLabel.textColor = .black
+        noHistoryLabel.textAlignment = .center
+        noHistoryLabel.numberOfLines = 0
+        noHistoryLabel.font = .boldSystemFont(ofSize: Constants.NO_HISTORY_LABEL_FONT_SIZE)
+        noHistoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(noHistoryLabel)
+        NSLayoutConstraint.activate([
+            noHistoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
+            noHistoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
+            noHistoryLabel.topAnchor.constraint(equalTo: noHistoryImageView.bottomAnchor, constant: Constants.NO_HISTORY_LABEL_TOP_MARGIN)
+        ])
+    }
+    
     private func localize() {
         navigationBar.text = Localized.transactions
+        noHistoryLabel.text = Localized.noHistory
     }
     
     private func fetchTransactions() {
@@ -130,6 +163,9 @@ extension TransactionsHistoryViewController: UITableViewDataSource, UITableViewD
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        noHistoryImageView.isHidden = !transactions.isEmpty
+        noHistoryLabel.isHidden = !transactions.isEmpty
+        
         return transactions.count
     }
     
@@ -162,8 +198,12 @@ private struct Localized {
     static var copyTransaction: String { NSLocalizedString("copy_transaction", comment: "") }
     static var copyAddress: String { NSLocalizedString("copy_address", comment: "") }
     static var cancel: String { NSLocalizedString("button_cancel", comment: "") }
+    static var noHistory: String { NSLocalizedString("no_history_text", comment: "") }
 }
 
 private struct Constants {
     static let CELL_HEIGHT: CGFloat = 80.0
+    static let NO_HISTORY_IMAGE_VIEW_SIZE: CGFloat = 250.0
+    static let NO_HISTORY_LABEL_FONT_SIZE: CGFloat = 20.0
+    static let NO_HISTORY_LABEL_TOP_MARGIN: CGFloat = 20.0
 }

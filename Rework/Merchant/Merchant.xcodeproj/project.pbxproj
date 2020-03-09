@@ -166,7 +166,7 @@
 		C49F1FEC23FEF95E00416058 /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		C49F1FEE23FF2B9A00416058 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		C49F1FF723FFB3EC00416058 /* SideMenuTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableHeaderView.swift; sourceTree = "<group>"; };
-		C4AF258323FEB3BA0050AD41 /* Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merchant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4AF258323FEB3BA0050AD41 /* Bitcoin Cash Register.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bitcoin Cash Register.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4AF258623FEB3BA0050AD41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4AF258A23FEB3BA0050AD41 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		C4AF258F23FEB3BC0050AD41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -424,7 +424,7 @@
 		C4AF258423FEB3BA0050AD41 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C4AF258323FEB3BA0050AD41 /* Merchant.app */,
+				C4AF258323FEB3BA0050AD41 /* Bitcoin Cash Register.app */,
 				C4AF259923FEB3BC0050AD41 /* MerchantTests.xctest */,
 				C4AF25A423FEB3BC0050AD41 /* MerchantUITests.xctest */,
 			);
@@ -551,7 +551,7 @@
 			);
 			name = Merchant;
 			productName = Merchant;
-			productReference = C4AF258323FEB3BA0050AD41 /* Merchant.app */;
+			productReference = C4AF258323FEB3BA0050AD41 /* Bitcoin Cash Register.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C4AF259823FEB3BC0050AD41 /* MerchantTests */ = {
@@ -1036,7 +1036,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1045,7 +1045,7 @@
 				);
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bitcoin Cash Register";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1057,7 +1057,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1066,7 +1066,7 @@
 				);
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bitcoin Cash Register";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

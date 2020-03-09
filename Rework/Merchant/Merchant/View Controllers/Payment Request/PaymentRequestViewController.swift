@@ -17,6 +17,7 @@ final class PaymentRequestViewController: UIViewController {
     private var shareButton = UIButton()
     private var connectionStatusImageView = UIImageView()
     private var qrContainerView = CardView()
+    private var activityIndicatorView = UIActivityIndicatorView(style: .large)
     private var qrImageView = UIImageView()
     private var timeRemainingLabel = UILabel()
     private var scanToPayLabel = UILabel()
@@ -126,6 +127,7 @@ final class PaymentRequestViewController: UIViewController {
         setupConnectionStatusImageView()
         setupQrContainerView()
         setupQrImageView()
+        setupActivityIndicatorView()
         setupTimeRemainingLabel()
         setupScanToPayLabel()
         setupAmountLabel()
@@ -201,6 +203,17 @@ final class PaymentRequestViewController: UIViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(qrImageViewTapped))
         qrImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func setupActivityIndicatorView() {
+        activityIndicatorView.color = .bitcoinGreen
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.hidesWhenStopped = true
+        qrContainerView.addSubview(activityIndicatorView)
+        NSLayoutConstraint.activate([
+            activityIndicatorView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor)
+        ])
     }
     
     private func setupTimeRemainingLabel() {
@@ -290,9 +303,13 @@ final class PaymentRequestViewController: UIViewController {
     private func fetchQrCode() {
         guard let invoice = invoice, let url = URL(string: "\(Endpoints.qr)/\(invoice.paymentId)") else { return }
         
+        activityIndicatorView.startAnimating()
+        
         DispatchQueue.global(qos: .userInitiated).async {
             if let data = try? Data(contentsOf: url) {
                 DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+
                     self.qrImageView.image = UIImage(data: data)
                     self.qrImage = UIImage(data: data)
                     self.qrImageView.isUserInteractionEnabled = true
