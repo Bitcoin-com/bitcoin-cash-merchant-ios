@@ -118,6 +118,14 @@ final class PaymentRequestViewController: UIViewController {
         ToastManager.shared.showMessage(url, forStatus: .success)
     }
     
+    @objc private func networkConnectionLost() {
+        connectionStatusImageView.image = UIImage(imageLiteralResourceName: "disconnected")
+    }
+    
+    @objc private func networkConnectionAcquired() {
+        connectionStatusImageView.image = UIImage(imageLiteralResourceName: "connected")
+    }
+    
     // MARK: - Private API
     private func setupView() {
         view.backgroundColor = .white
@@ -132,6 +140,7 @@ final class PaymentRequestViewController: UIViewController {
         setupScanToPayLabel()
         setupAmountLabel()
         setupPaymentCompletedView()
+        registerForNotifications()
     }
     
     private func setupCancelButton() {
@@ -270,6 +279,11 @@ final class PaymentRequestViewController: UIViewController {
         ])
     }
     
+    private func registerForNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(networkConnectionLost), name: .networkMonitorDidLostConnection, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(networkConnectionAcquired), name: .networkMonitorDidAcquireConnection, object: nil)
+    }
+    
     private func localize() {
         scanToPayLabel.text = Localized.scanToPay
         timeRemainingLabel.text = "0:00"
@@ -377,12 +391,12 @@ final class PaymentRequestViewController: UIViewController {
             }
             webSocket.event.open = { [weak self] in
                 Logger.log(message: "Socket did open", type: .success)
-                self?.connectionStatusImageView.image = UIImage(imageLiteralResourceName: "connected")
+                self?.networkConnectionAcquired()
             }
             
             webSocket.event.close = { [weak self] code, reason, clean in
                 Logger.log(message: "Socket did close", type: .debug)
-                self?.connectionStatusImageView.image = UIImage(imageLiteralResourceName: "disconnected")
+                self?.networkConnectionLost()
             }
             
             self.webSocket = webSocket
