@@ -2,33 +2,51 @@
 //  MerchantTests.swift
 //  MerchantTests
 //
-//  Created by Jean-Baptiste Dominguez on 2019/04/22.
-//  Copyright © 2019 Bitcoin.com. All rights reserved.
+//  Created by Djuro Alfirevic on 2/20/20.
+//  Copyright © 2020 Bitcoin.com. All rights reserved.
 //
 
 import XCTest
 @testable import Merchant
 
 class MerchantTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    // MARK: - Properties
+    private let bip70service = BIP70Service.shared
+    
+    // MARK: - Tests
+    
+    // MARK: - Create Invoice
+    func testCreateInvoice() {
+        let requestExpectation = expectation(description: "Request Expectation")
+        
+        let invoice = InvoiceRequest(fiatAmount: 500.57,
+                                     fiat: "USD",
+                                     apiKey: "sexqvmkxafvzhzfageoojrkchdekfwmuqpfqywsf",
+                                     address: "qqkzr47vfa8p48urteqer5dxsmwqkc3c7qjnlt0h2e")
+        
+        
+        bip70service.createInvoice(invoice) { result in
+            requestExpectation.fulfill()
+            
+            switch result {
+            case .success(let data):
+                let invoiceStatus = try? JSONDecoder().decode(InvoiceStatus.self, from: data)
+                if let invoiceStatus = invoiceStatus {
+                    XCTAssertTrue(invoiceStatus.status == "open", "InvoiceStatus should be open")
+                } else {
+                    XCTFail("Invoice status not parsed")
+                }
+            case .failure(let error):
+                XCTFail("Error occurred: \(error.localizedDescription)")
+            }
         }
+        
+        waitForExpectations(timeout: 10, handler: { (error) in
+            if error != nil {
+                XCTFail("Request timed out")
+            }
+        })
     }
-
+    
 }

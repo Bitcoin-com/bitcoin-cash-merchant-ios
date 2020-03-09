@@ -1,110 +1,26 @@
 PODS:
-  - Alamofire (4.8.2)
-  - BDCKit (0.1.0)
-  - BitcoinKit (1.1.1)
-  - Crashlytics (3.12.0):
-    - Fabric (~> 1.9.0)
-  - Fabric (1.9.0)
-  - lottie-ios (2.5.3)
-  - Moya/Core (11.0.2):
-    - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - Moya/RxSwift (11.0.2):
-    - Moya/Core
-    - RxSwift (~> 4.0)
-  - Nimble (8.0.1)
-  - Quick (2.1.0)
-  - Realm (3.14.2):
-    - Realm/Headers (= 3.14.2)
-  - Realm/Headers (3.14.2)
-  - RealmSwift (3.14.2):
-    - Realm (= 3.14.2)
-  - Result (3.2.4)
-  - RxBlocking (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxRealm (0.7.6):
-    - RealmSwift (~> 3.0)
-    - RxSwift (~> 4.0)
-  - RxSwift (4.5.0)
-  - RxTest (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - SwiftWebSocket (2.7.0)
+  - BitcoinKit (1.1.0)
+  - Realm (4.3.2):
+    - Realm/Headers (= 4.3.2)
+  - Realm/Headers (4.3.2)
+  - RealmSwift (4.3.2):
+    - Realm (= 4.3.2)
 
 DEPENDENCIES:
-  - BDCKit (from `https://github.com/bitcoin-com/bdc-kit-ios`, branch `master`)
-  - BitcoinKit (~> 1.1.1)
-  - Crashlytics
-  - Fabric
-  - lottie-ios (~> 2.5.2)
-  - Moya/RxSwift (~> 11.0)
-  - Nimble
-  - Quick
+  - BitcoinKit
   - RealmSwift
-  - RxBlocking
-  - RxCocoa (~> 4.0)
-  - RxRealm
-  - RxSwift (~> 4.0)
-  - RxTest
-  - SwiftWebSocket (from `https://github.com/tidwall/SwiftWebSocket.git`, branch `swift/4.0`)
 
 SPEC REPOS:
-  https://github.com/Bitcoin-com/CocoaPods.git:
+  trunk:
     - BitcoinKit
-  https://github.com/cocoapods/specs.git:
-    - Alamofire
-    - Crashlytics
-    - Fabric
-    - lottie-ios
-    - Moya
-    - Nimble
-    - Quick
     - Realm
     - RealmSwift
-    - Result
-    - RxBlocking
-    - RxCocoa
-    - RxRealm
-    - RxSwift
-    - RxTest
-
-EXTERNAL SOURCES:
-  BDCKit:
-    :branch: master
-    :git: https://github.com/bitcoin-com/bdc-kit-ios
-  SwiftWebSocket:
-    :branch: swift/4.0
-    :git: https://github.com/tidwall/SwiftWebSocket.git
-
-CHECKOUT OPTIONS:
-  BDCKit:
-    :commit: 336673d0be64f14cf576cae7cbe5524d5d86c0ff
-    :git: https://github.com/bitcoin-com/bdc-kit-ios
-  SwiftWebSocket:
-    :commit: 1f3049d4958ffb4e7586e58e158fba80dec86ff7
-    :git: https://github.com/tidwall/SwiftWebSocket.git
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  BDCKit: 5b89e845125d669f0ef996f74e6f627f4393bbe8
-  BitcoinKit: aad4c997e2500f7a89e1a82bd5aff6d9d6fab90d
-  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
-  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
-  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
-  Moya: a725035953bc1c0eb1be505ab903984501d82440
-  Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
-  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
-  Realm: 179c6706e3a49dbfe112e572fd3c03d3169bea35
-  RealmSwift: 1797f272fb51c555b764fada32e82159a2c65247
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  RxBlocking: 79413e4d916f44bb3e113c5b2cc059e36fe58910
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxRealm: 5379eddd74f8d617ca7681d1f8d144af25b432b0
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
-  RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
-  SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
+  BitcoinKit: a8c198d2a57caf64dc43271901f8c5a2309aced2
+  Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
+  RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
 
-PODFILE CHECKSUM: 827e0a9b66bff2c407b9bc1dbe64886479c7a583
+PODFILE CHECKSUM: 8a893573a48c9eaf023369cff639330840dd106b
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
