@@ -10,123 +10,123 @@
 
 "action_settings" = "Impostazioni";
 
-"pin_code_create_error" = "Inserisci due PIN a 4 cifre corrispondenti";
+"pin_code_create_error" = "Inserisci i due codici PIN a 4 cifre corrispondenti";
 
 "pin_code_enter_error" = "Codice PIN errato";
 
 "prompt_ok" = "OK";
 
-"prompt_ko" = "ANNULLA";
+"prompt_ko" = "Cancella";
 
-"create_pin" = "Create PIN";
+"create_pin" = "Crea Codice PIN";
 
-"confirm_pin" = "Confirm PIN";
+"confirm_pin" = "Conferma Codice PIN";
 
-"unrecognized_xpub" = "Unrecognized public key format";
+"unrecognized_xpub" = "Formato della chiave pubblica non riconosciuto";
 
-"payment_received" = "Payment complete. Thank you.";
+"payment_received" = "Il pagamento è stato completato. Grazie";
 
-"unable_to_generate_address" = "An address cannot be generated at this time. Please check your installation and try again.";
+"unable_to_generate_address" = "Impossibile generare un indirizzo allo stato attuale.Controlla la procedura di installazione e riprova.";
 
-"invalid_amount" = "Invalid amount.";
+"invalid_amount" = "Importo non valido.";
 
-"removed_by_bip70_insufficient_payment" = "Insufficient payment received.";
+"removed_by_bip70_insufficient_payment" = "Il pagamento ricevuto è insufficiente.";
 
-"removed_by_bip70_re_payment_remainder" = "Remainder:";
+"removed_by_bip70_re_payment_remainder" = "Promemoria:";
 
-"removed_by_bip70_re_payment_requested" = "Requested:";
+"removed_by_bip70_re_payment_requested" = "Richiesto:";
 
-"removed_by_bip70_re_payment_received" = "Received:";
+"removed_by_bip70_re_payment_received" = "Ricevuto:";
 
-"removed_by_bip70_insufficient_payment_continue" = "Update QR code for remaining amount due?";
+"removed_by_bip70_insufficient_payment_continue" = "Aggiornare il codice QR per il restante importo dovuto?";
 
-"removed_by_bip70_overpaid_amount" = "The amount received is higher than expected.";
+"removed_by_bip70_overpaid_amount" = "L'importo ricevuto è superiore a quanto dovuto.";
 
-"options_payment_address" = "Payment address";
+"options_payment_address" = "Indirizzo di pagamento";
 
-"options_receiving_payments" = "Receiving payments";
+"options_receiving_payments" = "Ricezione dei pagamenti";
 
-"scan" = "Scan";
+"scan" = "Scansiona";
 
-"paste" = "Paste";
+"paste" = "Incolla";
 
-"obligatory_receiver" = "You must provide a Bitcoin Cash address to receive payments.";
+"obligatory_receiver" = "Devi fornire un indirizzo Bitcoin Cash per ricevere i pagamenti.";
 
-"waiting_for_payment" = "Scan to Pay";
+"waiting_for_payment" = "Scansiona per pagare";
 
-"confirm_request" = "Checkout";
+"confirm_request" = "Pagamento";
 
-"button_cancel" = "Cancel";
+"button_cancel" = "Cancella";
 
-"button_done" = "Done";
+"button_done" = "Fatto";
 
-"powered_by" = "Powered by";
+"powered_by" = "Realizzato da";
 
 "bitcoindotcom" = "Bitcoin.com";
 
-"enter_pin" = "Enter PIN";
+"enter_pin" = "Inserisci codice PIN";
 
-"syncing_xpub" = "Syncing xpub…";
+"syncing_xpub" = "Sincronizzazione a xpub…";
 
-"synced_xpub" = "xpub synced!";
+"synced_xpub" = "xpub sincronizzato!";
 
-"no_history_text" = "There is no transaction history.";
+"no_history_text" = "Non esiste una cronologia delle transazioni.";
 
-"options_explain_payment_address" = "A destination address can either be a Bitcoin Cash address, or an Extended Public Key (xpub) or a merchant API key or pairing code";
+"options_explain_payment_address" = "L'indirizzo di destinazione può essere tanto l'indirizzo di Bitcoin Cash quanto una Chiave Pubblica Estesa (xpub) o una chiave API denominata merchant, oppure un codice corrispondente";
 
-"options_add_payment_address" = "Add destination address";
+"options_add_payment_address" = "Aggiungi indirizzo di destinazione";
 
-"button_save" = "Save";
+"button_save" = "Salva";
 
-"payment_enter_an_amount" = "Enter an amount";
+"payment_enter_an_amount" = "Inserisci importo";
 
-"menu_profile" = "Profile";
+"menu_profile" = "Profilo";
 
 "menu_cash_register" = "Cash Register";
 
-"menu_transactions" = "Transactions";
+"menu_transactions" = "Transazioni";
 
-"menu_settings" = "Settings";
+"menu_settings" = "Impostazioni";
 
-"menu_help" = "Help";
+"menu_help" = "Aiuto";
 
-"menu_about" = "About";
+"menu_about" = "Chi siamo";
 
-"settings_merchant_name" = "Merchant Name";
+"settings_merchant_name" = "Nome del venditore";
 
-"settings_destination_address" = "Destination Address";
+"settings_destination_address" = "Indirizzo di destinazione";
 
-"settings_local_currency" = "Local Currency";
+"settings_local_currency" = "Valuta locale";
 
-"settings_pin_code" = "PIN Code";
+"settings_pin_code" = "Codice PIN";
 
-"ad_title_local_bitcoin_cash" = "Local Bitcoin Cash";
+"ad_title_local_bitcoin_cash" = "Bitcoin Cash Locale";
 
-"ad_content_local_bitcoin_cash" = "Sell your Bitcoin Cash (BCH) for Cash";
+"ad_content_local_bitcoin_cash" = "Vendi il tuo Bitcoin Cash (BCH) per avere liquidità";
 
-"not_supported" = "Not supported";
+"not_supported" = "Non supportato";
 
-"grant_camera_permission" = "Please grant camera permission to use the QR code Scanner";
+"grant_camera_permission" = "Autorizzare la fotocamera per scansionare il codice QR";
 
-"view_transaction" = "View transaction";
+"view_transaction" = "Visualizza transazione";
 
-"copy_transaction" = "Copy transaction";
+"copy_transaction" = "Copia transazione";
 
-"view_address" = "View address";
+"view_address" = "Visualizza indirizzo";
 
-"copy_address" = "Copy address";
+"copy_address" = "Copia indirizzo";
 
-"menu_terms_of_use" = "Terms of use";
+"menu_terms_of_use" = "Condizioni d'uso";
 
-"menu_service_terms" = "Service terms";
+"menu_service_terms" = "Termini del servizio";
 
-"menu_privacy_policy" = "Privacy policy";
+"menu_privacy_policy" = "Informativa sulla privacy";
 
-"contract_agreement_summary" = "By continuing, I agree to the\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        and <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "nel continuare, acconsento a         <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>         , <xliff:g id=\"ref_service_terms\">%s</xliff:g>         e <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
 
-"contract_button_ok" = "I agree";
+"contract_button_ok" = "Acconsento";
 
-"error" = "Error";
+"error" = "Errore";
 
-"notify_changes_have_been_saved" = "Change has been saved";
+"notify_changes_have_been_saved" = "Le modifiche sono state salvate";
 

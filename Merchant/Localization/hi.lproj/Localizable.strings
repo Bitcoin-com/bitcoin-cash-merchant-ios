@@ -6,126 +6,126 @@
   Copyright © 2020 Bitcoin.com. All rights reserved.
 */
 
-"app_name" = "Bitcoin Cash Register";
+"app_name" = "Mesin Kasir Bitcoin";
 
-"action_settings" = "Settings";
+"action_settings" = "Pengaturan";
 
-"pin_code_create_error" = "Enter two matching 4-digit PIN codes";
+"pin_code_create_error" = "Masukkan dua kode PIN 4 digit yang sama";
 
-"pin_code_enter_error" = "PIN code incorrect";
+"pin_code_enter_error" = "Kode PIN salah";
 
-"prompt_ok" = "OK";
+"prompt_ok" = "Oke";
 
-"prompt_ko" = "Cancel";
+"prompt_ko" = "Batal";
 
-"create_pin" = "Create PIN Code";
+"create_pin" = "Buat Kode PIN";
 
-"confirm_pin" = "Confirm PIN Code";
+"confirm_pin" = "Konfirmasi Kode PIN";
 
-"unrecognized_xpub" = "Unrecognized public key format";
+"unrecognized_xpub" = "Format kunci publik tidak dikenali";
 
-"payment_received" = "Payment complete. Thank you.";
+"payment_received" = "Pembayaran selesai. Terima kasih.";
 
-"unable_to_generate_address" = "An address cannot be generated at this time. Please check your installation and try again.";
+"unable_to_generate_address" = "Alamat tidak dapat dihasilkan saat ini. Harap periksa instalasi Anda lalu cobalah kembali.";
 
-"invalid_amount" = "Invalid amount.";
+"invalid_amount" = "Nominal tidak sah.";
 
-"removed_by_bip70_insufficient_payment" = "Insufficient payment received.";
+"removed_by_bip70_insufficient_payment" = "Menerima pembayaran yang masih kurang.";
 
-"removed_by_bip70_re_payment_remainder" = "Remainder:";
+"removed_by_bip70_re_payment_remainder" = "Sisa:";
 
-"removed_by_bip70_re_payment_requested" = "Requested:";
+"removed_by_bip70_re_payment_requested" = "Diminta:";
 
-"removed_by_bip70_re_payment_received" = "Received:";
+"removed_by_bip70_re_payment_received" = "Diterima:";
 
-"removed_by_bip70_insufficient_payment_continue" = "Update QR code for remaining amount due?";
+"removed_by_bip70_insufficient_payment_continue" = "Perbarui kode QR untuk sisa nominal yang harus dibayar?";
 
-"removed_by_bip70_overpaid_amount" = "The amount received is higher than expected.";
+"removed_by_bip70_overpaid_amount" = "Nominal yang diterima lebih tinggi dari yang diminta.";
 
-"options_payment_address" = "Payment address";
+"options_payment_address" = "Alamat pembayaran";
 
-"options_receiving_payments" = "Receiving payments";
+"options_receiving_payments" = "Menerima pembayaran";
 
-"scan" = "Scan";
+"scan" = "Pindai";
 
-"paste" = "Paste";
+"paste" = "Tempel";
 
-"obligatory_receiver" = "You must provide a Bitcoin Cash address to receive payments.";
+"obligatory_receiver" = "Anda harus mencantumkan alamat Bitcoin Cash untuk menerima pembayaran.";
 
-"waiting_for_payment" = "Scan to Pay";
+"waiting_for_payment" = "Pindai dan Bayar";
 
 "confirm_request" = "Checkout";
 
-"button_cancel" = "Cancel";
+"button_cancel" = "Batal";
 
-"button_done" = "Done";
+"button_done" = "Selesai";
 
-"powered_by" = "Powered by";
+"powered_by" = "Didayai oleh";
 
 "bitcoindotcom" = "Bitcoin.com";
 
-"enter_pin" = "Enter PIN Code";
+"enter_pin" = "Masukkan Kode PIN";
 
-"syncing_xpub" = "Syncing xpub…";
+"syncing_xpub" = "Mensinkronkan xpub...";
 
-"synced_xpub" = "xpub synced!";
+"synced_xpub" = "xpub tersinkron!";
 
-"no_history_text" = "There is no transaction history.";
+"no_history_text" = "Tidak ada riwayat transaksi.";
 
-"options_explain_payment_address" = "A destination address can either be a Bitcoin Cash address, or an Extended Public Key (xpub) or a merchant API key or pairing code";
+"options_explain_payment_address" = "Alamat tujuan dapat berupa alamat Bitcoin Cash, atau Extended Public Key (xpub) atau kunci API merchant atau kode penyandingan";
 
-"options_add_payment_address" = "Add destination address";
+"options_add_payment_address" = "Tambah alamat tujuan";
 
-"button_save" = "Save";
+"button_save" = "Simpan";
 
-"payment_enter_an_amount" = "Enter an amount";
+"payment_enter_an_amount" = "Masukkan nominal";
 
-"menu_profile" = "Profile";
+"menu_profile" = "Profil";
 
-"menu_cash_register" = "Cash Register";
+"menu_cash_register" = "Mesin Kasir";
 
-"menu_transactions" = "Transactions";
+"menu_transactions" = "Transaksi";
 
-"menu_settings" = "Settings";
+"menu_settings" = "Pengaturan";
 
-"menu_help" = "Help";
+"menu_help" = "Bantuan";
 
-"menu_about" = "About";
+"menu_about" = "Seputar";
 
-"settings_merchant_name" = "Merchant Name";
+"settings_merchant_name" = "Nama Merchant";
 
-"settings_destination_address" = "Destination Address";
+"settings_destination_address" = "Alamat Tujuan";
 
-"settings_local_currency" = "Local Currency";
+"settings_local_currency" = "Mata Uang Lokal";
 
-"settings_pin_code" = "PIN Code";
+"settings_pin_code" = "Kode PIN";
 
-"ad_title_local_bitcoin_cash" = "Local Bitcoin Cash";
+"ad_title_local_bitcoin_cash" = "Bitcoin Cash Lokal";
 
-"ad_content_local_bitcoin_cash" = "Sell your Bitcoin Cash (BCH) for Cash";
+"ad_content_local_bitcoin_cash" = "Jual Bitcoin Cash (BCH) Anda untuk Cash";
 
-"not_supported" = "Not supported";
+"not_supported" = "Tidak Didukung";
 
-"grant_camera_permission" = "Please grant camera permission to use the QR code Scanner";
+"grant_camera_permission" = "Harap berikan perizinan kamera untuk menggunakan Pemindai kode QR";
 
-"view_transaction" = "View transaction";
+"view_transaction" = "Lihat transaksi";
 
-"copy_transaction" = "Copy transaction";
+"copy_transaction" = "Salin transaksi";
 
-"view_address" = "View address";
+"view_address" = "Lihat alamat";
 
-"copy_address" = "Copy address";
+"copy_address" = "Salin alamat";
 
-"menu_terms_of_use" = "Terms of use";
+"menu_terms_of_use" = "Syarat penggunaan";
 
-"menu_service_terms" = "Service terms";
+"menu_service_terms" = "Syarat layanan";
 
-"menu_privacy_policy" = "Privacy policy";
+"menu_privacy_policy" = "Kebijakan privasi";
 
-"contract_agreement_summary" = "By continuing, I agree to the\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        and <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "Dengan melanjutkan, saya menyetujui         <xliff:g id=\"ref_syarat_penggunaan\">%s</xliff:g>         , <xliff:g id=\"ref_syarat_layanan\">%s</xliff:g>         and <xliff:g id=\"ref_kebijakan_privasi\">%s</xliff:g>";
 
-"contract_button_ok" = "I agree";
+"contract_button_ok" = "Saya setuju";
 
-"error" = "Error";
+"error" = "Eror";
 
-"notify_changes_have_been_saved" = "Change has been saved";
+"notify_changes_have_been_saved" = "Perubahan telah tersimpan";

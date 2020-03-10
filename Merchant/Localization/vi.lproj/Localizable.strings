@@ -1,0 +1,131 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Sổ ghi Bitcoin Cash";
+
+"action_settings" = "Cài đặt";
+
+"pin_code_create_error" = "Nhập hai mã PIN giống nhau gồm 4 chữ số";
+
+"pin_code_enter_error" = "Mã PIN không chính xác";
+
+"prompt_ok" = "OK";
+
+"prompt_ko" = "Hủy";
+
+"create_pin" = "Tạo Mã PIN";
+
+"confirm_pin" = "Xác nhận Mã PIN";
+
+"unrecognized_xpub" = "Định dạng khóa công khai không được chấp nhận";
+
+"payment_received" = "Thanh toán hoàn tất. Xin cảm ơn bạn.";
+
+"unable_to_generate_address" = "Không thể tạo địa chỉ vào lúc này. Xin vui lòng kiểm tra cài đặt của bạn và thử lại.";
+
+"invalid_amount" = "Số tiền không hợp lệ.";
+
+"removed_by_bip70_insufficient_payment" = "Đã nhận khoản thanh toán không đủ.";
+
+"removed_by_bip70_re_payment_remainder" = "Phần còn lại:";
+
+"removed_by_bip70_re_payment_requested" = "Đã yêu cầu:";
+
+"removed_by_bip70_re_payment_received" = "Đã nhận:";
+
+"removed_by_bip70_insufficient_payment_continue" = "Cập nhật mã QR cho số tiền nợ còn lại?";
+
+"removed_by_bip70_overpaid_amount" = "Số tiền nhận được cao hơn dự kiến.";
+
+"options_payment_address" = "Địa chỉ thanh toán";
+
+"options_receiving_payments" = "Thanh toán đang nhận";
+
+"scan" = "Quét";
+
+"paste" = "Dán";
+
+"obligatory_receiver" = "Bạn phải cung cấp địa chỉ Bitcoin Cash để nhận thanh toán.";
+
+"waiting_for_payment" = "Quét để Thanh toán";
+
+"confirm_request" = "Thanh toán";
+
+"button_cancel" = "Hủy";
+
+"button_done" = "Xong";
+
+"powered_by" = "Được cung cấp bởi";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "Nhập Mã PIN";
+
+"syncing_xpub" = "Đang đồng bộ hóa xpub...";
+
+"synced_xpub" = "xpub đã đồng bộ hóa!";
+
+"no_history_text" = "Không có lịch sử giao dịch.";
+
+"options_explain_payment_address" = "Địa chỉ đích có thể là địa chỉ Bitcoin Cash hoặc Khóa Công khai Mở rộng (xpub) hoặc khóa API của người bán hoặc mã ghép nối";
+
+"options_add_payment_address" = "Thêm địa chỉ đích";
+
+"button_save" = "Lưu";
+
+"payment_enter_an_amount" = "Nhập số tiền";
+
+"menu_profile" = "Hồ sơ";
+
+"menu_cash_register" = "Sổ ghi Tiền mặt";
+
+"menu_transactions" = "Giao dịch";
+
+"menu_settings" = "Cài đặt";
+
+"menu_help" = "Trợ giúp";
+
+"menu_about" = "Giới thiệu";
+
+"settings_merchant_name" = "Tên Người bán";
+
+"settings_destination_address" = "Địa chỉ Đích";
+
+"settings_local_currency" = "Tiền tệ Địa phương";
+
+"settings_pin_code" = "Mã PIN";
+
+"ad_title_local_bitcoin_cash" = "Bicoin Cash Địa phương";
+
+"ad_content_local_bitcoin_cash" = "Bán Bitcoin Cash (BCH) của bạn để lấy Tiền mặt";
+
+"not_supported" = "Không được hỗ trợ";
+
+"grant_camera_permission" = "Xin vui lòng cấp quyền truy cập máy ảnh để sử dụng Máy quét mã QR";
+
+"view_transaction" = "Xem giao dịch";
+
+"copy_transaction" = "Sao chép giao dịch";
+
+"view_address" = "Xem địa chỉ";
+
+"copy_address" = "Sao chép địa chỉ";
+
+"menu_terms_of_use" = "Điều khoản sử dụng";
+
+"menu_service_terms" = "Điều khoản dịch vụ";
+
+"menu_privacy_policy" = "Chính sách bảo mật";
+
+"contract_agreement_summary" = "Bằng cách tiếp tục, tôi đồng ý với\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        và <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+
+"contract_button_ok" = "Tôi đồng ý";
+
+"error" = "Lỗi";
+
+"notify_changes_have_been_saved" = "Thay đổi đã được lưu";

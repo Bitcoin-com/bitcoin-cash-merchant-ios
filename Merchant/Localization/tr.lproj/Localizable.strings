@@ -1,0 +1,131 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Bitcoin Cash Girişi";
+
+"action_settings" = "Ayarlar";
+
+"pin_code_create_error" = "Eşleşen 4 haneli PIN kodunu girin";
+
+"pin_code_enter_error" = "PIN kodu hatalı";
+
+"prompt_ok" = "Tamam";
+
+"prompt_ko" = "İptal et";
+
+"create_pin" = "PIN kodu oluştur";
+
+"confirm_pin" = "PIN kodunu onayla";
+
+"unrecognized_xpub" = "Tanımlanamayan çift anahtar formatı";
+
+"payment_received" = "Ödeme tamamlandı. Teşekkürler.";
+
+"unable_to_generate_address" = "Şu anda bir adres oluşturulamadı. Lütfen kurulumunuzu kontrol edin ve tekrar deneyin.";
+
+"invalid_amount" = "Geçersiz tutar.";
+
+"removed_by_bip70_insufficient_payment" = "Eksik ödeme alındı.";
+
+"removed_by_bip70_re_payment_remainder" = "Kalan:";
+
+"removed_by_bip70_re_payment_requested" = "Talep Edilen:";
+
+"removed_by_bip70_re_payment_received" = "Alınan:";
+
+"removed_by_bip70_insufficient_payment_continue" = "Kalan tutar için QR kodunu güncellemek ister misiniz?";
+
+"removed_by_bip70_overpaid_amount" = "Alınan tutar beklenenden tutardan yüksek.";
+
+"options_payment_address" = "Ödeme adresi";
+
+"options_receiving_payments" = "Alınan ödemeler";
+
+"scan" = "Tara";
+
+"paste" = "Yapıştır";
+
+"obligatory_receiver" = "Ödeme alabilmek için bir Bitcoin Cash adresi sağlamanız gerekiyor.";
+
+"waiting_for_payment" = "Ödeme için Tara";
+
+"confirm_request" = "Kasa";
+
+"button_cancel" = "İptal et";
+
+"button_done" = "Tamamlandı";
+
+"powered_by" = "tarafından desteklenmektedir.";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "PIN Kodu girin";
+
+"syncing_xpub" = "xpub senkronize ediliyor…";
+
+"synced_xpub" = "xpub senkronize edildi!";
+
+"no_history_text" = "İşlem geçmişi bulunmamaktadır.";
+
+"options_explain_payment_address" = "Hedef adres, bir Bitcoin Cash adresi, bir Genişletilmiş Genel Anahtar (xpub), bir satıcı API anahtarı veya eşleme kodu olabilir";
+
+"options_add_payment_address" = "Hedef adresi ekle";
+
+"button_save" = "Kaydet";
+
+"payment_enter_an_amount" = "Bir miktar girin";
+
+"menu_profile" = "Profil";
+
+"menu_cash_register" = "Nakit Girişi";
+
+"menu_transactions" = "İşlemler";
+
+"menu_settings" = "Ayarlar";
+
+"menu_help" = "Yardım";
+
+"menu_about" = "Hakkında";
+
+"settings_merchant_name" = "Satıcı Adı";
+
+"settings_destination_address" = "Hedef Adresi";
+
+"settings_local_currency" = "Yerel Para Birimi";
+
+"settings_pin_code" = "PIN Kodu";
+
+"ad_title_local_bitcoin_cash" = "Yerel Bitcoin";
+
+"ad_content_local_bitcoin_cash" = "Bitcoin Cash'ini Nakit karşılığı sat";
+
+"not_supported" = "Desteklenmiyor";
+
+"grant_camera_permission" = "QR kod Tarayıcısını kullanmak için lütfen kamera iznini onayla";
+
+"view_transaction" = "İşlemi görüntüle";
+
+"copy_transaction" = "İşlemi kopyala";
+
+"view_address" = "Adresi görüntüle";
+
+"copy_address" = "Adresi kopyala";
+
+"menu_terms_of_use" = "Kullanım koşulları";
+
+"menu_service_terms" = "Hizmet koşulları";
+
+"menu_privacy_policy" = "Gizlilik politikası";
+
+"contract_agreement_summary" = "Devam ederek,\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        ve <xliff:g id=\"ref_privacy_policy\">%s</xliff:g> i kabul ediyorum.";
+
+"contract_button_ok" = "Kabul ediyorum";
+
+"error" = "Hata";
+
+"notify_changes_have_been_saved" = "Değişiklik kaydedildi";

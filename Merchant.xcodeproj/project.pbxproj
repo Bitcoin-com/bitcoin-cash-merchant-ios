@@ -187,6 +187,9 @@
 		C4BA0C902404354D00A3D74B /* CountryCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCurrency.swift; sourceTree = "<group>"; };
 		C4BA0CA9240451BC00A3D74B /* CurrenciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesViewController.swift; sourceTree = "<group>"; };
 		C4BA0CB624057D3E00A3D74B /* PaymentTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTarget.swift; sourceTree = "<group>"; };
+		C4DD67142417F0BA00C72768 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C4DD67152417F11B00C72768 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C4DD67162417F15B00C72768 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF5732E0852906CF836DCA7 /* Pods-Merchant-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E46EB0020643631F3A27E827 /* Pods-MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.release.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -637,6 +640,9 @@
 				th,
 				zh,
 				"trv-TW",
+				sl,
+				tr,
+				vi,
 			);
 			mainGroup = C4AF257A23FEB3BA0050AD41;
 			productRefGroup = C4AF258423FEB3BA0050AD41 /* Products */;
@@ -907,6 +913,9 @@
 				C49F1FCA23FED2FC00416058 /* th */,
 				C49F1FCB23FED37D00416058 /* zh */,
 				C49F1FCC23FED44500416058 /* trv-TW */,
+				C4DD67142417F0BA00C72768 /* sl */,
+				C4DD67152417F11B00C72768 /* tr */,
+				C4DD67162417F15B00C72768 /* vi */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
