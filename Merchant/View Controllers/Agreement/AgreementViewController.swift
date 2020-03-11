@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AgreementViewController: UIViewController {
+final class AgreementViewController: UIViewController {
     
     // MARK: - Properties
     private var overlayView = UIView()
