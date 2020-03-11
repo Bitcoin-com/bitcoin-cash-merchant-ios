@@ -6,6 +6,7 @@ target 'Merchant' do
   # Pods for Merchant
   pod 'RealmSwift'
   pod 'BitcoinKit'
+  pod 'Amplitude-iOS'
 
   target 'MerchantTests' do
     inherit! :search_paths

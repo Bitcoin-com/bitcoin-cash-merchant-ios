@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "Chính sách bảo mật";
 
-"contract_agreement_summary" = "Bằng cách tiếp tục, tôi đồng ý với\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        và <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "Bằng cách tiếp tục, tôi đồng ý với %@, %@ và %@";
 
 "contract_button_ok" = "Tôi đồng ý";
 

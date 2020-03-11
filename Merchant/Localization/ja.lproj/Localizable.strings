@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "プライバシーポリシー";
 
-"contract_agreement_summary" = "続行することで、以下に同意します\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        および <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "続行することで、以下に同意します %@, %@ および %@";
 
 "contract_button_ok" = "同意する";
 

@@ -121,6 +121,14 @@ final class UserManager {
             }
         }
     }
+    var isTermsAccepted: Bool {
+        get {
+            return defaults.bool(forKey: Constants.TERMS_ACCEPTED_KEY)
+        }
+        set {
+            defaults.set(newValue, forKey: Constants.TERMS_ACCEPTED_KEY)
+        }
+    }
     
     // MARK: - Initializer
     private init() {}
@@ -149,4 +157,5 @@ private struct Constants {
     static let SELECTED_CURRENCY_KEY = "selectedCurrency"
     static let ACTIVE_INVOICE_KEY = "activeInvoice"
     static let ACTIVE_PAYMENT_TARGET_KEY = "activePaymentTarget"
+    static let TERMS_ACCEPTED_KEY = "termsAccepted"
 }

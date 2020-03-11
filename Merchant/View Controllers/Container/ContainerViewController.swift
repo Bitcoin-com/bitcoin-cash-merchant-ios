@@ -34,6 +34,10 @@ final class ContainerViewController: UIViewController {
         if !UserManager.shared.hasDestinationAddress {
             showSettings()
         }
+        
+        if !UserManager.shared.isTermsAccepted {
+            showAgreement()
+        }
     }
     
     // MARK: - Actions
@@ -160,6 +164,13 @@ final class ContainerViewController: UIViewController {
     private func showSettings() {
         let settingsViewController = SettingsViewController()
         mainNavigationController.pushViewController(settingsViewController, animated: false)
+    }
+    
+    private func showAgreement() {
+        let agreementViewController = AgreementViewController()
+        agreementViewController.modalPresentationStyle = .overCurrentContext
+        agreementViewController.modalTransitionStyle = .crossDissolve
+        present(agreementViewController, animated: false)
     }
     
     private func closePinViewController(_ viewController: PinViewController) {

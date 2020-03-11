@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "Pravilnik o zasebnosti";
 
-"contract_agreement_summary" = "Z nadaljevanjem se strinjam z naslednjimi pogoji in določili:\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        in <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "Z nadaljevanjem se strinjam z naslednjimi pogoji in določili: %@, %@ in %@";
 
 "contract_button_ok" = "Strinjam se";
 

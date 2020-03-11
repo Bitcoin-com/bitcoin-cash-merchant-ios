@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "Datenschutzerklärung";
 
-"contract_agreement_summary" = "Indem du fortfährst, erklärst du dich einverstanden mit den         <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>         , den <xliff:g id=\"ref_service_terms\">%s</xliff:g>         und der <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "Indem du fortfährst, erklärst du dich einverstanden mit den %@ , den %@ und der %@";
 
 "contract_button_ok" = "Ich stimme zu";
 

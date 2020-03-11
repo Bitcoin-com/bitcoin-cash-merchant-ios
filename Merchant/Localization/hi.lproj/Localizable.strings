@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "Kebijakan privasi";
 
-"contract_agreement_summary" = "Dengan melanjutkan, saya menyetujui         <xliff:g id=\"ref_syarat_penggunaan\">%s</xliff:g>         , <xliff:g id=\"ref_syarat_layanan\">%s</xliff:g>         and <xliff:g id=\"ref_kebijakan_privasi\">%s</xliff:g>";
+"contract_agreement_summary" = "Dengan melanjutkan, saya menyetujui %@, %@ and %@";
 
 "contract_button_ok" = "Saya setuju";
 

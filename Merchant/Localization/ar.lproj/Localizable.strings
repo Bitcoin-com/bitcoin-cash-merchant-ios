@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "سياسة الخصوصية";
 
-"contract_agreement_summary" = "بالمتابعة فإني أوافق على  <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>         و <xliff:g id=\"ref_service_terms\">%s</xliff:g>         و <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "بالمتابعة فإني أوافق على  %@ و %@ و %@";
 
 "contract_button_ok" = "أوافق";
 

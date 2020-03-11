@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "Gizlilik politikası";
 
-"contract_agreement_summary" = "Devam ederek,\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        ve <xliff:g id=\"ref_privacy_policy\">%s</xliff:g> i kabul ediyorum.";
+"contract_agreement_summary" = "Devam ederek, %@, %@ ve %@ i kabul ediyorum.";
 
 "contract_button_ok" = "Kabul ediyorum";
 

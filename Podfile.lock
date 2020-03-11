@@ -1,4 +1,5 @@
 PODS:
+  - Amplitude-iOS (4.10.0)
   - BitcoinKit (1.1.0)
   - Realm (4.3.2):
     - Realm/Headers (= 4.3.2)
@@ -7,20 +8,23 @@ PODS:
     - Realm (= 4.3.2)
 
 DEPENDENCIES:
+  - Amplitude-iOS
   - BitcoinKit
   - RealmSwift
 
 SPEC REPOS:
   trunk:
+    - Amplitude-iOS
     - BitcoinKit
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
+  Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   BitcoinKit: a8c198d2a57caf64dc43271901f8c5a2309aced2
   Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
   RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
 
-PODFILE CHECKSUM: 8a893573a48c9eaf023369cff639330840dd106b
+PODFILE CHECKSUM: 2e9d307c2e32ffd95099ffce3b8f63ee2a65fa59
 
 COCOAPODS: 1.8.4

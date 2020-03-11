@@ -29,6 +29,18 @@ final class SideMenuTableHeaderView: UIView {
         setupView()
     }
     
+    // MARK: - View Lifecycle
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        NSLayoutConstraint.activate([
+            merchantNameLabel.centerXAnchor.constraint(equalTo: iconImageView.centerXAnchor),
+            merchantNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.MERCHANT_NAME_LABEL_PADDING),
+            merchantNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.MERCHANT_NAME_LABEL_PADDING),
+            merchantNameLabel.topAnchor.constraint(equalTo: iconContainerView.bottomAnchor, constant: Constants.MERCHANT_NAME_LABEL_PADDING)
+        ])
+    }
+    
     // MARK: - Actions
     @objc private func refresh() {
         merchantNameLabel.text = UserManager.shared.companyName
@@ -80,12 +92,6 @@ final class SideMenuTableHeaderView: UIView {
         merchantNameLabel.textAlignment = .center
         merchantNameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(merchantNameLabel)
-        NSLayoutConstraint.activate([
-            merchantNameLabel.centerXAnchor.constraint(equalTo: iconImageView.centerXAnchor),
-            merchantNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.MERCHANT_NAME_LABEL_PADDING),
-            merchantNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.MERCHANT_NAME_LABEL_PADDING),
-            merchantNameLabel.topAnchor.constraint(equalTo: iconContainerView.bottomAnchor, constant: Constants.MERCHANT_NAME_LABEL_PADDING)
-        ])
     }
     
     private func registerForNotifications() {

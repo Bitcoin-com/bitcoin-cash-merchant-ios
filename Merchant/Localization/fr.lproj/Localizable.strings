@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "Police de confidentialité";
 
-"contract_agreement_summary" = "En continuant, J'accepte les\n        <xliff:g id=\"ref_terms_of_use\">%s</xliff:g>\n        , <xliff:g id=\"ref_service_terms\">%s</xliff:g>\n        et la <xliff:g id=\"ref_privacy_policy\">%s</xliff:g>";
+"contract_agreement_summary" = "En continuant, J'accepte les %@, %@ et la %@";
 
 "contract_button_ok" = "Je suis d'accord";
 

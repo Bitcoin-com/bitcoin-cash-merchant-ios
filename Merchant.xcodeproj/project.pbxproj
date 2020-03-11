@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9693A049E3A4A3E7314A01E8 /* Pods_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */; };
 		A87AC8124A72CD7035A43C1F /* Pods_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAA19CAA1F377C630BDE3D7 /* Pods_MerchantTests.framework */; };
+		C4157D0D2418B90300EE3952 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4157D0C2418B90300EE3952 /* AnalyticsService.swift */; };
+		C41909DB24192A4E00B65F52 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41909DA24192A4E00B65F52 /* Keys.swift */; };
 		C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441ABD0240927FC00A2253A /* WebSocket.swift */; };
 		C445557824004D8500F4B3E0 /* BIP70Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557724004D8500F4B3E0 /* BIP70Service.swift */; };
 		C445557B24004DD600F4B3E0 /* InvoiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557A24004DD600F4B3E0 /* InvoiceRequest.swift */; };
@@ -75,6 +77,9 @@
 		C4BA0C912404354D00A3D74B /* CountryCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BA0C902404354D00A3D74B /* CountryCurrency.swift */; };
 		C4BA0CAA240451BC00A3D74B /* CurrenciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BA0CA9240451BC00A3D74B /* CurrenciesViewController.swift */; };
 		C4BA0CB724057D3E00A3D74B /* PaymentTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BA0CB624057D3E00A3D74B /* PaymentTarget.swift */; };
+		C4DD67192417FE9200C72768 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD67182417FE9200C72768 /* AgreementViewController.swift */; };
+		C4DD671B241828E100C72768 /* UITapGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD671A241828E100C72768 /* UITapGestureRecognizer+Extensions.swift */; };
+		C4DD671D241829E900C72768 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD671C241829E900C72768 /* NSAttributedString+Extensions.swift */; };
 		E5C8A04A9E7571A1C836CA74 /* Pods_Merchant_MerchantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F03BE384B9233089BDF8F6C /* Pods_Merchant_MerchantUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +106,8 @@
 		79AE22CA693F028AFEB110A4 /* Pods-Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant.debug.xcconfig"; path = "Target Support Files/Pods-Merchant/Pods-Merchant.debug.xcconfig"; sourceTree = "<group>"; };
 		7C86A23622A67FF85A7B51C6 /* Pods-Merchant-MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8E499E13B7E722CF3729BC4A /* Pods-MerchantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C4157D0C2418B90300EE3952 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		C41909DA24192A4E00B65F52 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		C441ABD0240927FC00A2253A /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		C445557724004D8500F4B3E0 /* BIP70Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIP70Service.swift; sourceTree = "<group>"; };
 		C445557A24004DD600F4B3E0 /* InvoiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceRequest.swift; sourceTree = "<group>"; };
@@ -190,6 +197,9 @@
 		C4DD67142417F0BA00C72768 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C4DD67152417F11B00C72768 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C4DD67162417F15B00C72768 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C4DD67182417FE9200C72768 /* AgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
+		C4DD671A241828E100C72768 /* UITapGestureRecognizer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extensions.swift"; sourceTree = "<group>"; };
+		C4DD671C241829E900C72768 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF5732E0852906CF836DCA7 /* Pods-Merchant-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E46EB0020643631F3A27E827 /* Pods-MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.release.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -355,6 +365,8 @@
 				C4BA0C8E2404334400A3D74B /* CurrencyManager.swift */,
 				C441ABD0240927FC00A2253A /* WebSocket.swift */,
 				C44A90EE24142EE900750D34 /* WalletManager.swift */,
+				C4157D0C2418B90300EE3952 /* AnalyticsService.swift */,
+				C41909DA24192A4E00B65F52 /* Keys.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -367,12 +379,14 @@
 				C453938D2402BA0F00CC3CA5 /* Double+Extensions.swift */,
 				C453938B2402B9D200CC3CA5 /* Int+Extensions.swift */,
 				C49F1FE123FEF49100416058 /* Notifications+Extensions.swift */,
+				C4DD671C241829E900C72768 /* NSAttributedString+Extensions.swift */,
 				C49F1FDF23FEF31B00416058 /* String+Extensions.swift */,
 				C49F1FBD23FECC1C00416058 /* UIColor+Extensions.swift */,
 				C49F1FEC23FEF95E00416058 /* UITableViewCell+Extensions.swift */,
 				C49F1FCD23FEDF8900416058 /* UIView+Extensions.swift */,
 				C44555892400758C00F4B3E0 /* UIViewController+Extensions.swift */,
 				C45393892402AC1600CC3CA5 /* UserDefaults+Extensions.swift */,
+				C4DD671A241828E100C72768 /* UITapGestureRecognizer+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -476,6 +490,7 @@
 		C4AF25B723FEB4BE0050AD41 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C4DD67172417FE6100C72768 /* Agreement */,
 				C4456DFC23FEBB970025FD06 /* Container */,
 				C49F1FE323FEF55400416058 /* Side Menu */,
 				C4456DFD23FEBBA20025FD06 /* Payment Input */,
@@ -533,6 +548,14 @@
 				C4BA0CA9240451BC00A3D74B /* CurrenciesViewController.swift */,
 			);
 			path = Currencies;
+			sourceTree = "<group>";
+		};
+		C4DD67172417FE6100C72768 /* Agreement */ = {
+			isa = PBXGroup;
+			children = (
+				C4DD67182417FE9200C72768 /* AgreementViewController.swift */,
+			);
+			path = Agreement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -793,6 +816,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C49F1FEA23FEF55400416058 /* MenuItem.swift in Sources */,
+				C41909DB24192A4E00B65F52 /* Keys.swift in Sources */,
 				C49F1FD523FEF28600416058 /* NetworkManager.swift in Sources */,
 				C49F1FDE23FEF2B500416058 /* Toast.swift in Sources */,
 				C45E06772406CB1D00322906 /* PaymentCompletedView.swift in Sources */,
@@ -819,11 +843,14 @@
 				C4455588240074CD00F4B3E0 /* AboutViewController.swift in Sources */,
 				C49F1FF823FFB3EC00416058 /* SideMenuTableHeaderView.swift in Sources */,
 				C445559A24014C5000F4B3E0 /* VerificationView.swift in Sources */,
+				C4DD67192417FE9200C72768 /* AgreementViewController.swift in Sources */,
 				C4456E0923FEBC530025FD06 /* PinViewController.swift in Sources */,
 				C44A90EF24142EE900750D34 /* WalletManager.swift in Sources */,
 				C4BA0C8F2404334400A3D74B /* CurrencyManager.swift in Sources */,
 				C445557D24004E9F00F4B3E0 /* Endpoints.swift in Sources */,
 				C445558524006B0D00F4B3E0 /* InvoiceRequestOutput.swift in Sources */,
+				C4DD671D241829E900C72768 /* NSAttributedString+Extensions.swift in Sources */,
+				C4DD671B241828E100C72768 /* UITapGestureRecognizer+Extensions.swift in Sources */,
 				C445558A2400758C00F4B3E0 /* UIViewController+Extensions.swift in Sources */,
 				C44555A72401DB7400F4B3E0 /* UITextField+BuilderCompatible.swift in Sources */,
 				C4456E0723FEBC430025FD06 /* TransactionsHistoryViewController.swift in Sources */,
@@ -836,6 +863,7 @@
 				C44A90F12414353F00750D34 /* AddressDetails.swift in Sources */,
 				C445557B24004DD600F4B3E0 /* InvoiceRequest.swift in Sources */,
 				C4BA0CB724057D3E00A3D74B /* PaymentTarget.swift in Sources */,
+				C4157D0D2418B90300EE3952 /* AnalyticsService.swift in Sources */,
 				C4BA0CAA240451BC00A3D74B /* CurrenciesViewController.swift in Sources */,
 				C445558324006AFC00F4B3E0 /* InvoiceStatusOutput.swift in Sources */,
 				C4BA0C912404354D00A3D74B /* CountryCurrency.swift in Sources */,
