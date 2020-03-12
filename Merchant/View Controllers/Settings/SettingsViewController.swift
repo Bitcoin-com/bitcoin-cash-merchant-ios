@@ -17,7 +17,6 @@ final class SettingsViewController: UIViewController {
     private var itemsView = ItemsView()
     private var localBitcoinCashView = UIView()
     private var bitcoinExchangeButton = UIButton()
-    private var sellYourBitcoinCashLabel = UILabel()
     private var itemsViewHeightConstraint: NSLayoutConstraint?
     
     // MARK: - View Lifecycle
@@ -31,10 +30,14 @@ final class SettingsViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func localBitcoinCashViewTapped() {
+        AnalyticsService.shared.logEvent(.tapLocalAd)
+        
         openLinkInSafari(link: Endpoints.localBitcoin)
     }
     
     @objc private func bitcoinExchangeButtonTapped() {
+        AnalyticsService.shared.logEvent(.tapExchangeAd)
+        
         openLinkInSafari(link: Endpoints.exchangeBitcoin)
     }
     
@@ -122,7 +125,7 @@ final class SettingsViewController: UIViewController {
         // Image.
         let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "localbch_banner"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         localBitcoinCashView.addSubview(imageView)
         NSLayoutConstraint.activate([
@@ -130,22 +133,6 @@ final class SettingsViewController: UIViewController {
             imageView.trailingAnchor.constraint(equalTo: localBitcoinCashView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: localBitcoinCashView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: localBitcoinCashView.bottomAnchor)
-        ])
-        
-        setupSellYourBitcoinCashLabel()
-    }
-    
-    private func setupSellYourBitcoinCashLabel() {
-        sellYourBitcoinCashLabel.textColor = .white
-        sellYourBitcoinCashLabel.numberOfLines = 0
-        sellYourBitcoinCashLabel.textAlignment = .center
-        sellYourBitcoinCashLabel.translatesAutoresizingMaskIntoConstraints = false
-        localBitcoinCashView.addSubview(sellYourBitcoinCashLabel)
-        NSLayoutConstraint.activate([
-            sellYourBitcoinCashLabel.leadingAnchor.constraint(equalTo: localBitcoinCashView.leadingAnchor, constant: Constants.LABEL_PADDING),
-            sellYourBitcoinCashLabel.trailingAnchor.constraint(equalTo: localBitcoinCashView.trailingAnchor, constant: -Constants.LABEL_PADDING),
-            sellYourBitcoinCashLabel.topAnchor.constraint(equalTo: localBitcoinCashView.topAnchor, constant: Constants.LABEL_PADDING),
-            sellYourBitcoinCashLabel.bottomAnchor.constraint(equalTo: localBitcoinCashView.bottomAnchor, constant: -Constants.LABEL_PADDING)
         ])
     }
     
@@ -166,19 +153,6 @@ final class SettingsViewController: UIViewController {
     
     private func localize() {
         navigationBar.text = Localized.settings
-        
-        let partOneAttributedString = Builder(text: "\(Localized.localBitcoinCash)\n")
-            .addAttribute(key: .font, object: UIFont.boldSystemFont(ofSize: 20.0))
-            .create()
-
-        let partTwoAttributedString = Builder(text: Localized.sellYourBitcoinCash)
-            .addAttribute(key: .font, object: UIFont.systemFont(ofSize: 15.0))
-            .create()
-
-        let attributedString = NSMutableAttributedString(attributedString: partOneAttributedString)
-        attributedString.append(partTwoAttributedString)
-
-        sellYourBitcoinCashLabel.attributedText = attributedString
     }
     
     private func registerForNotifications() {
@@ -227,7 +201,7 @@ final class SettingsViewController: UIViewController {
             if let address = UIPasteboard.general.string {
                 Logger.log(message: "Pasted BCH address: \(address)", type: .info)
                 
-                self.validateAddress(address)
+                self.validateAndStoreAddress(address)
             } else {
                 self.showFailureMessage()
             }
@@ -237,7 +211,7 @@ final class SettingsViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    private func validateAddress(_ address: String) {
+    private func validateAndStoreAddress(_ address: String) {
         let paymentTarget = PaymentTarget(address: address, type: .address)
         
         if paymentTarget.type == .invalid {
@@ -245,7 +219,13 @@ final class SettingsViewController: UIViewController {
         } else {
             UserManager.shared.destination = paymentTarget.address
             UserManager.shared.activePaymentTarget = paymentTarget
-            refreshAndShowSuccessMessage()
+            
+            if paymentTarget.type == .xPub {
+                refreshItemsView()
+                syncXPub(paymentTarget.address)
+            } else {
+                refreshAndShowSuccessMessage()
+            }
         }
     }
     
@@ -273,13 +253,17 @@ final class SettingsViewController: UIViewController {
     }
     
     private func refreshAndShowSuccessMessage() {
-        itemsView.refresh()
-        itemsViewHeightConstraint?.constant = itemsView.height
-        view.layoutIfNeeded()
+        refreshItemsView()
         
         ToastManager.shared.showMessage(Localized.changesHaveBeenSaved, forStatus: .success)
         
         NotificationCenter.default.post(name: .settingsUpdated, object: nil)
+    }
+    
+    private func refreshItemsView() {
+        itemsView.refresh()
+        itemsViewHeightConstraint?.constant = itemsView.height
+        view.layoutIfNeeded()
     }
     
     private func showFailureMessage() {
@@ -294,6 +278,15 @@ final class SettingsViewController: UIViewController {
         
         present(alertController, animated: true)
     }
+    
+    private func syncXPub(_ address: String) {
+        ToastManager.shared.showMessage(Localized.syncingXPub, forStatus: .success)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
+            WalletManager.shared.syncXPub(with: address)
+            ToastManager.shared.showMessage(Localized.syncedXPub, forStatus: .success)
+        }
+    }
 
 }
 
@@ -302,18 +295,26 @@ extension SettingsViewController: ItemsViewDelegate {
     // MARK: - ItemsViewDelegate
     func itemsView(_ itemsView: ItemsView, didTapOnItem item: Item) {
         if item.title == UserItem.pin.title { // Create PIN.
+            AnalyticsService.shared.logEvent(.editPin)
+            
             createPin()
         }
         
         if item.title == UserItem.merchantName.title { // Update Merchant name.
+            AnalyticsService.shared.logEvent(.editName)
+            
             updateMerchantName()
         }
         
         if item.title == UserItem.destinationAddress.title { // Destination address.
+            AnalyticsService.shared.logEvent(.editDestination)
+            
             showAddDestionationAddressAlert()
         }
         
         if item.title == UserItem.localCurrency.title { // Local Currency.
+            AnalyticsService.shared.logEvent(.editCurrency)
+            
             pickCurrency()
         }
     }
@@ -346,7 +347,7 @@ extension SettingsViewController: ScannerViewControllerDelegate {
             
             Logger.log(message: "Scanned BCH address: \(stringValue)", type: .info)
             
-            self.validateAddress(stringValue)
+            self.validateAndStoreAddress(stringValue)
         }
     }
     
@@ -376,8 +377,6 @@ private struct Constants {
 
 private struct Localized {
     static var settings: String { NSLocalizedString("menu_settings", comment: "") }
-    static var localBitcoinCash: String { NSLocalizedString("ad_title_local_bitcoin_cash", comment: "") }
-    static var sellYourBitcoinCash: String { NSLocalizedString("ad_content_local_bitcoin_cash", comment: "") }
     static var cancel: String { NSLocalizedString("button_cancel", comment: "") }
     static var OK: String { NSLocalizedString("prompt_ok", comment: "") }
     static var addDestinationAddress: String { NSLocalizedString("options_add_payment_address", comment: "") }
@@ -388,4 +387,6 @@ private struct Localized {
     static var changesHaveBeenSaved: String { NSLocalizedString("notify_changes_have_been_saved", comment: "") }
     static var paymentAddress: String { NSLocalizedString("options_payment_address", comment: "") }
     static var youMustProvideBCHAddress: String { NSLocalizedString("obligatory_receiver", comment: "") }
+    static var syncingXPub: String { NSLocalizedString("syncing_xpub", comment: "") }
+    static var syncedXPub: String { NSLocalizedString("synced_xpub", comment: "") }
 }

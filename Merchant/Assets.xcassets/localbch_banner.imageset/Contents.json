@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "localbch_banner.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "BCR - Local Ad@2x.png",
       "scale" : "2x"
     },
     {

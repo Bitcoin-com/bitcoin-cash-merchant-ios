@@ -71,9 +71,13 @@ final class SideMenuViewController: UIViewController {
         
         switch menuItem {
         case .transactions:
+            AnalyticsService.shared.logEvent(.tapTransactions)
+            
             let transactionsHistoryViewController = TransactionsHistoryViewController()
             NotificationCenter.default.post(name: .openViewController, object: transactionsHistoryViewController)
         case .settings:
+            AnalyticsService.shared.logEvent(.tapSettings)
+            
             NotificationCenter.default.post(name: .openSettings, object: nil)
         case .termsOfUse:
             NotificationCenter.default.post(name: .openLink, object: Endpoints.termsOfUse)

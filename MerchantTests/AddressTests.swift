@@ -79,4 +79,17 @@ class AddressTests: XCTestCase {
         }
     }
     
+    func testExtractAddressFromExtendedPublicKey() {
+        let xPubKey = "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz"
+        
+        if let data = xPubKey.data(using: .utf8) {
+            let key = PublicKey(bytes: data, network: .mainnetBCH)
+            let address = key.toBitcoinAddress()
+            
+            XCTAssertNotNil(address.cashaddr.count > 0)
+        } else {
+            XCTFail("Data not extracted")
+        }
+    }
+    
 }

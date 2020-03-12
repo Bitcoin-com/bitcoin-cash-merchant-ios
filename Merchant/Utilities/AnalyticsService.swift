@@ -19,8 +19,24 @@ final class AnalyticsService {
         Amplitude.instance().initializeApiKey(AMPLITUDE_API_KEY)
     }
     
-    func logEvent(_ eventName: String, withParameters parameters: [String: Any]?) {
-        Amplitude.instance()?.logEvent(eventName, withEventProperties: parameters)
+    func logEvent(_ event: Event, withParameters parameters: [String: Any]? = nil) {
+        Amplitude.instance()?.logEvent(event.rawValue, withEventProperties: parameters)
     }
     
+}
+
+enum Event: String {
+    case tapCheckout
+    case completedPayment
+    case responseFromPayBitcoinCom
+    case shareInvoice
+    case cancelInvoice
+    case tapTransactions
+    case tapSettings
+    case editPin
+    case editDestination
+    case editName
+    case editCurrency
+    case tapLocalAd
+    case tapExchangeAd
 }

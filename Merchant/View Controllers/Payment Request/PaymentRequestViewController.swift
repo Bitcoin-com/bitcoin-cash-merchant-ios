@@ -68,12 +68,16 @@ final class PaymentRequestViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func cancelButtonTapped() {
+        AnalyticsService.shared.logEvent(.cancelInvoice)
+        
         UserManager.shared.activeInvoice = nil
         dismiss(animated: true)
     }
     
     @objc private func shareButtonTapped() {
         guard let invoice = invoice else { return }
+        
+        AnalyticsService.shared.logEvent(.shareInvoice)
         
         var activityItems = [Any]()
         
@@ -296,12 +300,24 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func createInvoice() {
-        guard invoice == nil else { return }
+        guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget else { return }
+        
+        var address: String?
+        if paymentTarget.type == .xPub {
+            address = WalletManager.shared.generateAddressFromStoredIndex()
+        } else {
+            address = UserManager.shared.destination
+        }
+        
+        guard let bitcoinAddress = address else {
+            Logger.log(message: "Not a valid Bitcoin Address", type: .error)
+            return
+        }
         
         let invoice = InvoiceRequest(fiatAmount: amount,
                                      fiat: UserManager.shared.selectedCurrency.currency,
                                      apiKey: "sexqvmkxafvzhzfageoojrkchdekfwmuqpfqywsf",
-                                     address: UserManager.shared.destination!)
+                                     address: bitcoinAddress)
         
         BIP70Service.shared.createInvoice(invoice) { result in
             switch result {
@@ -336,10 +352,6 @@ final class PaymentRequestViewController: UIViewController {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
     }
     
-    private func showPaymentCompleteInfo() {
-        
-    }
-    
     private func saveTransaction() {
         guard let invoice = invoice else { return }
 
@@ -366,6 +378,13 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func showPaymentCompletedView() {
+        AnalyticsService.shared.logEvent(.completedPayment)
+        
+        // Increase the next index for xPubKey
+        if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
+            UserManager.shared.xPubKeyIndex += 1
+        }
+        
         UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
             self.paymentCompletedView.alpha = 1.0
         }

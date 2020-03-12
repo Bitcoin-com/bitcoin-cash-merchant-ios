@@ -129,6 +129,15 @@ final class UserManager {
             defaults.set(newValue, forKey: Constants.TERMS_ACCEPTED_KEY)
         }
     }
+    var xPubKeyIndex: Int {
+        get {
+            return defaults.integer(forKey: Constants.X_PUB_KEY_INDEX)
+        }
+        set {
+            Logger.log(message: "New xPubKey index: \(newValue)", type: .info)
+            defaults.set(newValue, forKey: Constants.X_PUB_KEY_INDEX)
+        }
+    }
     
     // MARK: - Initializer
     private init() {}
@@ -158,4 +167,5 @@ private struct Constants {
     static let ACTIVE_INVOICE_KEY = "activeInvoice"
     static let ACTIVE_PAYMENT_TARGET_KEY = "activePaymentTarget"
     static let TERMS_ACCEPTED_KEY = "termsAccepted"
+    static let X_PUB_KEY_INDEX = "xPubKeyIndex"
 }

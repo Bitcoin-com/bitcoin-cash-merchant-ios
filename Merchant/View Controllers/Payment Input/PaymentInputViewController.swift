@@ -72,6 +72,8 @@ final class PaymentInputViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func checkoutButtonTapped() {
+        AnalyticsService.shared.logEvent(.tapCheckout)
+        
         if let amount = Double(amountString) {
             if amount == 0.0 {
                 ToastManager.shared.showMessage(Localized.invalidAmount, forStatus: .failure)
