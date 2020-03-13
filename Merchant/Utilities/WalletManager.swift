@@ -59,8 +59,10 @@ final class WalletManager {
         let key = PublicKey(bytes: data, network: .mainnetBCH)
         let address = key.toBitcoinAddress()
         
-        if let url =  URL(string: "\(Endpoints.addressDetails)/\(address.cashaddr)") {
-            if let data = try? Data(contentsOf: url) {
+        if let url = URL(string: "\(Endpoints.addressDetails)/\(address.cashaddr)") {
+            do {
+                let data = try Data(contentsOf: url)
+                
                 do {
                     let addressDetails = try JSONDecoder().decode(AddressDetails.self, from: data)
                     Logger.log(message: "Transactions: \(addressDetails.transactions.count)", type: .debug)
@@ -76,6 +78,8 @@ final class WalletManager {
                     Logger.log(message: "Unable to parse: \(error.localizedDescription) | \(error)", type: .error)
                     AnalyticsService.shared.logEvent(.error_syncing_xpub, withError: error)
                 }
+            } catch {
+                AnalyticsService.shared.logEvent(.error_rest_bitcoin_com_scan_address_funds, withError: error)
             }
         }
     }
