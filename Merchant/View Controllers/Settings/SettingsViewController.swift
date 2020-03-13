@@ -15,8 +15,12 @@ final class SettingsViewController: UIViewController {
     private var navigationBar = NavigationBar()
     private var scrollView = UIScrollView()
     private var itemsView = ItemsView()
-    private var localBitcoinCashView = UIView()
-    private var bitcoinExchangeButton = UIButton()
+    private var walletAdView = UIView()
+    private var walletLabel = UILabel()
+    private var localBitcoinCashAdView = UIView()
+    private var localBitcoinCashLabel = UILabel()
+    private var exchangeAdView = UIView()
+    private var exchangeLabel = UILabel()
     private var itemsViewHeightConstraint: NSLayoutConstraint?
     
     // MARK: - View Lifecycle
@@ -29,13 +33,19 @@ final class SettingsViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @objc private func localBitcoinCashViewTapped() {
+    @objc private func walletAdViewTapped() {
+        AnalyticsService.shared.logEvent(.tapWalletAd)
+        
+        openLinkInSafari(link: Endpoints.bitcoinWalletAppStore)
+    }
+    
+    @objc private func localBitcoinCashAdViewTapped() {
         AnalyticsService.shared.logEvent(.tapLocalAd)
         
         openLinkInSafari(link: Endpoints.localBitcoin)
     }
     
-    @objc private func bitcoinExchangeButtonTapped() {
+    @objc private func exchangeAdViewTapped() {
         AnalyticsService.shared.logEvent(.tapExchangeAd)
         
         openLinkInSafari(link: Endpoints.exchangeBitcoin)
@@ -52,8 +62,9 @@ final class SettingsViewController: UIViewController {
         setupNavigationBar()
         setupScrollView()
         setupItemsView()
-        setupLocalBitcoinCashView()
-        setupBitcoinExchangeButton()
+        setupWalletAdView()
+        setupLocalBitcoinCashAdView()
+        setupExchangeAdView()
     }
     
     private func setupNavigationBar() {
@@ -107,52 +118,203 @@ final class SettingsViewController: UIViewController {
         ])
     }
     
-    private func setupLocalBitcoinCashView() {
-        localBitcoinCashView.translatesAutoresizingMaskIntoConstraints = false
-        localBitcoinCashView.isUserInteractionEnabled = true
-        scrollView.addSubview(localBitcoinCashView)
+    private func setupWalletAdView() {
+        walletAdView.translatesAutoresizingMaskIntoConstraints = false
+        walletAdView.isUserInteractionEnabled = true
+        scrollView.addSubview(walletAdView)
         NSLayoutConstraint.activate([
-            localBitcoinCashView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
-            localBitcoinCashView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
-            localBitcoinCashView.topAnchor.constraint(equalTo: itemsView.bottomAnchor, constant: Constants.LOCAL_BITCOIN_CASH_VIEW_TOP_MARGIN),
-            localBitcoinCashView.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
+            walletAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
+            walletAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
+            walletAdView.topAnchor.constraint(equalTo: itemsView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
+            walletAdView.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
         ])
         
         // Tap Gesture.
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(localBitcoinCashViewTapped))
-        localBitcoinCashView.addGestureRecognizer(tapGestureRecognizer)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(walletAdViewTapped))
+        walletAdView.addGestureRecognizer(tapGestureRecognizer)
         
-        // Image.
-        let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "localbch_banner"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        localBitcoinCashView.addSubview(imageView)
+        // Banner.
+        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "wallet_banner"))
+        bannerImageView.translatesAutoresizingMaskIntoConstraints = false
+        bannerImageView.contentMode = .scaleAspectFit
+        bannerImageView.clipsToBounds = true
+        walletAdView.addSubview(bannerImageView)
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: localBitcoinCashView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: localBitcoinCashView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: localBitcoinCashView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: localBitcoinCashView.bottomAnchor)
+            bannerImageView.leadingAnchor.constraint(equalTo: walletAdView.leadingAnchor),
+            bannerImageView.trailingAnchor.constraint(equalTo: walletAdView.trailingAnchor),
+            bannerImageView.topAnchor.constraint(equalTo: walletAdView.topAnchor),
+            bannerImageView.bottomAnchor.constraint(equalTo: walletAdView.bottomAnchor)
+        ])
+        
+        // Logo.
+        let logoImageView = UIImageView(image: UIImage(imageLiteralResourceName: "wallet"))
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.clipsToBounds = true
+        walletAdView.addSubview(logoImageView)
+        NSLayoutConstraint.activate([
+            logoImageView.leadingAnchor.constraint(equalTo: walletAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            logoImageView.topAnchor.constraint(equalTo: walletAdView.topAnchor, constant: Constants.LOGO_TOP_MARGIN),
+            logoImageView.widthAnchor.constraint(equalToConstant: Constants.LOGO_WIDTH),
+            logoImageView.heightAnchor.constraint(equalToConstant: Constants.LOGO_HEIGHT)
+        ])
+        
+        setupWalletLabel()
+    }
+    
+    private func setupWalletLabel() {
+        walletLabel.textColor = .white
+        walletLabel.numberOfLines = 0
+        walletLabel.textAlignment = .left
+        walletLabel.adjustsFontSizeToFitWidth = true
+        walletLabel.translatesAutoresizingMaskIntoConstraints = false
+        walletAdView.addSubview(walletLabel)
+        NSLayoutConstraint.activate([
+            walletLabel.leadingAnchor.constraint(equalTo: walletAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            walletLabel.topAnchor.constraint(equalTo: walletAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
+            walletLabel.bottomAnchor.constraint(equalTo: walletAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
+            walletLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH)
         ])
     }
     
-    private func setupBitcoinExchangeButton() {
-        bitcoinExchangeButton.setImage(UIImage(imageLiteralResourceName: "bce_banner"), for: .normal)
-        bitcoinExchangeButton.imageView?.contentMode = .scaleAspectFit
-        bitcoinExchangeButton.imageView?.clipsToBounds = true
-        bitcoinExchangeButton.addTarget(self, action: #selector(bitcoinExchangeButtonTapped), for: .touchUpInside)
-        bitcoinExchangeButton.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(bitcoinExchangeButton)
+    private func setupLocalBitcoinCashAdView() {
+        localBitcoinCashAdView.translatesAutoresizingMaskIntoConstraints = false
+        localBitcoinCashAdView.isUserInteractionEnabled = true
+        scrollView.addSubview(localBitcoinCashAdView)
         NSLayoutConstraint.activate([
-            bitcoinExchangeButton.leadingAnchor.constraint(equalTo: localBitcoinCashView.leadingAnchor),
-            bitcoinExchangeButton.trailingAnchor.constraint(equalTo: localBitcoinCashView.trailingAnchor),
-            bitcoinExchangeButton.topAnchor.constraint(equalTo: localBitcoinCashView.bottomAnchor, constant: Constants.BUTTON_TOP_PADDING),
-            bitcoinExchangeButton.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
+            localBitcoinCashAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
+            localBitcoinCashAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
+            localBitcoinCashAdView.topAnchor.constraint(equalTo: walletAdView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
+            localBitcoinCashAdView.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
+        ])
+        
+        // Tap Gesture.
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(localBitcoinCashAdViewTapped))
+        localBitcoinCashAdView.addGestureRecognizer(tapGestureRecognizer)
+        
+        // Banner.
+        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "localbch_banner"))
+        bannerImageView.translatesAutoresizingMaskIntoConstraints = false
+        bannerImageView.contentMode = .scaleAspectFit
+        bannerImageView.clipsToBounds = true
+        localBitcoinCashAdView.addSubview(bannerImageView)
+        NSLayoutConstraint.activate([
+            bannerImageView.leadingAnchor.constraint(equalTo: localBitcoinCashAdView.leadingAnchor),
+            bannerImageView.trailingAnchor.constraint(equalTo: localBitcoinCashAdView.trailingAnchor),
+            bannerImageView.topAnchor.constraint(equalTo: localBitcoinCashAdView.topAnchor),
+            bannerImageView.bottomAnchor.constraint(equalTo: localBitcoinCashAdView.bottomAnchor)
+        ])
+        
+        // Logo.
+        let logoImageView = UIImageView(image: UIImage(imageLiteralResourceName: "local"))
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.clipsToBounds = true
+        localBitcoinCashAdView.addSubview(logoImageView)
+        NSLayoutConstraint.activate([
+            logoImageView.leadingAnchor.constraint(equalTo: localBitcoinCashAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            logoImageView.topAnchor.constraint(equalTo: localBitcoinCashAdView.topAnchor, constant: Constants.LOGO_TOP_MARGIN),
+            logoImageView.widthAnchor.constraint(equalToConstant: Constants.LOGO_WIDTH),
+            logoImageView.heightAnchor.constraint(equalToConstant: Constants.LOGO_HEIGHT)
+        ])
+        
+        setupLocalBitcoinCashLabel()
+    }
+    
+    private func setupLocalBitcoinCashLabel() {
+        localBitcoinCashLabel.textColor = .white
+        localBitcoinCashLabel.numberOfLines = 0
+        localBitcoinCashLabel.textAlignment = .left
+        localBitcoinCashLabel.adjustsFontSizeToFitWidth = true
+        localBitcoinCashLabel.translatesAutoresizingMaskIntoConstraints = false
+        localBitcoinCashAdView.addSubview(localBitcoinCashLabel)
+        NSLayoutConstraint.activate([
+            localBitcoinCashLabel.leadingAnchor.constraint(equalTo: localBitcoinCashAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            localBitcoinCashLabel.topAnchor.constraint(equalTo: localBitcoinCashAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
+            localBitcoinCashLabel.bottomAnchor.constraint(equalTo: localBitcoinCashAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
+            localBitcoinCashLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH)
+        ])
+    }
+    
+    private func setupExchangeAdView() {
+        exchangeAdView.translatesAutoresizingMaskIntoConstraints = false
+        exchangeAdView.isUserInteractionEnabled = true
+        scrollView.addSubview(exchangeAdView)
+        NSLayoutConstraint.activate([
+            exchangeAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
+            exchangeAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
+            exchangeAdView.topAnchor.constraint(equalTo: localBitcoinCashAdView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
+            exchangeAdView.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
+        ])
+        
+        // Tap Gesture.
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(exchangeAdViewTapped))
+        exchangeAdView.addGestureRecognizer(tapGestureRecognizer)
+        
+        // Banner.
+        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "bce_banner"))
+        bannerImageView.translatesAutoresizingMaskIntoConstraints = false
+        bannerImageView.contentMode = .scaleAspectFit
+        bannerImageView.clipsToBounds = true
+        exchangeAdView.addSubview(bannerImageView)
+        NSLayoutConstraint.activate([
+            bannerImageView.leadingAnchor.constraint(equalTo: exchangeAdView.leadingAnchor),
+            bannerImageView.trailingAnchor.constraint(equalTo: exchangeAdView.trailingAnchor),
+            bannerImageView.topAnchor.constraint(equalTo: exchangeAdView.topAnchor),
+            bannerImageView.bottomAnchor.constraint(equalTo: exchangeAdView.bottomAnchor)
+        ])
+        
+        // Logo.
+        let logoImageView = UIImageView(image: UIImage(imageLiteralResourceName: "exchange"))
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.clipsToBounds = true
+        exchangeAdView.addSubview(logoImageView)
+        NSLayoutConstraint.activate([
+            logoImageView.leadingAnchor.constraint(equalTo: exchangeAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            logoImageView.topAnchor.constraint(equalTo: exchangeAdView.topAnchor, constant: Constants.LOGO_TOP_MARGIN),
+            logoImageView.widthAnchor.constraint(equalToConstant: Constants.LOGO_WIDTH),
+            logoImageView.heightAnchor.constraint(equalToConstant: Constants.LOGO_HEIGHT)
+        ])
+        
+        setupExchangeLabel()
+    }
+    
+    private func setupExchangeLabel() {
+        exchangeLabel.textColor = .white
+        exchangeLabel.numberOfLines = 0
+        exchangeLabel.textAlignment = .left
+        exchangeLabel.adjustsFontSizeToFitWidth = true
+        exchangeLabel.translatesAutoresizingMaskIntoConstraints = false
+        exchangeAdView.addSubview(exchangeLabel)
+        NSLayoutConstraint.activate([
+            exchangeLabel.leadingAnchor.constraint(equalTo: exchangeAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            exchangeLabel.topAnchor.constraint(equalTo: exchangeAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
+            exchangeLabel.bottomAnchor.constraint(equalTo: exchangeAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
+            exchangeLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH)
         ])
     }
     
     private func localize() {
         navigationBar.text = Localized.settings
+        
+        // Wallet.
+        let walletAdAttributedString = Builder(text: Localized.storeExchangeBuy)
+            .addAttribute(key: .font, object: UIFont.custom(style: .bold, size: 16.0))
+            .create()
+        walletLabel.attributedText = walletAdAttributedString
+        
+        // Local Bitcoin Cash.
+        let localBitconCashAdAttributedString = Builder(text: Localized.sellYourBitcoinCash)
+            .addAttribute(key: .font, object: UIFont.custom(style: .bold, size: 16.0))
+            .create()
+        localBitcoinCashLabel.attributedText = localBitconCashAdAttributedString
+        
+        // Exchange.
+        let exchangeAdAttributedString = Builder(text: Localized.fiftyTradingPairs)
+            .addAttribute(key: .font, object: UIFont.custom(style: .bold, size: 16.0))
+            .create()
+        exchangeLabel.attributedText = exchangeAdAttributedString
     }
     
     private func registerForNotifications() {
@@ -367,11 +529,16 @@ extension SettingsViewController: CurrenciesViewControllerDelegate {
 
 private struct Constants {
     static let ITEMS_VIEW_MARGIN: CGFloat = 35.0
-    static let LOCAL_BITCOIN_CASH_VIEW_TOP_MARGIN: CGFloat = 30.0
+    static let LOGO_TOP_MARGIN: CGFloat = 10.0
+    static let LOGO_LEADING_MARGIN: CGFloat = 20.0
+    static let LOGO_WIDTH: CGFloat = 120.0
+    static let LOGO_HEIGHT: CGFloat = 30.0
+    static let AD_TOP_MARGIN: CGFloat = 30.0
     static let BUTTON_HORIZONTAL_PADDING: CGFloat = 10.0
     static let BUTTON_TOP_PADDING: CGFloat = 20.0
     static let BUTTON_HEIGHT: CGFloat = 100.0
-    static let LABEL_PADDING: CGFloat = 10.0
+    static let LABEL_TOP_MARGIN: CGFloat = 40.0
+    static let LABEL_WIDTH: CGFloat = UIScreen.main.bounds.size.width / 2 - Constants.LOGO_LEADING_MARGIN - Constants.ITEMS_VIEW_MARGIN
     static let SCROLL_VIEW_WIDTH: CGFloat = UIScreen.main.bounds.size.width - 2 * AppConstants.GENERAL_MARGIN
 }
 
@@ -389,4 +556,7 @@ private struct Localized {
     static var youMustProvideBCHAddress: String { NSLocalizedString("obligatory_receiver", comment: "") }
     static var syncingXPub: String { NSLocalizedString("syncing_xpub", comment: "") }
     static var syncedXPub: String { NSLocalizedString("synced_xpub", comment: "") }
+    static var storeExchangeBuy: String { NSLocalizedString("Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.", comment: "") }
+    static var sellYourBitcoinCash: String { NSLocalizedString("ad_content_local_bitcoin_cash", comment: "") }
+    static var fiftyTradingPairs: String { NSLocalizedString("50+ trading pairs and SLP token support", comment: "") }
 }

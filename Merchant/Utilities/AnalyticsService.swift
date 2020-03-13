@@ -37,6 +37,7 @@ enum Event: String {
     case editDestination
     case editName
     case editCurrency
+    case tapWalletAd
     case tapLocalAd
     case tapExchangeAd
 }

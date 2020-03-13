@@ -24,4 +24,5 @@ struct Endpoints {
     static let websocket = "wss://pay.bitcoin.com/s"
     static let wallet = "bitcoincash:?r="
     static let addressDetails = "\(Endpoints.restBitcoin)/address/details"
+    static let bitcoinWalletAppStore = "https://apps.apple.com/us/app/bitcoin-wallet-by-bitcoin-com/id1252903728"
 }

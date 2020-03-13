@@ -122,7 +122,7 @@
 
 "menu_privacy_policy" = "隐私条约";
 
-"contract_agreement_summary" = "By continuing, I agree to the %@, %@ and %@";
+"contract_agreement_summary" = "繼續使用，我同意以下條約：\n %@ , %@ 以及 %@";
 
 "contract_button_ok" = "同意";
 
