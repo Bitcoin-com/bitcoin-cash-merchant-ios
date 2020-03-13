@@ -134,7 +134,7 @@ final class SettingsViewController: UIViewController {
         walletAdView.addGestureRecognizer(tapGestureRecognizer)
         
         // Banner.
-        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "wallet_banner"))
+        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "wallet_banner_with_text"))
         bannerImageView.translatesAutoresizingMaskIntoConstraints = false
         bannerImageView.contentMode = .scaleAspectFit
         bannerImageView.clipsToBounds = true
@@ -144,36 +144,6 @@ final class SettingsViewController: UIViewController {
             bannerImageView.trailingAnchor.constraint(equalTo: walletAdView.trailingAnchor),
             bannerImageView.topAnchor.constraint(equalTo: walletAdView.topAnchor),
             bannerImageView.bottomAnchor.constraint(equalTo: walletAdView.bottomAnchor)
-        ])
-        
-        // Logo.
-        let logoImageView = UIImageView(image: UIImage(imageLiteralResourceName: "wallet"))
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.contentMode = .scaleAspectFit
-        logoImageView.clipsToBounds = true
-        walletAdView.addSubview(logoImageView)
-        NSLayoutConstraint.activate([
-            logoImageView.leadingAnchor.constraint(equalTo: walletAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-            logoImageView.topAnchor.constraint(equalTo: walletAdView.topAnchor, constant: Constants.LOGO_TOP_MARGIN),
-            logoImageView.widthAnchor.constraint(equalToConstant: Constants.LOGO_WIDTH),
-            logoImageView.heightAnchor.constraint(equalToConstant: Constants.LOGO_HEIGHT)
-        ])
-        
-        setupWalletLabel()
-    }
-    
-    private func setupWalletLabel() {
-        walletLabel.textColor = .white
-        walletLabel.numberOfLines = 0
-        walletLabel.textAlignment = .left
-        walletLabel.adjustsFontSizeToFitWidth = true
-        walletLabel.translatesAutoresizingMaskIntoConstraints = false
-        walletAdView.addSubview(walletLabel)
-        NSLayoutConstraint.activate([
-            walletLabel.leadingAnchor.constraint(equalTo: walletAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-            walletLabel.topAnchor.constraint(equalTo: walletAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
-            walletLabel.bottomAnchor.constraint(equalTo: walletAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
-            walletLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH)
         ])
     }
     
@@ -193,7 +163,7 @@ final class SettingsViewController: UIViewController {
         localBitcoinCashAdView.addGestureRecognizer(tapGestureRecognizer)
         
         // Banner.
-        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "localbch_banner"))
+        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "localbch_banner_with_text"))
         bannerImageView.translatesAutoresizingMaskIntoConstraints = false
         bannerImageView.contentMode = .scaleAspectFit
         bannerImageView.clipsToBounds = true
@@ -203,36 +173,6 @@ final class SettingsViewController: UIViewController {
             bannerImageView.trailingAnchor.constraint(equalTo: localBitcoinCashAdView.trailingAnchor),
             bannerImageView.topAnchor.constraint(equalTo: localBitcoinCashAdView.topAnchor),
             bannerImageView.bottomAnchor.constraint(equalTo: localBitcoinCashAdView.bottomAnchor)
-        ])
-        
-        // Logo.
-        let logoImageView = UIImageView(image: UIImage(imageLiteralResourceName: "local"))
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.contentMode = .scaleAspectFit
-        logoImageView.clipsToBounds = true
-        localBitcoinCashAdView.addSubview(logoImageView)
-        NSLayoutConstraint.activate([
-            logoImageView.leadingAnchor.constraint(equalTo: localBitcoinCashAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-            logoImageView.topAnchor.constraint(equalTo: localBitcoinCashAdView.topAnchor, constant: Constants.LOGO_TOP_MARGIN),
-            logoImageView.widthAnchor.constraint(equalToConstant: Constants.LOGO_WIDTH),
-            logoImageView.heightAnchor.constraint(equalToConstant: Constants.LOGO_HEIGHT)
-        ])
-        
-        setupLocalBitcoinCashLabel()
-    }
-    
-    private func setupLocalBitcoinCashLabel() {
-        localBitcoinCashLabel.textColor = .white
-        localBitcoinCashLabel.numberOfLines = 0
-        localBitcoinCashLabel.textAlignment = .left
-        localBitcoinCashLabel.adjustsFontSizeToFitWidth = true
-        localBitcoinCashLabel.translatesAutoresizingMaskIntoConstraints = false
-        localBitcoinCashAdView.addSubview(localBitcoinCashLabel)
-        NSLayoutConstraint.activate([
-            localBitcoinCashLabel.leadingAnchor.constraint(equalTo: localBitcoinCashAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-            localBitcoinCashLabel.topAnchor.constraint(equalTo: localBitcoinCashAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
-            localBitcoinCashLabel.bottomAnchor.constraint(equalTo: localBitcoinCashAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
-            localBitcoinCashLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH)
         ])
     }
     
@@ -252,7 +192,7 @@ final class SettingsViewController: UIViewController {
         exchangeAdView.addGestureRecognizer(tapGestureRecognizer)
         
         // Banner.
-        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "bce_banner"))
+        let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "bce_banner_with_text"))
         bannerImageView.translatesAutoresizingMaskIntoConstraints = false
         bannerImageView.contentMode = .scaleAspectFit
         bannerImageView.clipsToBounds = true
@@ -263,58 +203,10 @@ final class SettingsViewController: UIViewController {
             bannerImageView.topAnchor.constraint(equalTo: exchangeAdView.topAnchor),
             bannerImageView.bottomAnchor.constraint(equalTo: exchangeAdView.bottomAnchor)
         ])
-        
-        // Logo.
-        let logoImageView = UIImageView(image: UIImage(imageLiteralResourceName: "exchange"))
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.contentMode = .scaleAspectFit
-        logoImageView.clipsToBounds = true
-        exchangeAdView.addSubview(logoImageView)
-        NSLayoutConstraint.activate([
-            logoImageView.leadingAnchor.constraint(equalTo: exchangeAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-            logoImageView.topAnchor.constraint(equalTo: exchangeAdView.topAnchor, constant: Constants.LOGO_TOP_MARGIN),
-            logoImageView.widthAnchor.constraint(equalToConstant: Constants.LOGO_WIDTH),
-            logoImageView.heightAnchor.constraint(equalToConstant: Constants.LOGO_HEIGHT)
-        ])
-        
-        setupExchangeLabel()
-    }
-    
-    private func setupExchangeLabel() {
-        exchangeLabel.textColor = .white
-        exchangeLabel.numberOfLines = 0
-        exchangeLabel.textAlignment = .left
-        exchangeLabel.adjustsFontSizeToFitWidth = true
-        exchangeLabel.translatesAutoresizingMaskIntoConstraints = false
-        exchangeAdView.addSubview(exchangeLabel)
-        NSLayoutConstraint.activate([
-            exchangeLabel.leadingAnchor.constraint(equalTo: exchangeAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-            exchangeLabel.topAnchor.constraint(equalTo: exchangeAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
-            exchangeLabel.bottomAnchor.constraint(equalTo: exchangeAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
-            exchangeLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH)
-        ])
     }
     
     private func localize() {
         navigationBar.text = Localized.settings
-        
-        // Wallet.
-        let walletAdAttributedString = Builder(text: Localized.storeExchangeBuy)
-            .addAttribute(key: .font, object: UIFont.custom(style: .bold, size: 16.0))
-            .create()
-        walletLabel.attributedText = walletAdAttributedString
-        
-        // Local Bitcoin Cash.
-        let localBitconCashAdAttributedString = Builder(text: Localized.sellYourBitcoinCash)
-            .addAttribute(key: .font, object: UIFont.custom(style: .bold, size: 16.0))
-            .create()
-        localBitcoinCashLabel.attributedText = localBitconCashAdAttributedString
-        
-        // Exchange.
-        let exchangeAdAttributedString = Builder(text: Localized.fiftyTradingPairs)
-            .addAttribute(key: .font, object: UIFont.custom(style: .bold, size: 16.0))
-            .create()
-        exchangeLabel.attributedText = exchangeAdAttributedString
     }
     
     private func registerForNotifications() {
@@ -556,7 +448,4 @@ private struct Localized {
     static var youMustProvideBCHAddress: String { NSLocalizedString("obligatory_receiver", comment: "") }
     static var syncingXPub: String { NSLocalizedString("syncing_xpub", comment: "") }
     static var syncedXPub: String { NSLocalizedString("synced_xpub", comment: "") }
-    static var storeExchangeBuy: String { NSLocalizedString("Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.", comment: "") }
-    static var sellYourBitcoinCash: String { NSLocalizedString("ad_content_local_bitcoin_cash", comment: "") }
-    static var fiftyTradingPairs: String { NSLocalizedString("50+ trading pairs and SLP token support", comment: "") }
 }

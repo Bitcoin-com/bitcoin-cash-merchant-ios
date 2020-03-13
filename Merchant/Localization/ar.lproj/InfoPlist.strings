@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 3/13/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+NSCameraUsageDescription = "يرجى منح إذن للكاميرا لاستخدام الماسح الضوئي لرمز الاستجابة السريعة";

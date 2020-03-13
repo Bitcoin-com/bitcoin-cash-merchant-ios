@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 3/13/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+NSCameraUsageDescription = "Otorgue permiso a la cámara para usar el escáner de código QR";
