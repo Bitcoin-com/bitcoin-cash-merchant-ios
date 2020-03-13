@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9693A049E3A4A3E7314A01E8 /* Pods_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */; };
 		A87AC8124A72CD7035A43C1F /* Pods_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAA19CAA1F377C630BDE3D7 /* Pods_MerchantTests.framework */; };
+		C40ABAC2241BA21C000CAD80 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40ABAC1241BA21C000CAD80 /* GradientView.swift */; };
 		C4157D0D2418B90300EE3952 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4157D0C2418B90300EE3952 /* AnalyticsService.swift */; };
 		C41909DB24192A4E00B65F52 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41909DA24192A4E00B65F52 /* Keys.swift */; };
 		C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441ABD0240927FC00A2253A /* WebSocket.swift */; };
@@ -109,6 +110,7 @@
 		79AE22CA693F028AFEB110A4 /* Pods-Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant.debug.xcconfig"; path = "Target Support Files/Pods-Merchant/Pods-Merchant.debug.xcconfig"; sourceTree = "<group>"; };
 		7C86A23622A67FF85A7B51C6 /* Pods-Merchant-MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8E499E13B7E722CF3729BC4A /* Pods-MerchantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C40ABAC1241BA21C000CAD80 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		C4157D0C2418B90300EE3952 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		C41909DA24192A4E00B65F52 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		C441ABD0240927FC00A2253A /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				C445559924014C5000F4B3E0 /* VerificationView.swift */,
 				C45393912402ECF500CC3CA5 /* CardView.swift */,
 				C45E06762406CB1D00322906 /* PaymentCompletedView.swift */,
+				C40ABAC1241BA21C000CAD80 /* GradientView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 			files = (
 				C49F1FEA23FEF55400416058 /* MenuItem.swift in Sources */,
 				C41909DB24192A4E00B65F52 /* Keys.swift in Sources */,
+				C40ABAC2241BA21C000CAD80 /* GradientView.swift in Sources */,
 				C49F1FD523FEF28600416058 /* NetworkManager.swift in Sources */,
 				C49F1FDE23FEF2B500416058 /* Toast.swift in Sources */,
 				C45E06772406CB1D00322906 /* PaymentCompletedView.swift in Sources */,

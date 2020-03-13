@@ -12,6 +12,7 @@ import BitcoinKit
 final class SettingsViewController: UIViewController {
 
     // MARK: - Properties
+    private let topOverlayView = GradientView(colors: [.white, .white, UIColor.white.withAlphaComponent(0)])
     private var navigationBar = NavigationBar()
     private var scrollView = UIScrollView()
     private var itemsView = ItemsView()
@@ -59,12 +60,28 @@ final class SettingsViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         
+        setupTopOverlayView()
         setupNavigationBar()
         setupScrollView()
         setupItemsView()
         setupWalletAdView()
         setupLocalBitcoinCashAdView()
         setupExchangeAdView()
+        updateScrollViewContentSize()
+        
+        view.bringSubviewToFront(topOverlayView)
+        view.bringSubviewToFront(navigationBar)
+    }
+    
+    private func setupTopOverlayView() {
+        topOverlayView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(topOverlayView)
+        NSLayoutConstraint.activate([
+            topOverlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topOverlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topOverlayView.topAnchor.constraint(equalTo: view.topAnchor),
+            topOverlayView.heightAnchor.constraint(equalToConstant: Constants.TOP_OVERLAY_VIEW_HEIGHT)
+        ])
     }
     
     private func setupNavigationBar() {
@@ -87,6 +104,7 @@ final class SettingsViewController: UIViewController {
     
     private func setupScrollView() {
         scrollView.clipsToBounds = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         NSLayoutConstraint.activate([
@@ -123,10 +141,10 @@ final class SettingsViewController: UIViewController {
         walletAdView.isUserInteractionEnabled = true
         scrollView.addSubview(walletAdView)
         NSLayoutConstraint.activate([
-            walletAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
-            walletAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
+            walletAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.AD_HORIZONTAL_PADDING),
+            walletAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.AD_HORIZONTAL_PADDING),
             walletAdView.topAnchor.constraint(equalTo: itemsView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
-            walletAdView.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
+            walletAdView.heightAnchor.constraint(equalToConstant: Constants.AD_HEIGHT)
         ])
         
         // Tap Gesture.
@@ -152,10 +170,10 @@ final class SettingsViewController: UIViewController {
         localBitcoinCashAdView.isUserInteractionEnabled = true
         scrollView.addSubview(localBitcoinCashAdView)
         NSLayoutConstraint.activate([
-            localBitcoinCashAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
-            localBitcoinCashAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
+            localBitcoinCashAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.AD_HORIZONTAL_PADDING),
+            localBitcoinCashAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.AD_HORIZONTAL_PADDING),
             localBitcoinCashAdView.topAnchor.constraint(equalTo: walletAdView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
-            localBitcoinCashAdView.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
+            localBitcoinCashAdView.heightAnchor.constraint(equalToConstant: Constants.AD_HEIGHT)
         ])
         
         // Tap Gesture.
@@ -181,10 +199,10 @@ final class SettingsViewController: UIViewController {
         exchangeAdView.isUserInteractionEnabled = true
         scrollView.addSubview(exchangeAdView)
         NSLayoutConstraint.activate([
-            exchangeAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.BUTTON_HORIZONTAL_PADDING),
-            exchangeAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.BUTTON_HORIZONTAL_PADDING),
+            exchangeAdView.leadingAnchor.constraint(equalTo: itemsView.leadingAnchor, constant: Constants.AD_HORIZONTAL_PADDING),
+            exchangeAdView.trailingAnchor.constraint(equalTo: itemsView.trailingAnchor, constant: -Constants.AD_HORIZONTAL_PADDING),
             exchangeAdView.topAnchor.constraint(equalTo: localBitcoinCashAdView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
-            exchangeAdView.heightAnchor.constraint(equalToConstant: Constants.BUTTON_HEIGHT)
+            exchangeAdView.heightAnchor.constraint(equalToConstant: Constants.AD_HEIGHT)
         ])
         
         // Tap Gesture.
@@ -203,6 +221,14 @@ final class SettingsViewController: UIViewController {
             bannerImageView.topAnchor.constraint(equalTo: exchangeAdView.topAnchor),
             bannerImageView.bottomAnchor.constraint(equalTo: exchangeAdView.bottomAnchor)
         ])
+    }
+    
+    private func updateScrollViewContentSize() {
+        var height = itemsView.height
+        height += 4 * Constants.AD_TOP_MARGIN
+        height += 3 * Constants.AD_HEIGHT
+        
+        scrollView.contentSize = CGSize(width: Constants.SCROLL_VIEW_WIDTH, height: height)
     }
     
     private func localize() {
@@ -276,6 +302,7 @@ final class SettingsViewController: UIViewController {
             
             if paymentTarget.type == .xPub {
                 refreshItemsView()
+                updateScrollViewContentSize()
                 syncXPub(paymentTarget.address)
             } else {
                 refreshAndShowSuccessMessage()
@@ -308,6 +335,7 @@ final class SettingsViewController: UIViewController {
     
     private func refreshAndShowSuccessMessage() {
         refreshItemsView()
+        updateScrollViewContentSize()
         
         ToastManager.shared.showMessage(Localized.changesHaveBeenSaved, forStatus: .success)
         
@@ -420,15 +448,15 @@ extension SettingsViewController: CurrenciesViewControllerDelegate {
 }
 
 private struct Constants {
+    static let TOP_OVERLAY_VIEW_HEIGHT: CGFloat = 100.0
     static let ITEMS_VIEW_MARGIN: CGFloat = 35.0
     static let LOGO_TOP_MARGIN: CGFloat = 10.0
     static let LOGO_LEADING_MARGIN: CGFloat = 20.0
     static let LOGO_WIDTH: CGFloat = 120.0
     static let LOGO_HEIGHT: CGFloat = 30.0
-    static let AD_TOP_MARGIN: CGFloat = 30.0
-    static let BUTTON_HORIZONTAL_PADDING: CGFloat = 10.0
-    static let BUTTON_TOP_PADDING: CGFloat = 20.0
-    static let BUTTON_HEIGHT: CGFloat = 100.0
+    static let AD_TOP_MARGIN: CGFloat = 25.0
+    static let AD_HORIZONTAL_PADDING: CGFloat = 10.0
+    static let AD_HEIGHT: CGFloat = 100.0
     static let LABEL_TOP_MARGIN: CGFloat = 40.0
     static let LABEL_WIDTH: CGFloat = UIScreen.main.bounds.size.width / 2 - Constants.LOGO_LEADING_MARGIN - Constants.ITEMS_VIEW_MARGIN
     static let SCROLL_VIEW_WIDTH: CGFloat = UIScreen.main.bounds.size.width - 2 * AppConstants.GENERAL_MARGIN
