@@ -35,19 +35,19 @@ final class SettingsViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func walletAdViewTapped() {
-        AnalyticsService.shared.logEvent(.tapWalletAd)
+        AnalyticsService.shared.logEvent(.tap_wallet)
         
         openLinkInSafari(link: Endpoints.bitcoinWalletAppStore)
     }
     
     @objc private func localBitcoinCashAdViewTapped() {
-        AnalyticsService.shared.logEvent(.tapLocalAd)
+        AnalyticsService.shared.logEvent(.tap_localbitcoin)
         
         openLinkInSafari(link: Endpoints.localBitcoin)
     }
     
     @objc private func exchangeAdViewTapped() {
-        AnalyticsService.shared.logEvent(.tapExchangeAd)
+        AnalyticsService.shared.logEvent(.tap_exchange)
         
         openLinkInSafari(link: Endpoints.exchangeBitcoin)
     }
@@ -248,6 +248,8 @@ final class SettingsViewController: UIViewController {
         let okAction = UIAlertAction(title: Localized.OK, style: .default) { _ in
             if let textField = alertController.textFields?.first {
                 if let text = textField.text {
+                    AnalyticsService.shared.logEvent(.settings_merchantname_changed)
+                    
                     UserManager.shared.companyName = text
                     alertController.dismiss(animated: true) { [weak self] in
                         self?.refreshAndShowSuccessMessage()
@@ -297,6 +299,8 @@ final class SettingsViewController: UIViewController {
         if paymentTarget.type == .invalid {
             showFailureMessage()
         } else {
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_changed)
+            
             UserManager.shared.destination = paymentTarget.address
             UserManager.shared.activePaymentTarget = paymentTarget
             
@@ -377,25 +381,25 @@ extension SettingsViewController: ItemsViewDelegate {
     // MARK: - ItemsViewDelegate
     func itemsView(_ itemsView: ItemsView, didTapOnItem item: Item) {
         if item.title == UserItem.pin.title { // Create PIN.
-            AnalyticsService.shared.logEvent(.editPin)
+            AnalyticsService.shared.logEvent(.settings_pin_edit)
             
             createPin()
         }
         
         if item.title == UserItem.merchantName.title { // Update Merchant name.
-            AnalyticsService.shared.logEvent(.editName)
+            AnalyticsService.shared.logEvent(.settings_merchantname_edit)
             
             updateMerchantName()
         }
         
         if item.title == UserItem.destinationAddress.title { // Destination address.
-            AnalyticsService.shared.logEvent(.editDestination)
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_edit)
             
             showAddDestionationAddressAlert()
         }
         
         if item.title == UserItem.localCurrency.title { // Local Currency.
-            AnalyticsService.shared.logEvent(.editCurrency)
+            AnalyticsService.shared.logEvent(.settings_currency_edit)
             
             pickCurrency()
         }
@@ -410,6 +414,8 @@ extension SettingsViewController: PinViewControllerDelegate {
     
     func pinViewControllerDidCreatePinSuccessfully(_ viewController: PinViewController) {
         viewController.dismiss(animated: true) { [weak self] in
+            AnalyticsService.shared.logEvent(.settings_pin_changed)
+            
             self?.refreshAndShowSuccessMessage()
         }
     }
@@ -440,6 +446,8 @@ extension SettingsViewController: CurrenciesViewControllerDelegate {
     // MARK: - CurrenciesViewControllerDelegate
     func currenciesViewController(_ viewController: CurrenciesViewController, didPickCurrency currency: CountryCurrency) {
         viewController.dismiss(animated: true) { [weak self] in
+            AnalyticsService.shared.logEvent(.settings_currency_changed)
+            
             UserManager.shared.selectedCurrency = currency
             self?.refreshAndShowSuccessMessage()
         }

@@ -132,19 +132,27 @@ final class TransactionsHistoryViewController: UIViewController {
         let cancelAction = UIAlertAction(title: Localized.cancel, style: .cancel, handler: nil)
         
         let viewTransactionAction = UIAlertAction(title: Localized.viewTranscation, style: .default, handler: { [weak self] _ in
+            AnalyticsService.shared.logEvent(.tx_id_explorer_launched)
+            
             self?.openLinkInSafari(link: "\(Endpoints.explorerBitcoin)/tx/\(transaction.txid)")
         })
         
         let viewAllTransactionsAction = UIAlertAction(title: Localized.viewAllTranscations, style: .default, handler: { [weak self] _ in
+            AnalyticsService.shared.logEvent(.tx_address_explorer_launched)
+            
             self?.openLinkInSafari(link: "\(Endpoints.explorerBitcoin)/address/\(transaction.toAddress)")
         })
         
         let copyTransactionAction = UIAlertAction(title: Localized.copyTransaction, style: .default, handler: { _ in
+            AnalyticsService.shared.logEvent(.tx_id_copied)
+            
             UIPasteboard.general.string = transaction.txid
         })
         
         let copyAddressAction = UIAlertAction(title: Localized.copyAddress, style: .default, handler: { _
             in
+            AnalyticsService.shared.logEvent(.tx_address_copied)
+            
             UIPasteboard.general.string = transaction.toAddress
         })
         

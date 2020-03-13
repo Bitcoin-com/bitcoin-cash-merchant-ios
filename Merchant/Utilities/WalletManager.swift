@@ -74,6 +74,7 @@ final class WalletManager {
                     }
                 } catch {
                     Logger.log(message: "Unable to parse: \(error.localizedDescription) | \(error)", type: .error)
+                    AnalyticsService.shared.logEvent(.error_syncing_xpub, withError: error)
                 }
             }
         }

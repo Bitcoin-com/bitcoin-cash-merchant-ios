@@ -72,7 +72,7 @@ final class PaymentInputViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func checkoutButtonTapped() {
-        AnalyticsService.shared.logEvent(.tapCheckout)
+        AnalyticsService.shared.logEvent(.invoice_checkout)
         
         if let amount = Double(amountString) {
             if amount == 0.0 {

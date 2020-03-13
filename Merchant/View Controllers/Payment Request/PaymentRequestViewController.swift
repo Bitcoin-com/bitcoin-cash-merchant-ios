@@ -68,7 +68,7 @@ final class PaymentRequestViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func cancelButtonTapped() {
-        AnalyticsService.shared.logEvent(.cancelInvoice)
+        AnalyticsService.shared.logEvent(.invoice_cancelled)
         
         UserManager.shared.activeInvoice = nil
         dismiss(animated: true)
@@ -77,7 +77,7 @@ final class PaymentRequestViewController: UIViewController {
     @objc private func shareButtonTapped() {
         guard let invoice = invoice else { return }
         
-        AnalyticsService.shared.logEvent(.shareInvoice)
+        AnalyticsService.shared.logEvent(.invoice_shared)
         
         var activityItems = [Any]()
         
@@ -322,6 +322,8 @@ final class PaymentRequestViewController: UIViewController {
         BIP70Service.shared.createInvoice(invoice) { result in
             switch result {
             case .success(let data):
+                AnalyticsService.shared.logEvent(.invoice_created)
+                
                 self.invoice = try? JSONDecoder().decode(InvoiceStatus.self, from: data)
                 UserManager.shared.activeInvoice = self.invoice
             case .failure(let error):
@@ -336,7 +338,9 @@ final class PaymentRequestViewController: UIViewController {
         activityIndicatorView.startAnimating()
         
         DispatchQueue.global(qos: .userInitiated).async {
-            if let data = try? Data(contentsOf: url) {
+            do {
+                let data = try Data(contentsOf: url)
+                
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
 
@@ -344,6 +348,8 @@ final class PaymentRequestViewController: UIViewController {
                     self.qrImage = UIImage(data: data)
                     self.qrImageView.isUserInteractionEnabled = true
                 }
+            } catch {
+                AnalyticsService.shared.logEvent(.error_generate_qr_code, withError: error)
             }
         }
     }
@@ -378,7 +384,7 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func showPaymentCompletedView() {
-        AnalyticsService.shared.logEvent(.completedPayment)
+        AnalyticsService.shared.logEvent(.invoice_paid)
         
         // Increase the next index for xPubKey
         if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
@@ -396,7 +402,6 @@ final class PaymentRequestViewController: UIViewController {
         if let url = URL(string: "\(Endpoints.websocket)/\(invoice.paymentId)") {
             let webSocket = WebSocket(request: URLRequest(url: url))
             webSocket.event.message = { message in
-                print(message)
                 if let messageString = message as? String, let data = messageString.data(using: .utf8) {
                     Logger.log(message: "Received message", type: .success)
                     if let invoiceStatus = try? JSONDecoder().decode(InvoiceStatus.self, from: data) {
@@ -412,10 +417,12 @@ final class PaymentRequestViewController: UIViewController {
                 Logger.log(message: "Socket did open", type: .success)
                 self?.networkConnectionAcquired()
             }
-            
             webSocket.event.close = { [weak self] code, reason, clean in
                 Logger.log(message: "Socket did close", type: .debug)
                 self?.networkConnectionLost()
+            }
+            webSocket.event.error = { error in
+                AnalyticsService.shared.logEvent(.error_connect_to_socket, withError: error)
             }
             
             self.webSocket = webSocket

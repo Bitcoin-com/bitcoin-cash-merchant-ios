@@ -36,23 +36,30 @@ final class PaymentTarget: Codable {
         
         if isApiKey() {
             type = .apiKey
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_apikey_set)
             return
         }
         
         if isXPub() {
             type = .xPub
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_xpub_set)
             return
         }
         
         if isLegacyAddress() {
             type = .address
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
             return
         } else {
             address = "bitcoincash:\(address)"
             if isLegacyAddress() {
                 type = .address
+                AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
+                return
             }
         }
+        
+        AnalyticsService.shared.logEvent(.error_convert_address_to_bch)
     }
     
     private func isApiKey() -> Bool {
