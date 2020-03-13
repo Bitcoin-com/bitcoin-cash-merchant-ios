@@ -1144,14 +1144,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 5.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
 				PRODUCT_NAME = "Bitcoin Cash Register";
 				SWIFT_VERSION = 5.0;
@@ -1165,14 +1165,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 299HJ3G3BP;
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 5.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
 				PRODUCT_NAME = "Bitcoin Cash Register";
 				SWIFT_VERSION = 5.0;
