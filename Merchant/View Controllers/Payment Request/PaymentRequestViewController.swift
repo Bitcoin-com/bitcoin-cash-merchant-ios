@@ -129,6 +129,12 @@ final class PaymentRequestViewController: UIViewController {
     
     @objc private func networkConnectionAcquired() {
         connectionStatusImageView.image = UIImage(imageLiteralResourceName: "connected")
+        
+        if invoice == nil {
+            createInvoice()
+        } else if qrImageView.image == nil {
+            fetchQrCode()
+        }
     }
     
     // MARK: - Private API
