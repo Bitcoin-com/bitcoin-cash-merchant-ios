@@ -35,19 +35,19 @@ final class SettingsViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func walletAdViewTapped() {
-        AnalyticsService.shared.logEvent(.tap_wallet)
+        AnalyticsService.shared.logEvent(.tap_link_wallet)
         
         openLinkInSafari(link: Endpoints.bitcoinWalletAppStore)
     }
     
     @objc private func localBitcoinCashAdViewTapped() {
-        AnalyticsService.shared.logEvent(.tap_localbitcoin)
+        AnalyticsService.shared.logEvent(.tap_link_localbitcoin)
         
         openLinkInSafari(link: Endpoints.localBitcoin)
     }
     
     @objc private func exchangeAdViewTapped() {
-        AnalyticsService.shared.logEvent(.tap_exchange)
+        AnalyticsService.shared.logEvent(.tap_link_exchange)
         
         openLinkInSafari(link: Endpoints.exchangeBitcoin)
     }

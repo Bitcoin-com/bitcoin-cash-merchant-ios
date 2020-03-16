@@ -52,9 +52,9 @@ enum Event: String {
     case settings_paymenttarget_apikey_set
     
     case tap_settings
-    case tap_wallet
-    case tap_localbitcoin
-    case tap_exchange
+    case tap_link_wallet
+    case tap_link_localbitcoin
+    case tap_link_exchange
     case tap_privacypolicy
     case tap_serviceterms
     case tap_termsofuse
@@ -70,6 +70,7 @@ enum Event: String {
     case error_db_read_tx
     case error_db_read_address
     case error_db_unknown
+    
     case error_rendering
     case error_syncing_xpub
     case error_rest_bitcoin_com_scan_address_funds
