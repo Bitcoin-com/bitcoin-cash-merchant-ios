@@ -50,5 +50,13 @@ struct InvoiceStatus: Codable {
     var isInitialized: Bool {
         return paymentUrl.count > 0 && paymentId.count > 0 && fiatTotal != 0.0 && outputs.count > 0
     }
+    var isTimerExpired: Bool {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withFullDate, .withFullTime, .withDashSeparatorInDate, .withFractionalSeconds]
+        
+        let expiresDate = dateFormatter.date(from: expires)!
+        
+        return expiresDate < Date()
+    }
     
 }

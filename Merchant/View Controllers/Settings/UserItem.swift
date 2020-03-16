@@ -48,13 +48,13 @@ extension UserItem: Item {
     var image: UIImage {
         switch self {
         case .merchantName:
-            return UIImage(imageLiteralResourceName: "setting_company_name")
+            return UIImage(imageLiteralResourceName: "settings_company_name")
         case .destinationAddress:
-            return UIImage(imageLiteralResourceName: "setting_destination")
+            return UIImage(imageLiteralResourceName: "settings_destination")
         case .localCurrency:
-            return UIImage(imageLiteralResourceName: "setting_currency")
+            return UIImage(imageLiteralResourceName: "settings_currency")
         case .pin:
-            return UIImage(imageLiteralResourceName: "setting_pin_code")
+            return UIImage(imageLiteralResourceName: "settings_pin_code")
         }
     }
     

@@ -64,6 +64,8 @@ final class PaymentRequestViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         webSocket?.close()
+        timer?.invalidate()
+        timer = nil
     }
     
     // MARK: - Actions
@@ -101,12 +103,11 @@ final class PaymentRequestViewController: UIViewController {
         let difference = Calendar.current.dateComponents([.second], from: expiresDate, to: Date())
         let time = 24*60*60 - difference.second!
         
-        if time == 0 {
+        if invoice.isTimerExpired {
             timer?.invalidate()
             timer = nil
             
-            UserManager.shared.activeInvoice = nil
-            dismiss(animated: true)
+            cancelButtonTapped()
         }
         
         timeRemainingLabel.text = time.toMinutesSeconds()
@@ -179,7 +180,9 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupConnectionStatusImageView() {
-        connectionStatusImageView.image = UIImage(imageLiteralResourceName: "connected")
+        connectionStatusImageView.image = NetworkManager.shared.isConnected ? UIImage(imageLiteralResourceName: "connected") : UIImage(imageLiteralResourceName: "disconnected")
+        connectionStatusImageView.contentMode = .scaleAspectFit
+        connectionStatusImageView.clipsToBounds = true
         connectionStatusImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(connectionStatusImageView)
         NSLayoutConstraint.activate([

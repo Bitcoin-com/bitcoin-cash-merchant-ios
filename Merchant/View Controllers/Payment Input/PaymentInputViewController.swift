@@ -50,7 +50,7 @@ final class PaymentInputViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let invoice = UserManager.shared.activeInvoice, invoice.isOpen {
+        if let invoice = UserManager.shared.activeInvoice, invoice.isOpen, !invoice.isTimerExpired {
             showInvoice(invoice)
         }
     }
