@@ -46,7 +46,7 @@ final class CurrencyManager {
             
             countryCurrencies = try decoder.decode([CountryCurrency].self, from: data)
             
-            Logger.log(message: "Parsing successful", type:  .success)
+            Logger.log(message: "Parsing successful: \(countryCurrencies.count)", type:  .success)
         } catch {
             Logger.log(message: "Parsing error: \(error.localizedDescription)", type:  .error)
             Logger.log(message: "Parsing error: \(error)", type:  .error)
