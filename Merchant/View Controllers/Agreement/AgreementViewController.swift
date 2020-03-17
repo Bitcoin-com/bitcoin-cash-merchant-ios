@@ -80,11 +80,13 @@ final class AgreementViewController: UIViewController {
     
     private func setupAgreeButton() {
         agreeButton.titleLabel?.font = .boldSystemFont(ofSize: Constants.FONT_SIZE)
+        agreeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         agreeButton.setTitleColor(.bitcoinGreen, for: .normal)
         agreeButton.translatesAutoresizingMaskIntoConstraints = false
         agreeButton.addTarget(self, action: #selector(agreeButtonTapped), for: .touchUpInside)
         containerView.addSubview(agreeButton)
         NSLayoutConstraint.activate([
+            agreeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.AGREE_BUTTON_TRAILING_MARGIN),
             agreeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.AGREE_BUTTON_TRAILING_MARGIN),
             agreeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Constants.AGREE_BUTTON_BOTTOM_MARGIN)
         ])

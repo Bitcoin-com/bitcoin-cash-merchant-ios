@@ -122,10 +122,24 @@
 
 "menu_privacy_policy" = "隱私權條款";
 
-"contract_agreement_summary" = "繼續使用，我同意以下條約：%@ , %@ 以及 %@";
+"contract_agreement_summary" = "繼續使用，我同意以下條約：%@, %@ 以及 %@";
 
 "contract_button_ok" = "同意";
 
 "error" = "錯誤";
 
 "notify_changes_have_been_saved" = "已儲存設定";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"inspect_tx_copy_address" = "Copy address";
+
+"inspect_tx_link_view_all_transactions_with_this_address" = "View all TX with this address";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";

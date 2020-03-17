@@ -102,7 +102,11 @@
 
 "ad_title_local_bitcoin_cash" = "Local Bitcoin Cash";
 
-"ad_content_local_bitcoin_cash" = "Sell your Bitcoin Cash (BCH) for Cash";
+"ad_content_local_bitcoin_cash" = "Sell your Bitcoin Cash for Cash";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
 
 "not_supported" = "Not supported";
 
@@ -129,3 +133,13 @@
 "error" = "Error";
 
 "notify_changes_have_been_saved" = "Change has been saved";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_link_view_all_transactions_with_this_address" = "View all TX with this address";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"inspect_tx_copy_address" = "Copy address";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";

@@ -201,10 +201,10 @@ extension TransactionsHistoryViewController: UITableViewDataSource, UITableViewD
 
 private struct Localized {
     static var transactions: String { NSLocalizedString("menu_transactions", comment: "") }
-    static var viewTranscation: String { NSLocalizedString("View all TX with this address", comment: "") }
-    static var viewAllTranscations: String { NSLocalizedString("view_transaction", comment: "") }
-    static var copyTransaction: String { NSLocalizedString("copy_transaction", comment: "") }
-    static var copyAddress: String { NSLocalizedString("copy_address", comment: "") }
+    static var viewTranscation: String { NSLocalizedString("inspect_tx_link_view_transaction", comment: "") }
+    static var viewAllTranscations: String { NSLocalizedString("inspect_tx_link_view_all_transactions_with_this_address", comment: "") }
+    static var copyTransaction: String { NSLocalizedString("inspect_tx_copy_transaction", comment: "") }
+    static var copyAddress: String { NSLocalizedString("inspect_tx_copy_address", comment: "") }
     static var cancel: String { NSLocalizedString("button_cancel", comment: "") }
     static var noHistory: String { NSLocalizedString("no_history_text", comment: "") }
 }

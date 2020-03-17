@@ -88,7 +88,7 @@ final class PaymentRequestViewController: UIViewController {
         }
         
         let paymentUrl = "\(BASE_URL)/i/\(invoice.paymentId)"
-        let pleasePay = "\(Localized.pleasePayYourInvoiceHere): \(paymentUrl)"
+        let pleasePay = String(format: Localized.pleasePayYourInvoiceHere, paymentUrl)
         activityItems.append(pleasePay)
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
@@ -446,7 +446,7 @@ final class PaymentRequestViewController: UIViewController {
 
 private struct Localized {
     static var scanToPay: String { NSLocalizedString("waiting_for_payment", comment: "") }
-    static var pleasePayYourInvoiceHere: String { NSLocalizedString("Please pay your invoice here", comment: "") }
+    static var pleasePayYourInvoiceHere: String { NSLocalizedString("share_invoice_msg", comment: "") }
 }
 
 private struct Constants {
