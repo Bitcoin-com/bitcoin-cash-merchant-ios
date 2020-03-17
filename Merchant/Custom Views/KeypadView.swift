@@ -20,9 +20,9 @@ final class KeypadView: CardView {
     private var buttons = [UIButton]()
     weak var delegate: KeypadViewDelegate?
     static let KEYPAD_BUTTON_SIZE: CGFloat = UIScreen.main.bounds.size.width / 5
-    var isDecimalPoint = true {
+    var hasDecimalPoint = true {
         didSet {
-            toggleDecimalPoint(isDecimalPoint)
+            toggleDecimalPoint(hasDecimalPoint)
         }
     }
     

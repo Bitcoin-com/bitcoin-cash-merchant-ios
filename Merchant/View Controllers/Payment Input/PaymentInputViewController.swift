@@ -27,8 +27,8 @@ final class PaymentInputViewController: UIViewController {
     var numberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = UserManager.shared.selectedCurrency.decimals
+        formatter.maximumFractionDigits = UserManager.shared.selectedCurrency.decimals
         formatter.locale = UserManager.shared.selectedCurrency.locale
         
         return formatter
@@ -90,6 +90,10 @@ final class PaymentInputViewController: UIViewController {
         NotificationCenter.default.post(name: .showSideMenu, object: nil)
     }
     
+    @objc private func updateCurrency() {
+        keypadView.hasDecimalPoint = UserManager.shared.selectedCurrency.decimals > 0
+    }
+    
     // MARK: - Private API
     private func setupView() {
         view.backgroundColor = .white
@@ -100,12 +104,14 @@ final class PaymentInputViewController: UIViewController {
         setupLabelsStackView()
         setupOverlayButton()
         setupMenuButton()
+        registerForNotifications()
     }
     
     private func setupKeypadView() {
+        updateCurrency()
+        keypadView.delegate = self
         keypadView.backgroundColor = .white
         keypadView.translatesAutoresizingMaskIntoConstraints = false
-        keypadView.delegate = self
         view.addSubview(keypadView)
         NSLayoutConstraint.activate([
             keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
@@ -143,7 +149,7 @@ final class PaymentInputViewController: UIViewController {
     
     private func setupLabelsStackView() {
         currencyLabel.textColor = .black
-        currencyLabel.font = .boldSystemFont(ofSize: Constants.AMOUNT_FONT_SIZE)
+        currencyLabel.font = .systemFont(ofSize: Constants.AMOUNT_FONT_SIZE)
         
         amountLabel.textColor = .black
         amountLabel.font = .boldSystemFont(ofSize: Constants.AMOUNT_FONT_SIZE)
@@ -203,6 +209,10 @@ final class PaymentInputViewController: UIViewController {
         paymentRequestViewController.modalPresentationStyle = .fullScreen
         present(paymentRequestViewController, animated: true)
     }
+    
+    private func registerForNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCurrency), name: .currencyUpdated, object: nil)
+    }
 
 }
 
@@ -215,6 +225,12 @@ extension PaymentInputViewController: KeypadViewDelegate {
         if amountString == "0" {
             amountString = "\(number)"
         } else {
+            if let index = amountString.firstIndex(of: ".")?.utf16Offset(in: amountString) {
+                let decimalPart = amountString.substring(fromIndex: index)
+                
+                if decimalPart.length > UserManager.shared.selectedCurrency.decimals { return }
+            }
+            
             amountString = "\(amountString)\(number)"
         }
     }

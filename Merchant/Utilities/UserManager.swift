@@ -58,6 +58,8 @@ final class UserManager {
             do {
                let data = try JSONEncoder().encode(newValue)
                 defaults.set(data, forKey: Constants.SELECTED_CURRENCY_KEY)
+                
+                NotificationCenter.default.post(name: .currencyUpdated, object: nil)
             } catch {
                 Logger.log(message: "Storing currency error: \(error.localizedDescription)", type: .error)
             }

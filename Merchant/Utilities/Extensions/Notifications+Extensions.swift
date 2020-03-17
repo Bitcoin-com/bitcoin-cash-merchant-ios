@@ -17,4 +17,5 @@ extension NSNotification.Name {
     static let createPin = NSNotification.Name("CreatePinNotification")
     static let refreshSettings = NSNotification.Name("RefreshSettingsNotification")
     static let settingsUpdated = NSNotification.Name("SettingsUpdatedNotification")
+    static let currencyUpdated = NSNotification.Name("CurrencyUpdatedNotification")
 }

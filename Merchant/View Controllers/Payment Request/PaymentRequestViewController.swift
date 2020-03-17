@@ -27,8 +27,8 @@ final class PaymentRequestViewController: UIViewController {
     var numberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.minimumFractionDigits = 2
-        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = UserManager.shared.selectedCurrency.decimals
+        formatter.maximumFractionDigits = UserManager.shared.selectedCurrency.decimals
         formatter.usesGroupingSeparator = true
         formatter.locale = UserManager.shared.selectedCurrency.locale
         

@@ -16,6 +16,7 @@ final class CountryCurrency: Codable {
     let currency: String
     let language: String
     let name: String
+    let decimals: Int
     var locale: Locale {
         if language.contains("-") {
             return Locale(identifier: "\(language.replacingOccurrences(of: "-", with: "_"))")
@@ -29,6 +30,7 @@ final class CountryCurrency: Codable {
         case currency
         case language = "lang"
         case name
+        case decimals
     }
     
 }

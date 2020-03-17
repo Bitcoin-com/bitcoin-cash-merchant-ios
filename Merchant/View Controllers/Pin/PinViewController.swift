@@ -78,7 +78,7 @@ final class PinViewController: UIViewController {
         keypadView.backgroundColor = .white
         keypadView.translatesAutoresizingMaskIntoConstraints = false
         keypadView.delegate = self
-        keypadView.isDecimalPoint = false
+        keypadView.hasDecimalPoint = false
         view.addSubview(keypadView)
         NSLayoutConstraint.activate([
             keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
