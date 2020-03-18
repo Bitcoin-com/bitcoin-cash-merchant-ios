@@ -44,7 +44,7 @@ final class PaymentRequestViewController: UIViewController {
     var invoice: InvoiceStatus? {
         didSet {
             setupTimer()
-            fetchQrCode()
+            setupQrCode()
             setupSocket()
         }
     }
@@ -132,8 +132,6 @@ final class PaymentRequestViewController: UIViewController {
         
         if invoice == nil {
             createInvoice()
-        } else if qrImageView.image == nil {
-            fetchQrCode()
         }
     }
     
@@ -311,6 +309,8 @@ final class PaymentRequestViewController: UIViewController {
     private func createInvoice() {
         guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget else { return }
         
+        activityIndicatorView.startAnimating()
+        
         var address: String?
         if paymentTarget.type == .xPub {
             address = WalletManager.shared.generateAddressFromStoredIndex()
@@ -341,25 +341,17 @@ final class PaymentRequestViewController: UIViewController {
         }
     }
     
-    private func fetchQrCode() {
-        guard let invoice = invoice, let url = URL(string: "\(Endpoints.qr)/\(invoice.paymentId)") else { return }
+    private func setupQrCode() {
+        guard let invoice = invoice, let url = URL(string: "\(Endpoints.wallet)\(BASE_URL)/i/\(invoice.paymentId)") else { return }
         
-        activityIndicatorView.startAnimating()
+        activityIndicatorView.stopAnimating()
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                let data = try Data(contentsOf: url)
-                
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-
-                    self.qrImageView.image = UIImage(data: data)
-                    self.qrImage = UIImage(data: data)
-                    self.qrImageView.isUserInteractionEnabled = true
-                }
-            } catch {
-                AnalyticsService.shared.logEvent(.error_generate_qr_code, withError: error)
-            }
+        Logger.log(message: "Generating QR for URL: \(url.absoluteString)", type: .info)
+        
+        if let image = url.qrImage {
+            qrImageView.image = UIImage(ciImage: image)
+            qrImage = UIImage(ciImage: image)
+            qrImageView.isUserInteractionEnabled = true
         }
     }
     
@@ -468,4 +460,3 @@ private struct Constants {
     static let AMOUNT_LABEL_BOTTOM_MARGIN: CGFloat = 20.0
     static let AMOUNT_LABEL_HORIZONTAL_MARGIN: CGFloat = 20.0
 }
-
