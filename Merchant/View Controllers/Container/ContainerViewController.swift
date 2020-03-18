@@ -34,10 +34,6 @@ final class ContainerViewController: UIViewController {
         if !UserManager.shared.hasDestinationAddress {
             showSettings()
         }
-        
-        if !UserManager.shared.isTermsAccepted {
-            showAgreement()
-        }
     }
     
     // MARK: - Actions

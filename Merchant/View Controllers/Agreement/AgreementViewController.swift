@@ -83,6 +83,7 @@ final class AgreementViewController: UIViewController {
         agreeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         agreeButton.setTitleColor(.bitcoinGreen, for: .normal)
         agreeButton.translatesAutoresizingMaskIntoConstraints = false
+        agreeButton.contentHorizontalAlignment = .trailing
         agreeButton.addTarget(self, action: #selector(agreeButtonTapped), for: .touchUpInside)
         containerView.addSubview(agreeButton)
         NSLayoutConstraint.activate([
