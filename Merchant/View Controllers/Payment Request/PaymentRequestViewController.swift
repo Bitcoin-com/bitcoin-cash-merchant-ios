@@ -234,6 +234,10 @@ final class PaymentRequestViewController: UIViewController {
             activityIndicatorView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor),
             activityIndicatorView.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor)
         ])
+        
+        if invoice == nil {
+            activityIndicatorView.startAnimating()
+        }
     }
     
     private func setupTimeRemainingLabel() {
@@ -308,8 +312,6 @@ final class PaymentRequestViewController: UIViewController {
     
     private func createInvoice() {
         guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget else { return }
-        
-        activityIndicatorView.startAnimating()
         
         let invoiceRequest = InvoiceRequest(fiatAmount: amount,
                                             fiat: UserManager.shared.selectedCurrency.currency,
