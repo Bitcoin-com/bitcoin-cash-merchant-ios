@@ -19,6 +19,7 @@ enum PaymentTargetType: Int, Codable {
 final class PaymentTarget: Codable {
     
     // MARK: - Properties
+    var target: String
     var legacyAddress: String
     var type: PaymentTargetType
     var bchAddress: String {
@@ -36,6 +37,7 @@ final class PaymentTarget: Codable {
 
     // MARK: - Initializer
     init(target: String, type: PaymentTargetType) {
+        self.target = target.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
         self.legacyAddress = target.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
         self.type = type
         
