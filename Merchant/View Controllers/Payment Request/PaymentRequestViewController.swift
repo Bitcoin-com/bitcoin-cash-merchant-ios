@@ -307,7 +307,7 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func createInvoice() {
-        guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget, let target = paymentTarget.target else { return }
+        guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget else { return }
         
         activityIndicatorView.startAnimating()
         
@@ -325,7 +325,7 @@ final class PaymentRequestViewController: UIViewController {
         
         let invoiceRequest = InvoiceRequest(fiatAmount: amount,
                                             fiat: UserManager.shared.selectedCurrency.currency,
-                                            apiKey: target,
+                                            apiKey: "sexqvmkxafvzhzfageoojrkchdekfwmuqpfqywsf",
                                             address: bitcoinAddress)
         
         BIP70Service.shared.createInvoice(invoiceRequest) { [weak self] result in

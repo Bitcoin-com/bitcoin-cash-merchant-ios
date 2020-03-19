@@ -16,37 +16,37 @@ class AddressTests: XCTestCase {
     
     // MARK: - Address Formats
     func testIsValidBitcoinAddressWithBitcoinCashPrefix() {
-        let target = PaymentTarget(address: "bitcoincash:qzg0jqca4c38uzmkqlqwqgnpemdup9u8hsjyvyc0tz", type: .address)
+        let target = PaymentTarget(target: "bitcoincash:qzg0jqca4c38uzmkqlqwqgnpemdup9u8hsjyvyc0tz", type: .address)
         
         XCTAssertTrue(target.type == .address, "Bitcoin address should be valid")
     }
     
     func testIsValidBitcoinAddressWithoutBitcoinCashPrefix() {
-        let target = PaymentTarget(address: "qzg0jqca4c38uzmkqlqwqgnpemdup9u8hsjyvyc0tz", type: .address)
+        let target = PaymentTarget(target: "qzg0jqca4c38uzmkqlqwqgnpemdup9u8hsjyvyc0tz", type: .address)
         
         XCTAssertTrue(target.type == .address, "Bitcoin address should be valid")
     }
     
     func testIsInvalidBitcoinAddress() {
-        let target = PaymentTarget(address: "bchtest:qpjdpjrm5zvp2al5u4uzmp36t9m0ll7gd525rss978", type: .invalid)
+        let target = PaymentTarget(target: "bchtest:qpjdpjrm5zvp2al5u4uzmp36t9m0ll7gd525rss978", type: .invalid)
         
         XCTAssertTrue(target.type == .invalid, "Bitcoin address should be invalid")
     }
     
     func testIsValidPubKeyLegacyFormat() {
-        let target = PaymentTarget(address: "1EDYcHyFgvFm9ZGqdLwjKxZtZUph5i7EQq", type: .address)
+        let target = PaymentTarget(target: "1EDYcHyFgvFm9ZGqdLwjKxZtZUph5i7EQq", type: .address)
         
         XCTAssertTrue(target.type == .address, "Pub Key legacy format should be valid")
     }
     
     func testIsValidPubKeyLegacyFormatWithWhitespaceCharactersIncluded() {
-        let target = PaymentTarget(address: " 1EDYcHyFgvFm9ZGqdLwjKxZtZUph5i7EQq ", type: .address)
+        let target = PaymentTarget(target: " 1EDYcHyFgvFm9ZGqdLwjKxZtZUph5i7EQq ", type: .address)
         
         XCTAssertTrue(target.type == .address, "Pub Key legacy format should be valid")
     }
     
     func testIsValidApiKey() {
-        let target = PaymentTarget(address: "dtgmfljtkcbwwvkbegpakhwseymimpalanmqjtae", type: .apiKey)
+        let target = PaymentTarget(target: "dtgmfljtkcbwwvkbegpakhwseymimpalanmqjtae", type: .apiKey)
         
         XCTAssertTrue(target.type == .apiKey, "Api Key should be valid")
     }

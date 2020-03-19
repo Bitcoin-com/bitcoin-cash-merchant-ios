@@ -402,20 +402,20 @@ final class SettingsViewController: UIViewController {
     }
     
     private func validateAndStoreAddress(_ address: String) {
-        let paymentTarget = PaymentTarget(address: address, type: .address)
+        let paymentTarget = PaymentTarget(target: address, type: .address)
         
         if paymentTarget.type == .invalid {
             showFailureMessage()
         } else {
             AnalyticsService.shared.logEvent(.settings_paymenttarget_changed)
             
-            UserManager.shared.destination = paymentTarget.address
+            UserManager.shared.destination = paymentTarget.legacyAddress
             UserManager.shared.activePaymentTarget = paymentTarget
             
             if paymentTarget.type == .xPub {
                 refreshItemsView()
                 updateScrollViewContentSize()
-                syncXPub(paymentTarget.address)
+                syncXPub(paymentTarget.legacyAddress)
             } else {
                 refreshAndShowSuccessMessage()
             }

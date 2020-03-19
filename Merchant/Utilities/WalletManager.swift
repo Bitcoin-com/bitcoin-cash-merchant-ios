@@ -35,7 +35,7 @@ final class WalletManager {
     // MARK: - Public API
     func generateAddressFromStoredIndex() -> String? {
         guard let paymentTarget = UserManager.shared.activePaymentTarget else { return nil }
-        guard let data = paymentTarget.address.data(using: .utf8) else { return nil }
+        guard let data = paymentTarget.legacyAddress.data(using: .utf8) else { return nil }
         
         wallet = HDWallet(seed: data, externalIndex: 0, internalIndex: 0, network: .mainnetBCH)
         

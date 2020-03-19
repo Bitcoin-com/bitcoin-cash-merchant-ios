@@ -19,15 +19,24 @@ enum PaymentTargetType: Int, Codable {
 final class PaymentTarget: Codable {
     
     // MARK: - Properties
-    var address: String
+    var legacyAddress: String
     var type: PaymentTargetType
-    var target: String? {
-        return UserManager.shared.destination
+    var bchAddress: String {
+        if type == .address {
+            do {
+                let cashAddress = try BitcoinAddress(cashaddr: legacyAddress)
+                return cashAddress.cashaddr
+            } catch {
+                AnalyticsService.shared.logEvent(.error_convert_address_to_bch, withError: error)
+            }
+        }
+        
+        return legacyAddress
     }
 
     // MARK: - Initializer
-    init(address: String, type: PaymentTargetType) {
-        self.address = address.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+    init(target: String, type: PaymentTargetType) {
+        self.legacyAddress = target.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
         self.type = type
         
         setup()
@@ -54,23 +63,21 @@ final class PaymentTarget: Codable {
             AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
             return
         } else {
-            address = "bitcoincash:\(address)"
+            legacyAddress = "bitcoincash:\(legacyAddress)"
             if isLegacyAddress() {
                 type = .address
                 AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
                 return
             }
         }
-        
-        AnalyticsService.shared.logEvent(.error_convert_address_to_bch)
     }
     
     private func isApiKey() -> Bool {
-        return NSPredicate(format:"SELF MATCHES %@", "[a-z]{40}").evaluate(with: address)
+        return NSPredicate(format:"SELF MATCHES %@", "[a-z]{40}").evaluate(with: legacyAddress)
     }
     
     private func isXPub() -> Bool {
-        guard let data = Base58.decode(address) else { return false }
+        guard let data = Base58.decode(legacyAddress) else { return false }
                 
         let xpubBytes = [UInt8](data)
         
@@ -104,8 +111,8 @@ final class PaymentTarget: Codable {
     
     private func isLegacy() -> Bool {
         do {
-            let legacy = try BitcoinAddress(legacy: address)
-            address = legacy.cashaddr
+            let legacy = try BitcoinAddress(legacy: legacyAddress)
+            legacyAddress = legacy.cashaddr
             
             return true
         } catch {
@@ -116,8 +123,8 @@ final class PaymentTarget: Codable {
     
     private func isCashAddress() -> Bool {
         do {
-            let cashAddress = try BitcoinAddress(cashaddr: address)
-            address = cashAddress.cashaddr
+            let cashAddress = try BitcoinAddress(cashaddr: legacyAddress)
+            legacyAddress = cashAddress.cashaddr
             
             return true
         } catch {

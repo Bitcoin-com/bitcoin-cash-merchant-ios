@@ -98,7 +98,7 @@ final class UserManager {
             }
             
             if let destination = destination {
-                let paymentTarget = PaymentTarget(address: destination, type: .address)
+                let paymentTarget = PaymentTarget(target: destination, type: .address)
                 
                 if paymentTarget.type != .invalid {
                     if let data = try? JSONEncoder().encode(paymentTarget) {
