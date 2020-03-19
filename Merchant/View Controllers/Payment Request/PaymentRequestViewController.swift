@@ -311,22 +311,10 @@ final class PaymentRequestViewController: UIViewController {
         
         activityIndicatorView.startAnimating()
         
-        var address: String?
-        if paymentTarget.type == .xPub {
-            address = WalletManager.shared.generateAddressFromStoredIndex()
-        } else {
-            address = UserManager.shared.destination
-        }
-        
-        guard let bitcoinAddress = address else {
-            Logger.log(message: "Not a valid Bitcoin Address", type: .error)
-            return
-        }
-        
         let invoiceRequest = InvoiceRequest(fiatAmount: amount,
                                             fiat: UserManager.shared.selectedCurrency.currency,
-                                            apiKey: "sexqvmkxafvzhzfageoojrkchdekfwmuqpfqywsf",
-                                            address: bitcoinAddress)
+                                            apiKey: paymentTarget.invoiceRequestApiKey,
+                                            address: paymentTarget.invoiceRequestAddress)
         
         BIP70Service.shared.createInvoice(invoiceRequest) { [weak self] result in
             guard let self = self else { return }

@@ -34,6 +34,22 @@ final class PaymentTarget: Codable {
         
         return legacyAddress
     }
+    var invoiceRequestAddress: String? {
+        if type == .xPub {
+            return WalletManager.shared.generateAddressFromStoredIndex()
+        } else if type == .address {
+            return target
+        }
+        
+        return nil
+    }
+    var invoiceRequestApiKey: String? {
+        if type == .apiKey {
+            return target
+        }
+        
+        return nil
+    }
 
     // MARK: - Initializer
     init(target: String, type: PaymentTargetType) {

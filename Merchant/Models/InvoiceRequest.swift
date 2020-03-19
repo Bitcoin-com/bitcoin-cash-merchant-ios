@@ -15,8 +15,8 @@ struct InvoiceRequest: Codable {
     let webhook = "http://127.0.0.1/unused/webhook"
     let fiatAmount: Double
     let fiat: String
-    let apiKey: String
-    let address: String
+    let apiKey: String?
+    let address: String?
     
     enum CodingKeys: String, CodingKey {
         case memo
