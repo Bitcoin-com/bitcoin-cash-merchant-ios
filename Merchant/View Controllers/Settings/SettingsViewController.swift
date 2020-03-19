@@ -356,6 +356,13 @@ final class SettingsViewController: UIViewController {
         let okAction = UIAlertAction(title: Localized.OK, style: .default) { _ in
             if let textField = alertController.textFields?.first {
                 if let text = textField.text {
+                    // If the merchant name is the same as the one which is already stored - do not store it again.
+                    if let storedMerchantName = UserManager.shared.companyName {
+                        if text == storedMerchantName {
+                            return
+                        }
+                    }
+                    
                     AnalyticsService.shared.logEvent(.settings_merchantname_changed)
                     
                     UserManager.shared.companyName = text
@@ -542,8 +549,17 @@ extension SettingsViewController: PinViewControllerDelegate {
     // MARK: - PinViewControllerDelegate
     func pinViewControllerDidEnterPinSuccessfully(_ viewController: PinViewController) {}
     
-    func pinViewControllerDidCreatePinSuccessfully(_ viewController: PinViewController) {
+    func pinViewController(_ viewController: PinViewController, didCreatePinSuccessfully pin: String) {
         viewController.dismiss(animated: true) { [weak self] in
+            // If the pin is the same as the one which is already stored - do not store it again.
+            if let storedPin = UserManager.shared.pin {
+                if pin == storedPin {
+                    return
+                }
+            }
+            
+            UserManager.shared.pin = pin
+            
             AnalyticsService.shared.logEvent(.settings_pin_changed)
             
             self?.refreshAndShowSuccessMessage()
@@ -576,6 +592,8 @@ extension SettingsViewController: CurrenciesViewControllerDelegate {
     // MARK: - CurrenciesViewControllerDelegate
     func currenciesViewController(_ viewController: CurrenciesViewController, didPickCurrency currency: CountryCurrency) {
         viewController.dismiss(animated: true) { [weak self] in
+            if UserManager.shared.selectedCurrency == currency { return }
+            
             AnalyticsService.shared.logEvent(.settings_currency_changed)
             
             UserManager.shared.selectedCurrency = currency

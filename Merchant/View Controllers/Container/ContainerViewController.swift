@@ -185,7 +185,8 @@ extension ContainerViewController: PinViewControllerDelegate {
         closePinViewController(viewController)
     }
     
-    func pinViewControllerDidCreatePinSuccessfully(_ viewController: PinViewController) {
+    func pinViewController(_ viewController: PinViewController, didCreatePinSuccessfully pin: String) {
+        UserManager.shared.pin = pin
         closePinViewController(viewController)
     }
     

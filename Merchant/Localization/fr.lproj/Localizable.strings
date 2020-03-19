@@ -134,10 +134,6 @@
 
 "inspect_tx_copy_transaction" = "Copy transaction";
 
-"inspect_tx_copy_address" = "Copy address";
-
-"inspect_tx_link_view_all_transactions_with_this_address" = "View all TX with this address";
-
 "ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
 
 "ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";

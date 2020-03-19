@@ -379,10 +379,17 @@ final class PaymentRequestViewController: UIViewController {
         }
     }
     
-    private func showPaymentCompletedView() {
+    private func showPaymentCompletedView(for invoiceStatus: InvoiceStatus) {
+        // If the invoiceStatus paymentId is the same as the one which is already stored - do not send analytics event again.
+        if let paymentId = UserManager.shared.lastProcessedPaymentId {
+            if paymentId == invoiceStatus.paymentId {
+                return
+            }
+        }
+        
         AnalyticsService.shared.logEvent(.invoice_paid)
         
-        // Increase the next index for xPubKey
+        // Increase the next index for xPubKey.
         if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
             UserManager.shared.xPubKeyIndex += 1
         }
@@ -399,13 +406,14 @@ final class PaymentRequestViewController: UIViewController {
             let webSocket = WebSocket(request: URLRequest(url: url))
             webSocket.event.message = { message in
                 if let messageString = message as? String, let data = messageString.data(using: .utf8) {
-                    Logger.log(message: "Received message", type: .success)
+                    Logger.log(message: "Received message: \(messageString)", type: .success)
                     
                     if let invoiceStatus = try? JSONDecoder().decode(InvoiceStatus.self, from: data) {
                         if invoiceStatus.isPaid {
                             self.saveTransaction(for: invoiceStatus)
-                            self.showPaymentCompletedView()
+                            self.showPaymentCompletedView(for: invoiceStatus)
                             UserManager.shared.activeInvoice = nil
+                            UserManager.shared.lastProcessedPaymentId = invoiceStatus.paymentId
                         }
                     }
                 }

@@ -122,10 +122,20 @@
 
 "menu_privacy_policy" = "Datenschutzerklärung";
 
-"contract_agreement_summary" = "Indem du fortfährst, erklärst du dich einverstanden mit den %@ , den %@ und der %@";
+"contract_agreement_summary" = "Indem du fortfährst, erklärst du dich einverstanden mit den %@, den %@ und der %@";
 
 "contract_button_ok" = "Ich stimme zu";
 
 "error" = "Fehler";
 
 "notify_changes_have_been_saved" = "Die Änderung wurde gespeichert";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";

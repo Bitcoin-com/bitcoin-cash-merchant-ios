@@ -35,6 +35,15 @@ final class CountryCurrency: Codable {
     
 }
 
+extension CountryCurrency: Equatable {
+    
+    // MARK: - Equatable
+    static func ==(lhs: CountryCurrency, rhs: CountryCurrency) -> Bool {
+        return lhs.name == rhs.name && lhs.iso == rhs.iso && lhs.currency == rhs.currency
+    }
+    
+}
+
 extension CountryCurrency: Item {
     
     // MARK: - Item

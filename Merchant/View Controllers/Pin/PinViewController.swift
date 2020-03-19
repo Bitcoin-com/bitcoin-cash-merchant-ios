@@ -16,7 +16,7 @@ enum PinViewControllerState {
 
 protocol PinViewControllerDelegate: class {
     func pinViewControllerDidEnterPinSuccessfully(_ viewController: PinViewController)
-    func pinViewControllerDidCreatePinSuccessfully(_ viewController: PinViewController)
+    func pinViewController(_ viewController: PinViewController, didCreatePinSuccessfully pin: String)
     func pinViewControllerDidClose(_ viewController: PinViewController)
 }
 
@@ -200,9 +200,8 @@ extension PinViewController: VerificationViewDelegate {
             transitionToState(.confirm)
         } else { // Confirm.
             if self.code == code {
-                UserManager.shared.pin = code
                 NotificationCenter.default.post(name: .refreshSettings, object: nil)
-                delegate?.pinViewControllerDidCreatePinSuccessfully(self)
+                delegate?.pinViewController(self, didCreatePinSuccessfully: code)
             } else {
                 reset()
                 transitionToState(.create)

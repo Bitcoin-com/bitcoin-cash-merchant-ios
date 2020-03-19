@@ -136,10 +136,6 @@
 
 "inspect_tx_link_view_transaction" = "View transaction";
 
-"inspect_tx_link_view_all_transactions_with_this_address" = "View all TX with this address";
-
 "inspect_tx_copy_transaction" = "Copy transaction";
-
-"inspect_tx_copy_address" = "Copy address";
 
 "share_invoice_msg" = "Please pay your invoice here: %@";

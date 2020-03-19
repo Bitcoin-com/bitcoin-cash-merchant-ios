@@ -140,6 +140,18 @@ final class UserManager {
             defaults.set(newValue, forKey: Constants.X_PUB_KEY_INDEX)
         }
     }
+    var lastProcessedPaymentId: String? {
+        get {
+            defaults.value(forKey: Constants.LAST_PROCESSED_PAYMENT_ID) as? String
+        }
+        set {
+            if let newValue = newValue {
+                defaults.setValue(newValue.trimmingCharacters(in: .whitespaces), forKey: Constants.LAST_PROCESSED_PAYMENT_ID)
+            } else {
+                defaults.removeObject(forKey: Constants.LAST_PROCESSED_PAYMENT_ID)
+            }
+        }
+    }
     
     // MARK: - Initializer
     private init() {}
@@ -170,4 +182,5 @@ private struct Constants {
     static let ACTIVE_PAYMENT_TARGET_KEY = "activePaymentTarget"
     static let TERMS_ACCEPTED_KEY = "termsAccepted"
     static let X_PUB_KEY_INDEX = "xPubKeyIndex"
+    static let LAST_PROCESSED_PAYMENT_ID = "lastProcessedPaymentId"
 }
