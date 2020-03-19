@@ -34,9 +34,19 @@ final class TransactionTableViewCell: UITableViewCell {
         fiatLabel.text = transaction.amountInFiat
         bitcoinLabel.text = transaction.amountInSatoshis.toBCHFormat()
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE dd MMM '\n@ 'HH:mm"
-        dateLabel.text = dateFormatter.string(from: transaction.date)
+        if Calendar.current.isDateInToday(transaction.date) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "'\(Localized.today)' '\n@ 'HH:mm"
+            dateLabel.text = dateFormatter.string(from: transaction.date)
+        } else if Calendar.current.isDateInYesterday(transaction.date) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "'\(Localized.yesterday)' '\n@ 'HH:mm"
+            dateLabel.text = dateFormatter.string(from: transaction.date)
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEE dd MMM '\n@ 'HH:mm"
+            dateLabel.text = dateFormatter.string(from: transaction.date)
+        }
     }
     
     // MARK: - Private API
@@ -110,6 +120,11 @@ final class TransactionTableViewCell: UITableViewCell {
         ])
     }
 
+}
+
+private struct Localized {
+    static var today: String { NSLocalizedString("Today", comment: "") }
+    static var yesterday: String { NSLocalizedString("Yesterday", comment: "") }
 }
 
 private struct Constants {

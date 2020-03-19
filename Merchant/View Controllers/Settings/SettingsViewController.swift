@@ -154,7 +154,7 @@ final class SettingsViewController: UIViewController {
         // Banner.
         let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "wallet_banner"))
         bannerImageView.translatesAutoresizingMaskIntoConstraints = false
-        bannerImageView.contentMode = .scaleAspectFit
+        bannerImageView.contentMode = .scaleAspectFill
         bannerImageView.clipsToBounds = true
         walletAdView.addSubview(bannerImageView)
         NSLayoutConstraint.activate([
@@ -213,7 +213,7 @@ final class SettingsViewController: UIViewController {
         // Banner.
         let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "localbch_banner"))
         bannerImageView.translatesAutoresizingMaskIntoConstraints = false
-        bannerImageView.contentMode = .scaleAspectFit
+        bannerImageView.contentMode = .scaleAspectFill
         bannerImageView.clipsToBounds = true
         localBitcoinCashAdView.addSubview(bannerImageView)
         NSLayoutConstraint.activate([
@@ -272,7 +272,7 @@ final class SettingsViewController: UIViewController {
         // Banner.
         let bannerImageView = UIImageView(image: UIImage(imageLiteralResourceName: "bce_banner"))
         bannerImageView.translatesAutoresizingMaskIntoConstraints = false
-        bannerImageView.contentMode = .scaleAspectFit
+        bannerImageView.contentMode = .scaleAspectFill
         bannerImageView.clipsToBounds = true
         exchangeAdView.addSubview(bannerImageView)
         NSLayoutConstraint.activate([

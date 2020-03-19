@@ -39,6 +39,12 @@ class AddressTests: XCTestCase {
         XCTAssertTrue(target.type == .address, "Pub Key legacy format should be valid")
     }
     
+    func testIsValidPubKeyLegacyFormatWithWhitespaceCharactersIncluded() {
+        let target = PaymentTarget(address: " 1EDYcHyFgvFm9ZGqdLwjKxZtZUph5i7EQq ", type: .address)
+        
+        XCTAssertTrue(target.type == .address, "Pub Key legacy format should be valid")
+    }
+    
     func testIsValidApiKey() {
         let target = PaymentTarget(address: "dtgmfljtkcbwwvkbegpakhwseymimpalanmqjtae", type: .apiKey)
         
@@ -69,7 +75,8 @@ class AddressTests: XCTestCase {
             "xpub68NZiKmJWnxxS6aaHmn81bvJeTESw724CRDs6HbuccFQN9Ku14VQrADWgqbhhTHBaohPX4CjNLf9fq9MYo6oDaPPLPxSb7gwQN3ih19Zm4Y",
             "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz",
             "xpub6AHA9hZDN11k2ijHMeS5QqHx2KP9aMBRhTDqANMnwVtdyw2TDYRmF8PjpvwUFcL1Et8Hj59S3gTSMcUQ5gAqTz3Wd8EsMTmF3DChhqPQBnU",
-            "xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8"
+            "xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8",
+            " xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8 "
         ]
         
         xPubKeys.forEach {

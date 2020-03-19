@@ -307,7 +307,7 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func createInvoice() {
-        guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget else { return }
+        guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget, let target = paymentTarget.target else { return }
         
         activityIndicatorView.startAnimating()
         
@@ -323,12 +323,14 @@ final class PaymentRequestViewController: UIViewController {
             return
         }
         
-        let invoice = InvoiceRequest(fiatAmount: amount,
-                                     fiat: UserManager.shared.selectedCurrency.currency,
-                                     apiKey: "sexqvmkxafvzhzfageoojrkchdekfwmuqpfqywsf",
-                                     address: bitcoinAddress)
+        let invoiceRequest = InvoiceRequest(fiatAmount: amount,
+                                            fiat: UserManager.shared.selectedCurrency.currency,
+                                            apiKey: target,
+                                            address: bitcoinAddress)
         
-        BIP70Service.shared.createInvoice(invoice) { result in
+        BIP70Service.shared.createInvoice(invoiceRequest) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let data):
                 AnalyticsService.shared.logEvent(.invoice_created)
@@ -337,6 +339,8 @@ final class PaymentRequestViewController: UIViewController {
                 UserManager.shared.activeInvoice = self.invoice
             case .failure(let error):
                 Logger.log(message: "Error creating invoice: \(error.localizedDescription)", type: .error)
+                AnalyticsService.shared.logEvent(.error_download_invoice, withError: error)
+                self.showErrorAlert(error.localizedDescription)
             }
         }
     }
@@ -352,6 +356,9 @@ final class PaymentRequestViewController: UIViewController {
             qrImageView.image = UIImage(ciImage: image)
             qrImage = UIImage(ciImage: image)
             qrImageView.isUserInteractionEnabled = true
+        } else {
+            AnalyticsService.shared.logEvent(.error_generate_qr_code, withError: QRError.notAbleToGenerateQR)
+            showErrorAlert(QRError.notAbleToGenerateQR.localizedDescription)
         }
     }
     
@@ -365,7 +372,7 @@ final class PaymentRequestViewController: UIViewController {
         let realm = try! Realm()
 
         let transaction = StoreTransaction()
-        transaction.amountInFiat = "\(invoice.fiatTotal)"
+        transaction.amountInFiat = amountLabel.text!
         transaction.amountInSatoshis = 0
         
         if let amount = invoice.outputs.first?.amount {
@@ -422,8 +429,10 @@ final class PaymentRequestViewController: UIViewController {
                 Logger.log(message: "Socket did close", type: .debug)
                 self?.networkConnectionLost()
             }
-            webSocket.event.error = { error in
+            webSocket.event.error = { [weak self] error in
+                guard let self = self else { return }
                 AnalyticsService.shared.logEvent(.error_connect_to_socket, withError: error)
+                self.showErrorAlert(error.localizedDescription)
             }
             
             self.webSocket = webSocket

@@ -127,17 +127,19 @@ final class TransactionsHistoryViewController: UIViewController {
     private func showOptionsForTransaction() {
         guard let transaction = selectedTransaction else { return }
         
+        let emoji = "\u{1F517}"
+        
         let alertController = UIAlertController(title: nil, message: transaction.txid, preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: Localized.cancel, style: .cancel, handler: nil)
         
-        let viewTransactionAction = UIAlertAction(title: Localized.viewTranscation, style: .default, handler: { [weak self] _ in
+        let viewTransactionAction = UIAlertAction(title: "\(emoji) \(Localized.viewTranscation)", style: .default, handler: { [weak self] _ in
             AnalyticsService.shared.logEvent(.tx_id_explorer_launched)
             
             self?.openLinkInSafari(link: "\(Endpoints.explorerBitcoin)/tx/\(transaction.txid)")
         })
         
-        let viewAllTransactionsAction = UIAlertAction(title: Localized.viewAllTranscations, style: .default, handler: { [weak self] _ in
+        let viewAllTransactionsAction = UIAlertAction(title: "\(emoji) \(Localized.viewAllTranscations)", style: .default, handler: { [weak self] _ in
             AnalyticsService.shared.logEvent(.tx_address_explorer_launched)
             
             self?.openLinkInSafari(link: "\(Endpoints.explorerBitcoin)/address/\(transaction.toAddress)")

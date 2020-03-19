@@ -27,6 +27,10 @@ extension UIViewController {
         present(alertController, animated: true)
     }
     
+    func showErrorAlert(_ error: String) {
+        showAlert(withTitle: Localized.error, message: error, cancelActionTitle: Localized.ok, confirmationActionTitle: nil, actionHandler: nil)
+    }
+    
     func openLinkInSafari(link: String) {
         guard let url = URL(string: link) else { return }
 
@@ -47,4 +51,9 @@ extension UIViewController {
         }
     }
     
+}
+
+private struct Localized {
+    static var error: String { NSLocalizedString("error", comment: "") }
+    static var ok: String { NSLocalizedString("prompt_ok", comment: "") }
 }

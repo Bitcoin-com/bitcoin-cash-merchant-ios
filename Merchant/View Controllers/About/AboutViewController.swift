@@ -55,6 +55,7 @@ final class AboutViewController: UIViewController {
     
     private func setupLogoButton() {
         logoButton.setImage(UIImage(imageLiteralResourceName: "bitcoincom_logo"), for: .normal)
+        logoButton.imageView?.contentMode = .scaleAspectFit
         logoButton.addTarget(self, action: #selector(logoButtonTapped), for: .touchUpInside)
         logoButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoButton)

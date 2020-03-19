@@ -12,6 +12,7 @@
 		C40ABAC2241BA21C000CAD80 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40ABAC1241BA21C000CAD80 /* GradientView.swift */; };
 		C4157D0D2418B90300EE3952 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4157D0C2418B90300EE3952 /* AnalyticsService.swift */; };
 		C41909DB24192A4E00B65F52 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41909DA24192A4E00B65F52 /* Keys.swift */; };
+		C43A3B082423581F0093787D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43A3B072423581F0093787D /* Errors.swift */; };
 		C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441ABD0240927FC00A2253A /* WebSocket.swift */; };
 		C445557824004D8500F4B3E0 /* BIP70Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557724004D8500F4B3E0 /* BIP70Service.swift */; };
 		C445557B24004DD600F4B3E0 /* InvoiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557A24004DD600F4B3E0 /* InvoiceRequest.swift */; };
@@ -132,6 +133,7 @@
 		C42D877D2420AB4D00262D90 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C42D877F2420AB4E00262D90 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C42D87812420AB4F00262D90 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		C43A3B072423581F0093787D /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		C441ABD0240927FC00A2253A /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		C445557724004D8500F4B3E0 /* BIP70Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIP70Service.swift; sourceTree = "<group>"; };
 		C445557A24004DD600F4B3E0 /* InvoiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceRequest.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				C44A90EE24142EE900750D34 /* WalletManager.swift */,
 				C4157D0C2418B90300EE3952 /* AnalyticsService.swift */,
 				C41909DA24192A4E00B65F52 /* Keys.swift */,
+				C43A3B072423581F0093787D /* Errors.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				C44555A92402847000F4B3E0 /* AttributedStringBuilder.swift in Sources */,
 				C49F1FDC23FEF2B500416058 /* ToastManager.swift in Sources */,
 				C453938C2402B9D200CC3CA5 /* Int+Extensions.swift in Sources */,
+				C43A3B082423581F0093787D /* Errors.swift in Sources */,
 				C49F1FD123FEE42300416058 /* KeypadView.swift in Sources */,
 				C4456E0523FEBC2C0025FD06 /* PaymentRequestViewController.swift in Sources */,
 				C49C3A7C241B577900C80795 /* UIFont+Helpers.swift in Sources */,

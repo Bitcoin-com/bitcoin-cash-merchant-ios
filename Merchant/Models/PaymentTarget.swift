@@ -21,10 +21,13 @@ final class PaymentTarget: Codable {
     // MARK: - Properties
     var address: String
     var type: PaymentTargetType
+    var target: String? {
+        return UserManager.shared.destination
+    }
 
     // MARK: - Initializer
     init(address: String, type: PaymentTargetType) {
-        self.address = address
+        self.address = address.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
         self.type = type
         
         setup()
