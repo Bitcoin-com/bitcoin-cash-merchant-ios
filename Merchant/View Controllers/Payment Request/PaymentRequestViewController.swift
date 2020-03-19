@@ -48,8 +48,8 @@ final class PaymentRequestViewController: UIViewController {
             setupSocket()
         }
     }
-    var webSocket: WebSocket?
-    var qrImage: UIImage?
+    private var webSocket: WebSocket?
+    private var qrImage: UIImage?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -356,9 +356,7 @@ final class PaymentRequestViewController: UIViewController {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
     }
     
-    private func saveTransaction() {
-        guard let invoice = invoice else { return }
-
+    private func saveTransaction(for invoice: InvoiceStatus) {
         let realm = try! Realm()
 
         let transaction = StoreTransaction()
@@ -373,7 +371,7 @@ final class PaymentRequestViewController: UIViewController {
             transaction.toAddress = address
         }
         
-        transaction.txid = invoice.paymentId
+        transaction.txid = invoice.txId ?? ""
         transaction.date = Date()
 
         try! realm.write {
@@ -402,9 +400,10 @@ final class PaymentRequestViewController: UIViewController {
             webSocket.event.message = { message in
                 if let messageString = message as? String, let data = messageString.data(using: .utf8) {
                     Logger.log(message: "Received message", type: .success)
+                    
                     if let invoiceStatus = try? JSONDecoder().decode(InvoiceStatus.self, from: data) {
                         if invoiceStatus.isPaid {
-                            self.saveTransaction()
+                            self.saveTransaction(for: invoiceStatus)
                             self.showPaymentCompletedView()
                             UserManager.shared.activeInvoice = nil
                         }

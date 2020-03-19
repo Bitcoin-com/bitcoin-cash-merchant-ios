@@ -19,3 +19,29 @@ final class StoreTransaction: Object {
     @objc dynamic var date = Date()
     
 }
+
+extension StoreTransaction {
+    
+    var formattedDate: String {
+        if Calendar.current.isDateInToday(date) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "'\(Localized.today)' '\n@ 'HH:mm"
+            return dateFormatter.string(from: date)
+        } else if Calendar.current.isDateInYesterday(date) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "'\(Localized.yesterday)' '\n@ 'HH:mm"
+            return dateFormatter.string(from: date)
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE dd MMM '\n@ 'HH:mm"
+        
+        return dateFormatter.string(from: date)
+    }
+    
+}
+
+private struct Localized {
+    static var today: String { NSLocalizedString("today", comment: "") }
+    static var yesterday: String { NSLocalizedString("yesterday", comment: "") }
+}

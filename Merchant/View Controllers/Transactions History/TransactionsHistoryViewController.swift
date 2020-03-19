@@ -129,7 +129,7 @@ final class TransactionsHistoryViewController: UIViewController {
         
         let emoji = "\u{1F517}"
         
-        let alertController = UIAlertController(title: nil, message: transaction.txid, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: transaction.txid, message: nil, preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: Localized.cancel, style: .cancel, handler: nil)
         

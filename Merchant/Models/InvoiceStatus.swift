@@ -26,6 +26,10 @@ struct InvoiceStatus: Codable {
     let paymentUrl: String
     let paymentId: String
     let webhookUrl: String
+    let txId: String?
+    let merchandId: String?
+    
+    // MARK: - Computed Properties
     var isPaid: Bool {
         return status == "paid"
     }

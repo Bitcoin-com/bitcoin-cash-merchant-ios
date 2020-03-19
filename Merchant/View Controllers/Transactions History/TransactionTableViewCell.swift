@@ -33,20 +33,7 @@ final class TransactionTableViewCell: UITableViewCell {
         iconImageView.image = UIImage(imageLiteralResourceName: "doublecheck")
         fiatLabel.text = transaction.amountInFiat
         bitcoinLabel.text = transaction.amountInSatoshis.toBCHFormat()
-        
-        if Calendar.current.isDateInToday(transaction.date) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "'\(Localized.today)' '\n@ 'HH:mm"
-            dateLabel.text = dateFormatter.string(from: transaction.date)
-        } else if Calendar.current.isDateInYesterday(transaction.date) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "'\(Localized.yesterday)' '\n@ 'HH:mm"
-            dateLabel.text = dateFormatter.string(from: transaction.date)
-        } else {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEE dd MMM '\n@ 'HH:mm"
-            dateLabel.text = dateFormatter.string(from: transaction.date)
-        }
+        dateLabel.text = transaction.formattedDate
     }
     
     // MARK: - Private API
@@ -120,11 +107,6 @@ final class TransactionTableViewCell: UITableViewCell {
         ])
     }
 
-}
-
-private struct Localized {
-    static var today: String { NSLocalizedString("Today", comment: "") }
-    static var yesterday: String { NSLocalizedString("Yesterday", comment: "") }
 }
 
 private struct Constants {
