@@ -414,7 +414,7 @@ final class SettingsViewController: UIViewController {
         if paymentTarget.type == .invalid {
             showFailureMessage()
         } else {
-            AnalyticsService.shared.logEvent(.settings_paymenttarget_changed)
+            performAnalytics(for: paymentTarget)
             
             UserManager.shared.destination = paymentTarget.legacyAddress
             UserManager.shared.activePaymentTarget = paymentTarget
@@ -486,6 +486,21 @@ final class SettingsViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
             WalletManager.shared.syncXPub(with: address)
             ToastManager.shared.showMessage(Localized.syncedXPub, forStatus: .success)
+        }
+    }
+    
+    private func performAnalytics(for paymentTarget: PaymentTarget) {
+        AnalyticsService.shared.logEvent(.settings_paymenttarget_changed)
+        
+        switch paymentTarget.type {
+        case .xPub:
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_xpub_set)
+        case .apiKey:
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_apikey_set)
+        case .address:
+            AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
+        default:
+            return
         }
     }
 

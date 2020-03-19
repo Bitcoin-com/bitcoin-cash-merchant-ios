@@ -22,6 +22,8 @@ final class PaymentTarget: Codable {
     var target: String
     var legacyAddress: String
     var type: PaymentTargetType
+    
+    // MARK: - Computed Properties
     var bchAddress: String {
         if type == .address {
             do {
@@ -66,25 +68,23 @@ final class PaymentTarget: Codable {
         
         if isApiKey() {
             type = .apiKey
-            AnalyticsService.shared.logEvent(.settings_paymenttarget_apikey_set)
             return
         }
         
         if isXPub() {
             type = .xPub
-            AnalyticsService.shared.logEvent(.settings_paymenttarget_xpub_set)
             return
         }
         
         if isLegacyAddress() {
             type = .address
-            AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
+            updateLegacyAddress()
             return
         } else {
             legacyAddress = "bitcoincash:\(legacyAddress)"
             if isLegacyAddress() {
                 type = .address
-                AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
+                updateLegacyAddress()
                 return
             }
         }
@@ -129,25 +129,31 @@ final class PaymentTarget: Codable {
     
     private func isLegacy() -> Bool {
         do {
-            let legacy = try BitcoinAddress(legacy: legacyAddress)
-            legacyAddress = legacy.cashaddr
-            
+            let _ = try BitcoinAddress(legacy: legacyAddress)
             return true
         } catch {
-            Logger.log(message: "Invalid Legacy Bitcoin address: \(error.localizedDescription)", type: .error)
             return false
         }
     }
     
     private func isCashAddress() -> Bool {
         do {
-            let cashAddress = try BitcoinAddress(cashaddr: legacyAddress)
-            legacyAddress = cashAddress.cashaddr
-            
+            let _ = try BitcoinAddress(cashaddr: legacyAddress)
             return true
         } catch {
-            Logger.log(message: "Invalid Bitcoin address: \(error.localizedDescription)", type: .error)
             return false
+        }
+    }
+    
+    private func updateLegacyAddress() {
+        do {
+            let legacy = try BitcoinAddress(legacy: legacyAddress)
+            legacyAddress = legacy.cashaddr
+        } catch {
+            do {
+                let cashAddress = try BitcoinAddress(cashaddr: legacyAddress)
+                legacyAddress = cashAddress.cashaddr
+            } catch {}
         }
     }
     
