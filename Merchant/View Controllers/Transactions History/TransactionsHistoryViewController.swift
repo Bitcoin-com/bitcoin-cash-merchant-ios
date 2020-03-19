@@ -164,6 +164,11 @@ final class TransactionsHistoryViewController: UIViewController {
         alertController.addAction(copyAddressAction)
         alertController.addAction(cancelAction)
         
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = view
+            popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.size.height, width: 0, height: 0)
+        }
+        
         present(alertController, animated: true)
     }
     
