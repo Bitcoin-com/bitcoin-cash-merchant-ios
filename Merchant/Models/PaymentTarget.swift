@@ -54,7 +54,7 @@ final class PaymentTarget: Codable {
     // MARK: - Initializer
     init(target: String, type: PaymentTargetType) {
         self.target = target.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-        self.legacyAddress = target.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+        self.legacyAddress = self.target
         self.type = type
         
         setup()

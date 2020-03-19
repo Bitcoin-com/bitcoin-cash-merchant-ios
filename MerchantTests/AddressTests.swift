@@ -52,7 +52,7 @@ class AddressTests: XCTestCase {
     }
     
     func testIsValidP2SH() {
-        let target = PaymentTarget(address: "3CSUDH5yW1KHJmMDHfCCWShWgJkbVnfvnJ", type: .address)
+        let target = PaymentTarget(target: "3CSUDH5yW1KHJmMDHfCCWShWgJkbVnfvnJ", type: .address)
         
         XCTAssertTrue(target.type == .address, "P2SH should be valid")
     }
@@ -80,7 +80,7 @@ class AddressTests: XCTestCase {
         ]
         
         xPubKeys.forEach {
-            let target = PaymentTarget(address: $0, type: .xPub)
+            let target = PaymentTarget(target: $0, type: .xPub)
             
             XCTAssertTrue(target.type == .xPub, "xPubKey should be valid")
         }
