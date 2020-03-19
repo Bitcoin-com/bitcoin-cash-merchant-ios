@@ -23,18 +23,29 @@ final class StoreTransaction: Object {
 extension StoreTransaction {
     
     var formattedDate: String {
+        let dateFormatter = DateFormatter()
+        
         if Calendar.current.isDateInToday(date) {
-            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "'\(Localized.today)' '\n@ 'HH:mm"
-            return dateFormatter.string(from: date)
         } else if Calendar.current.isDateInYesterday(date) {
-            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "'\(Localized.yesterday)' '\n@ 'HH:mm"
-            return dateFormatter.string(from: date)
+        } else {
+            dateFormatter.dateFormat = "EEE dd MMM '\n@ 'HH:mm"
         }
         
+        return dateFormatter.string(from: date)
+    }
+    
+    var formattedDateWithoutNewlines: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE dd MMM '\n@ 'HH:mm"
+        
+        if Calendar.current.isDateInToday(date) {
+            dateFormatter.dateFormat = "'\(Localized.today)' HH:mm"
+        } else if Calendar.current.isDateInYesterday(date) {
+            dateFormatter.dateFormat = "'\(Localized.yesterday)' HH:mm"
+        } else {
+            dateFormatter.dateFormat = "EEE dd MMM HH:mm"
+        }
         
         return dateFormatter.string(from: date)
     }
@@ -42,6 +53,6 @@ extension StoreTransaction {
 }
 
 private struct Localized {
-    static var today: String { NSLocalizedString("today", comment: "") }
-    static var yesterday: String { NSLocalizedString("yesterday", comment: "") }
+    static var today: String { NSLocalizedString("Today", comment: "") }
+    static var yesterday: String { NSLocalizedString("Yesterday", comment: "") }
 }

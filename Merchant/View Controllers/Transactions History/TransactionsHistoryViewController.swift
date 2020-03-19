@@ -127,41 +127,25 @@ final class TransactionsHistoryViewController: UIViewController {
     private func showOptionsForTransaction() {
         guard let transaction = selectedTransaction else { return }
         
-        let emoji = "\u{1F517}"
-        
-        let alertController = UIAlertController(title: transaction.txid, message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "\(transaction.amountInFiat) - \(transaction.formattedDateWithoutNewlines)", message: nil, preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: Localized.cancel, style: .cancel, handler: nil)
         
-        let viewTransactionAction = UIAlertAction(title: "\(emoji) \(Localized.viewTranscation)", style: .default, handler: { [weak self] _ in
+        let viewTransactionAction = UIAlertAction(title: "\("\u{1F517}") \(Localized.viewTranscation)", style: .default, handler: { [weak self] _ in
             AnalyticsService.shared.logEvent(.tx_id_explorer_launched)
             
             self?.openLinkInSafari(link: "\(Endpoints.explorerBitcoin)/tx/\(transaction.txid)")
         })
         
-        let viewAllTransactionsAction = UIAlertAction(title: "\(emoji) \(Localized.viewAllTranscations)", style: .default, handler: { [weak self] _ in
-            AnalyticsService.shared.logEvent(.tx_address_explorer_launched)
-            
-            self?.openLinkInSafari(link: "\(Endpoints.explorerBitcoin)/address/\(transaction.toAddress)")
-        })
-        
-        let copyTransactionAction = UIAlertAction(title: Localized.copyTransaction, style: .default, handler: { _ in
+        let copyTransactionAction = UIAlertAction(title: "\("\u{1F4CB}") \(Localized.copyTransaction)", style: .default, handler: { _ in
             AnalyticsService.shared.logEvent(.tx_id_copied)
             
             UIPasteboard.general.string = transaction.txid
         })
-        
-        let copyAddressAction = UIAlertAction(title: Localized.copyAddress, style: .default, handler: { _
-            in
-            AnalyticsService.shared.logEvent(.tx_address_copied)
-            
-            UIPasteboard.general.string = transaction.toAddress
-        })
+
         
         alertController.addAction(viewTransactionAction)
-        alertController.addAction(viewAllTransactionsAction)
         alertController.addAction(copyTransactionAction)
-        alertController.addAction(copyAddressAction)
         alertController.addAction(cancelAction)
         
         if let popoverController = alertController.popoverPresentationController {
