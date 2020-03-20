@@ -101,6 +101,7 @@ final class KeypadView: CardView {
         let button = UIButton()
         
         if let title = element as? String {
+            button.accessibilityIdentifier = title
             button.setTitle(title, for: .normal)
         } else if let image = element as? UIImage {
             button.setImage(image, for: .normal)

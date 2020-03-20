@@ -108,6 +108,7 @@ final class PaymentInputViewController: UIViewController {
     }
     
     private func setupKeypadView() {
+        keypadView.accessibilityIdentifier = Tests.PaymentInput.keypadView
         updateCurrency()
         keypadView.delegate = self
         keypadView.backgroundColor = .white
@@ -122,6 +123,7 @@ final class PaymentInputViewController: UIViewController {
     }
     
     private func setupCheckoutButton() {
+        checkoutButton.accessibilityIdentifier = Tests.PaymentInput.checkoutButton
         checkoutButton.titleLabel?.font = .boldSystemFont(ofSize: 16.0)
         checkoutButton.backgroundColor = .bitcoinGreen
         checkoutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -151,6 +153,7 @@ final class PaymentInputViewController: UIViewController {
         currencyLabel.textColor = .black
         currencyLabel.font = .systemFont(ofSize: Constants.AMOUNT_FONT_SIZE)
         
+        amountLabel.accessibilityIdentifier = Tests.PaymentInput.amountLabel
         amountLabel.textColor = .black
         amountLabel.font = .boldSystemFont(ofSize: Constants.AMOUNT_FONT_SIZE)
         

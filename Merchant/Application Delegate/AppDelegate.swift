@@ -15,6 +15,9 @@ class AppDelegate: UIResponder {
 
     // MARK: - Properties
     var window: UIWindow?
+    static var isUITestingEnabled: Bool {
+        return ProcessInfo.processInfo.arguments.contains("UI-Testing")
+    }
     
     // MARK - Private API
     private func setupRootViewController() {
@@ -31,6 +34,17 @@ class AppDelegate: UIResponder {
         Realm.Configuration.defaultConfiguration = config
     }
     
+    private func prepareForUITesting() {
+        if AppDelegate.isUITestingEnabled {
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            
+            UserManager.shared.pin = "1111"
+            UserManager.shared.companyName = "Djuro"
+            UserManager.shared.destination = "bitcoincash:qqqclals9tfg7vvd3xqdkgk7nn569ap7kgwjhqzedm"
+            UserManager.shared.activeInvoice = nil
+        }
+    }
+    
 }
 
 extension AppDelegate: UIApplicationDelegate {
@@ -41,6 +55,7 @@ extension AppDelegate: UIApplicationDelegate {
         setupRootViewController()
         setupRealm()
         NetworkManager.shared.startMonitoring()
+        prepareForUITesting()
         
         return true
     }

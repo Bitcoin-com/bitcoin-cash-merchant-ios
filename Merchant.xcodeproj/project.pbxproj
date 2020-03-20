@@ -12,6 +12,7 @@
 		C40ABAC2241BA21C000CAD80 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40ABAC1241BA21C000CAD80 /* GradientView.swift */; };
 		C4157D0D2418B90300EE3952 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4157D0C2418B90300EE3952 /* AnalyticsService.swift */; };
 		C41909DB24192A4E00B65F52 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41909DA24192A4E00B65F52 /* Keys.swift */; };
+		C433DB9D2424D85C00570C2C /* CFTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433DB9C2424D85C00570C2C /* CFTimeInterval+Extensions.swift */; };
 		C43A3B082423581F0093787D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43A3B072423581F0093787D /* Errors.swift */; };
 		C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441ABD0240927FC00A2253A /* WebSocket.swift */; };
 		C445557824004D8500F4B3E0 /* BIP70Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445557724004D8500F4B3E0 /* BIP70Service.swift */; };
@@ -83,6 +84,8 @@
 		C4BA0CAA240451BC00A3D74B /* CurrenciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BA0CA9240451BC00A3D74B /* CurrenciesViewController.swift */; };
 		C4BA0CB724057D3E00A3D74B /* PaymentTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BA0CB624057D3E00A3D74B /* PaymentTarget.swift */; };
 		C4BFF9ED241B986C0033024F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4BFF9EF241B986C0033024F /* InfoPlist.strings */; };
+		C4DBA1462424DCE100576C5C /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBA1452424DCE100576C5C /* Tests.swift */; };
+		C4DBA1472424DDC500576C5C /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBA1452424DCE100576C5C /* Tests.swift */; };
 		C4DD67192417FE9200C72768 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD67182417FE9200C72768 /* AgreementViewController.swift */; };
 		C4DD671B241828E100C72768 /* UITapGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD671A241828E100C72768 /* UITapGestureRecognizer+Extensions.swift */; };
 		C4DD671D241829E900C72768 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD671C241829E900C72768 /* NSAttributedString+Extensions.swift */; };
@@ -133,6 +136,7 @@
 		C42D877D2420AB4D00262D90 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C42D877F2420AB4E00262D90 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C42D87812420AB4F00262D90 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		C433DB9C2424D85C00570C2C /* CFTimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CFTimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		C43A3B072423581F0093787D /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		C441ABD0240927FC00A2253A /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		C445557724004D8500F4B3E0 /* BIP70Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIP70Service.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 		C4BFFA00241B987C0033024F /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C4BFFA01241B987D0033024F /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C4C463F7241B963A00A2FA7E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4DBA1452424DCE100576C5C /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		C4DD67142417F0BA00C72768 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C4DD67152417F11B00C72768 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C4DD67162417F15B00C72768 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -431,6 +436,7 @@
 				C4157D0C2418B90300EE3952 /* AnalyticsService.swift */,
 				C41909DA24192A4E00B65F52 /* Keys.swift */,
 				C43A3B072423581F0093787D /* Errors.swift */,
+				C4DBA1452424DCE100576C5C /* Tests.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -439,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				C445558B24007E4900F4B3E0 /* Bundle+Extensions.swift */,
+				C433DB9C2424D85C00570C2C /* CFTimeInterval+Extensions.swift */,
 				C445558D24007F0700F4B3E0 /* Date+Extensions.swift */,
 				C453938D2402BA0F00CC3CA5 /* Double+Extensions.swift */,
 				C453938B2402B9D200CC3CA5 /* Int+Extensions.swift */,
@@ -902,10 +909,12 @@
 				C453938A2402AC1600CC3CA5 /* UserDefaults+Extensions.swift in Sources */,
 				C49F1FBE23FECC1C00416058 /* UIColor+Extensions.swift in Sources */,
 				C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */,
+				C433DB9D2424D85C00570C2C /* CFTimeInterval+Extensions.swift in Sources */,
 				C49E1CB724227688009B2020 /* URL+Helpers.swift in Sources */,
 				C445559424010C7400F4B3E0 /* TransactionTableViewCell.swift in Sources */,
 				C445558E24007F0700F4B3E0 /* Date+Extensions.swift in Sources */,
 				C445559C24016ECB00F4B3E0 /* ItemsView.swift in Sources */,
+				C4DBA1462424DCE100576C5C /* Tests.swift in Sources */,
 				C4AF258B23FEB3BA0050AD41 /* ContainerViewController.swift in Sources */,
 				C49F1FCE23FEDF8900416058 /* UIView+Extensions.swift in Sources */,
 				C49F1FE923FEF55400416058 /* SideMenuViewController.swift in Sources */,
@@ -971,6 +980,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4AF25A923FEB3BC0050AD41 /* MerchantUITests.swift in Sources */,
+				C4DBA1472424DDC500576C5C /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

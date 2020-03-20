@@ -153,6 +153,7 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupCancelButton() {
+        cancelButton.accessibilityIdentifier = Tests.PaymentRequest.cancelButton
         cancelButton.setImage(UIImage(imageLiteralResourceName: "close"), for: .normal)
         cancelButton.tintColor = .black
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
@@ -184,6 +185,7 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupConnectionStatusImageView() {
+        connectionStatusImageView.accessibilityIdentifier = Tests.PaymentRequest.connectionStatusImageView
         connectionStatusImageView.image = NetworkManager.shared.isConnected ? UIImage(imageLiteralResourceName: "connected") : UIImage(imageLiteralResourceName: "disconnected")
         connectionStatusImageView.contentMode = .scaleAspectFit
         connectionStatusImageView.clipsToBounds = true
@@ -210,6 +212,7 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupQrImageView() {
+        qrImageView.accessibilityIdentifier = Tests.PaymentRequest.qrImageView
         qrImageView.contentMode = .scaleAspectFit
         qrImageView.translatesAutoresizingMaskIntoConstraints = false
         qrImageView.isUserInteractionEnabled = false
