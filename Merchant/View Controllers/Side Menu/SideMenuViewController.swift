@@ -38,6 +38,7 @@ final class SideMenuViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.accessibilityIdentifier = Tests.SideMenu.tableView
         tableView.register(SideMenuTableViewCell.self, forCellReuseIdentifier: SideMenuTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self

@@ -38,10 +38,11 @@ class AppDelegate: UIResponder {
         if AppDelegate.isUITestingEnabled {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
             
-            UserManager.shared.pin = "1111"
-            UserManager.shared.companyName = "Djuro"
-            UserManager.shared.destination = "bitcoincash:qqqclals9tfg7vvd3xqdkgk7nn569ap7kgwjhqzedm"
+            UserManager.shared.pin = nil
+            UserManager.shared.companyName = nil
+            UserManager.shared.destination = nil
             UserManager.shared.activeInvoice = nil
+            UserManager.shared.activePaymentTarget = nil
         }
     }
     

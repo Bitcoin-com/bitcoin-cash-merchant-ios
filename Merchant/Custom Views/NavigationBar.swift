@@ -48,6 +48,7 @@ final class NavigationBar: UIView {
     }
     
     private func setupCloseButton() {
+        closeButton.accessibilityIdentifier = Tests.NavigationBar.closeButton
         closeButton.setImage(UIImage(imageLiteralResourceName: "arrow_left"), for: .normal)
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         closeButton.tintColor = .black

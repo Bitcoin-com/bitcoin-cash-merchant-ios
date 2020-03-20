@@ -172,6 +172,7 @@ final class PaymentInputViewController: UIViewController {
     }
     
     private func setupMenuButton() {
+        menuButton.accessibilityIdentifier = Tests.PaymentInput.menuButton
         menuButton.setImage(UIImage(imageLiteralResourceName: "menu"), for: .normal)
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)

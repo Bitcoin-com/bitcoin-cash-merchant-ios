@@ -66,6 +66,7 @@ final class ItemsView: CardView {
     }
     
     private func setupTableView() {
+        tableView.accessibilityIdentifier = Tests.ItemsView.tableView
         tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self

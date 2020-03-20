@@ -75,6 +75,7 @@ final class PinViewController: UIViewController {
     }
     
     private func setupKeypadView() {
+        keypadView.accessibilityIdentifier = Tests.Pin.keypadView
         keypadView.backgroundColor = .white
         keypadView.translatesAutoresizingMaskIntoConstraints = false
         keypadView.delegate = self
@@ -103,6 +104,7 @@ final class PinViewController: UIViewController {
     }
     
     private func setupExpalanationLabel() {
+        explanationLabel.accessibilityIdentifier = Tests.Pin.explanationLabel
         explanationLabel.textColor = .gray
         explanationLabel.numberOfLines = 0
         explanationLabel.textAlignment = .center

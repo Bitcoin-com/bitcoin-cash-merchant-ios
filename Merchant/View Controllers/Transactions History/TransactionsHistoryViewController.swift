@@ -58,6 +58,7 @@ final class TransactionsHistoryViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.accessibilityIdentifier = Tests.Transactions.tableView
         tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
@@ -76,6 +77,7 @@ final class TransactionsHistoryViewController: UIViewController {
     }
     
     private func setupNoHistoryImageView() {
+        noHistoryImageView.accessibilityIdentifier = Tests.Transactions.noHistoryImageView
         noHistoryImageView.image = UIImage(imageLiteralResourceName: "notxhistory")
         noHistoryImageView.contentMode = .scaleAspectFit
         noHistoryImageView.clipsToBounds = true
@@ -90,6 +92,7 @@ final class TransactionsHistoryViewController: UIViewController {
     }
     
     private func setupNoHistoryLabel() {
+        noHistoryLabel.accessibilityIdentifier = Tests.Transactions.noHistoryLabel
         noHistoryLabel.textColor = .black
         noHistoryLabel.textAlignment = .center
         noHistoryLabel.numberOfLines = 0

@@ -85,6 +85,7 @@ final class SettingsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        navigationBar.accessibilityIdentifier = Tests.NavigationBar.identifier
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         navigationBar.onClose = { [weak self] in
             if UserManager.shared.hasDestinationAddress {
@@ -116,6 +117,7 @@ final class SettingsViewController: UIViewController {
     }
     
     private func setupItemsView() {
+        itemsView.accessibilityIdentifier = Tests.Settings.itemsView
         itemsView.items = [
             UserItem.merchantName,
             UserItem.destinationAddress,
@@ -137,6 +139,7 @@ final class SettingsViewController: UIViewController {
     }
     
     private func setupWalletAdView() {
+        walletAdView.accessibilityIdentifier = Tests.Settings.walletAdView
         walletAdView.translatesAutoresizingMaskIntoConstraints = false
         walletAdView.isUserInteractionEnabled = true
         scrollView.addSubview(walletAdView)
@@ -196,6 +199,7 @@ final class SettingsViewController: UIViewController {
     }
     
     private func setupLocalBitcoinCashAdView() {
+        localBitcoinCashAdView.accessibilityIdentifier = Tests.Settings.localBitcoinCashAdView
         localBitcoinCashAdView.translatesAutoresizingMaskIntoConstraints = false
         localBitcoinCashAdView.isUserInteractionEnabled = true
         scrollView.addSubview(localBitcoinCashAdView)
@@ -255,6 +259,7 @@ final class SettingsViewController: UIViewController {
     }
     
     private func setupExchangeAdView() {
+        exchangeAdView.accessibilityIdentifier = Tests.Settings.exchangeAdView
         exchangeAdView.translatesAutoresizingMaskIntoConstraints = false
         exchangeAdView.isUserInteractionEnabled = true
         scrollView.addSubview(exchangeAdView)

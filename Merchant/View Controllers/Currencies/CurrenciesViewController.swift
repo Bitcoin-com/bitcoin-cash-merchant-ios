@@ -55,6 +55,7 @@ final class CurrenciesViewController: UIViewController {
     }
     
     private func setupItemsView() {
+        itemsView.accessibilityIdentifier = Tests.Currencies.itemsView
         itemsView.items = CurrencyManager.shared.countryCurrencies
         itemsView.isScrollEnabled = true
         itemsView.delegate = self
