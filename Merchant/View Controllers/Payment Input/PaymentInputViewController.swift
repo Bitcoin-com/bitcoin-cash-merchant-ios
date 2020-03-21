@@ -78,10 +78,14 @@ final class PaymentInputViewController: UIViewController {
             if amount == 0.0 {
                 ToastManager.shared.showMessage(Localized.invalidAmount, forStatus: .failure)
             } else {
-                let paymentRequestViewController = PaymentRequestViewController()
-                paymentRequestViewController.amount = amount
-                paymentRequestViewController.modalPresentationStyle = .fullScreen
-                present(paymentRequestViewController, animated: true)
+                if !isConnectedToNetwork {
+                    let paymentRequestViewController = PaymentRequestViewController()
+                    paymentRequestViewController.amount = amount
+                    paymentRequestViewController.modalPresentationStyle = .fullScreen
+                    present(paymentRequestViewController, animated: true)
+                } else {
+                    showRetryDialog()
+                }
             }
         }
     }
@@ -217,6 +221,20 @@ final class PaymentInputViewController: UIViewController {
     private func registerForNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateCurrency), name: .currencyUpdated, object: nil)
     }
+    
+    private func showRetryDialog() {
+        let alertController = UIAlertController(title: Localized.error, message: Localized.noNetworkConnection, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: Localized.cancel, style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        let retryAction = UIAlertAction(title: Localized.retry, style: .default) { [weak self] _ in
+            self?.checkoutButtonTapped()
+        }
+        alertController.addAction(retryAction)
+        
+        present(alertController, animated: true)
+    }
 
 }
 
@@ -260,6 +278,10 @@ private struct Localized {
     static var checkout: String { NSLocalizedString("confirm_request", comment: "") }
     static var enterAmount: String { NSLocalizedString("payment_enter_an_amount", comment: "") }
     static var invalidAmount: String { NSLocalizedString("invalid_amount", comment: "") }
+    static var noNetworkConnection: String { NSLocalizedString("No network connection, please check and try again.", comment: "") }
+    static var retry: String { NSLocalizedString("Retry", comment: "") }
+    static var cancel: String { NSLocalizedString("button_cancel", comment: "") }
+    static var error: String { NSLocalizedString("error", comment: "") }
 }
 
 private struct Constants {

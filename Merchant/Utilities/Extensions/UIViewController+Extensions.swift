@@ -13,6 +13,10 @@ import SafariServices
 
 extension UIViewController {
     
+    var isConnectedToNetwork: Bool {
+        return NetworkManager.shared.isConnected
+    }
+    
     func showAlert(withTitle title: String? = nil, message: String, cancelActionTitle: String? = nil, confirmationActionTitle : String? = nil, actionHandler: ((UIAlertAction) -> Void)? = nil) {
         let alertController  = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if let cancelActionTitle = cancelActionTitle {
