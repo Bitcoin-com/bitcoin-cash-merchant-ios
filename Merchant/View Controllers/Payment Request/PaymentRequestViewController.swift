@@ -445,7 +445,7 @@ final class PaymentRequestViewController: UIViewController {
                 AnalyticsService.shared.logEvent(.error_connect_to_socket, withError: error)
                 
                 DispatchQueue.main.async {
-                    self.networkConnectionLost()
+                    self.showErrorAlert(Localized.noNetworkConnection)
                 }
             }
             
@@ -462,6 +462,7 @@ final class PaymentRequestViewController: UIViewController {
 private struct Localized {
     static var scanToPay: String { NSLocalizedString("waiting_for_payment", comment: "") }
     static var pleasePayYourInvoiceHere: String { NSLocalizedString("share_invoice_msg", comment: "") }
+    static var noNetworkConnection: String { NSLocalizedString("No network connection, please check and try again.", comment: "") }
 }
 
 private struct Constants {

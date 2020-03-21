@@ -78,7 +78,7 @@ final class PaymentInputViewController: UIViewController {
             if amount == 0.0 {
                 ToastManager.shared.showMessage(Localized.invalidAmount, forStatus: .failure)
             } else {
-                if !isConnectedToNetwork {
+                if isConnectedToNetwork {
                     let paymentRequestViewController = PaymentRequestViewController()
                     paymentRequestViewController.amount = amount
                     paymentRequestViewController.modalPresentationStyle = .fullScreen
