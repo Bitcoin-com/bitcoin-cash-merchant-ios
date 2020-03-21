@@ -422,17 +422,31 @@ final class PaymentRequestViewController: UIViewController {
                 }
             }
             webSocket.event.open = { [weak self] in
+                guard let self = self else { return }
+                
                 Logger.log(message: "Socket did open", type: .success)
-                self?.networkConnectionAcquired()
+                
+                DispatchQueue.main.async {
+                    self.networkConnectionAcquired()
+                }
             }
             webSocket.event.close = { [weak self] code, reason, clean in
+                guard let self = self else { return }
+                
                 Logger.log(message: "Socket did close", type: .debug)
-                self?.networkConnectionLost()
+                
+                DispatchQueue.main.async {
+                    self.networkConnectionLost()
+                }
             }
             webSocket.event.error = { [weak self] error in
                 guard let self = self else { return }
+                
                 AnalyticsService.shared.logEvent(.error_connect_to_socket, withError: error)
-                self.showErrorAlert(error.localizedDescription)
+                
+                DispatchQueue.main.async {
+                    self.networkConnectionLost()
+                }
             }
             
             self.webSocket = webSocket
