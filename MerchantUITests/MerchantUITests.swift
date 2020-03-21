@@ -103,6 +103,10 @@ class MerchantUITests: XCTestCase {
         XCTAssertTrue(textField.exists)
         textField.typeText("Djuro")
         alert.buttons["OK"].tap()
+        
+        let descriptionLabel = tableView.staticTexts[Tests.ItemsView.tableViewDescriptionLabel].firstMatch
+        XCTAssertTrue(descriptionLabel.exists)
+        XCTAssertTrue(descriptionLabel.label == "Djuro")
     }
     
     func testEnterDestinationAddressSuccessful() {
@@ -125,6 +129,10 @@ class MerchantUITests: XCTestCase {
         let pasteButton = alert.buttons["Paste"]
         XCTAssertTrue(pasteButton.exists)
         pasteButton.tap()
+        
+        let descriptionLabel = tableView.staticTexts[Tests.ItemsView.tableViewDescriptionLabel].firstMatch
+        XCTAssertTrue(descriptionLabel.exists)
+        XCTAssertTrue(descriptionLabel.label == UIPasteboard.general.string)
     }
     
     func testSelectCurrency() {

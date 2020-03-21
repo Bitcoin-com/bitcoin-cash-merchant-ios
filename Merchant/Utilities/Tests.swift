@@ -17,6 +17,8 @@ struct Tests {
     
     struct ItemsView {
         static let tableView = "tests--tableView"
+        static let tableViewTitleLabel = "tests--tableViewTitleLabel"
+        static let tableViewDescriptionLabel = "tests--tableViewDescriptionLabel"
     }
     
     struct Transactions {

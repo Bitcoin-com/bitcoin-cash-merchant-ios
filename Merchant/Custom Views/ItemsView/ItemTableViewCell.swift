@@ -55,11 +55,13 @@ final class ItemTableViewCell: UITableViewCell {
     }
     
     private func setupLabelsStackView() {
+        titleLabel.accessibilityIdentifier = Tests.ItemsView.tableViewTitleLabel
         titleLabel.textColor = .gray
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .boldSystemFont(ofSize: Constants.TITLE_FONT_SIZE)
         
+        descriptionLabel.accessibilityIdentifier = Tests.ItemsView.tableViewDescriptionLabel
         descriptionLabel.textColor = .gray
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
