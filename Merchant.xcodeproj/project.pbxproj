@@ -50,6 +50,7 @@
 		C453938E2402BA0F00CC3CA5 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C453938D2402BA0F00CC3CA5 /* Double+Extensions.swift */; };
 		C45393922402ECF500CC3CA5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45393912402ECF500CC3CA5 /* CardView.swift */; };
 		C45E06772406CB1D00322906 /* PaymentCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45E06762406CB1D00322906 /* PaymentCompletedView.swift */; };
+		C468B94F242A54B90032C711 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468B94E242A54B90032C711 /* UIDevice+Extensions.swift */; };
 		C49C3A7A241B572D00C80795 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49C3A79241B572D00C80795 /* Gilroy-Bold.ttf */; };
 		C49C3A7C241B577900C80795 /* UIFont+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C3A7B241B577900C80795 /* UIFont+Helpers.swift */; };
 		C49E1CB724227688009B2020 /* URL+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E1CB624227688009B2020 /* URL+Helpers.swift */; };
@@ -174,6 +175,7 @@
 		C453938D2402BA0F00CC3CA5 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		C45393912402ECF500CC3CA5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C45E06762406CB1D00322906 /* PaymentCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCompletedView.swift; sourceTree = "<group>"; };
+		C468B94E242A54B90032C711 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		C49C3A79241B572D00C80795 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Bold.ttf"; sourceTree = "<group>"; };
 		C49C3A7B241B577900C80795 /* UIFont+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Helpers.swift"; sourceTree = "<group>"; };
 		C49C3A7D241B8CF000C80795 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				C4DD671C241829E900C72768 /* NSAttributedString+Extensions.swift */,
 				C49F1FDF23FEF31B00416058 /* String+Extensions.swift */,
 				C49F1FBD23FECC1C00416058 /* UIColor+Extensions.swift */,
+				C468B94E242A54B90032C711 /* UIDevice+Extensions.swift */,
 				C49C3A7B241B577900C80795 /* UIFont+Helpers.swift */,
 				C49E1CB624227688009B2020 /* URL+Helpers.swift */,
 				C49F1FEC23FEF95E00416058 /* UITableViewCell+Extensions.swift */,
@@ -957,6 +960,7 @@
 				C453938E2402BA0F00CC3CA5 /* Double+Extensions.swift in Sources */,
 				C45393922402ECF500CC3CA5 /* CardView.swift in Sources */,
 				C44555A92402847000F4B3E0 /* AttributedStringBuilder.swift in Sources */,
+				C468B94F242A54B90032C711 /* UIDevice+Extensions.swift in Sources */,
 				C49F1FDC23FEF2B500416058 /* ToastManager.swift in Sources */,
 				C453938C2402B9D200CC3CA5 /* Int+Extensions.swift in Sources */,
 				C43A3B082423581F0093787D /* Errors.swift in Sources */,

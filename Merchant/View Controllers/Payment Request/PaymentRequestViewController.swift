@@ -270,10 +270,16 @@ final class PaymentRequestViewController: UIViewController {
         scanToPayLabel.font = .boldSystemFont(ofSize: Constants.SCAN_TO_PAY_LABEL_FONT_SIZE)
         scanToPayLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scanToPayLabel)
+        
+        var bottomContraintConstant = Constants.SCAN_TO_PAY_LABEL_BOTTOM_MARGIN
+        if UIDevice.current.isPhoneSE {
+            bottomContraintConstant /= 4
+        }
+        
         NSLayoutConstraint.activate([
             scanToPayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
             scanToPayLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
-            scanToPayLabel.bottomAnchor.constraint(equalTo: qrContainerView.topAnchor, constant: -Constants.SCAN_TO_PAY_LABEL_BOTTOM_MARGIN)
+            scanToPayLabel.bottomAnchor.constraint(equalTo: qrContainerView.topAnchor, constant: -bottomContraintConstant)
         ])
     }
     
@@ -284,8 +290,14 @@ final class PaymentRequestViewController: UIViewController {
         amountLabel.font = .boldSystemFont(ofSize: Constants.AMOUNT_LABEL_FONT_SIZE)
         amountLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(amountLabel)
+        
+        var bottomContraintConstant = Constants.AMOUNT_LABEL_BOTTOM_MARGIN
+        if UIDevice.current.isPhoneSE {
+            bottomContraintConstant /= 4
+        }
+        
         NSLayoutConstraint.activate([
-            amountLabel.bottomAnchor.constraint(equalTo: scanToPayLabel.topAnchor, constant: -Constants.AMOUNT_LABEL_BOTTOM_MARGIN),
+            amountLabel.bottomAnchor.constraint(equalTo: scanToPayLabel.topAnchor, constant: -bottomContraintConstant),
             amountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.AMOUNT_LABEL_HORIZONTAL_MARGIN),
             amountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.AMOUNT_LABEL_HORIZONTAL_MARGIN)
         ])
