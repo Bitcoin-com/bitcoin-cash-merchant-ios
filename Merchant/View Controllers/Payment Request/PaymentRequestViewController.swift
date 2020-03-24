@@ -92,6 +92,12 @@ final class PaymentRequestViewController: UIViewController {
         activityItems.append(pleasePay)
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = shareButton
+            popoverController.sourceRect = CGRect(x: shareButton.bounds.origin.x, y: shareButton.bounds.origin.y, width: 0, height: 0)
+        }
+        
         present(activityViewController, animated: true)
     }
     
