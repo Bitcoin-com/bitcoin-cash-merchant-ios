@@ -92,6 +92,7 @@ final class PaymentRequestViewController: UIViewController {
         activityItems.append(pleasePay)
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [.saveToCameraRoll]
         
         if let popoverController = activityViewController.popoverPresentationController {
             popoverController.sourceView = shareButton
