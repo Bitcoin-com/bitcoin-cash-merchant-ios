@@ -316,6 +316,8 @@ final class PaymentRequestViewController: UIViewController {
     private func createInvoice() {
         guard invoice == nil, let paymentTarget = UserManager.shared.activePaymentTarget else { return }
         
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
         let invoiceRequest = InvoiceRequest(fiatAmount: amount,
                                             fiat: UserManager.shared.selectedCurrency.currency,
                                             apiKey: paymentTarget.invoiceRequestApiKey,
@@ -324,9 +326,15 @@ final class PaymentRequestViewController: UIViewController {
         BIP70Service.shared.createInvoice(invoiceRequest) { [weak self] result in
             guard let self = self else { return }
             
+            let endTime = CFAbsoluteTimeGetCurrent() - startTime
+            Logger.log(message: "Invoice created in \(endTime.formattedTime)", type: .success)
+            
             switch result {
             case .success(let data):
                 AnalyticsService.shared.logEvent(.invoice_created)
+                AnalyticsService.shared.logEvent(.invoice_created, withParameters: [
+                    "millis" : endTime * 1000
+                ])
                 
                 self.invoice = try? JSONDecoder().decode(InvoiceStatus.self, from: data)
                 UserManager.shared.activeInvoice = self.invoice
@@ -462,7 +470,7 @@ final class PaymentRequestViewController: UIViewController {
 private struct Localized {
     static var scanToPay: String { NSLocalizedString("waiting_for_payment", comment: "") }
     static var pleasePayYourInvoiceHere: String { NSLocalizedString("share_invoice_msg", comment: "") }
-    static var noNetworkConnection: String { NSLocalizedString("No network connection, please check and try again.", comment: "") }
+    static var noNetworkConnection: String { NSLocalizedString("error_check_your_network_connection", comment: "") }
 }
 
 private struct Constants {

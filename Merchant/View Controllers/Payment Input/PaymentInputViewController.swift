@@ -278,8 +278,8 @@ private struct Localized {
     static var checkout: String { NSLocalizedString("confirm_request", comment: "") }
     static var enterAmount: String { NSLocalizedString("payment_enter_an_amount", comment: "") }
     static var invalidAmount: String { NSLocalizedString("invalid_amount", comment: "") }
-    static var noNetworkConnection: String { NSLocalizedString("No network connection, please check and try again.", comment: "") }
-    static var retry: String { NSLocalizedString("Retry", comment: "") }
+    static var noNetworkConnection: String { NSLocalizedString("error_check_your_network_connection", comment: "") }
+    static var retry: String { NSLocalizedString("retry", comment: "") }
     static var cancel: String { NSLocalizedString("button_cancel", comment: "") }
     static var error: String { NSLocalizedString("error", comment: "") }
 }

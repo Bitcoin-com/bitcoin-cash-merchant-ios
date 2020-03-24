@@ -140,3 +140,6 @@
 
 "share_invoice_msg" = "Please pay your invoice here: %@";
 
+"error_check_your_network_connection" = "Please check your network connection";
+
+"retry" = "Retry";
