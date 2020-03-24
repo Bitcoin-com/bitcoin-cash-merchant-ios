@@ -17,7 +17,7 @@ final class PaymentRequestViewController: UIViewController {
     private var shareButton = UIButton()
     private var connectionStatusImageView = UIImageView()
     private var qrContainerView = CardView()
-    private var activityIndicatorView = UIActivityIndicatorView(style: .large)
+    private var activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     private var qrImageView = UIImageView()
     private var timeRemainingLabel = UILabel()
     private var scanToPayLabel = UILabel()

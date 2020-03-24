@@ -358,7 +358,9 @@ final class SettingsViewController: UIViewController {
         let cancelAction = UIAlertAction(title: Localized.cancel, style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        let okAction = UIAlertAction(title: Localized.OK, style: .default) { _ in
+        let okAction = UIAlertAction(title: Localized.OK, style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
             if let textField = alertController.textFields?.first {
                 if let text = textField.text {
                     // If the merchant name is the same as the one which is already stored - do not store it again.
@@ -371,9 +373,8 @@ final class SettingsViewController: UIViewController {
                     AnalyticsService.shared.logEvent(.settings_merchantname_changed)
                     
                     UserManager.shared.companyName = text
-                    alertController.dismiss(animated: true) { [weak self] in
-                        self?.refreshAndShowSuccessMessage()
-                    }
+                    self.refreshAndShowSuccessMessage()
+                    alertController.dismiss(animated: true)
                 }
             }
         }
