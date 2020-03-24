@@ -160,7 +160,9 @@ final class UserManager {
     private func getCountryCurrency() -> CountryCurrency {
         // If user stored his default currency.
         if let data = defaults.data(forKey: Constants.SELECTED_CURRENCY_KEY) {
-            return try! JSONDecoder().decode(CountryCurrency.self, from: data)
+            if let countryCurrency = try? JSONDecoder().decode(CountryCurrency.self, from: data) {
+                return countryCurrency
+            }
         }
         
         // Try to use currency from Locale.current.languageCode.
