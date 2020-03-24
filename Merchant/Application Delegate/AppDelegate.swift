@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 import Amplitude_iOS
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder {
@@ -34,6 +36,10 @@ class AppDelegate: UIResponder {
         Realm.Configuration.defaultConfiguration = config
     }
     
+    private func setupCrashlytics() {
+        Fabric.with([Crashlytics.self])
+    }
+    
     private func prepareForUITesting() {
         if AppDelegate.isUITestingEnabled {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -55,6 +61,7 @@ extension AppDelegate: UIApplicationDelegate {
         AnalyticsService.shared.initialize()
         setupRootViewController()
         setupRealm()
+        setupCrashlytics()
         NetworkManager.shared.startMonitoring()
         prepareForUITesting()
         

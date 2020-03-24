@@ -1,6 +1,9 @@
 PODS:
   - Amplitude-iOS (4.10.0)
   - BitcoinKit (1.1.0)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
   - Realm (4.3.2):
     - Realm/Headers (= 4.3.2)
   - Realm/Headers (4.3.2)
@@ -10,21 +13,27 @@ PODS:
 DEPENDENCIES:
   - Amplitude-iOS
   - BitcoinKit
+  - Crashlytics
+  - Fabric
   - RealmSwift
 
 SPEC REPOS:
   trunk:
     - Amplitude-iOS
     - BitcoinKit
+    - Crashlytics
+    - Fabric
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   BitcoinKit: a8c198d2a57caf64dc43271901f8c5a2309aced2
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
   RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
 
-PODFILE CHECKSUM: 2e9d307c2e32ffd95099ffce3b8f63ee2a65fa59
+PODFILE CHECKSUM: 7cbc30382fa091239fb59851ce5df5389bb8cb75
 
 COCOAPODS: 1.8.4
