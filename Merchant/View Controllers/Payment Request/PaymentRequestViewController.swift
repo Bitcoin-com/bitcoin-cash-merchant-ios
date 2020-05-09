@@ -48,6 +48,12 @@ final class PaymentRequestViewController: UIViewController {
             setupSocket()
         }
     }
+    var bip21Address: String? {
+        didSet {
+            setupBip21QrCode()
+            setupBip21Socket()
+        }
+    }
     private var webSocket: WebSocket?
     private var qrImage: UIImage?
     
@@ -359,14 +365,33 @@ final class PaymentRequestViewController: UIViewController {
                 UserManager.shared.activeInvoice = self.invoice
             case .failure(let error):
                 Logger.log(message: "Error creating invoice: \(error.localizedDescription)", type: .error)
+                self.bip21Address = invoiceRequest.address
+                Logger.log(message: "Begin BIP21 fallback", type: .error)
                 AnalyticsService.shared.logEvent(.error_download_invoice, withError: error)
-                self.showErrorAlert(error.localizedDescription)
+                //self.showErrorAlert(error.localizedDescription)
             }
         }
     }
     
     private func setupQrCode() {
         guard let invoice = invoice, let url = URL(string: "\(Endpoints.wallet)\(BASE_URL)/i/\(invoice.paymentId)") else { return }
+        
+        activityIndicatorView.stopAnimating()
+        
+        Logger.log(message: "Generating QR for URL: \(url.absoluteString)", type: .info)
+        
+        if let image = url.qrImage {
+            qrImageView.image = UIImage(ciImage: image)
+            qrImage = UIImage(ciImage: image)
+            qrImageView.isUserInteractionEnabled = true
+        } else {
+            AnalyticsService.shared.logEvent(.error_generate_qr_code, withError: QRError.notAbleToGenerateQR)
+            showErrorAlert(QRError.notAbleToGenerateQR.localizedDescription)
+        }
+    }
+    
+    private func setupBip21QrCode() {
+        guard let bip21Addr = bip21Address, let url = URL(string: "\(bip21Addr)?amount=0.002") else { return }
         
         activityIndicatorView.stopAnimating()
         
@@ -480,10 +505,65 @@ final class PaymentRequestViewController: UIViewController {
         }
     }
     
+    private func setupBip21Socket() {
+        guard let bip21Addr = bip21Address else { return }
+
+        if let url = URL(string: "\(Endpoints.bip21Websocket)") {
+            let webSocket = WebSocket(request: URLRequest(url: url))
+            webSocket.event.message = { message in
+                if let messageString = message as? String, let data = messageString.data(using: .utf8) {
+                    let message = message as? String
+                    let data = message?.data(using: .utf8)
+                    
+                    if let transaction = try? JSONDecoder().decode(WebSocketTransactionResponse.self, from: data!) {
+                        Logger.log(message: "Txid of received transaction: \(transaction.txid)", type: .success)
+                    }
+                }
+            }
+            webSocket.event.open = { [weak self] in
+                guard let self = self else { return }
+                
+                Logger.log(message: "Socket did open", type: .success)
+                
+                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(bip21Addr)\"}"
+                webSocket.send(message)
+                
+                DispatchQueue.main.async {
+                    self.networkConnectionAcquired()
+                }
+            }
+            webSocket.event.close = { [weak self] code, reason, clean in
+                guard let self = self else { return }
+                
+                Logger.log(message: "Socket did close", type: .debug)
+                
+                DispatchQueue.main.async {
+                    self.networkConnectionLost()
+                }
+            }
+            webSocket.event.error = { [weak self] error in
+                guard let self = self else { return }
+                
+                AnalyticsService.shared.logEvent(.error_connect_to_socket, withError: error)
+                
+                DispatchQueue.main.async {
+                    self.showErrorAlert(Localized.noNetworkConnection)
+                }
+            }
+            
+            self.webSocket = webSocket
+        }
+    }
+    
     private func pingWebSocket() {
         webSocket?.ping()
     }
 
+}
+
+struct WebSocketTransactionResponse: Codable {
+    var txid: String
+    var amount: Int
 }
 
 private struct Localized {

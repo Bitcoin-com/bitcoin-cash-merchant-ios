@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D243B4524675D88008F4B49 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D243B4424675D88008F4B49 /* Keys.swift */; };
 		9693A049E3A4A3E7314A01E8 /* Pods_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */; };
 		A87AC8124A72CD7035A43C1F /* Pods_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAA19CAA1F377C630BDE3D7 /* Pods_MerchantTests.framework */; };
 		C40ABAC2241BA21C000CAD80 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40ABAC1241BA21C000CAD80 /* GradientView.swift */; };
@@ -112,6 +113,7 @@
 
 /* Begin PBXFileReference section */
 		1E19022F604B2D92E04D44CC /* Pods-Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant.release.xcconfig"; path = "Target Support Files/Pods-Merchant/Pods-Merchant.release.xcconfig"; sourceTree = "<group>"; };
+		4D243B4424675D88008F4B49 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		5F03BE384B9233089BDF8F6C /* Pods_Merchant_MerchantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Merchant_MerchantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79AE22CA693F028AFEB110A4 /* Pods-Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant.debug.xcconfig"; path = "Target Support Files/Pods-Merchant/Pods-Merchant.debug.xcconfig"; sourceTree = "<group>"; };
 		7C86A23622A67FF85A7B51C6 /* Pods-Merchant-MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				C41909DA24192A4E00B65F52 /* Keys.swift */,
 				C43A3B072423581F0093787D /* Errors.swift */,
 				C4DBA1452424DCE100576C5C /* Tests.swift */,
+				4D243B4424675D88008F4B49 /* Keys.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				C4AF258B23FEB3BA0050AD41 /* ContainerViewController.swift in Sources */,
 				C49F1FCE23FEDF8900416058 /* UIView+Extensions.swift in Sources */,
 				C49F1FE923FEF55400416058 /* SideMenuViewController.swift in Sources */,
+				4D243B4524675D88008F4B49 /* Keys.swift in Sources */,
 				C4456E0B23FEBC630025FD06 /* SettingsViewController.swift in Sources */,
 				C49F1FDB23FEF2B500416058 /* ToastPreferences.swift in Sources */,
 				C445559F240170EE00F4B3E0 /* UserItem.swift in Sources */,
@@ -1206,7 +1210,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = 299HJ3G3BP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1227,7 +1231,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = 299HJ3G3BP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Merchant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
