@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreGraphics
+import BitcoinKit
 
 extension String {
     
@@ -44,4 +45,7 @@ extension String {
         return self[0 ..< max(0, toIndex)]
     }
 	
+    func toLegacy() throws -> String {
+        return try AddressFactory.create(self).base58
+    }
 }

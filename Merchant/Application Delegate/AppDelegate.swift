@@ -57,7 +57,7 @@ extension AppDelegate: UIApplicationDelegate {
         setupRealm()
         NetworkManager.shared.startMonitoring()
         prepareForUITesting()
-        
+        RateManager.shared
         return true
     }
     

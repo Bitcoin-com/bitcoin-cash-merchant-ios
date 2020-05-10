@@ -48,12 +48,14 @@ final class PaymentRequestViewController: UIViewController {
             setupSocket()
         }
     }
+    var getRateInteractor: GetRateInteractor?
     var bip21Address: String? {
         didSet {
             setupBip21QrCode()
             setupBip21Socket()
         }
     }
+    private var expectedBip21Payment: ExpectedBip21Payment?
     private var webSocket: WebSocket?
     private var qrImage: UIImage?
     
@@ -79,6 +81,10 @@ final class PaymentRequestViewController: UIViewController {
         AnalyticsService.shared.logEvent(.invoice_cancelled)
         
         UserManager.shared.activeInvoice = nil
+        self.expectedBip21Payment = nil
+        self.bip21Address = nil
+        self.webSocket?.close()
+        self.webSocket = nil
         dismiss(animated: true)
     }
     
@@ -143,7 +149,7 @@ final class PaymentRequestViewController: UIViewController {
     @objc private func networkConnectionAcquired() {
         connectionStatusImageView.image = UIImage(imageLiteralResourceName: "connected")
         
-        if invoice == nil {
+        if invoice == nil && bip21Address == nil {
             createInvoice()
         }
     }
@@ -353,7 +359,7 @@ final class PaymentRequestViewController: UIViewController {
             
             let endTime = CFAbsoluteTimeGetCurrent() - startTime
             Logger.log(message: "Invoice created in \(endTime.formattedTime)", type: .success)
-            
+            Logger.log(message: "Result: \(result)", type: .success)
             switch result {
             case .success(let data):
                 AnalyticsService.shared.logEvent(.invoice_created)
@@ -362,15 +368,34 @@ final class PaymentRequestViewController: UIViewController {
                 ])
                 
                 self.invoice = try? JSONDecoder().decode(InvoiceStatus.self, from: data)
-                UserManager.shared.activeInvoice = self.invoice
+                
+                if(self.invoice != nil) {
+                    UserManager.shared.activeInvoice = self.invoice
+                } else {
+                    self.setupBip21Invoice(invoiceRequest: invoiceRequest)
+                    Logger.log(message: "Begin BIP21 fallback", type: .error)
+                }
             case .failure(let error):
                 Logger.log(message: "Error creating invoice: \(error.localizedDescription)", type: .error)
-                self.bip21Address = invoiceRequest.address
+                self.setupBip21Invoice(invoiceRequest: invoiceRequest)
                 Logger.log(message: "Begin BIP21 fallback", type: .error)
                 AnalyticsService.shared.logEvent(.error_download_invoice, withError: error)
                 //self.showErrorAlert(error.localizedDescription)
             }
         }
+    }
+    
+    private func setupBip21Invoice(invoiceRequest: InvoiceRequest?) {
+        getRateInteractor = GetRateInteractor()
+        guard let rate = getRateInteractor?.getRate(withCurrency: UserManager.shared.selectedCurrency) else {
+            // TODO: Handle the error here with a message
+            print("error get rate")
+            return
+        }
+        let amountInSatoshis = rate.rate > 0  ? (invoiceRequest!.fiatAmount / rate.rate).toSatoshis() : 0
+        let addr = invoiceRequest?.address
+        self.expectedBip21Payment = ExpectedBip21Payment(address: addr!, amount: amountInSatoshis)
+        self.bip21Address = invoiceRequest?.address
     }
     
     private func setupQrCode() {
@@ -391,7 +416,8 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupBip21QrCode() {
-        guard let bip21Addr = bip21Address, let url = URL(string: "\(bip21Addr)?amount=0.002") else { return }
+        print("Start setup QR code")
+        guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCH().avoidNotation, let url = URL(string: "\(bip21Addr)?amount=\(amountInBch)") else { return }
         
         activityIndicatorView.stopAnimating()
         
@@ -434,6 +460,25 @@ final class PaymentRequestViewController: UIViewController {
         }
     }
     
+    private func saveBip21Transaction(for paymentReceived: WebSocketTransactionResponse) {
+        let realm = try! Realm()
+
+        let transaction = StoreTransaction()
+        transaction.amountInFiat = amountLabel.text!
+        transaction.amountInSatoshis = paymentReceived.amount
+
+        if let address = paymentReceived.outputs.first?.address {
+            transaction.toAddress = address
+        }
+        
+        transaction.txid = paymentReceived.txid ?? ""
+        transaction.date = Date()
+
+        try! realm.write {
+            realm.add(transaction)
+        }
+    }
+    
     private func showPaymentCompletedView(for invoiceStatus: InvoiceStatus) {
         // If the invoiceStatus paymentId is the same as the one which is already stored - do not send analytics event again.
         if let paymentId = UserManager.shared.lastProcessedPaymentId {
@@ -444,6 +489,17 @@ final class PaymentRequestViewController: UIViewController {
         
         AnalyticsService.shared.logEvent(.invoice_paid)
         
+        // Increase the next index for xPubKey.
+        if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
+            UserManager.shared.xPubKeyIndex += 1
+        }
+        
+        UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
+            self.paymentCompletedView.alpha = 1.0
+        }
+    }
+    
+    private func showBip21PaymentCompletedView() {
         // Increase the next index for xPubKey.
         if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
             UserManager.shared.xPubKeyIndex += 1
@@ -507,16 +563,32 @@ final class PaymentRequestViewController: UIViewController {
     
     private func setupBip21Socket() {
         guard let bip21Addr = bip21Address else { return }
-
-        if let url = URL(string: "\(Endpoints.bip21Websocket)") {
+        
+        if self.webSocket != nil { return }
+        
+        if let url = URL(string: Endpoints.bip21Websocket) {
             let webSocket = WebSocket(request: URLRequest(url: url))
-            webSocket.event.message = { message in
+            webSocket.event.message = { [weak self] message in
+                guard let self = self else { return }
+
+                Logger.log(message: "Received message: \(message)", type: .debug)
                 if let messageString = message as? String, let data = messageString.data(using: .utf8) {
-                    let message = message as? String
-                    let data = message?.data(using: .utf8)
-                    
-                    if let transaction = try? JSONDecoder().decode(WebSocketTransactionResponse.self, from: data!) {
-                        Logger.log(message: "Txid of received transaction: \(transaction.txid)", type: .success)
+                    let expectedPayment = self.expectedBip21Payment
+                    if(self.expectedBip21Payment != nil) {
+                        if let transaction = try? JSONDecoder().decode(WebSocketTransactionResponse.self, from: data) {
+                            Logger.log(message: "Amount received: \(transaction.amount)", type: .success)
+                            Logger.log(message: "Expected amount: \(expectedPayment!.amount)", type: .success)
+                            let amount = transaction.amount
+                            let expectedAmount = expectedPayment!.amount
+                            if(expectedAmount == amount) {
+                                self.saveBip21Transaction(for: transaction)
+                                self.showBip21PaymentCompletedView()
+                            } else if(amount > expectedAmount) {
+                                Logger.log(message: "Transaction is overpaid!", type: .error)
+                            } else if(amount < expectedAmount) {
+                                Logger.log(message: "Transaction is underpaid!", type: .error)
+                            }
+                        }
                     }
                 }
             }
@@ -524,22 +596,23 @@ final class PaymentRequestViewController: UIViewController {
                 guard let self = self else { return }
                 
                 Logger.log(message: "Socket did open", type: .success)
-                
-                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(bip21Addr)\"}"
+                let legacyAddress = try? bip21Addr.toLegacy()
+                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress!)\"}"
+                Logger.log(message: message, type: .debug)
                 webSocket.send(message)
-                
                 DispatchQueue.main.async {
                     self.networkConnectionAcquired()
                 }
             }
-            webSocket.event.close = { [weak self] code, reason, clean in
-                guard let self = self else { return }
+            webSocket.event.close = { code, reason, clean in
+                
+                if self.webSocket != nil {
+                    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2) {
+                        webSocket.open()
+                    }
+                }
                 
                 Logger.log(message: "Socket did close", type: .debug)
-                
-                DispatchQueue.main.async {
-                    self.networkConnectionLost()
-                }
             }
             webSocket.event.error = { [weak self] error in
                 guard let self = self else { return }
@@ -563,7 +636,14 @@ final class PaymentRequestViewController: UIViewController {
 
 struct WebSocketTransactionResponse: Codable {
     var txid: String
-    var amount: Int
+    var fees: Int
+    var amount: Int64
+    var outputs: [WebSocketOutputResponse]
+}
+
+struct WebSocketOutputResponse: Codable {
+    var address: String
+    var value: Int
 }
 
 private struct Localized {
@@ -582,7 +662,7 @@ private struct Constants {
     static let SHARE_BUTTON_TRAILING_MARGIN: CGFloat = 20.0
     static let SHARE_BUTTON_BOTTOM_MARGIN: CGFloat = 20.0
     static let QR_CONTAINER_VIEW_SIZE: CGFloat = UIScreen.main.bounds.size.width - 100.0
-    static let QR_IMAGE_VIEW_PADDING: CGFloat = 10.0
+    static let QR_IMAGE_VIEW_PADDING: CGFloat = 32.0
     static let TIME_REMAINING_LABEL_FONT_SIZE: CGFloat = 18.0
     static let TIME_REMAINING_LABEL_TOP_MARGIN: CGFloat = 20.0
     static let SCAN_TO_PAY_LABEL_FONT_SIZE: CGFloat = 20.0
