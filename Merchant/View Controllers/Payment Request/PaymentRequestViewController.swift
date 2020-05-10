@@ -89,17 +89,22 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     @objc private func shareButtonTapped() {
-        guard let invoice = invoice else { return }
-        
         AnalyticsService.shared.logEvent(.invoice_shared)
-        
+        var paymentUrl: String
         var activityItems = [Any]()
         
         if let image = qrImage {
             activityItems.append(image)
         }
         
-        let paymentUrl = "\(BASE_URL)/i/\(invoice.paymentId)"
+        if self.bip21Address != nil {
+            guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCH().avoidNotation else { return }
+            paymentUrl = "\(bip21Addr)?amount=\(amountInBch)"
+        } else {
+            guard let invoice = invoice else { return }
+            paymentUrl = "\(BASE_URL)/i/\(invoice.paymentId)"
+        }
+        
         let pleasePay = String(format: Localized.pleasePayYourInvoiceHere, paymentUrl)
         activityItems.append(pleasePay)
         
