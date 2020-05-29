@@ -72,7 +72,11 @@ final class RESTManager: NSObject {
             fatalError("🛑 URL not in proper format")
         }
         
-        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 3
+        configuration.timeoutIntervalForResource = 3
+        
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue.main)
         let request = configureRequest(for: url, method: .post, body: body)
         
         let task = session.dataTask(with: request) { (data, response, error) in

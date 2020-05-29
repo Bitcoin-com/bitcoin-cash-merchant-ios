@@ -356,7 +356,7 @@ final class PaymentRequestViewController: UIViewController {
         
         let invoiceRequest = InvoiceRequest(fiatAmount: amount,
                                             fiat: UserManager.shared.selectedCurrency.currency,
-                                            apiKey: paymentTarget.invoiceRequestApiKey,
+                                            apiKey: nil,
                                             address: paymentTarget.invoiceRequestAddress)
         
         BIP70Service.shared.createInvoice(invoiceRequest) { [weak self] result in
