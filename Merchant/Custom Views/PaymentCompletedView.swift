@@ -81,7 +81,7 @@ final class PaymentCompletedView: UIView {
         NSLayoutConstraint.activate([
             paymentReceivedLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
             paymentReceivedLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
-            paymentReceivedLabel.topAnchor.constraint(equalTo: checkmarkContainerView.bottomAnchor, constant: AppConstants.GENERAL_MARGIN)
+            paymentReceivedLabel.topAnchor.constraint(equalTo: checkmarkContainerView.bottomAnchor, constant: AppConstants.GENERAL_MARGIN + 32)
         ])
     }
     
@@ -114,7 +114,7 @@ private struct Localized {
 }
 
 private struct Constants {
-    static let PAYMENT_RECEIVED_FONT_SIZE: CGFloat = 16.0
+    static let PAYMENT_RECEIVED_FONT_SIZE: CGFloat = 24
     static let CHECKMARK_CONTAINER_VIEW_TOP_MARGIN: CGFloat = 150.0
     static let CHECKMARK_CONTAINER_VIEW_SIZE: CGFloat = 80.0
     static let DONE_BUTTON_HEIGHT: CGFloat = 55.0

@@ -16,7 +16,7 @@ final class AnalyticsService {
     
     // MARK: - Public API
     func initialize() {
-        Amplitude.instance().initializeApiKey("f19c4dfc08c94639a40f5777c1f0ca88")
+        Amplitude.instance().initializeApiKey(AMPLITUDE_API_KEY)
     }
     
     func logEvent(_ event: Event, withParameters parameters: [String: Any]? = nil) {
