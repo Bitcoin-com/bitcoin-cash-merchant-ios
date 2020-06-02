@@ -227,11 +227,15 @@ final class PaymentRequestViewController: UIViewController {
         qrContainerView.backgroundColor = .white
         qrContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(qrContainerView)
+        var qrSize = Constants.QR_CONTAINER_VIEW_SIZE
+        if qrSize >= 320.0 {
+            qrSize = 320.0
+        }
         NSLayoutConstraint.activate([
             qrContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             qrContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            qrContainerView.widthAnchor.constraint(equalToConstant: Constants.QR_CONTAINER_VIEW_SIZE),
-            qrContainerView.heightAnchor.constraint(equalToConstant: Constants.QR_CONTAINER_VIEW_SIZE)
+            qrContainerView.widthAnchor.constraint(equalToConstant: qrSize),
+            qrContainerView.heightAnchor.constraint(equalToConstant: qrSize)
         ])
     }
     
