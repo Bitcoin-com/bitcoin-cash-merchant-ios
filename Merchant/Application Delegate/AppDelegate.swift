@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import Amplitude_iOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder {
