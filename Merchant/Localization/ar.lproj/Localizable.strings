@@ -1,0 +1,145 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "تسجيل في بيتكوين كاش";
+
+"action_settings" = "الإعدادات";
+
+"pin_code_create_error" = "أدخل رمزيّ PIN المطابقين المكونين من 4 أرقام";
+
+"pin_code_enter_error" = "رمز PIN غير صحيح";
+
+"prompt_ok" = "موافق";
+
+"prompt_ko" = "إلغاء الأمر";
+
+"create_pin" = "إنشاء رمز PIN";
+
+"confirm_pin" = "تأكيد رمز PIN";
+
+"unrecognized_xpub" = "تنسيق المفاح العام غير معروف";
+
+"payment_received" = "اكتملت عملية الدفع. شكرا لك.";
+
+"unable_to_generate_address" = "لا يمكن إنشاء عنوان في هذا الوقت. يرجى التحقق من التثبيت والمحاولة مرة أخرى.";
+
+"invalid_amount" = "مبلغ غير صحيح.";
+
+"removed_by_bip70_insufficient_payment" = "الدفعة المتلقاة غير كافية.";
+
+"removed_by_bip70_re_payment_remainder" = "تذكير:";
+
+"removed_by_bip70_re_payment_requested" = "المطلوب:";
+
+"removed_by_bip70_re_payment_received" = "المستلَم:";
+
+"removed_by_bip70_insufficient_payment_continue" = "هل ترغب في تحديث رمز الاستجابة السريعة للمبلغ المتبقي المستحق؟";
+
+"removed_by_bip70_overpaid_amount" = "المبلغ المستلَم أعلى من المتوقع.";
+
+"options_payment_address" = "عنوان الدفع";
+
+"options_receiving_payments" = "استلام المدفوعات";
+
+"scan" = "مسح";
+
+"paste" = "لصق";
+
+"obligatory_receiver" = "يجب عليك تزويد عنوان بيتكوين كاش لتلقي المدفوعات.";
+
+"waiting_for_payment" = "مسح من أجل الدفع";
+
+"confirm_request" = "سحب";
+
+"button_cancel" = "إلغاء الأمر";
+
+"button_done" = "تم";
+
+"powered_by" = "مدعوم من قبل";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "أدخل رمز PIN";
+
+"syncing_xpub" = "مزامنة xpub ...";
+
+"synced_xpub" = "تم مزامنة xpub!";
+
+"no_history_text" = "لا يوجد أي سجل للمعاملات.";
+
+"options_explain_payment_address" = "يمكن أن يكون عنوان الوجهة هو عنوان بيتكوين كاش أو المفتاح العام الموسّع (xpub) أو مفتاح API للتاجر أو رمز الاقتران.";
+
+"options_add_payment_address" = "إضافة عنوان الوجهة";
+
+"button_save" = "حفظ";
+
+"payment_enter_an_amount" = "أدخل مبلغا";
+
+"menu_profile" = "الملف الشخصي";
+
+"menu_cash_register" = "تسجيل الأموال";
+
+"menu_transactions" = "المعاملات";
+
+"menu_settings" = "الإعدادات";
+
+"menu_help" = "الدعم";
+
+"menu_about" = "حول الشركة";
+
+"settings_merchant_name" = "اسم البائع";
+
+"settings_destination_address" = "عنوان الوجهة";
+
+"settings_local_currency" = "العملة المحلية";
+
+"settings_pin_code" = "رمز PIN";
+
+"ad_title_local_bitcoin_cash" = "نقود البيتكوين المحلية";
+
+"ad_content_local_bitcoin_cash" = "قم ببيع نقود البيتكوين (BCH) مقابل المال";
+
+"not_supported" = "غير مدعوم";
+
+"grant_camera_permission" = "يرجى منح إذن للكاميرا لاستخدام الماسح الضوئي لرمز الاستجابة السريعة";
+
+"view_transaction" = "عرض المعاملة";
+
+"copy_transaction" = "نسخ المعاملة";
+
+"view_address" = "عرض العنوان";
+
+"copy_address" = "نسخ العنوان";
+
+"menu_terms_of_use" = "شروط الاستخدام";
+
+"menu_service_terms" = "شروط الخدمة";
+
+"menu_privacy_policy" = "سياسة الخصوصية";
+
+"contract_agreement_summary" = "بالمتابعة فإني أوافق على  %@ و %@ و %@";
+
+"contract_button_ok" = "أوافق";
+
+"error" = "خطأ";
+
+"notify_changes_have_been_saved" = "تم حفظ التغييرات";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"error_check_your_network_connection" = "Please check your network connection";
+
+"retry" = "Retry";

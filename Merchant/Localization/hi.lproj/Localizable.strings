@@ -1,0 +1,145 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Mesin Kasir Bitcoin";
+
+"action_settings" = "Pengaturan";
+
+"pin_code_create_error" = "Masukkan dua kode PIN 4 digit yang sama";
+
+"pin_code_enter_error" = "Kode PIN salah";
+
+"prompt_ok" = "Oke";
+
+"prompt_ko" = "Batal";
+
+"create_pin" = "Buat Kode PIN";
+
+"confirm_pin" = "Konfirmasi Kode PIN";
+
+"unrecognized_xpub" = "Format kunci publik tidak dikenali";
+
+"payment_received" = "Pembayaran selesai. Terima kasih.";
+
+"unable_to_generate_address" = "Alamat tidak dapat dihasilkan saat ini. Harap periksa instalasi Anda lalu cobalah kembali.";
+
+"invalid_amount" = "Nominal tidak sah.";
+
+"removed_by_bip70_insufficient_payment" = "Menerima pembayaran yang masih kurang.";
+
+"removed_by_bip70_re_payment_remainder" = "Sisa:";
+
+"removed_by_bip70_re_payment_requested" = "Diminta:";
+
+"removed_by_bip70_re_payment_received" = "Diterima:";
+
+"removed_by_bip70_insufficient_payment_continue" = "Perbarui kode QR untuk sisa nominal yang harus dibayar?";
+
+"removed_by_bip70_overpaid_amount" = "Nominal yang diterima lebih tinggi dari yang diminta.";
+
+"options_payment_address" = "Alamat pembayaran";
+
+"options_receiving_payments" = "Menerima pembayaran";
+
+"scan" = "Pindai";
+
+"paste" = "Tempel";
+
+"obligatory_receiver" = "Anda harus mencantumkan alamat Bitcoin Cash untuk menerima pembayaran.";
+
+"waiting_for_payment" = "Pindai dan Bayar";
+
+"confirm_request" = "Checkout";
+
+"button_cancel" = "Batal";
+
+"button_done" = "Selesai";
+
+"powered_by" = "Didayai oleh";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "Masukkan Kode PIN";
+
+"syncing_xpub" = "Mensinkronkan xpub...";
+
+"synced_xpub" = "xpub tersinkron!";
+
+"no_history_text" = "Tidak ada riwayat transaksi.";
+
+"options_explain_payment_address" = "Alamat tujuan dapat berupa alamat Bitcoin Cash, atau Extended Public Key (xpub) atau kunci API merchant atau kode penyandingan";
+
+"options_add_payment_address" = "Tambah alamat tujuan";
+
+"button_save" = "Simpan";
+
+"payment_enter_an_amount" = "Masukkan nominal";
+
+"menu_profile" = "Profil";
+
+"menu_cash_register" = "Mesin Kasir";
+
+"menu_transactions" = "Transaksi";
+
+"menu_settings" = "Pengaturan";
+
+"menu_help" = "Bantuan";
+
+"menu_about" = "Seputar";
+
+"settings_merchant_name" = "Nama Merchant";
+
+"settings_destination_address" = "Alamat Tujuan";
+
+"settings_local_currency" = "Mata Uang Lokal";
+
+"settings_pin_code" = "Kode PIN";
+
+"ad_title_local_bitcoin_cash" = "Bitcoin Cash Lokal";
+
+"ad_content_local_bitcoin_cash" = "Jual Bitcoin Cash (BCH) Anda untuk Cash";
+
+"not_supported" = "Tidak Didukung";
+
+"grant_camera_permission" = "Harap berikan perizinan kamera untuk menggunakan Pemindai kode QR";
+
+"view_transaction" = "Lihat transaksi";
+
+"copy_transaction" = "Salin transaksi";
+
+"view_address" = "Lihat alamat";
+
+"copy_address" = "Salin alamat";
+
+"menu_terms_of_use" = "Syarat penggunaan";
+
+"menu_service_terms" = "Syarat layanan";
+
+"menu_privacy_policy" = "Kebijakan privasi";
+
+"contract_agreement_summary" = "Dengan melanjutkan, saya menyetujui %@, %@ and %@";
+
+"contract_button_ok" = "Saya setuju";
+
+"error" = "Eror";
+
+"notify_changes_have_been_saved" = "Perubahan telah tersimpan";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";
+
+"error_check_your_network_connection" = "Please check your network connection";
+
+"retry" = "Retry";

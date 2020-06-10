@@ -1,0 +1,145 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Bitcoin Cash Register";
+
+"action_settings" = "Nastavitve";
+
+"pin_code_create_error" = "Vnesi dve ujemajoči se 4-mestni kodi PIN";
+
+"pin_code_enter_error" = "Koda PIN ni pravilna";
+
+"prompt_ok" = "V redu";
+
+"prompt_ko" = "Prekliči";
+
+"create_pin" = "Ustvari kodo PIN";
+
+"confirm_pin" = "Potrdi kodo PIN";
+
+"unrecognized_xpub" = "Neprepoznan format javnega ključa";
+
+"payment_received" = "Plačilo je zaključeno. Hvala.";
+
+"unable_to_generate_address" = "Trenutno ni mogoče ustvariti naslova. Preveri namestitev in poskusi znova.";
+
+"invalid_amount" = "Neveljaven znesek.";
+
+"removed_by_bip70_insufficient_payment" = "Prejeto je bilo nezadostno plačilo.";
+
+"removed_by_bip70_re_payment_remainder" = "Preostanek:";
+
+"removed_by_bip70_re_payment_requested" = "Potrebno:";
+
+"removed_by_bip70_re_payment_received" = "Prejeto:";
+
+"removed_by_bip70_insufficient_payment_continue" = "Posodobi kodo QR za zapadli preostali znesek?";
+
+"removed_by_bip70_overpaid_amount" = "Prejeti znesek je višji od pričakovanega.";
+
+"options_payment_address" = "Naslov za plačilo";
+
+"options_receiving_payments" = "Prejemanje plačil";
+
+"scan" = "Skeniraj";
+
+"paste" = "Prilepi";
+
+"obligatory_receiver" = "Za prejemanje plačil moraš vnesti naslov Bitcoin Cash.";
+
+"waiting_for_payment" = "Za plačilo skeniraj";
+
+"confirm_request" = "Plačaj";
+
+"button_cancel" = "Prekliči";
+
+"button_done" = "Opravljeno";
+
+"powered_by" = "Zagotavlja";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "Vnesi kodo PIN";
+
+"syncing_xpub" = "Sinhroniziranje ključa xpub ...";
+
+"synced_xpub" = "Ključ xpub je sinhroniziran.";
+
+"no_history_text" = "Ni zgodovine transakcij.";
+
+"options_explain_payment_address" = "Ciljni naslov je lahko naslov Bitcoin Cash ali ključ Extended Public Key (xpub) ali ključ API oz. koda za seznanitev trgovca";
+
+"options_add_payment_address" = "Dodaj ciljni naslov";
+
+"button_save" = "Shrani";
+
+"payment_enter_an_amount" = "Vnesi znesek";
+
+"menu_profile" = "Profil";
+
+"menu_cash_register" = "Blagajna";
+
+"menu_transactions" = "Transakcije";
+
+"menu_settings" = "Nastavitve";
+
+"menu_help" = "Pomoč";
+
+"menu_about" = "O aplikaciji";
+
+"settings_merchant_name" = "Ime trgovca";
+
+"settings_destination_address" = "Ciljni naslov";
+
+"settings_local_currency" = "Lokalna valuta";
+
+"settings_pin_code" = "Koda PIN";
+
+"ad_title_local_bitcoin_cash" = "Lokalna valuta Bitcoin Cash";
+
+"ad_content_local_bitcoin_cash" = "Prodaj Bitcoin Cash (BCH) za denar";
+
+"not_supported" = "Ni podprto";
+
+"grant_camera_permission" = "Za uporabo bralnika kod QR potrdi dovoljenje za kamero";
+
+"view_transaction" = "Prikaži transakcijo";
+
+"copy_transaction" = "Kopiraj transakcijo";
+
+"view_address" = "Prikaži naslov";
+
+"copy_address" = "Kopiraj naslov";
+
+"menu_terms_of_use" = "Pogoji uporabe";
+
+"menu_service_terms" = "Pogoji storitve";
+
+"menu_privacy_policy" = "Pravilnik o zasebnosti";
+
+"contract_agreement_summary" = "Z nadaljevanjem se strinjam z naslednjimi pogoji in določili: %@, %@ in %@";
+
+"contract_button_ok" = "Strinjam se";
+
+"error" = "Napaka";
+
+"notify_changes_have_been_saved" = "Sprememba je shranjena";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";
+
+"error_check_your_network_connection" = "Please check your network connection";
+
+"retry" = "Retry";

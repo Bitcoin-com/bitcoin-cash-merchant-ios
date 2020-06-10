@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1130"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-               BuildableName = "Pay.app"
+               BlueprintIdentifier = "C4AF258223FEB3BA0050AD41"
+               BuildableName = "Bitcoin Cash Register.app"
                BlueprintName = "Merchant"
                ReferencedContainer = "container:Merchant.xcodeproj">
             </BuildableReference>
@@ -26,33 +26,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Pay.app"
-            BlueprintName = "Merchant"
-            ReferencedContainer = "container:Merchant.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Pay.app"
-            BlueprintName = "Merchant"
-            ReferencedContainer = "container:Merchant.xcodeproj">
-         </BuildableReference>
-      </CodeCoverageTargets>
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3B1BA907226DEE32002EED15"
+               BlueprintIdentifier = "C4AF259823FEB3BC0050AD41"
                BuildableName = "MerchantTests.xctest"
                BlueprintName = "MerchantTests"
                ReferencedContainer = "container:Merchant.xcodeproj">
@@ -62,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3B1BA912226DEE32002EED15"
+               BlueprintIdentifier = "C4AF25A323FEB3BC0050AD41"
                BuildableName = "MerchantUITests.xctest"
                BlueprintName = "MerchantUITests"
                ReferencedContainer = "container:Merchant.xcodeproj">
@@ -84,12 +64,19 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Pay.app"
+            BlueprintIdentifier = "C4AF258223FEB3BA0050AD41"
+            BuildableName = "Bitcoin Cash Register.app"
             BlueprintName = "Merchant"
             ReferencedContainer = "container:Merchant.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -101,8 +88,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3B1BA8F3226DEE30002EED15"
-            BuildableName = "Pay.app"
+            BlueprintIdentifier = "C4AF258223FEB3BA0050AD41"
+            BuildableName = "Bitcoin Cash Register.app"
             BlueprintName = "Merchant"
             ReferencedContainer = "container:Merchant.xcodeproj">
          </BuildableReference>

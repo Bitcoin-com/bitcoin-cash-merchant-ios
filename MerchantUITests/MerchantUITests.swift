@@ -2,121 +2,557 @@
 //  MerchantUITests.swift
 //  MerchantUITests
 //
-//  Created by Jean-Baptiste Dominguez on 2019/04/22.
-//  Copyright © 2019 Bitcoin.com. All rights reserved.
+//  Created by Djuro Alfirevic on 2/20/20.
+//  Copyright © 2020 Bitcoin.com. All rights reserved.
 //
 
 import XCTest
 
 class MerchantUITests: XCTestCase {
-
+    
+    // MARK: - Properties
+    var application: XCUIApplication!
+    
+    // MARK: - Setup
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        let app = XCUIApplication()
-        app.launchArguments = ["MerchantUITests"]
-        app.launch()
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        
+        application = XCUIApplication()
+        application.launchArguments += ["UI-Testing"]
+        application.launch()
+        
+        XCUIDevice.shared.orientation = .portrait
+        
+        UIPasteboard.general.string = "bitcoincash:qqqclals9tfg7vvd3xqdkgk7nn569ap7kgwjhqzedm"
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    // MARK: - Tests
+    
+    // MARK: - PIN
+    func testCreatePINSuccessful() {
+        // Create PIN.
+        let keypadView = application.otherElements[Tests.Pin.keypadView]
+        XCTAssertTrue(keypadView.exists)
+        let button = keypadView.buttons["1"]
+        XCTAssertTrue(button.exists)
+        
+        // Create PIN.
+        button.tap()
+        button.tap()
+        button.tap()
+        button.tap()
+        
+        // Confirm PIN.
+        button.tap()
+        button.tap()
+        button.tap()
+        button.tap()
+        
+        // Settings.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
     }
-
-    func testBasicFlow() {
+    
+    func testCreatePINFailure() {
+        // Create PIN.
+        let keypadView = application.otherElements[Tests.Pin.keypadView]
+        XCTAssertTrue(keypadView.exists)
+        let button = keypadView.buttons["1"]
+        XCTAssertTrue(button.exists)
         
-        let app = XCUIApplication()
+        // Create PIN.
+        button.tap()
+        button.tap()
+        button.tap()
+        button.tap()
         
-        let closeButton = app.navigationBars.buttons["close icon"]
-        let settingsButton = app.navigationBars.buttons["settings icon"]
-        let checkmarkButton = app.collectionViews.buttons["checkmark icon"]
+        // Confirm PIN.
+        button.tap()
+        button.tap()
+        button.tap()
         
-        let button1 = app.collectionViews.buttons["1"]
-        let button2 = app.collectionViews.buttons["2"]
+        let wrongButton = keypadView.buttons["2"]
+        wrongButton.tap()
         
-        // Set PIN
-        button1.tap()
-        button1.tap()
-        button2.tap()
-        button2.tap()
+        // Pin.
+        let explanationLabel = application.staticTexts[Tests.Pin.explanationLabel]
+        XCTAssertTrue(explanationLabel.exists)
         
-        // Confirm PIN
-        button1.tap()
-        button1.tap()
-        button2.tap()
-        button2.tap()
+        XCTAssertTrue(explanationLabel.label == "Create PIN Code")
+    }
+    
+    // MARK: - Settings
+    func testEnterMerchantName() {
+        testCreatePINSuccessful()
         
-        let okButton = app.alerts.firstMatch.buttons["Ok"]
-        okButton.tap()
+        // Settings.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
         
-        app.firstMatch.buttons["Settings"].tap()
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let merchantCell = tableView.cells.element(boundBy: 0)
+        XCTAssertTrue(merchantCell.exists)
+        merchantCell.tap()
         
-        button1.tap()
-        button1.tap()
-        button2.tap()
-        button2.tap()
+        // Merchant Name alert.
+        let alert = application.alerts.firstMatch
+        XCTAssertTrue(alert.exists)
         
-        // Clean
-        let deleteString = (0..<60).map { _ in XCUIKeyboardKey.delete.rawValue }.joined()
+        let textField = alert.textFields.firstMatch
+        XCTAssertTrue(textField.exists)
+        textField.typeText("Djuro")
+        alert.buttons["OK"].tap()
         
-        let companyTextField = app.tables.cells.containing(.staticText, identifier:"Company name").children(matching: .textField).element
+        let descriptionLabel = tableView.staticTexts[Tests.ItemsView.tableViewDescriptionLabel].firstMatch
+        XCTAssertTrue(descriptionLabel.exists)
+        XCTAssertTrue(descriptionLabel.label == "Djuro")
+    }
+    
+    func testEnterDestinationAddressSuccessful() {
+        testCreatePINSuccessful()
         
-        companyTextField.tap()
-        companyTextField.typeText(deleteString)
-        companyTextField.typeText("My company")
+        // Settings.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
         
-        let addressTextField = app.tables.cells.containing(.staticText, identifier:"Destination address").children(matching: .textField).element
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let destinationAddressCell = tableView.cells.element(boundBy: 1)
+        XCTAssertTrue(destinationAddressCell.exists)
+        destinationAddressCell.tap()
         
-        addressTextField.tap()
-        addressTextField.typeText("bitcoincash:pqazqrn4l2pve9luh6s3xn2z94pvwtnpavn6ecz0fj")
-
-        app.tables.buttons["Change"].tap()
+        // Destination Address alert.
+        let alert = application.alerts.firstMatch
+        XCTAssertTrue(alert.exists)
         
-        button1.tap()
-        button1.tap()
-        button2.tap()
-        button2.tap()
+        let pasteButton = alert.buttons["Paste"]
+        XCTAssertTrue(pasteButton.exists)
+        pasteButton.tap()
         
-        button1.tap()
-        button1.tap()
-        button1.tap()
-        button1.tap()
+        let descriptionLabel = tableView.staticTexts[Tests.ItemsView.tableViewDescriptionLabel].firstMatch
+        XCTAssertTrue(descriptionLabel.exists)
+        XCTAssertTrue(descriptionLabel.label == UIPasteboard.general.string)
+    }
+    
+    func testSelectCurrency() {
+        testCreatePINSuccessful()
         
-        button1.tap()
-        button1.tap()
-        button1.tap()
-        button1.tap()
+        // Settings.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
         
-        okButton.tap()
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let countryCurrencyCell = tableView.cells.element(boundBy: 2)
+        XCTAssertTrue(countryCurrencyCell.exists)
+        countryCurrencyCell.tap()
         
+        sleep(1)
+        
+        let currenciesItemsView = application.otherElements[Tests.Currencies.itemsView]
+        XCTAssertTrue(currenciesItemsView.exists)
+        
+        let currenciesTableView = currenciesItemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(currenciesTableView.exists)
+        let currencyCell = currenciesTableView.cells.element(boundBy: 219) // USD: 219
+        XCTAssertTrue(currencyCell.exists)
+        currencyCell.tap()
+        
+        sleep(1)
+    }
+    
+    func testUpdatePin() {
+        testCreatePINSuccessful()
+        
+        // Settings.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
+        
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let pinCell = tableView.cells.element(boundBy: 3)
+        XCTAssertTrue(pinCell.exists)
+        pinCell.tap()
+        
+        sleep(1)
+        
+        // Update PIN.
+        let keypadView = application.otherElements[Tests.Pin.keypadView]
+        XCTAssertTrue(keypadView.exists)
+        let button = keypadView.buttons["2"]
+        XCTAssertTrue(button.exists)
+        
+        button.tap()
+        button.tap()
+        button.tap()
+        button.tap()
+        
+        button.tap()
+        button.tap()
+        button.tap()
+        button.tap()
+        
+        XCTAssertTrue(itemsView.exists)
+    }
+    
+    func testEnterMerchantNameTryToGoBackWithoutEnteringDestinationAddress() {
+        testCreatePINSuccessful()
+        
+        // Settings.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
+        
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let merchantCell = tableView.cells.element(boundBy: 0)
+        XCTAssertTrue(merchantCell.exists)
+        merchantCell.tap()
+        
+        // Merchant Name alert.
+        let alert = application.alerts.firstMatch
+        XCTAssertTrue(alert.exists)
+        
+        let textField = alert.textFields.firstMatch
+        XCTAssertTrue(textField.exists)
+        textField.typeText("Djuro")
+        alert.buttons["OK"].tap()
+        
+        sleep(1)
+        
+        // Tap on Back.
+        let navigationBar = application.otherElements[Tests.NavigationBar.identifier]
+        XCTAssertTrue(navigationBar.exists)
+        let closeButton = navigationBar.buttons[Tests.NavigationBar.closeButton]
+        XCTAssertTrue(closeButton.exists)
         closeButton.tap()
         
-        app.navigationBars["My company"].tap()
-        
-        
-        button1.tap()
-        button1.tap()
-        
-        app.staticTexts["$ 11.00"].tap()
-        
-        settingsButton.tap()
-        
-        button1.tap()
-        button1.tap()
-        button1.tap()
-        button1.tap()
-        
-        closeButton.tap()
-        
-        checkmarkButton.tap()
-        
-        app.staticTexts["Waiting for payment"].tap()
-        app.staticTexts["$ 11.00"].firstMatch.tap()
-        
-        closeButton.tap()
+        // Error alert.
+        let errorAlert = application.alerts.firstMatch
+        XCTAssertTrue(errorAlert.exists)
     }
+    
+    func testDataSavedAndUserReadyForCreatingInvoices() {
+        testEnterMerchantName()
+        
+        sleep(1)
+        
+        // Enter Destination Address.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
+        
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let merchantCell = tableView.cells.element(boundBy: 1)
+        XCTAssertTrue(merchantCell.exists)
+        merchantCell.tap()
+        
+        let alert = application.alerts.firstMatch
+        XCTAssertTrue(alert.exists)
+        
+        let pasteButton = alert.buttons["Paste"]
+        XCTAssertTrue(pasteButton.exists)
+        pasteButton.tap()
+        
+        sleep(3)
+        
+        // Tap on Back.
+        let navigationBar = application.otherElements[Tests.NavigationBar.identifier]
+        XCTAssertTrue(navigationBar.exists)
+        let closeButton = navigationBar.buttons[Tests.NavigationBar.closeButton]
+        XCTAssertTrue(closeButton.exists)
+        closeButton.tap()
+        
+        sleep(1)
+        
+        // Amount label.
+        let amountLabel = application.staticTexts[Tests.PaymentInput.amountLabel]
+        XCTAssertTrue(amountLabel.exists)
+    }
+    
+    func testTapOnWalletAdView() {
+        testCreatePINSuccessful()
+        
+        // Ad View.
+        let adView = application.otherElements[Tests.Settings.walletAdView]
+        XCTAssertTrue(adView.exists)
+        adView.tap()
+    }
+    
+    func testTapOnLocalBitcoinCashAdView() {
+        testCreatePINSuccessful()
+        
+        // Ad View.
+        let adView = application.otherElements[Tests.Settings.localBitcoinCashAdView]
+        XCTAssertTrue(adView.exists)
+        adView.tap()
+    }
+    
+    func testTapOnExchangeAdView() {
+        testCreatePINSuccessful()
+        
+        // Ad View.
+        let adView = application.otherElements[Tests.Settings.exchangeAdView]
+        XCTAssertTrue(adView.exists)
+        adView.tap()
+    }
+    
+    // MARK: - Payment Input
+    func testInvoiceCreation() {
+        testEnterMerchantName()
+        
+        sleep(1)
+        
+        // Enter Destination Address.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
+        
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let merchantCell = tableView.cells.element(boundBy: 1)
+        XCTAssertTrue(merchantCell.exists)
+        merchantCell.tap()
+        
+        let alert = application.alerts.firstMatch
+        XCTAssertTrue(alert.exists)
+        
+        let pasteButton = alert.buttons["Paste"]
+        XCTAssertTrue(pasteButton.exists)
+        pasteButton.tap()
+        
+        sleep(2)
+        
+        // Tap on Back.
+        let navigationBar = application.otherElements[Tests.NavigationBar.identifier]
+        XCTAssertTrue(navigationBar.exists)
+        let closeButton = navigationBar.buttons[Tests.NavigationBar.closeButton]
+        XCTAssertTrue(closeButton.exists)
+        closeButton.tap()
+        
+        sleep(1)
+        
+        // Payment Input.
+        let amountLabel = application.staticTexts[Tests.PaymentInput.amountLabel]
+        XCTAssertTrue(amountLabel.exists)
+
+        let keypadView = application.otherElements[Tests.PaymentInput.keypadView]
+        XCTAssertTrue(keypadView.exists)
+        
+        sleep(1)
+
+        let button = keypadView.buttons["5"]
+        XCTAssertTrue(button.exists)
+        button.tap()
+        
+        sleep(1)
+
+        XCTAssertEqual(amountLabel.label, "5")
+
+        let checkoutButton = application.buttons[Tests.PaymentInput.checkoutButton]
+        XCTAssertTrue(checkoutButton.exists)
+        checkoutButton.tap()
+
+        // Payment Request.
+        let connectionStatusImageView = application.images[Tests.PaymentRequest.connectionStatusImageView]
+        let connectionStatusImageViewExists = connectionStatusImageView.waitForExistence(timeout: 3)
+        XCTAssertTrue(connectionStatusImageViewExists)
+
+        let qrImageView = application.images[Tests.PaymentRequest.qrImageView]
+        let qrImageViewExists = qrImageView.waitForExistence(timeout: 3)
+        XCTAssertTrue(qrImageViewExists)
+    }
+
+    func testInvoiceCancellation() {
+        testEnterMerchantName()
+        
+        sleep(1)
+        
+        // Enter Destination Address.
+        let itemsView = application.otherElements[Tests.Settings.itemsView]
+        XCTAssertTrue(itemsView.exists)
+        
+        let tableView = itemsView.tables[Tests.ItemsView.tableView]
+        XCTAssertTrue(tableView.exists)
+        let merchantCell = tableView.cells.element(boundBy: 1)
+        XCTAssertTrue(merchantCell.exists)
+        merchantCell.tap()
+        
+        let alert = application.alerts.firstMatch
+        XCTAssertTrue(alert.exists)
+        
+        let pasteButton = alert.buttons["Paste"]
+        XCTAssertTrue(pasteButton.exists)
+        pasteButton.tap()
+        
+        sleep(2)
+        
+        // Tap on Back.
+        let navigationBar = application.otherElements[Tests.NavigationBar.identifier]
+        XCTAssertTrue(navigationBar.exists)
+        let closeButton = navigationBar.buttons[Tests.NavigationBar.closeButton]
+        XCTAssertTrue(closeButton.exists)
+        closeButton.tap()
+        
+        sleep(1)
+        
+        // Payment Input.
+        let amountLabel = application.staticTexts[Tests.PaymentInput.amountLabel]
+        XCTAssertTrue(amountLabel.exists)
+
+        let keypadView = application.otherElements[Tests.PaymentInput.keypadView]
+        XCTAssertTrue(keypadView.exists)
+        
+        sleep(1)
+
+        let button = keypadView.buttons["5"]
+        XCTAssertTrue(button.exists)
+        button.tap()
+        
+        sleep(1)
+
+        XCTAssertEqual(amountLabel.label, "5")
+
+        let checkoutButton = application.buttons[Tests.PaymentInput.checkoutButton]
+        XCTAssertTrue(checkoutButton.exists)
+        checkoutButton.tap()
+
+        // Payment Request.
+        let connectionStatusImageView = application.images[Tests.PaymentRequest.connectionStatusImageView]
+        let connectionStatusImageViewExists = connectionStatusImageView.waitForExistence(timeout: 3)
+        XCTAssertTrue(connectionStatusImageViewExists)
+
+        let qrImageView = application.images[Tests.PaymentRequest.qrImageView]
+        let qrImageViewExists = qrImageView.waitForExistence(timeout: 3)
+        XCTAssertTrue(qrImageViewExists)
+        
+        let cancelButton = application.buttons[Tests.PaymentRequest.cancelButton]
+        XCTAssertTrue(cancelButton.exists)
+
+        cancelButton.tap()
+
+        let amountLabelExists = amountLabel.waitForExistence(timeout: 2)
+        XCTAssertTrue(amountLabelExists)
+    }
+    
+    func testMenuButtonExists() {
+        testDataSavedAndUserReadyForCreatingInvoices()
+        
+        // Menu Button.
+        let menuButton = application.buttons[Tests.PaymentInput.menuButton]
+        XCTAssertTrue(menuButton.exists)
+        menuButton.tap()
+    }
+    
+    // MARK: - Transactions
+    func testTransactionsTableViewExists() {
+        testDataSavedAndUserReadyForCreatingInvoices()
+        
+        // Menu Button.
+        let menuButton = application.buttons[Tests.PaymentInput.menuButton]
+        XCTAssertTrue(menuButton.exists)
+        menuButton.tap()
+        
+        sleep(1)
+        
+        // Side Menu.
+        let sideMenuTableView = application.tables[Tests.SideMenu.tableView]
+        XCTAssertTrue(sideMenuTableView.exists)
+        let transactionsCell = sideMenuTableView.cells.element(boundBy: 0)
+        XCTAssertTrue(transactionsCell.exists)
+        transactionsCell.tap()
+        
+        sleep(1)
+        
+        // Transactions
+        XCTAssertTrue(application.tables[Tests.Transactions.tableView].exists)
+        XCTAssertTrue(application.images[Tests.Transactions.noHistoryImageView].exists)
+        XCTAssertTrue(application.staticTexts[Tests.Transactions.noHistoryLabel].exists)
+    }
+    
+    // MARK: - Side Menu
+    func testTermsOfUseTap() {
+        testDataSavedAndUserReadyForCreatingInvoices()
+        
+        // Menu Button.
+        let menuButton = application.buttons[Tests.PaymentInput.menuButton]
+        XCTAssertTrue(menuButton.exists)
+        menuButton.tap()
+        
+        sleep(1)
+        
+        // Terms of Use.
+        let sideMenuTableView = application.tables[Tests.SideMenu.tableView]
+        XCTAssertTrue(sideMenuTableView.exists)
+        let cell = sideMenuTableView.cells.element(boundBy: 2)
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+    }
+    
+    func testServiceTermsTap() {
+        testDataSavedAndUserReadyForCreatingInvoices()
+        
+        // Menu Button.
+        let menuButton = application.buttons[Tests.PaymentInput.menuButton]
+        XCTAssertTrue(menuButton.exists)
+        menuButton.tap()
+        
+        sleep(1)
+        
+        // Service Terms.
+        let sideMenuTableView = application.tables[Tests.SideMenu.tableView]
+        XCTAssertTrue(sideMenuTableView.exists)
+        let cell = sideMenuTableView.cells.element(boundBy: 3)
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+    }
+    
+    func testPrivacyPolicyTap() {
+        testDataSavedAndUserReadyForCreatingInvoices()
+        
+        // Menu Button.
+        let menuButton = application.buttons[Tests.PaymentInput.menuButton]
+        XCTAssertTrue(menuButton.exists)
+        menuButton.tap()
+        
+        sleep(1)
+        
+        // Privacy Policy.
+        let sideMenuTableView = application.tables[Tests.SideMenu.tableView]
+        XCTAssertTrue(sideMenuTableView.exists)
+        let cell = sideMenuTableView.cells.element(boundBy: 4)
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+    }
+    
+    func testAboutTap() {
+        testDataSavedAndUserReadyForCreatingInvoices()
+        
+        // Menu Button.
+        let menuButton = application.buttons[Tests.PaymentInput.menuButton]
+        XCTAssertTrue(menuButton.exists)
+        menuButton.tap()
+        
+        sleep(1)
+        
+        // About.
+        let sideMenuTableView = application.tables[Tests.SideMenu.tableView]
+        XCTAssertTrue(sideMenuTableView.exists)
+        let cell = sideMenuTableView.cells.element(boundBy: 5)
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+    }
+    
+}
+
+extension XCUIElement {
+    
+    func forceTapElement() {
+        if isHittable {
+            tap()
+        } else {
+            let coordinate = self.coordinate(withNormalizedOffset: CGVector(dx:0.0, dy:0.0))
+            coordinate.tap()
+        }
+    }
+    
 }

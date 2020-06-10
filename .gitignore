@@ -72,3 +72,6 @@ fastlane/test_output
 /.idea/bitcoin-cash-merchant-ios.iml
 .idea/
 .gitattributes
+
+### Ignore Keys.swift
+Keys.swift

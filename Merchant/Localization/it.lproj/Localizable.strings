@@ -1,0 +1,145 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "Bitcoin Cash Register";
+
+"action_settings" = "Impostazioni";
+
+"pin_code_create_error" = "Inserisci i due codici PIN a 4 cifre corrispondenti";
+
+"pin_code_enter_error" = "Codice PIN errato";
+
+"prompt_ok" = "OK";
+
+"prompt_ko" = "Cancella";
+
+"create_pin" = "Crea Codice PIN";
+
+"confirm_pin" = "Conferma Codice PIN";
+
+"unrecognized_xpub" = "Formato della chiave pubblica non riconosciuto";
+
+"payment_received" = "Il pagamento è stato completato. Grazie";
+
+"unable_to_generate_address" = "Impossibile generare un indirizzo allo stato attuale.Controlla la procedura di installazione e riprova.";
+
+"invalid_amount" = "Importo non valido.";
+
+"removed_by_bip70_insufficient_payment" = "Il pagamento ricevuto è insufficiente.";
+
+"removed_by_bip70_re_payment_remainder" = "Promemoria:";
+
+"removed_by_bip70_re_payment_requested" = "Richiesto:";
+
+"removed_by_bip70_re_payment_received" = "Ricevuto:";
+
+"removed_by_bip70_insufficient_payment_continue" = "Aggiornare il codice QR per il restante importo dovuto?";
+
+"removed_by_bip70_overpaid_amount" = "L'importo ricevuto è superiore a quanto dovuto.";
+
+"options_payment_address" = "Indirizzo di pagamento";
+
+"options_receiving_payments" = "Ricezione dei pagamenti";
+
+"scan" = "Scansiona";
+
+"paste" = "Incolla";
+
+"obligatory_receiver" = "Devi fornire un indirizzo Bitcoin Cash per ricevere i pagamenti.";
+
+"waiting_for_payment" = "Scansiona per pagare";
+
+"confirm_request" = "Pagamento";
+
+"button_cancel" = "Cancella";
+
+"button_done" = "Fatto";
+
+"powered_by" = "Realizzato da";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "Inserisci codice PIN";
+
+"syncing_xpub" = "Sincronizzazione a xpub…";
+
+"synced_xpub" = "xpub sincronizzato!";
+
+"no_history_text" = "Non esiste una cronologia delle transazioni.";
+
+"options_explain_payment_address" = "L'indirizzo di destinazione può essere tanto l'indirizzo di Bitcoin Cash quanto una Chiave Pubblica Estesa (xpub) o una chiave API denominata merchant, oppure un codice corrispondente";
+
+"options_add_payment_address" = "Aggiungi indirizzo di destinazione";
+
+"button_save" = "Salva";
+
+"payment_enter_an_amount" = "Inserisci importo";
+
+"menu_profile" = "Profilo";
+
+"menu_cash_register" = "Cash Register";
+
+"menu_transactions" = "Transazioni";
+
+"menu_settings" = "Impostazioni";
+
+"menu_help" = "Aiuto";
+
+"menu_about" = "Chi siamo";
+
+"settings_merchant_name" = "Nome del venditore";
+
+"settings_destination_address" = "Indirizzo di destinazione";
+
+"settings_local_currency" = "Valuta locale";
+
+"settings_pin_code" = "Codice PIN";
+
+"ad_title_local_bitcoin_cash" = "Bitcoin Cash Locale";
+
+"ad_content_local_bitcoin_cash" = "Vendi il tuo Bitcoin Cash (BCH) per avere liquidità";
+
+"not_supported" = "Non supportato";
+
+"grant_camera_permission" = "Autorizzare la fotocamera per scansionare il codice QR";
+
+"view_transaction" = "Visualizza transazione";
+
+"copy_transaction" = "Copia transazione";
+
+"view_address" = "Visualizza indirizzo";
+
+"copy_address" = "Copia indirizzo";
+
+"menu_terms_of_use" = "Condizioni d'uso";
+
+"menu_service_terms" = "Termini del servizio";
+
+"menu_privacy_policy" = "Informativa sulla privacy";
+
+"contract_agreement_summary" = "nel continuare, acconsento a %@, %@ e %@";
+
+"contract_button_ok" = "Acconsento";
+
+"error" = "Errore";
+
+"notify_changes_have_been_saved" = "Le modifiche sono state salvate";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";
+
+"error_check_your_network_connection" = "Please check your network connection";
+
+"retry" = "Retry";

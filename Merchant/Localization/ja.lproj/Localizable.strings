@@ -1,0 +1,145 @@
+/* 
+  Localizable.strings
+  Merchant
+
+  Created by Djuro Alfirevic on 2/20/20.
+  Copyright © 2020 Bitcoin.com. All rights reserved.
+*/
+
+"app_name" = "ビットコインキャッシュレジ";
+
+"action_settings" = "設定";
+
+"pin_code_create_error" = "4桁のPINコードを2回入力してください";
+
+"pin_code_enter_error" = "PINコードが正しくありません";
+
+"prompt_ok" = "OK";
+
+"prompt_ko" = "キャンセル";
+
+"create_pin" = "PINコードを作成";
+
+"confirm_pin" = "PINコードの確認";
+
+"unrecognized_xpub" = "認識できない形式の公開鍵です";
+
+"payment_received" = "支払いが完了しました。ありがとうございました。";
+
+"unable_to_generate_address" = "現在アドレスを生成できません。インストール状態を確認し、再度実行してください。";
+
+"invalid_amount" = "無効な金額です。";
+
+"removed_by_bip70_insufficient_payment" = "不十分な支払いを受領しました。";
+
+"removed_by_bip70_re_payment_remainder" = "残高:";
+
+"removed_by_bip70_re_payment_requested" = "支払い要求:";
+
+"removed_by_bip70_re_payment_received" = "支払い受領:";
+
+"removed_by_bip70_insufficient_payment_continue" = "未払い分用にQRコードを更新しますか？";
+
+"removed_by_bip70_overpaid_amount" = "期待値より高い金額を受領しました。";
+
+"options_payment_address" = "支払い先アドレス";
+
+"options_receiving_payments" = "支払いを受け取っています";
+
+"scan" = "スキャン";
+
+"paste" = "貼り付け";
+
+"obligatory_receiver" = "支払いを受け取るには、ビットコインキャッシュアドレスを提供する必要があります。";
+
+"waiting_for_payment" = "支払いを待っています";
+
+"confirm_request" = "お支払いへ";
+
+"button_cancel" = "キャンセル";
+
+"button_done" = "完了";
+
+"powered_by" = "Powered by";
+
+"bitcoindotcom" = "Bitcoin.com";
+
+"enter_pin" = "PINコードを入力";
+
+"syncing_xpub" = "xpubを同期しています...";
+
+"synced_xpub" = "xpubが同期されました！";
+
+"no_history_text" = "取引履歴がありません。";
+
+"options_explain_payment_address" = "支払先アドレスは、ビットコインキャッシュアドレス、拡張公開鍵 (xpub)、商用APIキー、またはペアリングコードのいずれかを使用できます。";
+
+"options_add_payment_address" = "支払先アドレスを設定する";
+
+"button_save" = "保存";
+
+"payment_enter_an_amount" = "金額を入力";
+
+"menu_profile" = "プロフィール";
+
+"menu_cash_register" = "キャッシュレジ";
+
+"menu_transactions" = "取引";
+
+"menu_settings" = "設定";
+
+"menu_help" = "ヘルプ";
+
+"menu_about" = "このアプリについて";
+
+"settings_merchant_name" = "店名";
+
+"settings_destination_address" = "支払先アドレス";
+
+"settings_local_currency" = "現地通貨";
+
+"settings_pin_code" = "PINコード";
+
+"ad_title_local_bitcoin_cash" = "Local Bitcoin Cash";
+
+"ad_content_local_bitcoin_cash" = "お持ちのビットコインキャッシュ (BCH) を現金のために売却することができます";
+
+"not_supported" = "サポートされていません";
+
+"grant_camera_permission" = "カメラにQRコードスキャナーを使用する許可を与えてください";
+
+"view_transaction" = "トランザクションを表示";
+
+"copy_transaction" = "コピー取引";
+
+"view_address" = "住所を表示";
+
+"copy_address" = "住所をコピー";
+
+"menu_terms_of_use" = "利用規約";
+
+"menu_service_terms" = "サービス利用規約";
+
+"menu_privacy_policy" = "プライバシーポリシー";
+
+"contract_agreement_summary" = "続行することで、以下に同意します %@, %@ および %@";
+
+"contract_button_ok" = "同意する";
+
+"error" = "エラー";
+
+"notify_changes_have_been_saved" = "変更箇所が保存されました。";
+
+"inspect_tx_link_view_transaction" = "View transaction";
+
+"inspect_tx_copy_transaction" = "Copy transaction";
+
+"ad_content_bitcoincom_exchange" = "50+ trading pairs and SLP token support";
+
+"ad_content_bitcoincom_wallet" = "Store, exchange, buy, and sell Bitcoin with the fastest wallet ever.";
+
+"share_invoice_msg" = "Please pay your invoice here: %@";
+
+"error_check_your_network_connection" = "Please check your network connection";
+
+"retry" = "Retry";
