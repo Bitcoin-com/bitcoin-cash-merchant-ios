@@ -118,11 +118,16 @@ final class PaymentInputViewController: UIViewController {
         keypadView.backgroundColor = .white
         keypadView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(keypadView)
+        var screenWidth = UIScreen.main.bounds.size.width
+        var keypadMargin = Constants.KEYPAD_VIEW_MARGIN
+        if(screenWidth >= 600) {
+            keypadMargin = 164.0
+        }
         NSLayoutConstraint.activate([
-            keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.GENERAL_MARGIN),
-            keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.GENERAL_MARGIN),
+            keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: keypadMargin),
+            keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -keypadMargin),
             keypadView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: Constants.KEYPAD_VIEW_CENTER_OFFSET),
-            keypadView.heightAnchor.constraint(equalToConstant: 4 * KeypadView.KEYPAD_BUTTON_SIZE)
+            keypadView.heightAnchor.constraint(equalToConstant: 4 * Constants.KEYPAD_BUTTON_SIZE)
         ])
     }
     
@@ -295,4 +300,6 @@ private struct Constants {
     static let OVERLAY_BUTTON_VISIBLE_ALPHA: CGFloat = 0.7
     static let MAX_ALLOWED_NUMBER_OF_DIGITS = 12
     static let KEYPAD_VIEW_CENTER_OFFSET: CGFloat = 50.0
+    static let KEYPAD_VIEW_MARGIN: CGFloat = 35.0
+    static let KEYPAD_BUTTON_SIZE: CGFloat = UIScreen.main.bounds.size.width / 5
 }
