@@ -11,7 +11,9 @@ import BitcoinKit
 
 enum PaymentTargetType: Int, Codable {
     case invalid
+    case xPub
     case address
+    case apiKey
 }
 
 final class PaymentTarget: Codable {
