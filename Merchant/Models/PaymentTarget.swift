@@ -11,7 +11,6 @@ import BitcoinKit
 
 enum PaymentTargetType: Int, Codable {
     case invalid
-    case xPub
     case address
     case apiKey
 }
@@ -37,9 +36,7 @@ final class PaymentTarget: Codable {
         return legacyAddress
     }
     var invoiceRequestAddress: String? {
-        if type == .xPub {
-            return WalletManager.shared.generateAddressFromStoredIndex()
-        } else if type == .address {
+        if type == .address {
             return target
         }
         
@@ -70,12 +67,7 @@ final class PaymentTarget: Codable {
             type = .apiKey
             return
         }
-        
-        if isXPub() {
-            type = .xPub
-            return
-        }
-        
+
         if isLegacyAddress() {
             type = .address
             updateLegacyAddress()

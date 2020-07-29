@@ -431,14 +431,7 @@ final class SettingsViewController: UIViewController {
             
             UserManager.shared.destination = paymentTarget.legacyAddress
             UserManager.shared.activePaymentTarget = paymentTarget
-            
-            if paymentTarget.type == .xPub {
-                refreshItemsView()
-                updateScrollViewContentSize()
-                syncXPub(paymentTarget.legacyAddress)
-            } else {
-                refreshAndShowSuccessMessage()
-            }
+            refreshAndShowSuccessMessage()
         }
     }
     
@@ -492,22 +485,11 @@ final class SettingsViewController: UIViewController {
         
         present(alertController, animated: true)
     }
-    
-    private func syncXPub(_ address: String) {
-        ToastManager.shared.showMessage(Localized.syncingXPub, forStatus: .success)
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
-            WalletManager.shared.syncXPub(with: address)
-            ToastManager.shared.showMessage(Localized.syncedXPub, forStatus: .success)
-        }
-    }
-    
+   
     private func performAnalytics(for paymentTarget: PaymentTarget) {
         AnalyticsService.shared.logEvent(.settings_paymenttarget_changed)
         
         switch paymentTarget.type {
-        case .xPub:
-            AnalyticsService.shared.logEvent(.settings_paymenttarget_xpub_set)
         case .apiKey:
             AnalyticsService.shared.logEvent(.settings_paymenttarget_apikey_set)
         case .address:

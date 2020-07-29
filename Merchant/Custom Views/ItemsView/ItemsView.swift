@@ -88,13 +88,7 @@ final class ItemsView: CardView {
     
     private func calculateHeight() -> CGFloat {
         var height =  CGFloat(items.count - 1) * Constants.CELL_HEIGHT
-        
-        if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
-            height += Constants.XPUB_DESTINATION_CELL_HEIGHT
-        } else {
-            height += Constants.DESTINATION_CELL_HEIGHT
-        }
-        
+        height += Constants.DESTINATION_CELL_HEIGHT
         return height
     }
     
@@ -126,10 +120,6 @@ extension ItemsView: UITableViewDataSource, UITableViewDelegate {
         let item = items[indexPath.row]
         
         if item.title == UserItem.destinationAddress.title {
-            if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
-                return Constants.XPUB_DESTINATION_CELL_HEIGHT
-            }
-            
             return Constants.DESTINATION_CELL_HEIGHT
         }
         

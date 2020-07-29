@@ -499,22 +499,12 @@ final class PaymentRequestViewController: UIViewController {
         
         AnalyticsService.shared.logEvent(.invoice_paid)
         
-        // Increase the next index for xPubKey.
-        if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
-            UserManager.shared.xPubKeyIndex += 1
-        }
-        
         UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
             self.paymentCompletedView.alpha = 1.0
         }
     }
     
     private func showBip21PaymentCompletedView() {
-        // Increase the next index for xPubKey.
-        if let paymentTarget = UserManager.shared.activePaymentTarget, paymentTarget.type == .xPub {
-            UserManager.shared.xPubKeyIndex += 1
-        }
-        
         UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
             self.paymentCompletedView.alpha = 1.0
         }
