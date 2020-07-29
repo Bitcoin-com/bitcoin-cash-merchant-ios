@@ -12,7 +12,6 @@ import BitcoinKit
 enum PaymentTargetType: Int, Codable {
     case invalid
     case address
-    case apiKey
 }
 
 final class PaymentTarget: Codable {
@@ -42,13 +41,6 @@ final class PaymentTarget: Codable {
         
         return nil
     }
-    var invoiceRequestApiKey: String? {
-        if type == .apiKey {
-            return target
-        }
-        
-        return nil
-    }
 
     // MARK: - Initializer
     init(target: String, type: PaymentTargetType) {
@@ -63,11 +55,6 @@ final class PaymentTarget: Codable {
     private func setup() {
         type = .invalid
         
-        if isApiKey() {
-            type = .apiKey
-            return
-        }
-
         if isLegacyAddress() {
             type = .address
             updateLegacyAddress()

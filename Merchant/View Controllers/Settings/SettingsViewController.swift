@@ -490,8 +490,6 @@ final class SettingsViewController: UIViewController {
         AnalyticsService.shared.logEvent(.settings_paymenttarget_changed)
         
         switch paymentTarget.type {
-        case .apiKey:
-            AnalyticsService.shared.logEvent(.settings_paymenttarget_apikey_set)
         case .address:
             AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
         default:
