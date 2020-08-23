@@ -73,8 +73,8 @@ final class RESTManager: NSObject {
         }
         
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 3
-        configuration.timeoutIntervalForResource = 3
+        configuration.timeoutIntervalForRequest = 5
+        configuration.timeoutIntervalForResource = 5
         
         let session = URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue.main)
         let request = configureRequest(for: url, method: .post, body: body)

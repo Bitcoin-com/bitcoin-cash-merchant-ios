@@ -24,6 +24,8 @@ final class PaymentRequestViewController: UIViewController {
     private var amountLabel = UILabel()
     private var paymentCompletedView = PaymentCompletedView()
     private var timer: Timer?
+    private var bip21Timer: Timer?
+
     var numberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -73,6 +75,8 @@ final class PaymentRequestViewController: UIViewController {
         
         webSocket?.close()
         timer?.invalidate()
+        bip21Timer?.invalidate()
+        bip21Timer = nil
         timer = nil
     }
     
@@ -136,6 +140,11 @@ final class PaymentRequestViewController: UIViewController {
         
         timeRemainingLabel.text = time.toMinutesSeconds()
         timeRemainingLabel.alpha = 1.0
+    }
+    
+    @objc private func pingBip21Socket() {
+        if self.webSocket == nil { return }
+        self.webSocket?.ping()
     }
     
     @objc private func qrImageViewTapped() {
@@ -533,7 +542,7 @@ final class PaymentRequestViewController: UIViewController {
                 guard let self = self else { return }
                 
                 Logger.log(message: "Socket did open", type: .success)
-                
+
                 DispatchQueue.main.async {
                     self.networkConnectionAcquired()
                 }
@@ -563,9 +572,7 @@ final class PaymentRequestViewController: UIViewController {
     
     private func setupBip21Socket() {
         guard let bip21Addr = bip21Address else { return }
-        
-        if self.webSocket != nil { return }
-        
+                
         if let url = URL(string: Endpoints.bip21Websocket) {
             let webSocket = WebSocket(request: URLRequest(url: url))
             webSocket.event.message = { [weak self] message in
@@ -600,6 +607,10 @@ final class PaymentRequestViewController: UIViewController {
                 let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress!)\"}"
                 Logger.log(message: message, type: .debug)
                 webSocket.send(message)
+                self.bip21Timer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { timer in
+                    print("Ping")
+                    self.webSocket?.ping()
+                }
                 DispatchQueue.main.async {
                     self.networkConnectionAcquired()
                 }
@@ -627,11 +638,6 @@ final class PaymentRequestViewController: UIViewController {
             self.webSocket = webSocket
         }
     }
-    
-    private func pingWebSocket() {
-        webSocket?.ping()
-    }
-
 }
 
 struct WebSocketTransactionResponse: Codable {
