@@ -616,7 +616,6 @@ final class PaymentRequestViewController: UIViewController {
                 }
             }
             webSocket.event.close = { code, reason, clean in
-                
                 if self.webSocket != nil {
                     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2) {
                         webSocket.open()
@@ -624,6 +623,10 @@ final class PaymentRequestViewController: UIViewController {
                 }
                 
                 Logger.log(message: "Socket did close", type: .debug)
+                
+                DispatchQueue.main.async {
+                    self.networkConnectionLost()
+                }
             }
             webSocket.event.error = { [weak self] error in
                 guard let self = self else { return }
