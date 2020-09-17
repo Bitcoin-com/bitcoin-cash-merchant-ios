@@ -76,6 +76,14 @@
 
 "options_add_payment_address" = "Add destination address";
 
+"options_multi_terminal" = "Enable/disable Multi-terminal";
+
+"options_explain_multiterminal" = "For merchants using the same address across multiple terminals";
+
+"enable" = "Enable";
+
+"disable" = "Disable";
+
 "button_save" = "Save";
 
 "payment_enter_an_amount" = "Enter an amount";
@@ -99,6 +107,8 @@
 "settings_local_currency" = "Local Currency";
 
 "settings_pin_code" = "PIN Code";
+
+"settings_multi_terminal" = "Multi-terminal";
 
 "ad_title_local_bitcoin_cash" = "Local Bitcoin Cash";
 

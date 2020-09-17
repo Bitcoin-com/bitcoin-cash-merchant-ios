@@ -122,7 +122,8 @@ final class SettingsViewController: UIViewController {
             UserItem.merchantName,
             UserItem.destinationAddress,
             UserItem.localCurrency,
-            UserItem.pin
+            UserItem.pin,
+            UserItem.bip70
         ]
         itemsView.delegate = self
         itemsView.translatesAutoresizingMaskIntoConstraints = false
@@ -458,6 +459,27 @@ final class SettingsViewController: UIViewController {
         present(currenciesViewController, animated: true)
     }
     
+    private func showMultiterminalAlert() {
+        let alertController = UIAlertController(title: Localized.enableMultiterminal, message: Localized.multiterminalExplanation, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: Localized.cancel, style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let enableAction = UIAlertAction(title: Localized.enable, style: .default) { [weak self] _ in
+            UserManager.shared.multiterminal = true
+            self?.refreshAndShowSuccessMessage()
+        }
+        alertController.addAction(enableAction)
+        
+        let disableAction = UIAlertAction(title: Localized.disable, style: .default) { [weak self] _ in
+            UserManager.shared.multiterminal = false
+            self?.refreshAndShowSuccessMessage()
+        }
+        alertController.addAction(disableAction)
+        
+        present(alertController, animated: true)
+    }
+    
     private func refreshAndShowSuccessMessage() {
         refreshItemsView()
         updateScrollViewContentSize()
@@ -525,6 +547,10 @@ extension SettingsViewController: ItemsViewDelegate {
             AnalyticsService.shared.logEvent(.settings_currency_edit)
             
             pickCurrency()
+        }
+        
+        if item.title == UserItem.bip70.title {
+            showMultiterminalAlert()
         }
     }
     
@@ -621,4 +647,8 @@ private struct Localized {
     static var adContentBitcoinWallet: String { NSLocalizedString("ad_content_bitcoincom_wallet", comment: "") }
     static var adContentLocalBitcoinCash: String { NSLocalizedString("ad_content_local_bitcoin_cash", comment: "") }
     static var adContentBitcoinExchange: String { NSLocalizedString("ad_content_bitcoincom_exchange", comment: "") }
+    static var enableMultiterminal: String { NSLocalizedString("options_multi_terminal", comment: "") }
+    static var multiterminalExplanation: String { NSLocalizedString("options_explain_multiterminal", comment: "") }
+    static var enable: String { NSLocalizedString("enable", comment: "") }
+    static var disable: String { NSLocalizedString("disable", comment: "") }
 }

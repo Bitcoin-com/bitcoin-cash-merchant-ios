@@ -109,7 +109,14 @@ final class PaymentRequestViewController: UIViewController {
             paymentUrl = "\(BASE_URL)/i/\(invoice.paymentId)"
         }
         
-        let pleasePay = String(format: Localized.pleasePayYourInvoiceHere, paymentUrl)
+        var pleasePay = ""
+        
+        if self.bip21Address != nil {
+            pleasePay = paymentUrl
+        } else {
+            pleasePay = String(format: Localized.pleasePayYourInvoiceHere, paymentUrl)
+        }
+        
         activityItems.append(pleasePay)
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
@@ -371,35 +378,39 @@ final class PaymentRequestViewController: UIViewController {
                                             fiat: UserManager.shared.selectedCurrency.currency,
                                             apiKey: nil,
                                             address: paymentTarget.invoiceRequestAddress)
-        
-        BIP70Service.shared.createInvoice(invoiceRequest) { [weak self] result in
-            guard let self = self else { return }
-            
-            let endTime = CFAbsoluteTimeGetCurrent() - startTime
-            Logger.log(message: "Invoice created in \(endTime.formattedTime)", type: .success)
-            Logger.log(message: "Result: \(result)", type: .success)
-            switch result {
-            case .success(let data):
-                AnalyticsService.shared.logEvent(.invoice_created)
-                AnalyticsService.shared.logEvent(.invoice_created, withParameters: [
-                    "millis" : endTime * 1000
-                ])
+        let multiTerminal = UserManager.shared.multiterminal ?? false
+        if(multiTerminal) {
+            BIP70Service.shared.createInvoice(invoiceRequest) { [weak self] result in
+                guard let self = self else { return }
                 
-                self.invoice = try? JSONDecoder().decode(InvoiceStatus.self, from: data)
-                
-                if(self.invoice != nil) {
-                    UserManager.shared.activeInvoice = self.invoice
-                } else {
+                let endTime = CFAbsoluteTimeGetCurrent() - startTime
+                Logger.log(message: "Invoice created in \(endTime.formattedTime)", type: .success)
+                Logger.log(message: "Result: \(result)", type: .success)
+                switch result {
+                case .success(let data):
+                    AnalyticsService.shared.logEvent(.invoice_created)
+                    AnalyticsService.shared.logEvent(.invoice_created, withParameters: [
+                        "millis" : endTime * 1000
+                    ])
+                    
+                    self.invoice = try? JSONDecoder().decode(InvoiceStatus.self, from: data)
+                    
+                    if(self.invoice != nil) {
+                        UserManager.shared.activeInvoice = self.invoice
+                    } else {
+                        self.setupBip21Invoice(invoiceRequest: invoiceRequest)
+                        Logger.log(message: "Begin BIP21 fallback", type: .error)
+                    }
+                case .failure(let error):
+                    Logger.log(message: "Error creating invoice: \(error.localizedDescription)", type: .error)
                     self.setupBip21Invoice(invoiceRequest: invoiceRequest)
                     Logger.log(message: "Begin BIP21 fallback", type: .error)
+                    AnalyticsService.shared.logEvent(.error_download_invoice, withError: error)
+                    //self.showErrorAlert(error.localizedDescription)
                 }
-            case .failure(let error):
-                Logger.log(message: "Error creating invoice: \(error.localizedDescription)", type: .error)
-                self.setupBip21Invoice(invoiceRequest: invoiceRequest)
-                Logger.log(message: "Begin BIP21 fallback", type: .error)
-                AnalyticsService.shared.logEvent(.error_download_invoice, withError: error)
-                //self.showErrorAlert(error.localizedDescription)
             }
+        } else {
+            self.setupBip21Invoice(invoiceRequest: invoiceRequest)
         }
     }
     
