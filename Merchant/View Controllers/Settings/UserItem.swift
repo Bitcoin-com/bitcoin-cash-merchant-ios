@@ -14,6 +14,7 @@ enum UserItem {
     case destinationAddress
     case localCurrency
     case pin
+    case bip70
 }
 
 extension UserItem: Item {
@@ -29,6 +30,8 @@ extension UserItem: Item {
             return Localized.localCurrency
         case .pin:
             return Localized.pin
+        case .bip70:
+            return Localized.multiterminal
         }
     }
     
@@ -42,6 +45,8 @@ extension UserItem: Item {
             return "\(UserManager.shared.selectedCurrency.name) \(UserManager.shared.selectedCurrency.currency)"
         case .pin:
             return UserManager.shared.hasPin ? "####" : " "
+        case .bip70:
+            return UserManager.shared.multiterminal ?? false ? "Enabled" : "Disabled"
         }
     }
     
@@ -55,6 +60,8 @@ extension UserItem: Item {
             return UIImage(imageLiteralResourceName: "settings_currency")
         case .pin:
             return UIImage(imageLiteralResourceName: "settings_pin_code")
+        case .bip70:
+            return UIImage(imageLiteralResourceName: "settings_bip70")
         }
     }
     
@@ -65,4 +72,5 @@ private struct Localized {
     static var destinationAddress: String { NSLocalizedString("settings_destination_address", comment: "") }
     static var localCurrency: String { NSLocalizedString("settings_local_currency", comment: "") }
     static var pin: String { NSLocalizedString("settings_pin_code", comment: "") }
+    static var multiterminal: String { NSLocalizedString("settings_multi_terminal", comment: "") }
 }

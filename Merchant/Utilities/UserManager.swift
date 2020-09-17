@@ -65,6 +65,18 @@ final class UserManager {
             }
         }
     }
+    var multiterminal: Bool? {
+        get {
+            defaults.value(forKey: Constants.MULTI_TERMINAL_KEY) as? Bool
+        }
+        set {
+            if let newValue = newValue {
+                defaults.setValue(newValue, forKey: Constants.MULTI_TERMINAL_KEY)
+            } else {
+                defaults.removeObject(forKey: Constants.MULTI_TERMINAL_KEY)
+            }
+        }
+    }
     var hasPin: Bool {
         return pin != nil
     }
@@ -180,6 +192,7 @@ private struct Constants {
     static let COMPANY_NAME_KEY = "companyName"
     static let PIN_KEY = "pin"
     static let SELECTED_CURRENCY_KEY = "selectedCurrency"
+    static let MULTI_TERMINAL_KEY = "multiTerminal"
     static let ACTIVE_INVOICE_KEY = "activeInvoice"
     static let ACTIVE_PAYMENT_TARGET_KEY = "activePaymentTarget"
     static let TERMS_ACCEPTED_KEY = "termsAccepted"
