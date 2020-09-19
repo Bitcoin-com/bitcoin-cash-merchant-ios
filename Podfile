@@ -1,4 +1,4 @@
-platform :ios, '11.0'
+platform :ios, '12.0'
 
 target 'Merchant' do
   use_frameworks!
@@ -7,9 +7,9 @@ target 'Merchant' do
   pod 'RealmSwift'
   pod 'BitcoinKit'
   pod 'Amplitude-iOS'
-  pod 'RxSwift',          '~> 4.0'
-  pod 'RxCocoa',          '~> 4.0'
-  pod 'Moya/RxSwift',     '~> 13.0.0'
+  pod 'RxSwift',          '~> 5'
+  pod 'RxCocoa',          '~> 5'
+  pod 'Moya/RxSwift',     '~> 14.0.0'
 
   target 'MerchantTests' do
     inherit! :search_paths

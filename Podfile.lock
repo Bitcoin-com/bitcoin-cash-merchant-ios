@@ -1,30 +1,31 @@
 PODS:
-  - Alamofire (4.9.1)
+  - Alamofire (5.2.1)
   - Amplitude-iOS (4.10.0)
   - BitcoinKit (1.1.0)
-  - Moya/Core (13.0.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.1)
-  - Moya/RxSwift (13.0.1):
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
     - Moya/Core
-    - RxSwift (~> 4.0)
+    - RxSwift (~> 5.0)
   - Realm (4.3.2):
     - Realm/Headers (= 4.3.2)
   - Realm/Headers (4.3.2)
   - RealmSwift (4.3.2):
     - Realm (= 4.3.2)
-  - Result (4.1.0)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
 
 DEPENDENCIES:
   - Amplitude-iOS
   - BitcoinKit
-  - Moya/RxSwift (~> 13.0.0)
+  - Moya/RxSwift (~> 14.0.0)
   - RealmSwift
-  - RxCocoa (~> 4.0)
-  - RxSwift (~> 4.0)
+  - RxCocoa (~> 5)
+  - RxSwift (~> 5)
 
 SPEC REPOS:
   trunk:
@@ -34,21 +35,21 @@ SPEC REPOS:
     - Moya
     - Realm
     - RealmSwift
-    - Result
     - RxCocoa
+    - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   BitcoinKit: a8c198d2a57caf64dc43271901f8c5a2309aced2
-  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
   RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 7f7a9fe116fe6465270bfbdc6f22ac2b7847b310
+PODFILE CHECKSUM: df67d1f52f2ed285e0f8ee28245659351e17a67d
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
