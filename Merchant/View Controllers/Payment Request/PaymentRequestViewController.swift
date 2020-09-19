@@ -97,10 +97,12 @@ final class PaymentRequestViewController: UIViewController {
         var paymentUrl: String
         var activityItems = [Any]()
         
-        //TODO Fix this in a later version. Doesn't seem to work on iOS 14.
-        /*if let image = qrImage {
-            activityItems.append(image)
-        }*/
+        let version = OperatingSystemVersion(majorVersion: 13, minorVersion: 0, patchVersion: 0)
+        if ProcessInfo.processInfo.isOperatingSystemAtLeast(version) {
+            if let image = qrImage {
+                activityItems.append(image)
+            }
+        }
         
         if self.bip21Address != nil {
             guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCH().avoidNotation else { return }
