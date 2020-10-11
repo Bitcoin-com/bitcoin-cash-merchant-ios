@@ -66,6 +66,10 @@ extension Int64 {
     }
     
     func toBCHFormat() -> String {
+        return toBCHFormat(unit: false)
+    }
+    
+    func toBCHFormat(unit: Bool) -> String {
         var satoshisStr: [Character] = description.reversed()
         
         while (satoshisStr.count < 9) {
@@ -80,14 +84,15 @@ extension Int64 {
             if i%3 == 0 {
                 if i == 6 {
                     satoshisStrWithSpace.insert(".", at: 0)
-                } else {
-                    satoshisStrWithSpace.insert(" ", at: 0)
                 }
             }
             satoshisStrWithSpace.insert(satoshisStr[i], at: 0)
         }
         
-        return "\(String(satoshisStrWithSpace)) BCH"
+        var string = String(satoshisStrWithSpace)
+        if unit {
+            string += " BCH"
+        }
+        return string
     }
-    
 }

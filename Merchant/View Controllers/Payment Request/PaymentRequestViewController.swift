@@ -25,6 +25,7 @@ final class PaymentRequestViewController: UIViewController {
     private var paymentCompletedView = PaymentCompletedView()
     private var timer: Timer?
     private var bip21Timer: Timer?
+    private var transactionSaved: Bool = false
 
     var numberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
@@ -78,6 +79,7 @@ final class PaymentRequestViewController: UIViewController {
         bip21Timer?.invalidate()
         bip21Timer = nil
         timer = nil
+        transactionSaved = false
     }
     
     // MARK: - Actions
@@ -158,10 +160,15 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     @objc private func qrImageViewTapped() {
-        guard let invoice = invoice else { return }
-        
-        let url = "\(Endpoints.wallet)\(BASE_URL)/i/\(invoice.paymentId)"
-        
+        let invoice = self.invoice
+        var url = ""
+        if invoice == nil {
+            let bip21Invoice = self.expectedBip21Payment
+            url = "\(bip21Invoice?.address ?? "")?amount=\(bip21Invoice?.amount.toBCHFormat() ?? "")"
+        } else {
+            url = "\(Endpoints.wallet)\(BASE_URL)/i/\(invoice?.paymentId ?? "")"
+        }
+                
         UIPasteboard.general.string = url
         ToastManager.shared.showMessage(url, forStatus: .success)
     }
@@ -471,44 +478,65 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func saveTransaction(for invoice: InvoiceStatus) {
-        let realm = try! Realm()
+        if self.transactionSaved == false {
+            let realm = try! Realm()
+            let txs = realm.objects(StoreTransaction.self)
+            for tx in txs {
+                if tx.txid == invoice.txId {
+                    return
+                }
+            }
 
-        let transaction = StoreTransaction()
-        transaction.amountInFiat = amountLabel.text!
-        transaction.amountInSatoshis = 0
-        
-        if let amount = invoice.outputs.first?.amount {
-            transaction.amountInSatoshis = Int64(amount)
-        }
-        
-        if let address = invoice.outputs.first?.address {
-            transaction.toAddress = address
-        }
-        
-        transaction.txid = invoice.txId ?? ""
-        transaction.date = Date()
+            let transaction = StoreTransaction()
+            transaction.amountInFiat = amountLabel.text!
+            transaction.amountInSatoshis = 0
+            
+            if let amount = invoice.outputs.first?.amount {
+                transaction.amountInSatoshis = Int64(amount)
+            }
+            
+            if let address = invoice.outputs.first?.address {
+                transaction.toAddress = address
+            }
+            
+            transaction.txid = invoice.txId ?? ""
+            transaction.date = Date()
 
-        try! realm.write {
-            realm.add(transaction)
+            try! realm.write {
+                realm.add(transaction)
+            }
+            
+            self.transactionSaved = true
+            self.showPaymentCompletedView(for: invoice)
         }
     }
     
     private func saveBip21Transaction(for paymentReceived: WebSocketTransactionResponse) {
-        let realm = try! Realm()
+        if self.transactionSaved == false {
+            let realm = try! Realm()
+            let txs = realm.objects(StoreTransaction.self)
+            for tx in txs {
+                if tx.txid == paymentReceived.txid {
+                    return
+                }
+            }
 
-        let transaction = StoreTransaction()
-        transaction.amountInFiat = amountLabel.text!
-        transaction.amountInSatoshis = paymentReceived.amount
+            let transaction = StoreTransaction()
+            transaction.amountInFiat = amountLabel.text!
+            transaction.amountInSatoshis = paymentReceived.amount
 
-        if let address = paymentReceived.outputs.first?.address {
-            transaction.toAddress = address
-        }
-        
-        transaction.txid = paymentReceived.txid ?? ""
-        transaction.date = Date()
+            if let address = paymentReceived.outputs.first?.address {
+                transaction.toAddress = address
+            }
+            
+            transaction.txid = paymentReceived.txid
+            transaction.date = Date()
 
-        try! realm.write {
-            realm.add(transaction)
+            try! realm.write {
+                realm.add(transaction)
+            }
+            self.transactionSaved = true
+            self.showBip21PaymentCompletedView()
         }
     }
     
@@ -545,7 +573,6 @@ final class PaymentRequestViewController: UIViewController {
                     if let invoiceStatus = try? JSONDecoder().decode(InvoiceStatus.self, from: data) {
                         if invoiceStatus.isPaid {
                             self.saveTransaction(for: invoiceStatus)
-                            self.showPaymentCompletedView(for: invoiceStatus)
                             UserManager.shared.activeInvoice = nil
                             UserManager.shared.lastProcessedPaymentId = invoiceStatus.paymentId
                         }
@@ -603,7 +630,6 @@ final class PaymentRequestViewController: UIViewController {
                             let expectedAmount = expectedPayment!.amount
                             if(expectedAmount == amount) {
                                 self.saveBip21Transaction(for: transaction)
-                                self.showBip21PaymentCompletedView()
                             } else if(amount > expectedAmount) {
                                 Logger.log(message: "Transaction is overpaid!", type: .error)
                             } else if(amount < expectedAmount) {
