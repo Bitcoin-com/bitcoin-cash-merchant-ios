@@ -25,6 +25,7 @@ final class PaymentRequestViewController: UIViewController {
     private var paymentCompletedView = PaymentCompletedView()
     private var timer: Timer?
     private var bip21Timer: Timer?
+    private var bip21BlockchainInfoTimer: Timer?
     private var transactionSaved: Bool = false
 
     var numberFormatter: NumberFormatter {
@@ -56,10 +57,12 @@ final class PaymentRequestViewController: UIViewController {
         didSet {
             setupBip21QrCode()
             setupBip21Socket()
+            setupBip21BlockchainInfoSocket()
         }
     }
     private var expectedBip21Payment: ExpectedBip21Payment?
     private var webSocket: WebSocket?
+    private var blockchainInfoSocket: WebSocket?
     private var qrImage: UIImage?
     
     // MARK: - View Lifecycle
@@ -75,9 +78,12 @@ final class PaymentRequestViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         webSocket?.close()
+        blockchainInfoSocket?.close()
         timer?.invalidate()
         bip21Timer?.invalidate()
         bip21Timer = nil
+        bip21BlockchainInfoTimer?.invalidate()
+        bip21BlockchainInfoTimer = nil
         timer = nil
         transactionSaved = false
     }
@@ -91,6 +97,8 @@ final class PaymentRequestViewController: UIViewController {
         self.bip21Address = nil
         self.webSocket?.close()
         self.webSocket = nil
+        self.blockchainInfoSocket?.close()
+        self.blockchainInfoSocket = nil
         dismiss(animated: true)
     }
     
@@ -540,6 +548,31 @@ final class PaymentRequestViewController: UIViewController {
         }
     }
     
+    private func saveBip21BlockchainInfoTransaction(txid: String, address: String, amount: Int64) {
+        if self.transactionSaved == false {
+            let realm = try! Realm()
+            let txs = realm.objects(StoreTransaction.self)
+            for tx in txs {
+                if tx.txid == txid {
+                    return
+                }
+            }
+
+            let transaction = StoreTransaction()
+            transaction.amountInFiat = amountLabel.text!
+            transaction.amountInSatoshis = amount
+            transaction.toAddress = address
+            transaction.txid = txid
+            transaction.date = Date()
+
+            try! realm.write {
+                realm.add(transaction)
+            }
+            self.transactionSaved = true
+            self.showBip21PaymentCompletedView()
+        }
+    }
+    
     private func showPaymentCompletedView(for invoiceStatus: InvoiceStatus) {
         // If the invoiceStatus paymentId is the same as the one which is already stored - do not send analytics event again.
         if let paymentId = UserManager.shared.lastProcessedPaymentId {
@@ -681,6 +714,91 @@ final class PaymentRequestViewController: UIViewController {
             self.webSocket = webSocket
         }
     }
+    
+    private func setupBip21BlockchainInfoSocket() {
+        guard let bip21Addr = bip21Address else { return }
+                
+        if let url = URL(string: Endpoints.bip21BlockchainInfoWebsocket) {
+            let webSocket = WebSocket(request: URLRequest(url: url))
+            webSocket.event.message = { [weak self] message in
+                guard let self = self else { return }
+
+                Logger.log(message: "Received message: \(message)", type: .debug)
+                if let messageString = message as? String, let data = messageString.data(using: .utf8) {
+                    let expectedPayment = self.expectedBip21Payment
+                    let legacyAddr = try? expectedPayment!.address.toLegacy()
+                    if(self.expectedBip21Payment != nil) {
+                        if let transaction = try? JSONDecoder().decode(WebSocketBlockchainInfoTransactionResponse.self, from: data) {
+                            if transaction.op == "utx" {
+                                var amount: Int64 = 0
+                                var foundAddr: String? = nil
+                                for out in transaction.x.out {
+                                    let addr = out.addr
+                                    if addr == legacyAddr {
+                                        foundAddr = addr
+                                        amount = out.value
+                                    }
+                                }
+                                
+                                if(foundAddr != nil) {
+                                    Logger.log(message: "Amount received: \(amount)", type: .success)
+                                    Logger.log(message: "Expected amount: \(expectedPayment!.amount)", type: .success)
+                                    let expectedAmount = expectedPayment!.amount
+                                    if(expectedAmount == amount) {
+                                        self.saveBip21BlockchainInfoTransaction(txid: transaction.x.hash, address: foundAddr!, amount: amount)
+                                    } else if(amount > expectedAmount) {
+                                        Logger.log(message: "Transaction is overpaid!", type: .error)
+                                    } else if(amount < expectedAmount) {
+                                        Logger.log(message: "Transaction is underpaid!", type: .error)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            webSocket.event.open = { [weak self] in
+                guard let self = self else { return }
+                
+                Logger.log(message: "Socket did open", type: .success)
+                let legacyAddress = try? bip21Addr.toLegacy()
+                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress!)\"}"
+                Logger.log(message: message, type: .debug)
+                webSocket.send(message)
+                self.bip21BlockchainInfoTimer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { timer in
+                    print("Ping")
+                    self.blockchainInfoSocket?.ping()
+                }
+                DispatchQueue.main.async {
+                    self.networkConnectionAcquired()
+                }
+            }
+            webSocket.event.close = { code, reason, clean in
+                if self.blockchainInfoSocket != nil {
+                    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2) {
+                        webSocket.open()
+                    }
+                }
+                
+                Logger.log(message: "Socket did close", type: .debug)
+                
+                DispatchQueue.main.async {
+                    self.networkConnectionLost()
+                }
+            }
+            webSocket.event.error = { [weak self] error in
+                guard let self = self else { return }
+                
+                AnalyticsService.shared.logEvent(.error_connect_to_socket, withError: error)
+                
+                DispatchQueue.main.async {
+                    self.showErrorAlert(Localized.noNetworkConnection)
+                }
+            }
+            
+            self.blockchainInfoSocket = webSocket
+        }
+    }
 }
 
 struct WebSocketTransactionResponse: Codable {
@@ -688,6 +806,19 @@ struct WebSocketTransactionResponse: Codable {
     var fees: Int
     var amount: Int64
     var outputs: [WebSocketOutputResponse]
+}
+
+struct WebSocketBlockchainInfoTransactionResponse: Decodable {
+    struct ResponseX: Decodable {
+        struct ResponseOut: Decodable {
+            var addr: String
+            var value: Int64
+        }
+        var hash: String
+        var out: [ResponseOut]
+    }
+    var op: String
+    var x: ResponseX
 }
 
 struct WebSocketOutputResponse: Codable {

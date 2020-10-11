@@ -23,6 +23,7 @@ struct Endpoints {
     static let explorerBitcoin = "https://explorer.bitcoin.com/bch"
     static let websocket = "wss://pay.bitcoin.com/s"
     static let bip21Websocket = "wss://bch.api.wallet.bitcoin.com/bws/api/socket/v1/address"
+    static let bip21BlockchainInfoWebsocket = "wss://ws.blockchain.info/bch/inv"
     static let wallet = "bitcoincash:?r="
     static let addressDetails = "\(Endpoints.restBitcoin)/address/details"
     static let bitcoinWalletAppStore = "https://apps.apple.com/us/app/bitcoin-wallet-by-bitcoin-com/id1252903728"
