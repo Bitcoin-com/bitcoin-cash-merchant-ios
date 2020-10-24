@@ -115,7 +115,7 @@ final class PaymentRequestViewController: UIViewController {
         }
         
         if self.bip21Address != nil {
-            guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCH().avoidNotation else { return }
+            guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCHFormat() else { return }
             paymentUrl = "\(bip21Addr)?amount=\(amountInBch)"
         } else {
             guard let invoice = invoice else { return }
@@ -465,7 +465,7 @@ final class PaymentRequestViewController: UIViewController {
     
     private func setupBip21QrCode() {
         print("Start setup QR code")
-        guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCH().avoidNotation, let url = URL(string: "\(bip21Addr)?amount=\(amountInBch)") else { return }
+        guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCHFormat(), let url = URL(string: "\(bip21Addr)?amount=\(amountInBch)") else { return }
         
         activityIndicatorView.stopAnimating()
         
