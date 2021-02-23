@@ -172,7 +172,11 @@ final class PaymentRequestViewController: UIViewController {
         var url = ""
         if invoice == nil {
             let bip21Invoice = self.expectedBip21Payment
-            url = "\(bip21Invoice?.address ?? "")?amount=\(bip21Invoice?.amount.toBCHFormat() ?? "")"
+            var bip21Addr = bip21Invoice?.address ?? ""
+            if(bip21Addr.starts(with: "bitcoincash:") == false) {
+                bip21Addr = "bitcoincash:\(bip21Addr)"
+            }
+            url = "\(bip21Addr)?amount=\(bip21Invoice?.amount.toBCHFormat() ?? "")"
         } else {
             url = "\(Endpoints.wallet)\(BASE_URL)/i/\(invoice?.paymentId ?? "")"
         }
@@ -465,7 +469,11 @@ final class PaymentRequestViewController: UIViewController {
     
     private func setupBip21QrCode() {
         print("Start setup QR code")
-        guard let bip21Addr = bip21Address, let amountInBch = expectedBip21Payment?.amount.toBCHFormat(), let url = URL(string: "\(bip21Addr)?amount=\(amountInBch)") else { return }
+        guard var bip21Addr = bip21Address else { return }
+        if(bip21Addr.starts(with: "bitcoincash:") == false) {
+            bip21Addr = "bitcoincash:\(bip21Addr)"
+        }
+        guard let amountInBch = expectedBip21Payment?.amount.toBCHFormat(), let url = URL(string: "\(bip21Addr)?amount=\(amountInBch)") else { return }
         
         activityIndicatorView.stopAnimating()
         
@@ -645,8 +653,6 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupBip21Socket() {
-        guard let bip21Addr = bip21Address else { return }
-                
         if let url = URL(string: Endpoints.bip21Websocket) {
             let webSocket = WebSocket(request: URLRequest(url: url))
             webSocket.event.message = { [weak self] message in
@@ -674,10 +680,10 @@ final class PaymentRequestViewController: UIViewController {
             }
             webSocket.event.open = { [weak self] in
                 guard let self = self else { return }
-                
                 Logger.log(message: "Socket did open", type: .success)
+                guard let bip21Addr = self.bip21Address else { return }
                 let legacyAddress = try? bip21Addr.toLegacy()
-                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress!)\"}"
+                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress ?? "")\"}"
                 Logger.log(message: message, type: .debug)
                 webSocket.send(message)
                 self.bip21Timer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { timer in
@@ -716,8 +722,6 @@ final class PaymentRequestViewController: UIViewController {
     }
     
     private func setupBip21BlockchainInfoSocket() {
-        guard let bip21Addr = bip21Address else { return }
-                
         if let url = URL(string: Endpoints.bip21BlockchainInfoWebsocket) {
             let webSocket = WebSocket(request: URLRequest(url: url))
             webSocket.event.message = { [weak self] message in
@@ -759,10 +763,10 @@ final class PaymentRequestViewController: UIViewController {
             }
             webSocket.event.open = { [weak self] in
                 guard let self = self else { return }
-                
+                guard let bip21Addr = self.bip21Address else { return }
                 Logger.log(message: "Socket did open", type: .success)
                 let legacyAddress = try? bip21Addr.toLegacy()
-                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress!)\"}"
+                let message = "{\"op\": \"addr_sub\", \"addr\":\"\(legacyAddress ?? "")\"}"
                 Logger.log(message: message, type: .debug)
                 webSocket.send(message)
                 self.bip21BlockchainInfoTimer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { timer in

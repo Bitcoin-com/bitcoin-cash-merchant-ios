@@ -46,6 +46,20 @@ extension String {
     }
 	
     func toLegacy() throws -> String {
-        return try AddressFactory.create(self).base58
+        return try createAddress(self).legacy
+    }
+    
+    private func createAddress(_ plainAddress: String) throws -> Address {
+        do {
+            var formattedAddress = plainAddress
+            if(formattedAddress.starts(with: "bitcoincash:") == false) {
+                formattedAddress = "bitcoincash:\(plainAddress)"
+            }
+            return try BitcoinAddress(cashaddr: formattedAddress)
+        } catch AddressError.invalid {
+            return try BitcoinAddress(legacy: plainAddress)
+        } catch let e {
+            throw e
+        }
     }
 }
