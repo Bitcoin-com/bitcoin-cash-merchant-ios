@@ -55,13 +55,18 @@ final class PaymentRequestViewController: UIViewController {
     var getRateInteractor: GetRateInteractor?
     var bip21Address: String? {
         didSet {
-            setupBip21QrCode()
             setupBip21Socket()
             setupBip21BlockchainInfoSocket()
         }
     }
     private var expectedBip21Payment: ExpectedBip21Payment?
-    private var webSocket: WebSocket?
+    private var webSocket: WebSocket? {
+        didSet {
+            if(expectedBip21Payment != nil) {
+                setupBip21QrCode()
+            }
+        }
+    }
     private var blockchainInfoSocket: WebSocket?
     private var qrImage: UIImage?
     
