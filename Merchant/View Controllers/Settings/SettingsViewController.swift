@@ -418,13 +418,6 @@ final class SettingsViewController: UIViewController {
     private func validateAndStoreAddress(_ address: String) {
         let paymentTarget = PaymentTarget(target: address, type: .address)
         
-        // If the address is the same as the one which is already stored - do not store it again.
-        if let storedPaymentTarget = UserManager.shared.activePaymentTarget {
-            if paymentTarget.legacyAddress == storedPaymentTarget.legacyAddress {
-                return
-            }
-        }
-        
         if paymentTarget.type == .invalid {
             showFailureMessage()
         } else {
