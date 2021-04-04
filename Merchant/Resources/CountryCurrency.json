@@ -203,6 +203,7 @@
  { "currency":"CHF", "decimals":2, "iso":"CH", "lang":"de-CH", "name":"Switzerland" },
  { "currency":"SYP", "decimals":0, "iso":"SY", "lang":"ar-SY", "name":"Syria" },
  { "currency":"STD", "decimals":0, "iso":"ST", "lang":"pt-ST", "name":"São Tomé & Príncipe" },
+ { "currency":"TWD", "decimals":2, "iso":"TW", "lang":"zh-TW", "name":"Taiwan" },
  { "currency":"TJS", "decimals":2, "iso":"TJ", "lang":"tg", "name":"Tajikistan" },
  { "currency":"TZS", "decimals":2, "iso":"TZ", "lang":"sw-TZ", "name":"Tanzania" },
  { "currency":"THB", "decimals":2, "iso":"TH", "lang":"th", "name":"Thailand" },
