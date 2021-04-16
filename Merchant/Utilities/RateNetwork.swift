@@ -15,14 +15,14 @@ enum RateNetwork {
 extension RateNetwork: TargetType {
     public var baseURL: URL {
         switch self {
-        default: return URL(string: "https://www.bitcoin.com/special")!
+        default: return URL(string: "https://markets.api.bitcoin.com/rates?c=BTC")!
         }
     }
     
     public var path: String {
         switch self {
         case .get:
-            return "/rates.json"
+            return ""
         }
     }
     

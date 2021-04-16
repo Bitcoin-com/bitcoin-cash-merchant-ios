@@ -118,9 +118,14 @@ class RateManager {
     
     func storeData(withRates rates: [RateResponse]) {
         do {
+            guard let btcUsdRate = rates.filter({ $0.code == "USD" }).first else {
+                return
+            }
             guard let bchRate = rates.filter({ $0.code == "BCH" }).first else {
                 return
             }
+            let bchUsdRate = btcUsdRate.rate/bchRate.rate
+            let bchBtcRate = bchUsdRate/btcUsdRate.rate
             
             let storeRates = rates.compactMap { rate -> StoreRate? in
                 guard rate.code != "BCH"
@@ -131,9 +136,8 @@ class RateManager {
                 
                 let newRate = StoreRate()
                 newRate.id = rate.code
-                newRate.rate = rate.rate*bchRate.rate
+                newRate.rate = rate.rate*bchBtcRate
                 newRate.updatedAt = 0
-                
                 if rate.code == "USD" {
                     self.defaultRate = newRate
                 }

@@ -448,7 +448,6 @@ final class PaymentRequestViewController: UIViewController {
             print("error get rate")
             return
         }
-        
         let amountInSatoshis = rate.rate > 0  ? (invoiceRequest!.fiatAmount / rate.rate).toSatoshis() : 0
         let addr = invoiceRequest?.address
         self.expectedBip21Payment = ExpectedBip21Payment(address: addr!, amount: amountInSatoshis)
