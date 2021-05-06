@@ -153,3 +153,5 @@
 "error_check_your_network_connection" = "Please check your network connection";
 
 "retry" = "Retry";
+
+"outdated_rates" = "Exchange rates are out of date. Updating...";

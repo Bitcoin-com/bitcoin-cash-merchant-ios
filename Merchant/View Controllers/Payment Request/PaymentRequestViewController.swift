@@ -74,6 +74,7 @@ final class PaymentRequestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RateManager.shared.fetchRate()
         setupView()
         localize()
         createInvoice()

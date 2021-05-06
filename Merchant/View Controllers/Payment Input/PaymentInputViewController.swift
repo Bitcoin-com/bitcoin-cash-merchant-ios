@@ -73,6 +73,12 @@ final class PaymentInputViewController: UIViewController {
     // MARK: - Actions
     @objc private func checkoutButtonTapped() {
         AnalyticsService.shared.logEvent(.invoice_checkout)
+        let outdated = RateManager.shared.isSeverelyOutdated()
+        if outdated == true {
+            RateManager.shared.fetchRate()
+            ToastManager.shared.showMessage(Localized.outdatedRates, forStatus: .failure)
+            return
+        }
         
         if let amount = Double(amountString) {
             if amount == 0.0 {
@@ -280,6 +286,7 @@ extension PaymentInputViewController: KeypadViewDelegate {
 }
 
 private struct Localized {
+    static var outdatedRates: String { NSLocalizedString("outdated_rates", comment: "") }
     static var checkout: String { NSLocalizedString("confirm_request", comment: "") }
     static var enterAmount: String { NSLocalizedString("payment_enter_an_amount", comment: "") }
     static var invalidAmount: String { NSLocalizedString("invalid_amount", comment: "") }

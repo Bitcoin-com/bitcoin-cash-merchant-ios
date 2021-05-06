@@ -16,6 +16,7 @@ class RateManager {
     
     var defaultRate = StoreRate()
     var defaultCurrency = StoreCurrency()
+    var lastUpdate = 0.0
     
     fileprivate let bag = DisposeBag()
     fileprivate lazy var timer: DispatchSourceTimer = {
@@ -112,8 +113,15 @@ class RateManager {
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onSuccess: { [weak self] response in
                 self?.storeData(withRates: response)
+                self?.lastUpdate = NSDate().timeIntervalSince1970
             })
             .disposed(by: bag)
+    }
+    
+    func isSeverelyOutdated() -> Bool {
+        let now = NSDate().timeIntervalSince1970
+        let timeSince = now - self.lastUpdate
+        return timeSince >= (1 * 60)
     }
     
     func storeData(withRates rates: [RateResponse]) {
