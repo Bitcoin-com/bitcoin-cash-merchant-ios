@@ -605,6 +605,8 @@ final class PaymentRequestViewController: UIViewController {
         UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
             self.paymentCompletedView.alpha = 1.0
         }
+        
+        self.expectedBip21Payment = nil
     }
     
     private func setupSocket() {
@@ -735,12 +737,12 @@ final class PaymentRequestViewController: UIViewController {
                 Logger.log(message: "Received message: \(message)", type: .debug)
                 if let messageString = message as? String, let data = messageString.data(using: .utf8) {
                     let expectedPayment = self.expectedBip21Payment
-                    let legacyAddr = try? expectedPayment!.address.toLegacy()
                     if(self.expectedBip21Payment != nil) {
                         if let transaction = try? JSONDecoder().decode(WebSocketBlockchainInfoTransactionResponse.self, from: data) {
                             if transaction.op == "utx" {
                                 var amount: Int64 = 0
                                 var foundAddr: String? = nil
+                                let legacyAddr = try? self.bip21Address?.toLegacy()
                                 for out in transaction.x.out {
                                     let addr = out.addr
                                     if addr == legacyAddr {
