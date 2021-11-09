@@ -17,7 +17,7 @@ struct Endpoints {
   static let termsOfUse = "https://www.bitcoin.com/legal/"
   static let serviceTerms = "https://www.bitcoin.com/bitcoin-cash-register/service-terms/"
   static let privacyPolicy = "https://www.bitcoin.com/privacy-policy/"
-  static let localBitcoin = "https://localcryptos.com"
+  static let localBitcoin = "https://localcryptos.com/?campaign=bl"
   static let exchangeBitcoin = "https://exchange.bitcoin.com"
   static let restBitcoin = "https://rest.bitcoin.com/v2"
   static let explorerBitcoin = "https://explorer.bitcoin.com/bch"
