@@ -297,6 +297,9 @@ final class SettingsViewController: UIViewController {
   private func registerForNotifications() {
     NotificationCenter.default.addObserver(
       self, selector: #selector(refresh), name: .refreshSettings, object: nil)
+
+    NotificationCenter.default.addObserver(
+      self, selector: #selector(refresh), name: .settingsUpdated, object: nil)
   }
 
   private func updateMerchantName() {
