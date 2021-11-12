@@ -82,7 +82,7 @@ final class ItemTableViewCell: UITableViewCell {
     labelsStackView.addArrangedSubview(descriptionLabel)
     labelsStackView.distribution = .fillProportionally
     labelsStackView.axis = .vertical
-    labelsStackView.spacing = 5
+    labelsStackView.spacing = 0
     labelsStackView.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(labelsStackView)
     NSLayoutConstraint.activate([
@@ -98,7 +98,7 @@ final class ItemTableViewCell: UITableViewCell {
 
 private struct Constants {
   static let ICON_MARGIN: CGFloat = 15.0
-  static let ICON_SIZE: CGFloat = 30.0
+  static let ICON_SIZE: CGFloat = 40.0
   static let TITLE_LABEL_MARGIN: CGFloat = 15.0
   static let LABEL_OFFSET: CGFloat = 10.0
   static let BORDER_HEIGHT: CGFloat = 1.0
