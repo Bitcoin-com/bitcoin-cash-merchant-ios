@@ -5,7 +5,7 @@ target 'Merchant' do
 
   # Pods for Merchant
   pod 'RealmSwift'
-  pod 'BitcoinKit'
+  pod 'BitcoinKit', :git => 'https://github.com/saltyskip/BitcoinKit.git'
   pod 'Amplitude-iOS'
   pod 'RxSwift',          '~> 5'
   pod 'RxCocoa',          '~> 5'

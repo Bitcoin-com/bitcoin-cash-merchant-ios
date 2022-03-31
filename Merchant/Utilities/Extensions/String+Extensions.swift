@@ -49,6 +49,10 @@ extension String {
         return try createAddress(self).legacy
     }
     
+    func toCash() throws -> String {
+        return try createAddress(self).cashaddr
+    }
+    
     private func createAddress(_ plainAddress: String) throws -> Address {
         do {
             var formattedAddress = plainAddress
