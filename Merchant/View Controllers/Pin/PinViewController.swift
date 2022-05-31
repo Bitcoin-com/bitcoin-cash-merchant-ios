@@ -14,7 +14,7 @@ enum PinViewControllerState {
     case confirm
 }
 
-protocol PinViewControllerDelegate: class {
+protocol PinViewControllerDelegate: AnyObject {
     func pinViewControllerDidEnterPinSuccessfully(_ viewController: PinViewController)
     func pinViewController(_ viewController: PinViewController, didCreatePinSuccessfully pin: String)
     func pinViewControllerDidClose(_ viewController: PinViewController)
@@ -37,12 +37,24 @@ final class PinViewController: UIViewController {
         }
     }
     
+    // MARK: - Layout Properties
+    private var constraints : [NSLayoutConstraint] = [];
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         localize()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate { coordinatorContext in
+            self.delegate?.pinViewControllerDidClose(self)
+            self.setupConstraints()
+        }
     }
     
     // MARK: - Actions
@@ -58,6 +70,7 @@ final class PinViewController: UIViewController {
         setupKeypadView()
         setupVerificationView()
         setupExpalanationLabel()
+        setupConstraints()
     }
     
     private func setupCancelButton() {
@@ -66,12 +79,6 @@ final class PinViewController: UIViewController {
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         view.addSubview(cancelButton)
-        NSLayoutConstraint.activate([
-            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CANCEL_BUTTON_LEADING_MARGIN),
-            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.CANCEL_BUTTON_TOP_MARGIN),
-            cancelButton.widthAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE),
-            cancelButton.heightAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE)
-        ])
     }
     
     private func setupKeypadView() {
@@ -81,29 +88,12 @@ final class PinViewController: UIViewController {
         keypadView.delegate = self
         keypadView.hasDecimalPoint = false
         view.addSubview(keypadView)
-        var screenWidth = UIScreen.main.bounds.size.width
-        var keypadMargin = Constants.KEYPAD_VIEW_MARGIN
-        if(screenWidth >= 600) {
-            keypadMargin = 164.0
-        }
-        NSLayoutConstraint.activate([
-            keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: keypadMargin),
-            keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -keypadMargin),
-            keypadView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: Constants.KEYPAD_VIEW_CENTER_OFFSET),
-            keypadView.heightAnchor.constraint(equalToConstant: 4 * Constants.KEYPAD_BUTTON_SIZE)
-        ])
     }
     
     private func setupVerificationView() {
         verificationView.translatesAutoresizingMaskIntoConstraints = false
         verificationView.delegate = self
         view.addSubview(verificationView)
-        NSLayoutConstraint.activate([
-            verificationView.leadingAnchor.constraint(equalTo: keypadView.leadingAnchor, constant: Constants.VERIFICATION_VIEW_HORIZONTAL_PADDING),
-            verificationView.trailingAnchor.constraint(equalTo: keypadView.trailingAnchor, constant: -Constants.VERIFICATION_VIEW_HORIZONTAL_PADDING),
-            verificationView.bottomAnchor.constraint(equalTo: keypadView.topAnchor, constant: -Constants.VERIFICATION_VIEW_BOTTOM_MARGIN),
-            verificationView.heightAnchor.constraint(equalToConstant: Constants.VERIFICATION_VIEW_HEIGHT)
-        ])
         
         verificationView.setNumbersRequired(AppConstants.PIN_NUMBERS_REQUIRED)
     }
@@ -116,10 +106,51 @@ final class PinViewController: UIViewController {
         explanationLabel.translatesAutoresizingMaskIntoConstraints = false
         explanationLabel.font = .systemFont(ofSize: 16.0)
         view.addSubview(explanationLabel)
-        NSLayoutConstraint.activate([
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.deactivate(constraints)
+        
+        constraints = [
+            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CANCEL_BUTTON_LEADING_MARGIN),
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.CANCEL_BUTTON_TOP_MARGIN),
+            cancelButton.widthAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE),
+            cancelButton.heightAnchor.constraint(equalToConstant: Constants.CANCEL_BUTTON_SIZE),
+            
+            verificationView.leadingAnchor.constraint(equalTo: keypadView.leadingAnchor, constant: Constants.VERIFICATION_VIEW_HORIZONTAL_PADDING),
+            verificationView.trailingAnchor.constraint(equalTo: keypadView.trailingAnchor, constant: -Constants.VERIFICATION_VIEW_HORIZONTAL_PADDING),
+            verificationView.bottomAnchor.constraint(equalTo: keypadView.topAnchor, constant: -Constants.VERIFICATION_VIEW_BOTTOM_MARGIN),
+            verificationView.heightAnchor.constraint(equalToConstant: Constants.VERIFICATION_VIEW_HEIGHT),
+            
             explanationLabel.centerXAnchor.constraint(equalTo: keypadView.centerXAnchor),
             explanationLabel.topAnchor.constraint(equalTo: verificationView.bottomAnchor, constant: Constants.EXPLANATION_LABEL_TOP_MARGIN)
+        ]
+        
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        let keypadButtonSize : CGFloat
+        
+        var keypadMargin = Constants.KEYPAD_VIEW_MARGIN
+        if(screenWidth >= 600) {
+            keypadMargin = 164.0
+        }
+        
+        if windowInterfaceOrientation?.isLandscape ?? false {
+            keypadMargin = 256.0
+            keypadButtonSize = screenHeight / 5 * 3
+        }
+        else {
+            keypadButtonSize = 4 * screenWidth / 5
+        }
+        
+        constraints.append(contentsOf: [
+            keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: keypadMargin),
+            keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -keypadMargin),
+            keypadView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: Constants.KEYPAD_VIEW_CENTER_OFFSET),
+            keypadView.heightAnchor.constraint(equalToConstant: keypadButtonSize)
         ])
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func localize() {
@@ -237,5 +268,4 @@ private struct Constants {
     static let EXPLANATION_LABEL_TOP_MARGIN: CGFloat = 20.0
     static let KEYPAD_VIEW_CENTER_OFFSET: CGFloat = 128.0
     static let KEYPAD_VIEW_MARGIN: CGFloat = 35.0
-    static let KEYPAD_BUTTON_SIZE: CGFloat = UIScreen.main.bounds.size.width / 5
 }

@@ -22,7 +22,10 @@ final class SettingsViewController: UIViewController {
   private var walletLabel = UILabel()
   private var localBitcoinCashAdView = UIView()
   private var localBitcoinCashLabel = UILabel()
-  private var itemsViewHeightConstraint: NSLayoutConstraint?
+    
+    // MARK: - Layout Properties
+    private var itemsViewHeightConstraint: NSLayoutConstraint?
+    private var constraints : [NSLayoutConstraint] = [];
 
   // MARK: - View Lifecycle
   override func viewDidLoad() {
@@ -32,6 +35,14 @@ final class SettingsViewController: UIViewController {
     localize()
     registerForNotifications()
   }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [self] (context) in
+            setupConstraints()
+        })
+    }
 
   // MARK: - Actions
   @objc private func walletAdViewTapped() {
@@ -60,6 +71,7 @@ final class SettingsViewController: UIViewController {
     setupItemsView()
     setupWalletAdView()
     setupLocalBitcoinCashAdView()
+    setupConstraints()
     updateScrollViewContentSize()
 
     view.bringSubviewToFront(topOverlayView)
@@ -69,12 +81,6 @@ final class SettingsViewController: UIViewController {
   private func setupTopOverlayView() {
     topOverlayView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(topOverlayView)
-    NSLayoutConstraint.activate([
-      topOverlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      topOverlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      topOverlayView.topAnchor.constraint(equalTo: view.topAnchor),
-      topOverlayView.heightAnchor.constraint(equalToConstant: Constants.TOP_OVERLAY_VIEW_HEIGHT),
-    ])
   }
 
   private func setupNavigationBar() {
@@ -88,12 +94,6 @@ final class SettingsViewController: UIViewController {
       }
     }
     view.addSubview(navigationBar)
-    NSLayoutConstraint.activate([
-      navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      navigationBar.heightAnchor.constraint(equalToConstant: NavigationBar.height),
-    ])
   }
 
   private func setupScrollView() {
@@ -101,12 +101,6 @@ final class SettingsViewController: UIViewController {
     scrollView.showsVerticalScrollIndicator = false
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(scrollView)
-    NSLayoutConstraint.activate([
-      scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      scrollView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-      scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-      scrollView.widthAnchor.constraint(equalToConstant: Constants.SCROLL_VIEW_WIDTH),
-    ])
   }
 
   private func setupItemsView() {
@@ -121,15 +115,6 @@ final class SettingsViewController: UIViewController {
     itemsView.delegate = self
     itemsView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.addSubview(itemsView)
-
-    itemsViewHeightConstraint = itemsView.heightAnchor.constraint(equalToConstant: itemsView.height)
-
-    NSLayoutConstraint.activate([
-      itemsView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-      itemsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-      itemsView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-      itemsViewHeightConstraint!,
-    ])
   }
 
   private func setupWalletAdView() {
@@ -137,15 +122,6 @@ final class SettingsViewController: UIViewController {
     walletAdView.translatesAutoresizingMaskIntoConstraints = false
     walletAdView.isUserInteractionEnabled = true
     scrollView.addSubview(walletAdView)
-    NSLayoutConstraint.activate([
-      walletAdView.leadingAnchor.constraint(
-        equalTo: itemsView.leadingAnchor, constant: Constants.AD_HORIZONTAL_PADDING),
-      walletAdView.trailingAnchor.constraint(
-        equalTo: itemsView.trailingAnchor, constant: -Constants.AD_HORIZONTAL_PADDING),
-      walletAdView.topAnchor.constraint(
-        equalTo: itemsView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
-      walletAdView.heightAnchor.constraint(equalToConstant: Constants.AD_HEIGHT),
-    ])
 
     // Tap Gesture.
     let tapGestureRecognizer = UITapGestureRecognizer(
@@ -190,15 +166,6 @@ final class SettingsViewController: UIViewController {
     walletLabel.adjustsFontSizeToFitWidth = true
     walletLabel.translatesAutoresizingMaskIntoConstraints = false
     walletAdView.addSubview(walletLabel)
-    NSLayoutConstraint.activate([
-      walletLabel.leadingAnchor.constraint(
-        equalTo: walletAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-      walletLabel.topAnchor.constraint(
-        equalTo: walletAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
-      walletLabel.bottomAnchor.constraint(
-        equalTo: walletAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
-      walletLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH),
-    ])
   }
 
   private func setupLocalBitcoinCashAdView() {
@@ -206,15 +173,6 @@ final class SettingsViewController: UIViewController {
     localBitcoinCashAdView.translatesAutoresizingMaskIntoConstraints = false
     localBitcoinCashAdView.isUserInteractionEnabled = true
     scrollView.addSubview(localBitcoinCashAdView)
-    NSLayoutConstraint.activate([
-      localBitcoinCashAdView.leadingAnchor.constraint(
-        equalTo: itemsView.leadingAnchor, constant: Constants.AD_HORIZONTAL_PADDING),
-      localBitcoinCashAdView.trailingAnchor.constraint(
-        equalTo: itemsView.trailingAnchor, constant: -Constants.AD_HORIZONTAL_PADDING),
-      localBitcoinCashAdView.topAnchor.constraint(
-        equalTo: walletAdView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
-      localBitcoinCashAdView.heightAnchor.constraint(equalToConstant: Constants.AD_HEIGHT),
-    ])
 
     // Tap Gesture.
     let tapGestureRecognizer = UITapGestureRecognizer(
@@ -259,16 +217,73 @@ final class SettingsViewController: UIViewController {
     localBitcoinCashLabel.adjustsFontSizeToFitWidth = true
     localBitcoinCashLabel.translatesAutoresizingMaskIntoConstraints = false
     localBitcoinCashAdView.addSubview(localBitcoinCashLabel)
-    NSLayoutConstraint.activate([
-      localBitcoinCashLabel.leadingAnchor.constraint(
-        equalTo: localBitcoinCashAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
-      localBitcoinCashLabel.topAnchor.constraint(
-        equalTo: localBitcoinCashAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
-      localBitcoinCashLabel.bottomAnchor.constraint(
-        equalTo: localBitcoinCashAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
-      localBitcoinCashLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH),
-    ])
   }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.deactivate(constraints)
+        
+        let labelWidth = UIScreen.main.bounds.size.width / 2 - Constants.LOGO_LEADING_MARGIN - Constants.ITEMS_VIEW_MARGIN
+        let scrollViewWidth = UIScreen.main.bounds.size.width - 2 * AppConstants.GENERAL_MARGIN
+        
+        constraints = [
+            topOverlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topOverlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topOverlayView.topAnchor.constraint(equalTo: view.topAnchor),
+            topOverlayView.heightAnchor.constraint(equalToConstant: Constants.TOP_OVERLAY_VIEW_HEIGHT),
+            
+            navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationBar.heightAnchor.constraint(equalToConstant: NavigationBar.height),
+            
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.widthAnchor.constraint(equalToConstant: scrollViewWidth),
+            
+            itemsView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            itemsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            itemsView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            
+            walletAdView.leadingAnchor.constraint(
+              equalTo: itemsView.leadingAnchor, constant: Constants.AD_HORIZONTAL_PADDING),
+            walletAdView.trailingAnchor.constraint(
+              equalTo: itemsView.trailingAnchor, constant: -Constants.AD_HORIZONTAL_PADDING),
+            walletAdView.topAnchor.constraint(
+              equalTo: itemsView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
+            walletAdView.heightAnchor.constraint(equalToConstant: Constants.AD_HEIGHT),
+            
+            walletLabel.leadingAnchor.constraint(
+              equalTo: walletAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            walletLabel.topAnchor.constraint(
+              equalTo: walletAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
+            walletLabel.bottomAnchor.constraint(
+              equalTo: walletAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
+            walletLabel.widthAnchor.constraint(equalToConstant: labelWidth),
+        
+            localBitcoinCashAdView.leadingAnchor.constraint(
+              equalTo: itemsView.leadingAnchor, constant: Constants.AD_HORIZONTAL_PADDING),
+            localBitcoinCashAdView.trailingAnchor.constraint(
+              equalTo: itemsView.trailingAnchor, constant: -Constants.AD_HORIZONTAL_PADDING),
+            localBitcoinCashAdView.topAnchor.constraint(
+              equalTo: walletAdView.bottomAnchor, constant: Constants.AD_TOP_MARGIN),
+            localBitcoinCashAdView.heightAnchor.constraint(equalToConstant: Constants.AD_HEIGHT),
+            
+            localBitcoinCashLabel.leadingAnchor.constraint(
+              equalTo: localBitcoinCashAdView.leadingAnchor, constant: Constants.LOGO_LEADING_MARGIN),
+            localBitcoinCashLabel.topAnchor.constraint(
+              equalTo: localBitcoinCashAdView.topAnchor, constant: Constants.LABEL_TOP_MARGIN),
+            localBitcoinCashLabel.bottomAnchor.constraint(
+              equalTo: localBitcoinCashAdView.bottomAnchor, constant: -Constants.LOGO_TOP_MARGIN),
+            localBitcoinCashLabel.widthAnchor.constraint(equalToConstant: Constants.LABEL_WIDTH)
+        ]
+        
+        itemsViewHeightConstraint = itemsView.heightAnchor.constraint(equalToConstant: itemsView.height)
+        
+        constraints.append(itemsViewHeightConstraint!)
+        
+        NSLayoutConstraint.activate(constraints)
+    }
 
   private func updateScrollViewContentSize() {
     var height = itemsView.height

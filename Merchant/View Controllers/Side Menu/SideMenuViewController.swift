@@ -23,11 +23,32 @@ final class SideMenuViewController: UIViewController {
         MenuItem.about
     ]
     
+    // MARK: - Layout Properties
+    private var orientationConstraints : [NSLayoutConstraint] = [];
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [self] (context) in
+            NSLayoutConstraint.deactivate(orientationConstraints)
+            
+            let sideMenuOffset : CGFloat = valueForOrientation(portraitValue: AppConstants.SIDE_MENU_OFFSET_PORTRAIT, landscapeValue: AppConstants.SIDE_MENU_OFFSET_LANDSCAPE)
+            orientationConstraints = [
+                tableView.topAnchor.constraint(equalTo: view.topAnchor),
+                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: sideMenuOffset)
+            ]
+            
+            NSLayoutConstraint.activate(orientationConstraints)
+        })
     }
     
     // MARK: - Private API
@@ -48,12 +69,16 @@ final class SideMenuViewController: UIViewController {
         tableView.separatorColor = .clear
         tableView.contentInsetAdjustmentBehavior = .never
         view.addSubview(tableView)
-        NSLayoutConstraint.activate([
+        
+        let sideMenuOffset : CGFloat = valueForOrientation(portraitValue: AppConstants.SIDE_MENU_OFFSET_PORTRAIT, landscapeValue: AppConstants.SIDE_MENU_OFFSET_LANDSCAPE)
+        orientationConstraints = [
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.SIDE_MENU_OFFSET)
-        ])
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: sideMenuOffset)
+        ]
+        
+        NSLayoutConstraint.activate(orientationConstraints)
         
         setupTableHeader()
         tableView.reloadData()

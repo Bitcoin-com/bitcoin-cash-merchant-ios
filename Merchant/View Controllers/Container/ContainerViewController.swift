@@ -36,6 +36,14 @@ final class ContainerViewController: UIViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [self] (context) in
+            hideSideMenu()
+        })
+    }
+    
     // MARK: - Actions
     @objc private func showSideMenu() {
         guard !isMenuOpened else {
@@ -47,8 +55,9 @@ final class ContainerViewController: UIViewController {
         
         isMenuOpened = true
         
+        let sideMenuOffset : CGFloat = valueForOrientation(portraitValue: AppConstants.SIDE_MENU_OFFSET_PORTRAIT, landscapeValue: AppConstants.SIDE_MENU_OFFSET_LANDSCAPE)
         var sideMenuFrame = sideMenuViewController.view.frame
-        sideMenuFrame.origin.x = -AppConstants.SIDE_MENU_OFFSET
+        sideMenuFrame.origin.x = -sideMenuOffset
         
         UIView.animate(withDuration: AppConstants.ANIMATION_DURATION) {
             self.sideMenuViewController.view.frame = sideMenuFrame
@@ -174,7 +183,6 @@ final class ContainerViewController: UIViewController {
             viewController.view.frame.origin.y = UIScreen.main.bounds.size.height
         }
     }
-
 }
 
 extension ContainerViewController: PinViewControllerDelegate {
@@ -193,5 +201,4 @@ extension ContainerViewController: PinViewControllerDelegate {
     func pinViewControllerDidClose(_ viewController: PinViewController) {
         closePinViewController(viewController)
     }
-    
 }
