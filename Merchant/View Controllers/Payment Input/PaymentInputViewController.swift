@@ -34,6 +34,9 @@ final class PaymentInputViewController: UIViewController {
         return formatter
     }
     
+    // MARK: - Layout Properties
+    private var constraints : [NSLayoutConstraint] = [];
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +62,14 @@ final class PaymentInputViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         amountString = "0"
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [self] (context) in
+            setupConstraints()
+        })
     }
     
     // MARK: - Public API
@@ -115,6 +126,7 @@ final class PaymentInputViewController: UIViewController {
         setupOverlayButton()
         setupMenuButton()
         registerForNotifications()
+        setupConstraints()
     }
     
     private func setupKeypadView() {
@@ -124,17 +136,6 @@ final class PaymentInputViewController: UIViewController {
         keypadView.backgroundColor = .white
         keypadView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(keypadView)
-        var screenWidth = UIScreen.main.bounds.size.width
-        var keypadMargin = Constants.KEYPAD_VIEW_MARGIN
-        if(screenWidth >= 600) {
-            keypadMargin = 164.0
-        }
-        NSLayoutConstraint.activate([
-            keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: keypadMargin),
-            keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -keypadMargin),
-            keypadView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: Constants.KEYPAD_VIEW_CENTER_OFFSET),
-            keypadView.heightAnchor.constraint(equalToConstant: 4 * Constants.KEYPAD_BUTTON_SIZE)
-        ])
     }
     
     private func setupCheckoutButton() {
@@ -145,12 +146,6 @@ final class PaymentInputViewController: UIViewController {
         checkoutButton.layer.cornerRadius = Constants.CHECKOUT_BUTTON_HEIGHT / 2
         checkoutButton.addTarget(self, action: #selector(checkoutButtonTapped), for: .touchUpInside)
         view.addSubview(checkoutButton)
-        NSLayoutConstraint.activate([
-            checkoutButton.leadingAnchor.constraint(equalTo: keypadView.leadingAnchor),
-            checkoutButton.trailingAnchor.constraint(equalTo: keypadView.trailingAnchor),
-            checkoutButton.topAnchor.constraint(equalTo: keypadView.bottomAnchor, constant: AppConstants.GENERAL_MARGIN),
-            checkoutButton.heightAnchor.constraint(equalToConstant: Constants.CHECKOUT_BUTTON_HEIGHT)
-        ])
     }
     
     private func setupEnterAmountLabel() {
@@ -158,10 +153,6 @@ final class PaymentInputViewController: UIViewController {
         enterAmountLabel.translatesAutoresizingMaskIntoConstraints = false
         enterAmountLabel.font = .systemFont(ofSize: 16.0)
         view.addSubview(enterAmountLabel)
-        NSLayoutConstraint.activate([
-            enterAmountLabel.centerXAnchor.constraint(equalTo: keypadView.centerXAnchor),
-            enterAmountLabel.bottomAnchor.constraint(equalTo: keypadView.topAnchor, constant: -Constants.ENTER_AMOUNT_LABEL_BOTTOM_MARGIN)
-        ])
     }
     
     private func setupLabelsStackView() {
@@ -180,10 +171,6 @@ final class PaymentInputViewController: UIViewController {
         labelsStackView.spacing = Constants.LABELS_STACK_VIEW_SPACING
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(labelsStackView)
-        NSLayoutConstraint.activate([
-            labelsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            labelsStackView.bottomAnchor.constraint(equalTo: enterAmountLabel.topAnchor, constant: -Constants.LABELS_STACK_VIEW_BOTTOM_MARGIN)
-        ])
     }
     
     private func setupMenuButton() {
@@ -193,12 +180,6 @@ final class PaymentInputViewController: UIViewController {
         menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         menuButton.tintColor = .black
         view.addSubview(menuButton)
-        NSLayoutConstraint.activate([
-            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.MENU_BUTTON_MARGIN),
-            menuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.MENU_BUTTON_MARGIN / 2),
-            menuButton.heightAnchor.constraint(equalToConstant: Constants.MENU_BUTTON_SIZE),
-            menuButton.widthAnchor.constraint(equalToConstant: Constants.MENU_BUTTON_SIZE)
-        ])
     }
     
     private func setupOverlayButton() {
@@ -207,12 +188,62 @@ final class PaymentInputViewController: UIViewController {
         overlayButton.translatesAutoresizingMaskIntoConstraints = false
         overlayButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         view.addSubview(overlayButton)
-        NSLayoutConstraint.activate([
+    }
+    
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.deactivate(constraints)
+        
+        constraints = [
+            checkoutButton.leadingAnchor.constraint(equalTo: keypadView.leadingAnchor),
+            checkoutButton.trailingAnchor.constraint(equalTo: keypadView.trailingAnchor),
+            checkoutButton.topAnchor.constraint(equalTo: keypadView.bottomAnchor, constant: AppConstants.GENERAL_MARGIN),
+            checkoutButton.heightAnchor.constraint(equalToConstant: Constants.CHECKOUT_BUTTON_HEIGHT),
+            
+            enterAmountLabel.centerXAnchor.constraint(equalTo: keypadView.centerXAnchor),
+            enterAmountLabel.bottomAnchor.constraint(equalTo: keypadView.topAnchor, constant: -Constants.ENTER_AMOUNT_LABEL_BOTTOM_MARGIN),
+            
+            labelsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelsStackView.bottomAnchor.constraint(equalTo: enterAmountLabel.topAnchor, constant: -Constants.LABELS_STACK_VIEW_BOTTOM_MARGIN),
+            
+            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.MENU_BUTTON_MARGIN),
+            menuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.MENU_BUTTON_MARGIN / 2),
+            menuButton.heightAnchor.constraint(equalToConstant: Constants.MENU_BUTTON_SIZE),
+            menuButton.widthAnchor.constraint(equalToConstant: Constants.MENU_BUTTON_SIZE),
+            
             overlayButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             overlayButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overlayButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            overlayButton.topAnchor.constraint(equalTo: view.topAnchor)
+            overlayButton.topAnchor.constraint(equalTo: view.topAnchor),
+        ]
+        
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        let keypadButtonSize : CGFloat
+        let keypadViewCenterOffset : CGFloat
+        
+        var keypadMargin = Constants.KEYPAD_VIEW_MARGIN
+        if(screenWidth >= 600) {
+            keypadMargin = 164.0
+        }
+        
+        if windowInterfaceOrientation?.isLandscape ?? false {
+            keypadMargin = 256.0
+            keypadButtonSize = screenHeight / 5 * 3
+            keypadViewCenterOffset = Constants.KEYPAD_VIEW_CENTER_OFFSET_LANDSCAPE
+        } else {
+            keypadButtonSize = screenWidth / 5 * 4
+            keypadViewCenterOffset = Constants.KEYPAD_VIEW_CENTER_OFFSET_PORTRAIT
+        }
+        
+        constraints.append(contentsOf: [
+            keypadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: keypadMargin),
+            keypadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -keypadMargin),
+            keypadView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: keypadViewCenterOffset),
+            keypadView.heightAnchor.constraint(equalToConstant: keypadButtonSize)
         ])
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func localize() {
@@ -306,7 +337,7 @@ private struct Constants {
     static let MENU_BUTTON_MARGIN: CGFloat = 20.0
     static let OVERLAY_BUTTON_VISIBLE_ALPHA: CGFloat = 0.7
     static let MAX_ALLOWED_NUMBER_OF_DIGITS = 12
-    static let KEYPAD_VIEW_CENTER_OFFSET: CGFloat = 50.0
+    static let KEYPAD_VIEW_CENTER_OFFSET_PORTRAIT: CGFloat = 50.0
+    static let KEYPAD_VIEW_CENTER_OFFSET_LANDSCAPE: CGFloat = 32.0
     static let KEYPAD_VIEW_MARGIN: CGFloat = 35.0
-    static let KEYPAD_BUTTON_SIZE: CGFloat = UIScreen.main.bounds.size.width / 5
 }
