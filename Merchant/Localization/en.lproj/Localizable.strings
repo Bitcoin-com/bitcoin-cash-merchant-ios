@@ -72,7 +72,7 @@
 
 "no_history_text" = "There is no transaction history.";
 
-"options_explain_payment_address" = "A destination address is a Bitcoin Cash address";
+"options_explain_payment_address" = "A destination address can either be a Bitcoin Cash address, or an Extended Public Key (xpub) or a merchant API key or pairing code";
 
 "options_add_payment_address" = "Add destination address";
 

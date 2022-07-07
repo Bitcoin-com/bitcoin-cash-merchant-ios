@@ -7,6 +7,7 @@ PODS:
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
+  - OpenSslKit.swift (1.2.2)
   - Realm (4.3.2):
     - Realm/Headers (= 4.3.2)
   - Realm/Headers (4.3.2)
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - Amplitude-iOS
   - BitcoinKit (from `https://github.com/saltyskip/BitcoinKit.git`)
   - Moya/RxSwift (~> 14.0.0)
+  - OpenSslKit.swift
   - RealmSwift
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
@@ -32,6 +34,7 @@ SPEC REPOS:
     - Alamofire
     - Amplitude-iOS
     - Moya
+    - OpenSslKit.swift
     - Realm
     - RealmSwift
     - RxCocoa
@@ -52,12 +55,13 @@ SPEC CHECKSUMS:
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   BitcoinKit: a8c198d2a57caf64dc43271901f8c5a2309aced2
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  OpenSslKit.swift: 0e2194853fd9ce42006cf18c89743331406a10a9
   Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
   RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: ff614967e3967dc78a806eb613b7ab31d106c2ed
+PODFILE CHECKSUM: 9583a955194bf6ed61814e7ddccdd26013e80f7f
 
 COCOAPODS: 1.11.3

@@ -97,6 +97,7 @@
 		C4DD67192417FE9200C72768 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD67182417FE9200C72768 /* AgreementViewController.swift */; };
 		C4DD671B241828E100C72768 /* UITapGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD671A241828E100C72768 /* UITapGestureRecognizer+Extensions.swift */; };
 		C4DD671D241829E900C72768 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD671C241829E900C72768 /* NSAttributedString+Extensions.swift */; };
+		D6A2995C28760B0C00F6028B /* ReadOnlyHDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2995B28760B0C00F6028B /* ReadOnlyHDWallet.swift */; };
 		D6FC3FC7283EB75A00647147 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC3FC6283EB75A00647147 /* UIViewController.swift */; };
 		E5C8A04A9E7571A1C836CA74 /* Pods_Merchant_MerchantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F03BE384B9233089BDF8F6C /* Pods_Merchant_MerchantUITests.framework */; };
 /* End PBXBuildFile section */
@@ -270,6 +271,7 @@
 		C4DD671A241828E100C72768 /* UITapGestureRecognizer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extensions.swift"; sourceTree = "<group>"; };
 		C4DD671C241829E900C72768 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6A2995B28760B0C00F6028B /* ReadOnlyHDWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyHDWallet.swift; sourceTree = "<group>"; };
 		D6FC3FC6283EB75A00647147 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		DCF5732E0852906CF836DCA7 /* Pods-Merchant-MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E46EB0020643631F3A27E827 /* Pods-MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.release.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				4DF0D5822467A796007E1B3D /* RateManager.swift */,
 				4DFC75C12467AA2400C8D6BF /* RateNetwork.swift */,
 				4D23422C2467AB8C001382F4 /* RateInteractor.swift */,
+				D6A2995B28760B0C00F6028B /* ReadOnlyHDWallet.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -949,6 +952,7 @@
 				C441ABD1240927FC00A2253A /* WebSocket.swift in Sources */,
 				C433DB9D2424D85C00570C2C /* CFTimeInterval+Extensions.swift in Sources */,
 				C49E1CB724227688009B2020 /* URL+Helpers.swift in Sources */,
+				D6A2995C28760B0C00F6028B /* ReadOnlyHDWallet.swift in Sources */,
 				D6FC3FC7283EB75A00647147 /* UIViewController.swift in Sources */,
 				C445559424010C7400F4B3E0 /* TransactionTableViewCell.swift in Sources */,
 				C445558E24007F0700F4B3E0 /* Date+Extensions.swift in Sources */,
