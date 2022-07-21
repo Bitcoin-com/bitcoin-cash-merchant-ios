@@ -371,8 +371,9 @@ final class SettingsViewController: UIViewController {
 
       if let address = UIPasteboard.general.string {
         Logger.log(message: "Pasted BCH address: \(address)", type: .info)
-
-        self.validateAndStoreAddress(address)
+          let paymentTarget : PaymentTarget = PaymentTarget(target: address, type: .invalid)
+          
+        self.validateAndStoreAddress(paymentTarget)
       } else {
         self.showFailureMessage()
       }
@@ -382,9 +383,7 @@ final class SettingsViewController: UIViewController {
     present(alertController, animated: true)
   }
 
-  private func validateAndStoreAddress(_ address: String) {
-    let paymentTarget = PaymentTarget(target: address, type: .address)
-
+  private func validateAndStoreAddress(_ paymentTarget: PaymentTarget) {
     if paymentTarget.type == .invalid {
       showFailureMessage()
     } else {
@@ -578,7 +577,9 @@ extension SettingsViewController: ScannerViewControllerDelegate {
 
       Logger.log(message: "Scanned BCH address: \(stringValue)", type: .info)
 
-      self.validateAndStoreAddress(stringValue)
+        let paymentTarget : PaymentTarget = PaymentTarget(target: stringValue, type: .invalid)
+        
+      self.validateAndStoreAddress(paymentTarget)
     }
   }
 
