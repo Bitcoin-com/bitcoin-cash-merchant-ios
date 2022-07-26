@@ -139,7 +139,7 @@ extension ItemsView: UITableViewDataSource, UITableViewDelegate {
 }
 
 private struct Constants {
-    static let XPUB_DESTINATION_CELL_HEIGHT: CGFloat = 100.0
+    static let XPUB_DESTINATION_CELL_HEIGHT: CGFloat = 120.0
     static let DESTINATION_CELL_HEIGHT: CGFloat = 80.0
     static let CELL_HEIGHT: CGFloat = 65.0
 }
