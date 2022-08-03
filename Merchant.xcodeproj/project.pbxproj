@@ -1257,7 +1257,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
 				PRODUCT_NAME = "Bitcoin Cash Register";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1280,7 +1280,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin.merchant;
 				PRODUCT_NAME = "Bitcoin Cash Register";
 				PROVISIONING_PROFILE_SPECIFIER = "";
