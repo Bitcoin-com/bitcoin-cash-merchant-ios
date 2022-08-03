@@ -371,8 +371,9 @@ final class SettingsViewController: UIViewController {
 
       if let address = UIPasteboard.general.string {
         Logger.log(message: "Pasted BCH address: \(address)", type: .info)
-
-        self.validateAndStoreAddress(address)
+          let paymentTarget : PaymentTarget = PaymentTarget(target: address, type: .invalid)
+          
+        self.validateAndStoreAddress(paymentTarget)
       } else {
         self.showFailureMessage()
       }
@@ -382,9 +383,7 @@ final class SettingsViewController: UIViewController {
     present(alertController, animated: true)
   }
 
-  private func validateAndStoreAddress(_ address: String) {
-    let paymentTarget = PaymentTarget(target: address, type: .address)
-
+  private func validateAndStoreAddress(_ paymentTarget: PaymentTarget) {
     if paymentTarget.type == .invalid {
       showFailureMessage()
     } else {
@@ -392,9 +391,25 @@ final class SettingsViewController: UIViewController {
 
       UserManager.shared.destination = paymentTarget.legacyAddress
       UserManager.shared.activePaymentTarget = paymentTarget
-      refreshAndShowSuccessMessage()
+      
+        if paymentTarget.type == .xPub {
+            refreshItemsView()
+            updateScrollViewContentSize()
+            syncXPub(paymentTarget.legacyAddress)
+        } else {
+            refreshAndShowSuccessMessage()
+        }
     }
   }
+    
+    private func syncXPub(_ address: String) {
+            ToastManager.shared.showMessage(Localized.syncingXPub, forStatus: .success)
+
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
+                WalletManager.shared.syncXPub(with: address)
+                ToastManager.shared.showMessage(Localized.syncedXPub, forStatus: .success)
+            }
+        }
 
   private func createPin() {
     let pinViewController = PinViewController()
@@ -476,6 +491,8 @@ final class SettingsViewController: UIViewController {
     AnalyticsService.shared.logEvent(.settings_paymenttarget_changed)
 
     switch paymentTarget.type {
+    case .xPub:
+        AnalyticsService.shared.logEvent(.settings_paymenttarget_xpub_set)
     case .address:
       AnalyticsService.shared.logEvent(.settings_paymenttarget_pubkey_set)
     default:
@@ -560,7 +577,9 @@ extension SettingsViewController: ScannerViewControllerDelegate {
 
       Logger.log(message: "Scanned BCH address: \(stringValue)", type: .info)
 
-      self.validateAndStoreAddress(stringValue)
+        let paymentTarget : PaymentTarget = PaymentTarget(target: stringValue, type: .invalid)
+        
+      self.validateAndStoreAddress(paymentTarget)
     }
   }
 

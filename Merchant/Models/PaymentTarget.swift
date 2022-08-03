@@ -37,7 +37,10 @@ final class PaymentTarget: Codable {
         return legacyAddress
     }
     var invoiceRequestAddress: String? {
-        if type == .address {
+        if type == .xPub {
+            return WalletManager.shared.generateAddressFromStoredIndex()
+        }
+        else if type == .address {
             return target
         }
         
@@ -56,6 +59,11 @@ final class PaymentTarget: Codable {
     // MARK: - Private API
     private func setup() {
         type = .invalid
+        
+        if isXPub() {
+            type = .xPub
+            return
+        }
         
         if isLegacyAddress() {
             type = .address
