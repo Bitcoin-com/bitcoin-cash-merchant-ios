@@ -28,9 +28,21 @@ class RateManager {
         return t
     }()
     
+    // Bundled seed format (Resources/rates.json): array of { code, name, rate }.
     struct RateResponse: Codable {
         var code: String
         var name: String
+        var rate: Double
+    }
+
+    // Live API format: { "rates": [ { "ccy": "usd", "rate": <fiat per 1 BCH> } ] }.
+    // `rate` is already denominated in BCH, so no BTC->BCH conversion is needed.
+    struct ExchangeRatesResponse: Codable {
+        var rates: [ExchangeRate]
+    }
+
+    struct ExchangeRate: Codable {
+        var ccy: String
         var rate: Double
     }
     
@@ -109,10 +121,10 @@ class RateManager {
             .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .retry(3)
             .filterSuccessfulStatusCodes()
-            .map([RateResponse].self)
+            .map(ExchangeRatesResponse.self)
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onSuccess: { [weak self] response in
-                self?.storeData(withRates: response)
+                self?.storeData(withRates: response.rates)
                 self?.lastUpdate = NSDate().timeIntervalSince1970
             })
             .disposed(by: bag)
@@ -124,42 +136,36 @@ class RateManager {
         return timeSince >= (1 * 60)
     }
     
-    func storeData(withRates rates: [RateResponse]) {
+    func storeData(withRates rates: [ExchangeRate]) {
         do {
-            guard let btcUsdRate = rates.filter({ $0.code == "USD" }).first else {
-                return
-            }
-            guard let bchRate = rates.filter({ $0.code == "BCH" }).first else {
-                return
-            }
-            let bchUsdRate = btcUsdRate.rate/bchRate.rate
-            let bchBtcRate = bchUsdRate/btcUsdRate.rate
-            
+            // The new API returns rates already denominated in BCH (fiat per 1 BCH),
+            // so we can store them directly without any BTC conversion.
             let storeRates = rates.compactMap { rate -> StoreRate? in
-                guard rate.code != "BCH"
-                    , rate.code != "BCH_BTC"
-                    , rate.code != "BCC" else {
+                let ticker = rate.ccy.uppercased()
+                guard ticker != "BCH"
+                    , ticker != "BCH_BTC"
+                    , ticker != "BCC" else {
                         return nil
                 }
-                
+
                 let newRate = StoreRate()
-                newRate.id = rate.code
-                newRate.rate = rate.rate*bchBtcRate
+                newRate.id = ticker
+                newRate.rate = rate.rate
                 newRate.updatedAt = 0
-                if rate.code == "USD" {
+                if ticker == "USD" {
                     self.defaultRate = newRate
                 }
-                
+
                 return newRate
             }
-            
+
             let realm = try Realm()
             try realm.write {
                 realm.add(storeRates, update: .all)
             }
-            
+
         } catch {
-            print("Error loading symbols & default rates", error)
+            print("Error storing live rates", error)
         }
     }
 }
