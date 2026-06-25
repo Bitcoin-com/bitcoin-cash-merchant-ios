@@ -1,0 +1,5 @@
+# Everything under Libraries/ is now an intentional, committed artifact:
+#   - secp256k1.xcframework / openssl.xcframework  (prebuilt device+sim slices)
+#   - secp256k1/module.modulemap + secp256k1/include/  (Swift `import secp256k1`)
+# (The old `include/` and `lib/` ignores were for the legacy from-source build,
+#  which no longer runs. See setup/build_xcframeworks.sh.)

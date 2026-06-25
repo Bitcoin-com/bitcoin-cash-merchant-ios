@@ -13,9 +13,13 @@ enum RateNetwork {
 }
 
 extension RateNetwork: TargetType {
+    // New BCH-denominated prices endpoint (mirrors Android's BuildConfig.PRICES_URL).
+    // Response format: { "rates": [ { "ccy": "usd", "rate": <fiat per 1 BCH>, ... } ] }
+    // The URL is confidential and lives in the gitignored `Keys.swift`
+    // (copy `Keys.example.swift` -> `Keys.swift` and fill in the real value).
     public var baseURL: URL {
         switch self {
-        default: return URL(string: "https://markets.api.bitcoin.com/rates?c=BTC")!
+        default: return URL(string: Keys.pricesURL)!
         }
     }
     
