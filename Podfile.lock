@@ -22,7 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - Amplitude-iOS
-  - BitcoinKit (from `https://github.com/saltyskip/BitcoinKit.git`)
+  - BitcoinKit (from `LocalPods/BitcoinKit`)
   - Moya/RxSwift (~> 14.0.0)
   - OpenSslKit.swift
   - RealmSwift
@@ -43,17 +43,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   BitcoinKit:
-    :git: https://github.com/saltyskip/BitcoinKit.git
-
-CHECKOUT OPTIONS:
-  BitcoinKit:
-    :commit: 307856e40ac8670e6d7eee6c1a80bf7c0a39f32b
-    :git: https://github.com/saltyskip/BitcoinKit.git
+    :path: LocalPods/BitcoinKit
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
-  BitcoinKit: a8c198d2a57caf64dc43271901f8c5a2309aced2
+  BitcoinKit: f3674fdb003e19cc783845210ebec12b44f91e25
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   OpenSslKit.swift: 0e2194853fd9ce42006cf18c89743331406a10a9
   Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
@@ -62,6 +57,6 @@ SPEC CHECKSUMS:
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 9583a955194bf6ed61814e7ddccdd26013e80f7f
+PODFILE CHECKSUM: 5f4d663c3fc92c4744d26741c65d44a792cf418f
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.16.2

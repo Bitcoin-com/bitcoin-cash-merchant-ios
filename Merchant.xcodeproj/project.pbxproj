@@ -16,6 +16,7 @@
 		4DF0D5832467A796007E1B3D /* RateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0D5822467A796007E1B3D /* RateManager.swift */; };
 		4DFC75C22467AA2400C8D6BF /* RateNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC75C12467AA2400C8D6BF /* RateNetwork.swift */; };
 		9693A049E3A4A3E7314A01E8 /* Pods_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB816F5C7C102071EE166A68 /* Pods_Merchant.framework */; };
+		9AAB8FC29E214A126BD8F850 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E4B0A62AE08BC4360C7D1 /* Keys.swift */; };
 		A87AC8124A72CD7035A43C1F /* Pods_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAA19CAA1F377C630BDE3D7 /* Pods_MerchantTests.framework */; };
 		C40ABAC2241BA21C000CAD80 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40ABAC1241BA21C000CAD80 /* GradientView.swift */; };
 		C4157D0D2418B90300EE3952 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4157D0C2418B90300EE3952 /* AnalyticsService.swift */; };
@@ -133,6 +134,7 @@
 		79AE22CA693F028AFEB110A4 /* Pods-Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant.debug.xcconfig"; path = "Target Support Files/Pods-Merchant/Pods-Merchant.debug.xcconfig"; sourceTree = "<group>"; };
 		7C86A23622A67FF85A7B51C6 /* Pods-Merchant-MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant-MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Merchant-MerchantUITests/Pods-Merchant-MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8E499E13B7E722CF3729BC4A /* Pods-MerchantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MerchantTests.debug.xcconfig"; path = "Target Support Files/Pods-MerchantTests/Pods-MerchantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9C6E4B0A62AE08BC4360C7D1 /* Keys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		C40ABAC1241BA21C000CAD80 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		C4157D0C2418B90300EE3952 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		C42D875D2420AB3E00262D90 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				4DFC75C12467AA2400C8D6BF /* RateNetwork.swift */,
 				4D23422C2467AB8C001382F4 /* RateInteractor.swift */,
 				D6A2995B28760B0C00F6028B /* ReadOnlyHDWallet.swift */,
+				9C6E4B0A62AE08BC4360C7D1 /* Keys.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1011,6 +1014,7 @@
 				C49F1FD123FEE42300416058 /* KeypadView.swift in Sources */,
 				C4456E0523FEBC2C0025FD06 /* PaymentRequestViewController.swift in Sources */,
 				C49C3A7C241B577900C80795 /* UIFont+Helpers.swift in Sources */,
+				9AAB8FC29E214A126BD8F850 /* Keys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
